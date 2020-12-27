@@ -8,3 +8,5 @@ const kRegularActiveTextStyle =
 const kRegularInactiveTextStyle =
     TextStyle(fontSize: kRegularTextSize, color: kInactiveColor);
 
+const kPageTitleTextStyle =
+    TextStyle(fontSize: kPageTitleTextSize, color: Colors.black, fontWeight: FontWeight.bold);
