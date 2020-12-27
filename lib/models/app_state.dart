@@ -2,6 +2,7 @@ import 'package:UUL_Gym/models/appartment.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:UUL_Gym/models/week.dart';
+import 'package:UUL_Gym/models/gym.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppState extends ChangeNotifier {
@@ -11,6 +12,7 @@ class AppState extends ChangeNotifier {
   DateTime activeDate = DateTime.now();
   DateTime currentDate = DateTime.now();
   Week currentWeek = Week.withDay(DateTime.now());
+  Gym activeGym = Gym.GymA;
 
   void changeActiveDate(DateTime newDate) {
     this.activeDate = newDate;
@@ -28,19 +30,18 @@ class AppState extends ChangeNotifier {
     notifyListeners();
   }
 
+  void changeActiveGym(Gym gym) {
+    this.activeGym = gym;
+    notifyListeners();
+  }
+
   List<TimeSlot> getCurrentDateTimeSlots() {
-    return timeSlots[activeDate] ?? _generateTestData();//List.empty();
+    return timeSlots[activeDate] ?? _generateTestData(); //List.empty();
   }
 
   List<TimeSlot> _generateTestData() => List(20)
       .asMap()
-      .map((index, value) => MapEntry(
-          index,
-          TimeSlot(
-              id: index,
-              start: index.toString() + " " + activeDate.toIso8601String(),
-              end: "end",
-              occupiedBy: List.empty())))
+      .map((index, value) => MapEntry(index, TimeSlot(id: index, start: index.toString() + " " + activeDate.toIso8601String(), end: "end", occupiedBy: List.empty())))
       .values
       .toList();
 }
