@@ -1,5 +1,5 @@
-import 'file:///C:/local/flutter/UUL_Gym/lib/widgets/timeslot/time_slot_list.dart';
 import 'package:UUL_Gym/widgets/week/day_list.dart';
+import 'package:UUL_Gym/widgets/week/day_list_animated.dart';
 import 'package:flutter/material.dart';
 
 class TimeSlotScreen extends StatelessWidget {
@@ -16,7 +16,7 @@ class TimeSlotScreen extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 16),
-              child: DayList(),
+              child: DayListAnimated(),
             )
           ],
         ),
