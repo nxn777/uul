@@ -54,7 +54,7 @@ class _GymTileState extends State<GymTile> {
   bool _isSelected() => Provider.of<AppState>(context, listen: false).activeGym == widget.gym;
 
   TextStyle _getTextStyle() {
-    var _style = _isSelected() ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold) : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.bold);
+    var _style = _isSelected() ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.w900) : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.w900);
     return _style;
   }
 }

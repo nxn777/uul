@@ -48,8 +48,8 @@ class _DayTileAnimatedState extends State<DayTileAnimated> {
 
   TextStyle _getTextStyle() {
     var _style =  _isSelected()
-        ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold)
-        : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.bold);
+        ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.w900)
+        : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.w900);
     return _isCurrent() ? _style.copyWith(color: Colors.black) : _style;
   }
 }
