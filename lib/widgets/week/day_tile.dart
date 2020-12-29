@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:intl/intl.dart';
+import 'package:UUL_Gym/constants/dimens.dart';
 
 class DayTile extends StatelessWidget {
   final Function(DateTime) onTap;
@@ -28,7 +29,7 @@ class DayTile extends StatelessWidget {
         width: 44,
         decoration: BoxDecoration(
           color: isSelected ? kAccentColor : Colors.transparent,
-          borderRadius: BorderRadius.circular(10.0),
+          borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         ),
       ),
     );

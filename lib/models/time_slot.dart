@@ -7,19 +7,19 @@ import 'package:UUL_Gym/models/user.dart';
 
 class TimeSlot {
   int _id;
-  String _start;
-  String _end;
+  DateTime _start;
+  DateTime _end;
   List<User> _occupiedBy;
 
   int get id => _id;
-  String get start => _start;
-  String get end => _end;
+  DateTime get start => _start;
+  DateTime get end => _end;
   List<User> get occupiedBy => _occupiedBy;
 
   TimeSlot({
     int id,
-    String start,
-    String end,
+    DateTime start,
+    DateTime end,
     List<User> occupiedBy}){
     _id = id;
     _start = start;
@@ -29,8 +29,8 @@ class TimeSlot {
 
   TimeSlot.fromJson(dynamic json) {
     _id = json["id"];
-    _start = json["start"];
-    _end = json["end"];
+    _start = DateTime.parse(json["start"]);
+    _end = DateTime.parse(json["end"]);
     if (json["occupiedBy"] != null) {
       _occupiedBy = [];
       json["occupiedBy"].forEach((v) {
@@ -42,8 +42,8 @@ class TimeSlot {
   Map<String, User> toJson() {
     var map = <String, dynamic>{};
     map["id"] = _id;
-    map["start"] = _start;
-    map["end"] = _end;
+    map["start"] = _start.toIso8601String();
+    map["end"] = _end.toIso8601String();
     if (_occupiedBy != null) {
       map["occupiedBy"] = _occupiedBy.map((v) => v.toJson()).toList();
     }

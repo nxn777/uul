@@ -1,15 +1,105 @@
+import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:UUL_Gym/constants/color_constants.dart';
+import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:UUL_Gym/models/rules.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TimeSlotTile extends StatelessWidget {
   final TimeSlot timeSlot;
-  
-  TimeSlotTile({this.timeSlot});
+  final DateFormat _timeFormatter;
+  final bool isCurrentDay;
+  final Rules rules;
+  TimeSlotTile({@required this.timeSlot, @required this.isCurrentDay, @required this.rules}) : _timeFormatter = DateFormat.Hm();
 
   @override
   Widget build(BuildContext context) {
-    return ListTile(
-      title: Text(timeSlot.start),
+    return Container(
+      margin: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingXSmallPlus, kSpacingMedium, kSpacingXSmallPlus),
+      child: InkWell(
+        onTap: () {},
+        borderRadius: BorderRadius.circular(kDefaultBorderRadius),
+        child: Row(
+          mainAxisAlignment: MainAxisAlignment.start,
+          crossAxisAlignment: CrossAxisAlignment.center,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
+              child: FaIcon(
+                FontAwesomeIcons.solidStar,
+                color: kAccentColor,
+                size: kSpacingXLarge,
+              ),
+            ),
+            Expanded(
+              child: Column(
+                mainAxisSize: MainAxisSize.min,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingSmall),
+                    child: Text(
+                      "${_timeFormatter.format(timeSlot.start)} - ${_timeFormatter.format(timeSlot.end)}",
+                      style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
+                    ),
+                  ),
+                  Text(
+                    _getTimeSlotOccupiedByDescription(),
+                    style: kCaptionInactiveTextStyle.copyWith(fontWeight: FontWeight.bold),
+                  )
+                ],
+              ),
+            ),
+            Padding(
+              padding: const EdgeInsets.all(kSpacingMedium),
+              child: FaIcon(
+                FontAwesomeIcons.angleRight,
+                color: kSecondaryColor,
+              ),
+            ),
+          ],
+        ),
+      ),
+      decoration: BoxDecoration(color: kBackgroundColor, borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
     );
+  }
+
+  String _getTimeSlotOccupiedByDescription() {
+    if (timeSlot.occupiedBy.isEmpty) {
+      String result = "All ${rules.personsPerTimeSlot} places are available";
+      if (rules.personsPerTimeSlot == 1) {
+        result = "The only place is available";
+      }
+      return result;
+    } else {
+      //return _countOccupiedByAppartment();
+      String result;
+      var left = rules.personsPerTimeSlot - timeSlot.occupiedBy.length;
+      if (left > 1) {
+        result = "${left} places left";
+      } else if (left == 1) {
+        result = "1 place left";
+      } else {
+        result = "No places are available";
+      }
+      return result;
+    }
+  }
+
+  String _countOccupiedByAppartment() {
+    var map = Map<String, int>();
+    timeSlot.occupiedBy.forEach((element) {
+      var count = map.putIfAbsent(element.apartment.code, () => 0);
+      count++;
+      map[element.apartment.code] = count;
+    });
+    String result = "";
+    map.entries.forEach((element) {
+      result = result + element.key + "x" + element.value.toString() + " ";
+    });
+    return result;
   }
 }

@@ -1,4 +1,5 @@
 import 'package:UUL_Gym/models/appartment.dart';
+import 'package:UUL_Gym/models/rules.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:UUL_Gym/models/week.dart';
@@ -13,6 +14,7 @@ class AppState extends ChangeNotifier {
   DateTime currentDate = DateTime.now();
   Week currentWeek = Week.withDay(DateTime.now());
   Gym activeGym = Gym.GymA;
+  Rules rules = Rules();
 
   void changeActiveDate(DateTime newDate) {
     this.activeDate = newDate;
@@ -41,7 +43,7 @@ class AppState extends ChangeNotifier {
 
   List<TimeSlot> _generateTestData() => List(20)
       .asMap()
-      .map((index, value) => MapEntry(index, TimeSlot(id: index, start: index.toString() + " " + activeDate.toIso8601String(), end: "end", occupiedBy: List.empty())))
+      .map((index, value) => MapEntry(index, TimeSlot(id: index, start: activeDate, end: activeDate.add(Duration(hours: 1)), occupiedBy: List.empty())))
       .values
       .toList();
 }
