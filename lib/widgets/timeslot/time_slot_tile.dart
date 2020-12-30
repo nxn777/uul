@@ -79,7 +79,7 @@ class TimeSlotTile extends StatelessWidget {
       String result;
       var left = rules.personsPerTimeSlot - timeSlot.occupiedBy.length;
       if (left > 1) {
-        result = "${left} places left";
+        result = "$left places left";
       } else if (left == 1) {
         result = "1 place left";
       } else {

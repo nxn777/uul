@@ -34,23 +34,27 @@ class TimeSlotScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingMedium, kSpacingMedium, kSpacingMedium),
             child: DayListAnimated(),
           ),
-          TimeSlotTile(
-            timeSlot: TimeSlot(id: 0, start: DateTime.now(), end: DateTime.now().add(Duration(hours: 1)), occupiedBy: List.of({
-              User(id: 1, name: "user1", appartment: Appartment(id: 1, code: "C1207")),
-              //User(id: 2, name: "user2", appartment: Appartment(id: 1, code: "C1207")),
-              //User(id: 3, name: "user3", appartment: Appartment(id: 3, code: "B0104")),
-              User(id: 4, name: "user4", appartment: Appartment(id: 4, code: "D1002")),
-            })),
-            rules: Provider.of<AppState>(context, listen: false).rules,
-            isCurrentDay: true,
-          ),
-          TimeSlotTile(
-            timeSlot: TimeSlot(id: 0, start: DateTime.now(), end: DateTime.now().add(Duration(hours: 1)), occupiedBy: List.empty()),
-            rules: Provider.of<AppState>(context, listen: false).rules,
-            isCurrentDay: true,
-          )
+          Expanded(child: TimeSlotList())
         ],
       ),
     ));
   }
 }
+
+/**
+    TimeSlotTile(
+    timeSlot: TimeSlot(id: 0, start: DateTime.now(), end: DateTime.now().add(Duration(hours: 1)), occupiedBy: List.of({
+    User(id: 1, name: "user1", appartment: Appartment(id: 1, code: "C1207")),
+    //User(id: 2, name: "user2", appartment: Appartment(id: 1, code: "C1207")),
+    //User(id: 3, name: "user3", appartment: Appartment(id: 3, code: "B0104")),
+    User(id: 4, name: "user4", appartment: Appartment(id: 4, code: "D1002")),
+    })),
+    rules: Provider.of<AppState>(context, listen: false).rules,
+    isCurrentDay: true,
+    ),
+    TimeSlotTile(
+    timeSlot: TimeSlot(id: 0, start: DateTime.now(), end: DateTime.now().add(Duration(hours: 1)), occupiedBy: List.empty()),
+    rules: Provider.of<AppState>(context, listen: false).rules,
+    isCurrentDay: true,
+    )
+    **/

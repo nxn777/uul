@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/common/date_helpers.dart';
 import 'package:UUL_Gym/models/appartment.dart';
 import 'package:UUL_Gym/models/rules.dart';
 import 'package:UUL_Gym/models/user.dart';
@@ -15,6 +16,7 @@ class AppState extends ChangeNotifier {
   Week currentWeek = Week.withDay(DateTime.now());
   Gym activeGym = Gym.GymA;
   Rules rules = Rules();
+  bool get isCurrentDateActive => DateHelpers.isTheSameDay(activeDate, currentDate);
 
   void changeActiveDate(DateTime newDate) {
     this.activeDate = newDate;
