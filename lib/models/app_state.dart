@@ -1,3 +1,5 @@
+import 'dart:math';
+
 import 'package:UUL_Gym/common/date_helpers.dart';
 import 'package:UUL_Gym/models/appartment.dart';
 import 'package:UUL_Gym/models/rules.dart';
@@ -45,7 +47,13 @@ class AppState extends ChangeNotifier {
 
   List<TimeSlot> _generateTestData() => List(20)
       .asMap()
-      .map((index, value) => MapEntry(index, TimeSlot(id: index, start: activeDate, end: activeDate.add(Duration(hours: 1)), occupiedBy: List.empty())))
+      .map((index, value) => MapEntry(index, TimeSlot(id: index, start: activeDate, end: activeDate.add(Duration(hours: 1)), occupiedBy: _generateUsers(Random().nextInt(5)))))
+      .values
+      .toList();
+
+  List<User> _generateUsers(int number) => List(number)
+      .asMap()
+      .map((index, value) => MapEntry(index, User(id: index, name: "username #$index", appartment: Appartment(id: index, code: "C120${Random().nextInt(2)}"))))
       .values
       .toList();
 }

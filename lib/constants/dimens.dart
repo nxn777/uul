@@ -8,6 +8,10 @@ const kSpacingXSmall = 4.0;
 const kSpacingXSmallPlus = 6.0;
 const kSpacingLarge = 24.0;
 const kSpacingXLarge = 32.0;
+const kSpacingXXLarge = 48.0;
 const kSpacingHuge = 64.0;
 
-const kDefaultBorderRadius = 10.0;
+const kDefaultBorderRadius = 8.0;
+const kMediumBorderRadius = 16.0;
+const kLargeBorderRadius = 24.0;
+const kXLargeBorderRadius = 32.0;

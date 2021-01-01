@@ -1,8 +1,11 @@
+import 'dart:ui';
+
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/models/appartment.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:UUL_Gym/models/user.dart';
+import 'package:UUL_Gym/screens/book_time_slot_screen.dart';
 import 'package:UUL_Gym/widgets/gym/gym_list.dart';
 import 'package:UUL_Gym/widgets/timeslot/time_slot_list.dart';
 import 'package:UUL_Gym/widgets/timeslot/time_slot_tile.dart';
@@ -34,7 +37,23 @@ class TimeSlotScreen extends StatelessWidget {
             padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingMedium, kSpacingMedium, kSpacingMedium),
             child: DayListAnimated(),
           ),
-          Expanded(child: TimeSlotList())
+          Expanded(child: TimeSlotList(
+            onTap: (timeSlot) {
+              showModalBottomSheet(
+                context: context,
+                isScrollControlled: true,
+                builder: (context) => BackdropFilter(
+                  filter:  ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  child: SingleChildScrollView(
+                    child: Container(
+                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                      child: BookTimeSlotScreen(timeSlot: timeSlot,),
+                    ),
+                  ),
+                ),
+              );
+            },
+          ))
         ],
       ),
     ));

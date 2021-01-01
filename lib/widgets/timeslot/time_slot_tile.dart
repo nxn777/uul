@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/common/date_helpers.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
@@ -9,17 +10,21 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TimeSlotTile extends StatelessWidget {
   final TimeSlot timeSlot;
-  final DateFormat _timeFormatter;
   final bool isCurrentDay;
   final Rules rules;
-  TimeSlotTile({@required this.timeSlot, @required this.isCurrentDay, @required this.rules}) : _timeFormatter = DateFormat.Hm();
+  final Function(TimeSlot) onTap;
+  TimeSlotTile({@required this.timeSlot, @required this.isCurrentDay, @required this.rules, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingXSmallPlus, kSpacingMedium, kSpacingXSmallPlus),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          if (isCurrentDay) {
+            this.onTap(this.timeSlot);
+          }
+        },
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,
@@ -29,7 +34,7 @@ class TimeSlotTile extends StatelessWidget {
               padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
               child: FaIcon(
                 FontAwesomeIcons.solidStar,
-                color: kAccentColor,
+                color: isCurrentDay ? kAccentColor : kInactiveColor,
                 size: kSpacingXLarge,
               ),
             ),
@@ -42,7 +47,7 @@ class TimeSlotTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingSmall),
                     child: Text(
-                      "${_timeFormatter.format(timeSlot.start)} - ${_timeFormatter.format(timeSlot.end)}",
+                      DateHelpers.formatTimeSlotTitle(timeSlot),
                       style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -75,7 +80,6 @@ class TimeSlotTile extends StatelessWidget {
       }
       return result;
     } else {
-      //return _countOccupiedByAppartment();
       String result;
       var left = rules.personsPerTimeSlot - timeSlot.occupiedBy.length;
       if (left > 1) {
@@ -83,23 +87,9 @@ class TimeSlotTile extends StatelessWidget {
       } else if (left == 1) {
         result = "1 place left";
       } else {
-        result = "No places are available";
+        result = "No places left";
       }
       return result;
     }
-  }
-
-  String _countOccupiedByAppartment() {
-    var map = Map<String, int>();
-    timeSlot.occupiedBy.forEach((element) {
-      var count = map.putIfAbsent(element.apartment.code, () => 0);
-      count++;
-      map[element.apartment.code] = count;
-    });
-    String result = "";
-    map.entries.forEach((element) {
-      result = result + element.key + "x" + element.value.toString() + " ";
-    });
-    return result;
   }
 }
