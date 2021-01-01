@@ -33,8 +33,8 @@ class TimeSlotTile extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
               child: FaIcon(
-                FontAwesomeIcons.solidStar,
-                color: isCurrentDay ? kAccentColor : kInactiveColor,
+                _getIcon(),
+                color: _getIconColor(),
                 size: kSpacingXLarge,
               ),
             ),
@@ -91,5 +91,23 @@ class TimeSlotTile extends StatelessWidget {
       }
       return result;
     }
+  }
+
+  IconData _getIcon() {
+    IconData icon;
+    if (timeSlot.occupiedBy.isEmpty || timeSlot.occupiedBy.length == rules.personsPerTimeSlot) {
+      icon = FontAwesomeIcons.solidStar;
+    } else  {
+      icon = FontAwesomeIcons.starHalfAlt;
+    }
+    return icon;
+  }
+
+  Color _getIconColor() {
+    var color = isCurrentDay ? kAccentColor : kInactiveColor;
+    if (timeSlot.occupiedBy.length == rules.personsPerTimeSlot) {
+      color = kInactiveColor;
+    }
+    return color;
   }
 }
