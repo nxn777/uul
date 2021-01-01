@@ -43,11 +43,13 @@ class TimeSlotScreen extends StatelessWidget {
                 context: context,
                 isScrollControlled: true,
                 builder: (context) => BackdropFilter(
-                  filter:  ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                   child: SingleChildScrollView(
                     child: Container(
                       padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: BookTimeSlotScreen(timeSlot: timeSlot,),
+                      child: BookTimeSlotScreen(
+                        timeSlot: timeSlot,
+                      ),
                     ),
                   ),
                 ),
