@@ -1,11 +1,10 @@
 import 'package:UUL_Gym/common/date_helpers.dart';
-import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/color_constants.dart';
+import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/rules.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:flutter/material.dart';
-import 'package:intl/intl.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 class TimeSlotTile extends StatelessWidget {
@@ -97,7 +96,7 @@ class TimeSlotTile extends StatelessWidget {
     IconData icon;
     if (timeSlot.occupiedBy.isEmpty || timeSlot.occupiedBy.length == rules.personsPerTimeSlot) {
       icon = FontAwesomeIcons.solidStar;
-    } else  {
+    } else {
       icon = FontAwesomeIcons.starHalfAlt;
     }
     return icon;

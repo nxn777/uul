@@ -1,9 +1,7 @@
-
 class Week {
   final DateTime currentDate;
   final List<DateTime> days;
   final int count = 7;
-
 
   Week({this.currentDate, this.days});
 

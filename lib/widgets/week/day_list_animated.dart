@@ -1,7 +1,7 @@
+import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/models/week.dart';
 import 'package:UUL_Gym/widgets/week/day_tile_animated.dart';
 import 'package:flutter/material.dart';
-import 'package:UUL_Gym/models/app_state.dart';
 import 'package:provider/provider.dart';
 
 class DayListAnimated extends StatelessWidget {

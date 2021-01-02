@@ -1,6 +1,6 @@
+import 'package:UUL_Gym/models/gym.dart';
 import 'package:UUL_Gym/widgets/gym/gym_tile.dart';
 import 'package:flutter/material.dart';
-import 'package:UUL_Gym/models/gym.dart';
 
 class GymList extends StatelessWidget {
   @override

@@ -1,8 +1,9 @@
-import 'file:///C:/local/flutter/UUL_Gym/lib/widgets/timeslot/time_slot_tile.dart';
+import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:UUL_Gym/models/app_state.dart';
+
+import 'file:///C:/local/flutter/UUL_Gym/lib/widgets/timeslot/time_slot_tile.dart';
 
 class TimeSlotList extends StatelessWidget {
   final Function(TimeSlot) onTap;

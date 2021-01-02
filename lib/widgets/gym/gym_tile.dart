@@ -1,12 +1,12 @@
+import 'package:UUL_Gym/constants/animation_constants.dart';
+import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:UUL_Gym/models/app_state.dart';
+import 'package:UUL_Gym/models/gym.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:UUL_Gym/models/gym.dart';
 import 'package:provider/provider.dart';
-import 'package:UUL_Gym/models/app_state.dart';
-import 'package:UUL_Gym/constants/animation_constants.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
-import 'package:UUL_Gym/constants/color_constants.dart';
 
 class GymTile extends StatefulWidget {
   final Gym gym;
@@ -39,7 +39,10 @@ class _GymTileState extends State<GymTile> {
                 ),
               ),
               AnimatedContainer(
-                child: SizedBox(width: kSpacingMedium, height: kSpacingXSmall,),
+                child: SizedBox(
+                  width: kSpacingMedium,
+                  height: kSpacingXSmall,
+                ),
                 duration: Duration(milliseconds: kStandardAnimationDurationMS),
                 decoration: BoxDecoration(
                   color: _isSelected() ? kAccentColor : Colors.transparent,

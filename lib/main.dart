@@ -1,8 +1,7 @@
-import 'package:UUL_Gym/screens/time_slot_screen.dart';
+import 'package:UUL_Gym/models/app_state.dart';
+import 'package:UUL_Gym/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:UUL_Gym/models/app_state.dart';
-import 'screens/user_profiles_screen.dart';
 
 void main() {
   runApp(MyApp());
@@ -15,7 +14,7 @@ class MyApp extends StatelessWidget {
       create: (context) => AppState(),
       child: MaterialApp(
         theme: ThemeData.light().copyWith(canvasColor: Colors.transparent),
-        home: UserProfilesScreen(),
+        home: HomeScreen(),
       ),
     );
   }

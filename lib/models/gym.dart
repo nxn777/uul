@@ -1,6 +1,4 @@
-enum Gym {
-  GymA, GymB
-}
+enum Gym { GymA, GymB }
 
 extension GymDesc on Gym {
   String get title {

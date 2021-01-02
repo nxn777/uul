@@ -2,11 +2,11 @@ import 'dart:math';
 
 import 'package:UUL_Gym/common/date_helpers.dart';
 import 'package:UUL_Gym/models/appartment.dart';
-import 'package:UUL_Gym/models/rules.dart';
-import 'package:UUL_Gym/models/user.dart';
-import 'package:UUL_Gym/models/time_slot.dart';
-import 'package:UUL_Gym/models/week.dart';
 import 'package:UUL_Gym/models/gym.dart';
+import 'package:UUL_Gym/models/rules.dart';
+import 'package:UUL_Gym/models/time_slot.dart';
+import 'package:UUL_Gym/models/user.dart';
+import 'package:UUL_Gym/models/week.dart';
 import 'package:flutter/cupertino.dart';
 
 class AppState extends ChangeNotifier {

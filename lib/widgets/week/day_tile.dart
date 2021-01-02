@@ -1,8 +1,8 @@
-import 'package:flutter/material.dart';
 import 'package:UUL_Gym/constants/color_constants.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
-import 'package:intl/intl.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 
 class DayTile extends StatelessWidget {
   final Function(DateTime) onTap;
@@ -10,8 +10,7 @@ class DayTile extends StatelessWidget {
   final bool isCurrent;
   final DateTime day;
   final DateFormat _dayFormatter;
-  DayTile({@required this.day, @required this.isSelected, @required this.isCurrent, @required this.onTap})
-      : _dayFormatter = DateFormat("E");
+  DayTile({@required this.day, @required this.isSelected, @required this.isCurrent, @required this.onTap}) : _dayFormatter = DateFormat("E");
 
   @override
   Widget build(BuildContext context) {
@@ -36,9 +35,7 @@ class DayTile extends StatelessWidget {
   }
 
   TextStyle _getTextStyle() {
-    var _style =  isSelected
-        ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold)
-        : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.bold);
+    var _style = isSelected ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold) : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.bold);
     return isCurrent ? _style.copyWith(color: Colors.black) : _style;
   }
 }

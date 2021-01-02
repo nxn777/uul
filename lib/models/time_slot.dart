@@ -16,11 +16,7 @@ class TimeSlot {
   DateTime get end => _end;
   List<User> get occupiedBy => _occupiedBy;
 
-  TimeSlot({
-    int id,
-    DateTime start,
-    DateTime end,
-    List<User> occupiedBy}){
+  TimeSlot({int id, DateTime start, DateTime end, List<User> occupiedBy}) {
     _id = id;
     _start = start;
     _end = end;
@@ -49,5 +45,4 @@ class TimeSlot {
     }
     return map;
   }
-
 }

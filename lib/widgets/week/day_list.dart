@@ -1,9 +1,9 @@
-import 'package:UUL_Gym/models/week.dart';
-import 'package:flutter/material.dart';
-import 'package:UUL_Gym/models/app_state.dart';
-import 'package:UUL_Gym/widgets/week/day_tile.dart';
-import 'package:provider/provider.dart';
 import 'package:UUL_Gym/common/date_helpers.dart';
+import 'package:UUL_Gym/models/app_state.dart';
+import 'package:UUL_Gym/models/week.dart';
+import 'package:UUL_Gym/widgets/week/day_tile.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DayList extends StatelessWidget {
   @override
@@ -12,9 +12,7 @@ class DayList extends StatelessWidget {
       return Row(
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         crossAxisAlignment: CrossAxisAlignment.center,
-        children: _getDayTiles(appState.currentWeek, appState.activeDate, appState.currentDate, (day) => {
-          appState.changeActiveDate(day)
-        }),
+        children: _getDayTiles(appState.currentWeek, appState.activeDate, appState.currentDate, (day) => {appState.changeActiveDate(day)}),
       );
     });
   }

@@ -1,12 +1,12 @@
 import 'package:UUL_Gym/common/date_helpers.dart';
+import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/app_state.dart';
+import 'package:UUL_Gym/models/gym.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:flutter/material.dart';
-import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:provider/provider.dart';
-import 'package:UUL_Gym/models/gym.dart';
 
 class BookTimeSlotScreen extends StatelessWidget {
   final TimeSlot timeSlot;
@@ -75,17 +75,17 @@ class BookTimeSlotScreen extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.symmetric(vertical: kSpacingSmall),
               child: FlatButton(
-                onPressed: placesLeft == 0 ? null : () {
-                  Navigator.pop(context);
-                },height: kSpacingXXLarge,
+                onPressed: placesLeft == 0
+                    ? null
+                    : () {
+                        Navigator.pop(context);
+                      },
+                height: kSpacingXXLarge,
                 color: kAccentColor,
-                shape: RoundedRectangleBorder(
-                    borderRadius: BorderRadius.circular(kMediumBorderRadius),
-                    side: BorderSide(color: placesLeft == 0 ? kInactiveColor : kAccentColor)
-                ),
+                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: placesLeft == 0 ? kInactiveColor : kAccentColor)),
                 child: Text(
                   "Book",
-                  style:  kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color:  placesLeft == 0 ? kInactiveColor : Colors.black),
+                  style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color: placesLeft == 0 ? kInactiveColor : Colors.black),
                 ),
               ),
             ),
