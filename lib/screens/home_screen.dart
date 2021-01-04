@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/navigation/bottom_navigation.dart';
 import 'package:UUL_Gym/navigation/tab_navigator_factory.dart';
 import 'package:UUL_Gym/navigation/tabs.dart';
@@ -26,11 +27,13 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => !await _navigatorKeys[_currentTab].currentState.maybePop(),
       child: Scaffold(
+        extendBody: true,
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.NEWS),
           _buildOffstageNavigator(TabItem.SCHEDULE),
           _buildOffstageNavigator(TabItem.USER_PROFILES),
         ]),
+        backgroundColor: kWindowBackgroundColor,
         bottomNavigationBar: BottomNavigation(
           currentTab: _currentTab,
           onSelectTab: _selectTab,

@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
@@ -5,6 +6,7 @@ import 'tabs.dart';
 
 class BottomNavigation extends StatelessWidget {
   BottomNavigation({@required this.currentTab, @required this.onSelectTab});
+  final _tabs = [TabItem.NEWS, TabItem.SCHEDULE, TabItem.USER_PROFILES];
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;
 
@@ -12,27 +14,36 @@ class BottomNavigation extends StatelessWidget {
   Widget build(BuildContext context) {
     return Container(
       decoration: BoxDecoration(
-        borderRadius: BorderRadius.only(
-            topRight: Radius.circular(kLargeBorderRadius), topLeft: Radius.circular(kLargeBorderRadius)),
+        borderRadius: BorderRadius.only(topRight: Radius.circular(kLargeBorderRadius), topLeft: Radius.circular(kLargeBorderRadius)),
       ),
       child: ClipRRect(
         borderRadius: BorderRadius.only(
           topLeft: Radius.circular(kLargeBorderRadius),
           topRight: Radius.circular(kLargeBorderRadius),
         ),
-        child: BottomNavigationBar(
-          type: BottomNavigationBarType.fixed,
-          showSelectedLabels: false,
-          showUnselectedLabels: false,
-          backgroundColor: Colors.white,
-          items: [
-            _buildItem(TabItem.NEWS),
-            _buildItem(TabItem.SCHEDULE),
-            _buildItem(TabItem.USER_PROFILES),
+        child: Column(
+          mainAxisSize: MainAxisSize.min,
+          children: [
+            ColoredBox(
+              color: Colors.white,
+              child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceAround,
+                crossAxisAlignment: CrossAxisAlignment.center,
+                children: _getIndicators(),
+              ),
+            ),
+            BottomNavigationBar(
+              elevation: 0,
+              type: BottomNavigationBarType.fixed,
+              showSelectedLabels: false,
+              showUnselectedLabels: false,
+              backgroundColor: Colors.white,
+              items: _tabs.map((tab) => _buildItem(tab)).toList(),
+              onTap: (index) => onSelectTab(
+                TabItem.values[index],
+              ),
+            ),
           ],
-          onTap: (index) => onSelectTab(
-            TabItem.values[index],
-          ),
         ),
       ),
     );
@@ -67,4 +78,15 @@ class BottomNavigation extends StatelessWidget {
   Color _colorTabMatching(TabItem item) {
     return currentTab == item ? activeTabColor[item] : Colors.grey;
   }
+
+  List<Widget> _getIndicators() => _tabs
+      .map((tab) => Container(
+            height: 4,
+            child: SizedBox(width: 32, height: 4,),
+            decoration: BoxDecoration(
+              color: currentTab == tab ? kAccentColor : Colors.transparent,
+              borderRadius: BorderRadius.circular(2),
+            ),
+          ))
+      .toList();
 }

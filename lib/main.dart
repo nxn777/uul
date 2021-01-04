@@ -13,7 +13,7 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AppState>(
       create: (context) => AppState(),
       child: MaterialApp(
-        theme: ThemeData.light().copyWith(canvasColor: Colors.transparent),
+        theme: ThemeData.light().copyWith(canvasColor: Colors.white),
         home: HomeScreen(),
       ),
     );
