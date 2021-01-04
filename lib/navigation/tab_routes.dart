@@ -6,14 +6,12 @@ abstract class TabRoutes {
 
   Map<String, WidgetBuilder> routeBuilders(BuildContext context);
 
-  // void push(BuildContext context) {
-  //   var routeBuilders = routeBuilders(context);
-  //
-  //   Navigator.push(
-  //     context,
-  //     MaterialPageRoute(
-  //       builder: (context) => routeBuilders[TabNavigatorRoutes.detail](context),
-  //     ),
-  //   );
-  // }
+  void push(String screen,BuildContext context) {
+    Navigator.push(
+      context,
+      MaterialPageRoute(
+        builder: (context) => routeBuilders(context)[screen](context),
+      ),
+    );
+  }
 }

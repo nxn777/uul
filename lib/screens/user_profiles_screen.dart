@@ -4,6 +4,10 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 
 class UserProfilesScreen extends StatelessWidget {
+  final Function onNewProfileTap;
+
+  UserProfilesScreen({@required this.onNewProfileTap});
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -15,7 +19,7 @@ class UserProfilesScreen extends StatelessWidget {
         child: FloatingActionButton(
           elevation: kSpacingXXSmall,
           onPressed: () {
-            // Add your onPressed code here!
+            this.onNewProfileTap();
           },
           child: FaIcon(
             FontAwesomeIcons.userPlus,

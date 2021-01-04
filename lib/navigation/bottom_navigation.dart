@@ -81,8 +81,8 @@ class BottomNavigation extends StatelessWidget {
 
   List<Widget> _getIndicators() => _tabs
       .map((tab) => Container(
-            height: 4,
-            child: SizedBox(width: 32, height: 4,),
+            height: kSpacingXSmall,
+            child: SizedBox(width: kSpacingXLarge, height: kSpacingXSmall,),
             decoration: BoxDecoration(
               color: currentTab == tab ? kAccentColor : Colors.transparent,
               borderRadius: BorderRadius.circular(2),
