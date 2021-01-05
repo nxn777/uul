@@ -12,47 +12,50 @@ class TimeSlotScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-        body: SafeArea(
-      child: Column(
-        crossAxisAlignment: CrossAxisAlignment.stretch,
-        children: [
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
-            child: Text(
-              "Schedule",
-              style: kPageTitleTextStyle,
+      body: SafeArea(
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.stretch,
+          children: [
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
+              child: Text(
+                "Schedule",
+                style: kPageTitleTextStyle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-            child: GymList(),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingMedium, kSpacingMedium, kSpacingMedium),
-            child: DayListAnimated(),
-          ),
-          Expanded(child: TimeSlotList(
-            onTap: (timeSlot) {
-              showModalBottomSheet(
-                context: context,
-                isScrollControlled: true,
-                builder: (context) => BackdropFilter(
-                  filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
-                  child: SingleChildScrollView(
-                    child: Container(
-                      padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
-                      child: BookTimeSlotScreen(
-                        timeSlot: timeSlot,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+              child: GymList(),
+            ),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingMedium, kSpacingMedium, kSpacingMedium),
+              child: DayListAnimated(),
+            ),
+            Expanded(
+              child: TimeSlotList(
+                onTap: (timeSlot) {
+                  showModalBottomSheet(
+                    context: context,
+                    isScrollControlled: true,
+                    builder: (context) => BackdropFilter(
+                      filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
+                      child: SingleChildScrollView(
+                        child: Container(
+                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                          child: BookTimeSlotScreen(
+                            timeSlot: timeSlot,
+                          ),
+                        ),
                       ),
                     ),
-                  ),
-                ),
-              );
-            },
-          ))
-        ],
+                  );
+                },
+              ),
+            )
+          ],
+        ),
       ),
-    ));
+    );
   }
 }
 

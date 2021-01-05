@@ -15,7 +15,7 @@ class ProfilesTabRoutes extends TabRoutes {
     return {
       ProfilesTabRoutes.root: (context) => UserProfilesScreen(
             onNewProfileTap: () {
-              push(newProfile, context);
+              push(newProfile, context, true);
             },
           ),
       ProfilesTabRoutes.newProfile: (context) => AddNewProfileScreen()

@@ -6,9 +6,8 @@ abstract class TabRoutes {
 
   Map<String, WidgetBuilder> routeBuilders(BuildContext context);
 
-  void push(String screen,BuildContext context) {
-    Navigator.push(
-      context,
+  void push(String screen,BuildContext context, bool hideNavBar) {
+    Navigator.of(context, rootNavigator: hideNavBar).push(
       MaterialPageRoute(
         builder: (context) => routeBuilders(context)[screen](context),
       ),
