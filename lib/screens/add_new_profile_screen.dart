@@ -1,5 +1,6 @@
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:UUL_Gym/widgets/stepper/step_controls.dart';
 import 'package:flutter/material.dart';
 
 class AddNewProfileScreen extends StatelessWidget {
@@ -18,9 +19,10 @@ class AddNewProfileScreen extends StatelessWidget {
               ),
             ),
             Expanded(
-              child: ListView(
-                children: [Stepper(
+              child: ListView(children: [
+                Stepper(
                   physics: ScrollPhysics(),
+                  controlsBuilder: stepControlsBuilder,
                   steps: [
                     Step(
                       title: Text("Start"),
@@ -71,8 +73,8 @@ class AddNewProfileScreen extends StatelessWidget {
                       content: Text("Before starting, we should create a page."),
                     ),
                   ],
-                ),]
-              ),
+                ),
+              ]),
             )
           ],
         ),
