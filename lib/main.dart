@@ -3,6 +3,8 @@ import 'package:UUL_Gym/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'constants/dimens.dart';
+
 void main() {
   runApp(MyApp());
 }
@@ -13,7 +15,9 @@ class MyApp extends StatelessWidget {
     return ChangeNotifierProvider<AppState>(
       create: (context) => AppState(),
       child: MaterialApp(
-        theme: ThemeData.light().copyWith(canvasColor: Colors.white),
+        theme: ThemeData.light().copyWith(
+            canvasColor: Colors.white,
+            bottomSheetTheme: BottomSheetThemeData(backgroundColor: Colors.white, shape: RoundedRectangleBorder(borderRadius: BorderRadius.vertical(top: Radius.circular(kLargeBorderRadius))))),
         home: HomeScreen(),
       ),
     );

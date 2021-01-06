@@ -41,7 +41,7 @@ class TimeSlotScreen extends StatelessWidget {
                       filter: ImageFilter.blur(sigmaX: 3, sigmaY: 3),
                       child: SingleChildScrollView(
                         child: Container(
-                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom),
+                          padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + kBottomNavBarHeight),
                           child: BookTimeSlotScreen(
                             timeSlot: timeSlot,
                           ),

@@ -16,3 +16,5 @@ const kDefaultBorderRadius = 8.0;
 const kMediumBorderRadius = 16.0;
 const kLargeBorderRadius = 24.0;
 const kXLargeBorderRadius = 32.0;
+
+const kBottomNavBarHeight = 60.0;
