@@ -1,3 +1,6 @@
+import 'package:UUL_Gym/constants/color_constants.dart';
+import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -11,15 +14,27 @@ class StepControls extends StatelessWidget {
   Widget build(BuildContext context) {
     return Row(
       children: <Widget>[
-        FlatButton.icon(
-          label: Text("Next"),
-          icon: FaIcon(FontAwesomeIcons.checkCircle),
-          onPressed: onStepContinue,
-          //child: const Text('NEXT'),
+        Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: FlatButton(
+            onPressed: this.onStepCancel,
+            height: kSpacingXLarge,
+            color: kAccentColor,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kAccentColor)),
+            child: Text(
+              "Next",
+              style:  kRegularActiveTextStyle.copyWith(color: Colors.black),
+            ),
+          ),
         ),
-        TextButton(
-          onPressed: onStepCancel,
-          child: const Text('CANCEL'),
+        FlatButton(
+          onPressed: this.onStepCancel,
+          height: kSpacingXLarge,
+          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor)),
+          child: Text(
+            "Cancel",
+            style: kRegularActiveTextStyle.copyWith(color: kInactiveColor),
+          ),
         ),
       ],
     );
