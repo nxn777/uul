@@ -8,7 +8,7 @@ Step createChooseTowerStep(BuildContext context, int index, NewProfileViewModel 
     isActive: viewModel.isStepActive(index),
     state: viewModel.getStepState(index),
     title: Text("Choose your tower"),
-    content: Text("Here will be options")
+    content: Container(child: Text("Here will be options"))
   );
 }
 

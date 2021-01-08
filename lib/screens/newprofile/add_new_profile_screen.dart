@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
@@ -13,7 +14,7 @@ class AddNewProfileScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<NewProfileViewModel>(
       create: (context) => NewProfileViewModel(),
-      child: Consumer<NewProfileViewModel>(builder: (context, profileState, child) {
+      child: Consumer<NewProfileViewModel>(builder: (context, viewModel, child) {
         return Scaffold(
           body: SafeArea(
             child: Column(
@@ -30,12 +31,12 @@ class AddNewProfileScreen extends StatelessWidget {
                   child: ListView(children: [
                     Stepper(
                         physics: ScrollPhysics(),
-                        onStepContinue: profileState.nextStep,
-                        onStepCancel: profileState.cancelStep,
-                        onStepTapped: profileState.gotoStep,
+                        onStepContinue: viewModel.nextStep,
+                        onStepCancel: viewModel.cancelStep,
+                        onStepTapped: viewModel.gotoStep,
                         controlsBuilder: stepControlsBuilder,
-                        steps: _stepsFactory.getNewProfileSteps(context, profileState)
-                    ),
+                        currentStep: viewModel.currentStep,
+                        steps: _stepsFactory.getNewProfileSteps(context, viewModel)),
                   ]),
                 )
               ],

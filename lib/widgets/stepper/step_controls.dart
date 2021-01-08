@@ -17,7 +17,7 @@ class StepControls extends StatelessWidget {
         Padding(
           padding: const EdgeInsets.all(12.0),
           child: FlatButton(
-            onPressed: this.onStepCancel,
+            onPressed: this.onStepContinue,
             height: kSpacingXLarge,
             color: kAccentColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kAccentColor)),
@@ -32,7 +32,7 @@ class StepControls extends StatelessWidget {
           height: kSpacingXLarge,
           shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor)),
           child: Text(
-            "Cancel",
+            "Clear",
             style: kRegularActiveTextStyle.copyWith(color: kInactiveColor),
           ),
         ),
