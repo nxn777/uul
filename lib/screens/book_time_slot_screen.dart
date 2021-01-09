@@ -3,7 +3,6 @@ import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/app_state.dart';
-import 'package:UUL_Gym/models/gym.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -16,7 +15,7 @@ class BookTimeSlotScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     final state = Provider.of<AppState>(context, listen: false);
-    final String gymTitle = state.activeGym.title;
+    final String gymTitle = state.activeGym.getTitle();
     final placesLeft = state.rules.personsPerTimeSlot - timeSlot.occupiedBy.length;
     final placesLeftDesc = "Places left: $placesLeft";
 

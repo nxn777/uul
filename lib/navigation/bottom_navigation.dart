@@ -1,7 +1,8 @@
 import 'package:UUL_Gym/constants/color_constants.dart';
+import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:UUL_Gym/constants/dimens.dart';
+
 import 'tabs.dart';
 
 class BottomNavigation extends StatelessWidget {
@@ -82,7 +83,10 @@ class BottomNavigation extends StatelessWidget {
   List<Widget> _getIndicators() => _tabs
       .map((tab) => Container(
             height: kSpacingXSmall,
-            child: SizedBox(width: kSpacingXLarge, height: kSpacingXSmall,),
+            child: SizedBox(
+              width: kSpacingXLarge,
+              height: kSpacingXSmall,
+            ),
             decoration: BoxDecoration(
               color: currentTab == tab ? kAccentColor : Colors.transparent,
               borderRadius: BorderRadius.circular(2),

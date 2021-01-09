@@ -1,4 +1,3 @@
-import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -6,8 +5,7 @@ class NewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(
-        ),
+        child: Container(),
       ),
     );
   }

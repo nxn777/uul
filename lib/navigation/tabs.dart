@@ -1,4 +1,3 @@
-import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:flutter/material.dart';
 
 enum TabItem { NEWS, SCHEDULE, USER_PROFILES }

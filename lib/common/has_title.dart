@@ -1,0 +1,3 @@
+mixin HasTitle {
+  String getTitle();
+}

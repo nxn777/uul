@@ -1,16 +1,14 @@
+import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/models/gym.dart';
-import 'package:UUL_Gym/widgets/gym/gym_tile.dart';
+import 'package:UUL_Gym/widgets/selector/horizontal_selector.dart';
 import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class GymList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: _getGymTiles(),
-    );
+    return Consumer<AppState>(builder: (context, appState, child) {
+      return HorizontalSelector<Gym>(items: appState.gyms, onItemTap: appState.changeActiveGym, isItemSelected: (gym) => gym.id == appState.activeGymId);
+    });
   }
-
-  List<Widget> _getGymTiles() => Gym.values.map((g) => GymTile(gym: g)).toList();
 }

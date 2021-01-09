@@ -1,4 +1,3 @@
-import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';

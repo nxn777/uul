@@ -3,8 +3,8 @@ import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const int _FIRST_STEP = 0;
-class NewProfileViewModel extends ChangeNotifier {
 
+class NewProfileViewModel extends ChangeNotifier {
   int _totalSteps = 0;
   int _currentStep = _FIRST_STEP;
 

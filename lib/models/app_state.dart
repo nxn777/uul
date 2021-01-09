@@ -16,7 +16,10 @@ class AppState extends ChangeNotifier {
   DateTime activeDate = DateTime.now();
   DateTime currentDate = DateTime.now();
   Week currentWeek = Week.withDay(DateTime.now());
-  Gym activeGym = Gym.GymA;
+  final List<Gym> gyms = Gym.getGyms();
+  int activeGymId = 0;
+  Gym get activeGym => gyms[activeGymId];
+
   Rules rules = Rules();
   bool get isCurrentDateActive => DateHelpers.isTheSameDay(activeDate, currentDate);
 
@@ -37,7 +40,7 @@ class AppState extends ChangeNotifier {
   }
 
   void changeActiveGym(Gym gym) {
-    this.activeGym = gym;
+    this.activeGymId = gym.id;
     notifyListeners();
   }
 
