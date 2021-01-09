@@ -14,7 +14,7 @@ class StepControls extends StatelessWidget {
     return Row(
       children: <Widget>[
         Padding(
-          padding: const EdgeInsets.all(12.0),
+          padding: const EdgeInsets.fromLTRB(0, kSpacingMedium, kSpacingMedium, 0),
           child: FlatButton(
             onPressed: this.onStepContinue,
             height: kSpacingXLarge,
@@ -26,13 +26,16 @@ class StepControls extends StatelessWidget {
             ),
           ),
         ),
-        FlatButton(
-          onPressed: this.onStepCancel,
-          height: kSpacingXLarge,
-          shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor)),
-          child: Text(
-            "Clear",
-            style: kRegularActiveTextStyle.copyWith(color: kInactiveColor),
+        Padding(
+          padding: const EdgeInsets.fromLTRB(0, kSpacingMedium, kSpacingMedium, 0),
+          child: FlatButton(
+            onPressed: this.onStepCancel,
+            height: kSpacingXLarge,
+            shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor)),
+            child: Text(
+              "Clear",
+              style: kRegularActiveTextStyle.copyWith(color: kInactiveColor),
+            ),
           ),
         ),
       ],

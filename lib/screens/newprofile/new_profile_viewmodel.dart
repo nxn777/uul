@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/models/tower.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_operations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -20,6 +21,11 @@ class NewProfileViewModel extends ChangeNotifier {
   final Map<int, NewProfileStepEraser> _erasers = {};
   final Set<int> _visited = {_FIRST_STEP};
   final accountFormKey = GlobalKey<FormState>();
+
+
+  final List<Tower> towers = Tower.getTowers();
+  int activeTowerId = 0;
+  Tower get currentTower => towers[activeTowerId];
 
   StepState getStepState(int index) {
     if (index == _currentStep) {
@@ -58,10 +64,10 @@ class NewProfileViewModel extends ChangeNotifier {
     }
   }
 
-  void cancelStep() {
+  void clearStep() {
     _erasers[_currentStep].call(this);
     _visited.remove(_currentStep);
-    gotoStep(_currentStep - 1);
+    notifyListeners();//gotoStep(_currentStep - 1);
   }
 
   void registerValidator(int step, NewProfileStepValidator validator) {
@@ -91,5 +97,14 @@ class NewProfileViewModel extends ChangeNotifier {
 
   NewProfileViewModel() {
     print("NewVM !");
+  }
+
+  void changeActiveTower(Tower tower) {
+    if (tower == null) {
+      this.activeTowerId = 0;
+    } else {
+      this.activeTowerId = tower.id;
+    }
+    notifyListeners();
   }
 }

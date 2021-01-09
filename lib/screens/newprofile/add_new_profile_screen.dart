@@ -31,7 +31,7 @@ class AddNewProfileScreen extends StatelessWidget {
                     Stepper(
                         physics: ScrollPhysics(),
                         onStepContinue: viewModel.nextStep,
-                        onStepCancel: viewModel.cancelStep,
+                        onStepCancel: viewModel.clearStep,
                         onStepTapped: viewModel.gotoStep,
                         controlsBuilder: stepControlsBuilder,
                         currentStep: viewModel.currentStep,
