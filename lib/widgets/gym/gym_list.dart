@@ -8,7 +8,13 @@ class GymList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Consumer<AppState>(builder: (context, appState, child) {
-      return HorizontalSelector<Gym>(items: appState.gyms, onItemTap: appState.changeActiveGym, isItemSelected: (gym) => gym.id == appState.activeGymId);
+      return HorizontalSelector<Gym>(
+        items: appState.gyms,
+        onItemTap: appState.changeActiveGym,
+        isItemSelected: (gym) => gym.id == appState.activeGymId,
+        textScale: 2,
+        indicatorScale: 1.2,
+      );
     });
   }
 }

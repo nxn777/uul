@@ -1,4 +1,5 @@
 import 'package:UUL_Gym/models/floor.dart';
+import 'package:UUL_Gym/models/door_number.dart';
 import 'package:UUL_Gym/models/tower.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_operations.dart';
 import 'package:flutter/foundation.dart';
@@ -26,12 +27,16 @@ class NewProfileViewModel extends ChangeNotifier {
 
   final List<Tower> towers = Tower.getTowers();
   int activeTowerId = 0;
-  Tower get currentTower => towers[activeTowerId];
+  Tower get activeTower => towers[activeTowerId];
 
-  List<Floor> get floors => Floor.getFloors(currentTower);
+  List<Floor> get floors => Floor.getFloors(activeTower);
   int activeFloorId = 0;
-  Floor get currentFloor => floors[activeTowerId];
+  Floor get activeFloor => floors[activeTowerId];
 
+  final List<Door> doors = Door.getDoor();
+  int activeDoorId = 0;
+  Door get activeDoor => doors[activeDoorId];
+  
   StepState getStepState(int index) {
     if (index == _currentStep) {
       return StepState.editing;
@@ -115,6 +120,15 @@ class NewProfileViewModel extends ChangeNotifier {
       this.activeFloorId = 0;
     } else {
       this.activeFloorId = floor.id;
+    }
+    notifyListeners();
+  }
+
+  void changeActiveDoor(Door door) {
+    if (door == null) {
+      this.activeDoorId = 0;
+    } else {
+      this.activeDoorId = door.id;
     }
     notifyListeners();
   }
