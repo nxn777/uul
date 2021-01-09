@@ -9,5 +9,5 @@ class Tower with HasTitle {
   Tower._(this.id, this._title);
 
   @override
-  String getTitle() => _title;
+  String getTitle({bool raw = false}) => _title;
 }

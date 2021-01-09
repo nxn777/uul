@@ -1,3 +1,3 @@
 mixin HasTitle {
-  String getTitle();
+  String getTitle({bool raw = false});
 }

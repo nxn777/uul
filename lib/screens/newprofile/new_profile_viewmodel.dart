@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/models/floor.dart';
 import 'package:UUL_Gym/models/tower.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_operations.dart';
 import 'package:flutter/foundation.dart';
@@ -26,6 +27,10 @@ class NewProfileViewModel extends ChangeNotifier {
   final List<Tower> towers = Tower.getTowers();
   int activeTowerId = 0;
   Tower get currentTower => towers[activeTowerId];
+
+  List<Floor> get floors => Floor.getFloors(currentTower);
+  int activeFloorId = 0;
+  Floor get currentFloor => floors[activeTowerId];
 
   StepState getStepState(int index) {
     if (index == _currentStep) {
@@ -95,15 +100,21 @@ class NewProfileViewModel extends ChangeNotifier {
     return true;
   }
 
-  NewProfileViewModel() {
-    print("NewVM !");
-  }
-
   void changeActiveTower(Tower tower) {
     if (tower == null) {
       this.activeTowerId = 0;
     } else {
       this.activeTowerId = tower.id;
+    }
+    this.activeFloorId = 0;
+    notifyListeners();
+  }
+
+  void changeActiveFloor(Floor floor) {
+    if (floor == null) {
+      this.activeFloorId = 0;
+    } else {
+      this.activeFloorId = floor.id;
     }
     notifyListeners();
   }
