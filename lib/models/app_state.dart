@@ -8,6 +8,7 @@ import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/models/week.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:UUL_Gym/common/list_extensions.dart';
 
 class AppState extends ChangeNotifier {
   final List<Appartment> appartments = [];
@@ -18,9 +19,11 @@ class AppState extends ChangeNotifier {
   Week currentWeek = Week.withDay(DateTime.now());
   final List<Gym> gyms = Gym.getGyms();
   int activeGymId = 0;
+
   Gym get activeGym => gyms[activeGymId];
 
   Rules rules = Rules();
+
   bool get isCurrentDateActive => DateHelpers.isTheSameDay(activeDate, currentDate);
 
   void changeActiveDate(DateTime newDate) {
@@ -48,15 +51,9 @@ class AppState extends ChangeNotifier {
     return timeSlots[activeDate] ?? _generateTestData(); //List.empty();
   }
 
-  List<TimeSlot> _generateTestData() => List(20)
-      .asMap()
-      .map((index, value) => MapEntry(index, TimeSlot(id: index, start: activeDate, end: activeDate.add(Duration(hours: 1)), occupiedBy: _generateUsers(Random().nextInt(5)))))
-      .values
-      .toList();
+  List<TimeSlot> _generateTestData() =>
+      List(20).mapIndexed((value, index) => TimeSlot(id: index, start: activeDate, end: activeDate.add(Duration(hours: 1)), occupiedBy: _generateUsers(Random().nextInt(5))));
 
-  List<User> _generateUsers(int number) => List(number)
-      .asMap()
-      .map((index, value) => MapEntry(index, User(id: index, name: "username #$index", appartment: Appartment(id: index, code: "C120${Random().nextInt(2)}"))))
-      .values
-      .toList();
+  List<User> _generateUsers(int number) =>
+      List(number).mapIndexed((value, index) => User(id: index, name: "username #$index", appartment: Appartment(id: index, code: "C120${Random().nextInt(2)}")));
 }

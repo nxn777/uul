@@ -36,7 +36,8 @@ class NewProfileViewModel extends ChangeNotifier {
   final List<Door> doors = Door.getDoor();
   int activeDoorId = 0;
   Door get activeDoor => doors[activeDoorId];
-  
+
+  String avatarImage = "";
   StepState getStepState(int index) {
     if (index == _currentStep) {
       return StepState.editing;

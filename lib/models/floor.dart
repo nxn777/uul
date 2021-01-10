@@ -1,5 +1,6 @@
 import 'package:UUL_Gym/common/has_title.dart';
 import 'package:UUL_Gym/models/tower.dart';
+import 'package:UUL_Gym/common/list_extensions.dart';
 
 class Floor with HasTitle {
   static List<Floor> getFloors(Tower tower) {
@@ -11,7 +12,7 @@ class Floor with HasTitle {
   }
 
   static List<Floor> _getFloors(int count) =>
-      List(count).asMap().map((index, value) => MapEntry(index, Floor._(index, (index + 1).toString().padLeft(2, '0'), (index + 1).toString().padLeft(2, '0')))).values.toList();
+      List(count).mapIndexed((value, index) => Floor._(index, (index + 1).toString().padLeft(2, '0'), (index + 1).toString().padLeft(2, '0')));
 
   static List<Floor> _addPH(List<Floor> input) {
     input.add(Floor._(input.length, "PH", (input.length + 1).toString().padLeft(2, '0')));
