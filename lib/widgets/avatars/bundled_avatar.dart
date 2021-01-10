@@ -14,14 +14,14 @@ class BundledAvatar extends StatelessWidget {
       child: Material(
         child: InkWell(
           onTap: () {
-            this.onTap(imageSrc);
+            this.onTap?.call(imageSrc);
           },
           child: Padding(
             padding: const EdgeInsets.all(kSpacingXSmall),
             child: CircleAvatar(
               radius: (height - 2*kSpacingXSmall) /2 ,
               backgroundImage:AssetImage(
-                imageSrc,
+                imageSrc != null ? imageSrc : "assets/defaults/default_user3.png",
               ),
             ),
           ),

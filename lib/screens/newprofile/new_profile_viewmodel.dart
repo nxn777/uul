@@ -37,7 +37,8 @@ class NewProfileViewModel extends ChangeNotifier {
   int activeDoorId = 0;
   Door get activeDoor => doors[activeDoorId];
 
-  String avatarImage = "";
+  String activeAvatarImage;
+
   StepState getStepState(int index) {
     if (index == _currentStep) {
       return StepState.editing;
@@ -133,4 +134,10 @@ class NewProfileViewModel extends ChangeNotifier {
     }
     notifyListeners();
   }
+
+  void changeActiveAvatarImage(String image) {
+    this.activeAvatarImage = image;
+    notifyListeners();
+  }
+
 }
