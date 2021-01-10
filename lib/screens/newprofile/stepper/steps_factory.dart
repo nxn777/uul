@@ -1,4 +1,5 @@
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
+import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_avatar.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_door.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_floor.dart';
 import 'package:flutter/material.dart';
@@ -13,6 +14,7 @@ class NewProfileStepsFactory {
       createChooseTowerStep(context, 1, viewModel),
       createChooseFloorStep(context, 2, viewModel),
       createChooseDoorStep(context, 3, viewModel),
+      createChooseAvatarStep(context, 4, viewModel),
     ];
     viewModel.totalSteps = list.length;
     return list;
