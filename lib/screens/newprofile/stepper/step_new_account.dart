@@ -24,6 +24,8 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
     viewModel.pwd = "";
   }
 
+  bool _stepEnabler(NewProfileViewModel viewModel) => true;
+  viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _newAccountStepValidator);
   viewModel.registerEraser(index, _newAccountStepEraser);
 

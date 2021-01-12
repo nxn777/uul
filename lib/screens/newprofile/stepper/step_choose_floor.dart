@@ -4,13 +4,16 @@ import 'package:flutter/material.dart';
 
 Step createChooseFloorStep(BuildContext context, int index, NewProfileViewModel viewModel) {
   bool _chooseFloorStepValidator(NewProfileViewModel viewModel) {
-    return true;
+    return viewModel.activeFloorId != -1;
   }
 
   void _chooseFloorStepEraser(NewProfileViewModel viewModel) {
     viewModel.changeActiveFloor(null);
   }
 
+  bool _stepEnabler(NewProfileViewModel viewModel) => !(viewModel.activeTowerId == -1);
+
+  viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseFloorStepValidator);
   viewModel.registerEraser(index, _chooseFloorStepEraser);
 

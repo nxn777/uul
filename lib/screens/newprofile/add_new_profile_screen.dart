@@ -33,7 +33,12 @@ class AddNewProfileScreen extends StatelessWidget {
                         onStepContinue: viewModel.nextStep,
                         onStepCancel: viewModel.clearStep,
                         onStepTapped: viewModel.gotoStep,
-                        controlsBuilder: stepControlsBuilder,
+                        controlsBuilder: (_, {VoidCallback onStepContinue, VoidCallback onStepCancel}) => StepControls(
+                              onStepContinue: viewModel.nextButtonIsEnabled() ? onStepContinue : null,
+                              onStepCancel: onStepCancel,
+                              nextTitle: viewModel.getNextButtonTitle(),
+                              clearTitle: viewModel.getClearButtonTitle(),
+                            ),
                         currentStep: viewModel.currentStep,
                         steps: _stepsFactory.getNewProfileSteps(context, viewModel)),
                   ]),

@@ -3,6 +3,7 @@ import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_avatar.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_door.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_floor.dart';
 import 'package:UUL_Gym/common/list_extensions.dart';
+import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_review.dart';
 import 'package:flutter/material.dart';
 
 import 'step_choose_tower.dart';
@@ -16,6 +17,7 @@ class NewProfileStepsFactory {
       createChooseFloorStep,
       createChooseDoorStep,
       createChooseAvatarStep,
+      createReviewStep,
     ];
     viewModel.totalSteps = list.length;
     return list.mapIndexed((value, index) => value.call(context, index, viewModel));

@@ -4,13 +4,15 @@ import 'package:flutter/material.dart';
 
 Step createChooseTowerStep(BuildContext context, int index, NewProfileViewModel viewModel) {
   bool _chooseTowerStepValidator(NewProfileViewModel viewModel) {
-    return true;
+    return viewModel.activeTowerId != -1;
   }
 
   void _chooseTowerStepEraser(NewProfileViewModel viewModel) {
     viewModel.changeActiveTower(null);
   }
 
+  bool _stepEnabler(NewProfileViewModel viewModel) => true;
+  viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseTowerStepValidator);
   viewModel.registerEraser(index, _chooseTowerStepEraser);
 

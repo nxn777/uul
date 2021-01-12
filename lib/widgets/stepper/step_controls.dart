@@ -4,10 +4,12 @@ import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:flutter/material.dart';
 
 class StepControls extends StatelessWidget {
+  final String nextTitle;
+  final String clearTitle;
   final VoidCallback onStepContinue;
   final VoidCallback onStepCancel;
 
-  StepControls(this.onStepContinue, this.onStepCancel);
+  StepControls({this.onStepContinue, this.onStepCancel, this.nextTitle, this.clearTitle});
 
   @override
   Widget build(BuildContext context) {
@@ -21,7 +23,7 @@ class StepControls extends StatelessWidget {
             color: kAccentColor,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kAccentColor)),
             child: Text(
-              "Next",
+              nextTitle != null ? nextTitle : "Next",
               style: kRegularActiveTextStyle.copyWith(color: Colors.black),
             ),
           ),
@@ -33,7 +35,7 @@ class StepControls extends StatelessWidget {
             height: kSpacingXLarge,
             shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor)),
             child: Text(
-              "Clear",
+              clearTitle != null ? clearTitle : "Clear",
               style: kRegularActiveTextStyle.copyWith(color: kInactiveColor),
             ),
           ),
@@ -43,4 +45,3 @@ class StepControls extends StatelessWidget {
   }
 }
 
-Widget stepControlsBuilder(_, {VoidCallback onStepContinue, VoidCallback onStepCancel}) => StepControls(onStepContinue, onStepCancel);

@@ -13,6 +13,8 @@ Step createChooseAvatarStep(BuildContext context, int index, NewProfileViewModel
     viewModel.changeActiveAvatarImage(null);
   }
 
+  bool _stepEnabler(NewProfileViewModel viewModel) => true;
+  viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseAvatarStepValidator);
   viewModel.registerEraser(index, _chooseAvatarStepEraser);
 

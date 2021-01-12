@@ -27,6 +27,9 @@ class FloorList extends StatelessWidget {
   }
 
   List<Widget> _getFloorSelectors(NewProfileViewModel viewModel) {
+    if (viewModel.activeTower == null) {
+      return [];
+    }
     if (viewModel.activeTower.getTitle() == "A" || viewModel.activeTower.getTitle() == "B") {
       return [
         _getSelector(0, 4, viewModel),
