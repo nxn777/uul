@@ -11,7 +11,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:UUL_Gym/common/list_extensions.dart';
 
 class AppState extends ChangeNotifier {
-  final List<Appartment> appartments = [];
+  //final List<Appartment> appartments = [];
   final List<User> availableUsers = [];
   final Map<String, List<TimeSlot>> timeSlots = new Map();
   DateTime activeDate = DateTime.now();
@@ -19,6 +19,7 @@ class AppState extends ChangeNotifier {
   Week currentWeek = Week.withDay(DateTime.now());
   final List<Gym> gyms = Gym.getGyms();
   int activeGymId = 0;
+  int activeUserId = -1;
 
   Gym get activeGym => gyms[activeGymId];
 
@@ -49,6 +50,12 @@ class AppState extends ChangeNotifier {
 
   List<TimeSlot> getCurrentDateTimeSlots() {
     return timeSlots[activeDate] ?? _generateTestData(); //List.empty();
+  }
+
+  void addUser(User user) {
+    availableUsers.add(user);
+    activeUserId = availableUsers.length - 1;
+    notifyListeners();
   }
 
   List<TimeSlot> _generateTestData() =>

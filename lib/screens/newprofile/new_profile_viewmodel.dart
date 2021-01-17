@@ -1,6 +1,8 @@
+import 'package:UUL_Gym/models/appartment.dart';
 import 'package:UUL_Gym/models/floor.dart';
 import 'package:UUL_Gym/models/door_number.dart';
 import 'package:UUL_Gym/models/tower.dart';
+import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_operations.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -8,6 +10,10 @@ import 'package:flutter/material.dart';
 const int _FIRST_STEP = 0;
 
 class NewProfileViewModel extends ChangeNotifier {
+  final Function(User) onUserCreated;
+
+  NewProfileViewModel({@required this.onUserCreated});
+
   int _totalSteps = 0;
   int _currentStep = _FIRST_STEP;
 
@@ -121,7 +127,8 @@ class NewProfileViewModel extends ChangeNotifier {
   bool isComplete() => (_currentStep == _totalSteps - 1) && _visited.length == _totalSteps && _allValid();
 
   void _onComplete() {
-    print("complete!");
+    User user = User(name: name, appartment: Appartment(code: getAppartmentName()));
+    this.onUserCreated(user);
   }
 
   bool _allValid() => !_validators.values.any((validator) => !validator.call(this));

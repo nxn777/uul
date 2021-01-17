@@ -1,5 +1,6 @@
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:UUL_Gym/widgets/stepper/step_controls.dart';
 import 'package:flutter/material.dart';
@@ -12,7 +13,12 @@ class AddNewProfileScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<NewProfileViewModel>(
-      create: (context) => NewProfileViewModel(),
+      create: (context) => NewProfileViewModel(
+        onUserCreated: (user) {
+          Provider.of<AppState>(context, listen: false).addUser(user);
+          Navigator.pop(context);
+        },
+      ),
       child: Consumer<NewProfileViewModel>(builder: (context, viewModel, child) {
         return Scaffold(
           body: SafeArea(
