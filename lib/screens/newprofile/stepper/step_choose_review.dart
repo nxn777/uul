@@ -3,6 +3,7 @@ import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatars_list.dart';
+import 'package:UUL_Gym/widgets/user/short_user_info.dart';
 import 'package:flutter/material.dart';
 
 Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewModel) {
@@ -30,9 +31,14 @@ Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewM
         Row(
           children: [
             BundledAvatar(
-              height: kSpacingHuge * 2,
+              height: kSpacingHuge * 1.5,
               imageSrc: viewModel.activeAvatarImage,
             ),
+            SizedBox(width: kSpacingMedium,),
+            ShortUserInfo(
+              name: viewModel.name,
+              appartment: viewModel.getAppartmentName(),
+            )
           ],
         ),
         Padding(

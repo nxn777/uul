@@ -82,6 +82,13 @@ class NewProfileViewModel extends ChangeNotifier {
 
   bool nextButtonIsEnabled() => (_currentStep != _totalSteps -1) || isComplete();
 
+  String getAppartmentName() {
+    if (activeTower == null || activeFloorId == -1 || activeDoorId == -1) {
+      return null;
+    }
+    return "${activeTower.getTitle()}${floors[activeFloorId].getTitle(raw: true)}${doors[activeDoorId].getTitle()}";
+  }
+
   void gotoStep(int newStep) {
     if (!isStepActive(newStep)) { return; }
     if (newStep < _totalSteps && newStep >= 0) {
