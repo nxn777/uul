@@ -7,6 +7,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'stepper/steps_factory.dart';
+import 'package:UUL_Gym/common/function_extenstions.dart';
 
 class AddNewProfileScreen extends StatelessWidget {
   final NewProfileStepsFactory _stepsFactory = NewProfileStepsFactory();
@@ -40,8 +41,14 @@ class AddNewProfileScreen extends StatelessWidget {
                         onStepCancel: viewModel.clearStep,
                         onStepTapped: viewModel.gotoStep,
                         controlsBuilder: (_, {VoidCallback onStepContinue, VoidCallback onStepCancel}) => StepControls(
-                              onStepContinue: viewModel.nextButtonIsEnabled() ? onStepContinue : null,
-                              onStepCancel: onStepCancel,
+                              onStepContinue: viewModel.nextButtonIsEnabled()
+                                  ? onStepContinue.also(() {
+                                      FocusScope.of(context).unfocus();
+                                    })
+                                  : null,
+                              onStepCancel: onStepCancel.also(() {
+                                FocusScope.of(context).unfocus();
+                              }),
                               nextTitle: viewModel.getNextButtonTitle(),
                               clearTitle: viewModel.getClearButtonTitle(),
                             ),
