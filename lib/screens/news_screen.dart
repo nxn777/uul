@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/widgets/indicator/u_u_l_loading_indicator.dart';
 import 'package:flutter/material.dart';
 
 class NewsScreen extends StatelessWidget {
@@ -5,7 +6,9 @@ class NewsScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-        child: Container(),
+        child: Container(
+          child: Center(child: UULLoadingIndicator()),
+        ),
       ),
     );
   }

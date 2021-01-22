@@ -31,6 +31,7 @@ dependencies:
   provider: ^4.3.2+3
   intl: ^0.16.1
   font_awesome_flutter: ^8.11.0
+  shared_preferences: ^0.5.12+4
 
 dev_dependencies:
   flutter_test:
@@ -54,6 +55,7 @@ flutter:
   assets:
     - assets/avatars/
     - assets/defaults/
+    - assets/common/
 
 
   # An image asset can refer to one or more resolution-specific "variants", see

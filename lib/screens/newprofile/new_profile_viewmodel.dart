@@ -127,7 +127,7 @@ class NewProfileViewModel extends ChangeNotifier {
   bool isComplete() => (_currentStep == _totalSteps - 1) && _visited.length == _totalSteps && _allValid();
 
   void _onComplete() {
-    User user = User(name: name, appartment: Appartment(code: getAppartmentName()));
+    User user = User(name: name, appartment: Appartment(code: getAppartmentName()), avatarImageSrc: activeAvatarImage);
     this.onUserCreated(user);
   }
 

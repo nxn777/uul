@@ -3,15 +3,16 @@ import 'package:UUL_Gym/constants/animation_constants.dart';
 import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
-import 'package:UUL_Gym/models/app_state.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:provider/provider.dart';
 
 class DayTileAnimated extends StatefulWidget {
   final DateTime day;
   final DateFormat _dayFormatter;
-  DayTileAnimated({@required this.day}) : _dayFormatter = DateFormat("E");
+  final void Function(DateTime) onTap;
+  final DateTime activeDate;
+  final DateTime currentDate;
+  DayTileAnimated({@required this.day, @required this.activeDate, @required this.currentDate, @required this.onTap}) : _dayFormatter = DateFormat("E");
   @override
   _DayTileAnimatedState createState() => _DayTileAnimatedState();
 }
@@ -19,10 +20,9 @@ class DayTileAnimated extends StatefulWidget {
 class _DayTileAnimatedState extends State<DayTileAnimated> {
   @override
   Widget build(BuildContext context) {
-    return Consumer<AppState>(builder: (context, appState, child) {
       return GestureDetector(
         onTap: () {
-          Provider.of<AppState>(context, listen: false).changeActiveDate(widget.day);
+         widget.onTap(widget.day);
         },
         child: AnimatedContainer(
           child: Text(
@@ -39,11 +39,12 @@ class _DayTileAnimatedState extends State<DayTileAnimated> {
           ),
         ),
       );
-    });
   }
 
-  bool _isSelected() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).activeDate, widget.day);
-  bool _isCurrent() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).currentDate, widget.day);
+  // bool _isSelected() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).activeDate, widget.day);
+  // bool _isCurrent() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).currentDate, widget.day);
+  bool _isSelected() => DateHelpers.isTheSameDay(widget.activeDate, widget.day);
+  bool _isCurrent() => DateHelpers.isTheSameDay(widget.currentDate, widget.day);
 
   TextStyle _getTextStyle() {
     var _style = _isSelected() ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.w900) : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.w900);
