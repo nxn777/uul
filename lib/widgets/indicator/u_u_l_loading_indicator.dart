@@ -25,6 +25,7 @@ class _UULLoadingIndicatorState extends State<UULLoadingIndicator> with TickerPr
             shape: BoxShape.rectangle,
             borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
             border: Border.all(color: colorVariation(_resizableController.value)),
+            color: Colors.white
           ),
         );
       },

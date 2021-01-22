@@ -8,6 +8,7 @@ import 'package:UUL_Gym/screens/timeslots/time_slots_screen_object.dart';
 import 'package:UUL_Gym/screens/timeslots/time_slots_viewmodel.dart';
 import 'package:UUL_Gym/widgets/gym/gym_list.dart';
 import 'package:UUL_Gym/widgets/indicator/u_u_l_loading_indicator.dart';
+import 'package:UUL_Gym/widgets/indicator/u_u_l_overlay_loading_indicator.dart';
 import 'package:UUL_Gym/widgets/timeslot/time_slot_list.dart';
 import 'package:UUL_Gym/widgets/week/day_list_animated.dart';
 import 'package:flutter/material.dart';
@@ -33,7 +34,7 @@ class TimeSlotScreen extends StatelessWidget {
   }
 
   Widget _buildBody(TimeSlotsViewModel viewModel, BuildContext context) {
-    print("Building: ${viewModel.viewState.status}");
+    // print("Building: ${viewModel.viewState.status}");
     Widget body;
     switch (viewModel.viewState.status) {
       case ViewStatus.IDLE:
@@ -43,7 +44,7 @@ class TimeSlotScreen extends StatelessWidget {
         body = null;
         break;
       case ViewStatus.LOADING:
-        body = _buildLoadingState(viewModel, context);
+        body = viewModel.viewState.value == null ? _buildLoadingState(viewModel, context) : UULOverlayLoadingIndicator(child: _buildIdleState(viewModel, context));
         break;
     }
     return body;
