@@ -2,12 +2,12 @@ import 'dart:ui';
 
 import 'package:UUL_Gym/common/base_view_state.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/screens/timeslots/time_slot_screen_builder.dart';
 import 'package:UUL_Gym/screens/timeslots/time_slots_screen_object.dart';
 import 'package:UUL_Gym/screens/timeslots/time_slots_viewmodel.dart';
 import 'package:UUL_Gym/widgets/gym/gym_list.dart';
 import 'package:UUL_Gym/widgets/timeslot/time_slot_list.dart';
+import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:UUL_Gym/widgets/week/day_list_animated.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -36,13 +36,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
     return Column(
       crossAxisAlignment: CrossAxisAlignment.stretch,
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
-          child: Text(
-            "Schedule",
-            style: kPageTitleTextStyle,
-          ),
-        ),
+        ScreenTitle("Schedule"),
         Padding(
           padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
           child: GymList(

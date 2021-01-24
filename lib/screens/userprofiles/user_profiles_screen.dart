@@ -5,6 +5,8 @@ import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_screen_builder.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_viewmodel.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
+import 'package:UUL_Gym/widgets/button/u_u_l_button.dart';
+import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:UUL_Gym/widgets/user/current_user_card.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,8 +14,9 @@ import 'package:provider/provider.dart';
 
 class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfilesViewModel> {
   final Function onNewProfileTap;
+  final Future Function() onLoginTap;
 
-  UserProfilesScreen({@required this.onNewProfileTap});
+  UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap});
 
   @override
   Widget build(BuildContext context) {
@@ -64,42 +67,39 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
   Widget buildNoProfilesState() {
     return ListView(
       children: [
-        Padding(
-          padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
-          child: Text(
-            "User profile",
-            style: kPageTitleTextStyle,
-          ),
-        ),
+        ScreenTitle("User profile"),
         Center(
           child: BundledAvatar(height: kSpacingHuge * 2, imageSrc: "assets/defaults/default_user3.png"),
         ),
         Padding(
           padding: const EdgeInsets.all(kSpacingMedium),
-          child: Text("There are no stored user profiles", style: kRegularActiveTextStyle, textAlign: TextAlign.center,),
+          child: Text(
+            "There are no stored user profiles",
+            style: kRegularActiveTextStyle,
+            textAlign: TextAlign.center,
+          ),
         ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          mainAxisSize:  MainAxisSize.min,
+          mainAxisSize: MainAxisSize.min,
           children: [
-            SizedBox(
+            UULButton(
+              title: "Log in",
               width: kSpacingHuge * 2,
-              child: FlatButton(
-                onPressed: () {},
-                height: kSpacingXXLarge,
-                color: kAccentColor,
-                shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kAccentColor)),
-                child: Text(
-                  "Log in",
-                  style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color: Colors.black),
-                ),
-              ),
+              onPressed: () async {
+                var result = await this.onLoginTap();
+                print(result);
+              },
             ),
           ],
         ),
         Padding(
           padding: const EdgeInsets.all(kSpacingMedium),
-          child: Text("Or create a new profile", style: kRegularActiveTextStyle, textAlign: TextAlign.center,),
+          child: Text(
+            "Or create a new profile",
+            style: kRegularActiveTextStyle,
+            textAlign: TextAlign.center,
+          ),
         ),
       ],
     );

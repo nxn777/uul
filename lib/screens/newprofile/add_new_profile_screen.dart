@@ -1,8 +1,7 @@
-import 'package:UUL_Gym/constants/dimens.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:UUL_Gym/widgets/stepper/step_controls.dart';
+import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
@@ -26,13 +25,7 @@ class AddNewProfileScreen extends StatelessWidget {
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
-                Padding(
-                  padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
-                  child: Text(
-                    "New profile",
-                    style: kPageTitleTextStyle,
-                  ),
-                ),
+                ScreenTitle("New profile"),
                 Expanded(
                   child: ListView(children: [
                     Stepper(

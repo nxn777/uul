@@ -3,6 +3,7 @@ import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:UUL_Gym/widgets/button/u_u_l_icon_button.dart';
+import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
@@ -30,13 +31,7 @@ class CurrentUserCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Padding(
-              padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
-              child: Text(
-                "User profile",
-                style: kPageTitleTextStyle,
-              ),
-            ),
+            ScreenTitle("User profile"),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [

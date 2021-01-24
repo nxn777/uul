@@ -1,17 +1,10 @@
+import 'package:UUL_Gym/common/validator/account_form_validator.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:flutter/material.dart';
 
 Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel viewModel) {
   var nameController = TextEditingController(text: viewModel.name);
   var pwdController = TextEditingController(text: viewModel.pwd);
-
-  String _nameValidationErrorMessage(String name) {
-    return name.isNotEmpty ? null : "Name should not be empty";
-  }
-
-  String _pwdValidationErrorMessage(String pwd) {
-    return pwd.length > 4 ? null : "Should be at least 5 characters long";
-  }
 
   bool _newAccountStepValidator(NewProfileViewModel viewModel) {
     return viewModel.accountFormKey.currentState.validate();
@@ -41,14 +34,14 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
             controller: nameController,
             decoration: InputDecoration(labelText: 'Name (will be visible for everyone)'),
             textCapitalization: TextCapitalization.words,
-            validator: _nameValidationErrorMessage,
+            validator: AccountFormValidator.getNameValidator(),
             onChanged: (value) => viewModel.name = value,
           ),
           TextFormField(
             controller: pwdController,
             decoration: InputDecoration(labelText: 'Password'),
             obscureText: true,
-            validator: _pwdValidationErrorMessage,
+            validator: AccountFormValidator.getPwdValidator(),
             onChanged: (value) => viewModel.pwd = value,
           ),
         ],

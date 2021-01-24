@@ -1,6 +1,8 @@
 import 'package:UUL_Gym/widgets/indicator/u_u_l_loading_indicator.dart';
 import 'package:UUL_Gym/widgets/indicator/u_u_l_overlay_loading_indicator.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 enum ViewStatus { IDLE, ERROR, LOADING }
 
@@ -21,11 +23,28 @@ class ViewState<T> {
   ViewState({this.value, @required this.status, this.error});
 }
 
-mixin ViewStateField<T> {
+mixin ViewStateField<T> implements ChangeNotifier {
   ViewState<T> viewState;
 }
 
-mixin ViewStateScreen<VM extends ViewStateField> {
+mixin ViewStateScreen<VM extends  ViewStateField> {
+  VM Function(BuildContext) vmCreator() { return (ctx) => null; }
+
+  Widget build(BuildContext context) {
+    return ChangeNotifierProvider<VM>(
+      create: vmCreator(),
+      child: Consumer<VM>(
+        builder: (context, viewModel, child) {
+          return Scaffold(
+            body: SafeArea(
+              child: buildBody(viewModel, context),
+            ),
+          );
+        },
+      ),
+    );
+  }
+
   Widget buildIdleState(VM viewModel, BuildContext context);
 
   Widget buildLoadingState(VM viewModel, BuildContext context) => Container(
