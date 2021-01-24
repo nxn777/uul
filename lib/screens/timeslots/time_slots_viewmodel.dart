@@ -7,7 +7,7 @@ import 'package:UUL_Gym/models/week.dart';
 import 'package:UUL_Gym/screens/timeslots/time_slots_screen_object.dart';
 import 'package:flutter/widgets.dart';
 
-class TimeSlotsViewModel extends ChangeNotifier {
+class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject> {
   final GymRepo _gymRepo;
   final RulesRepo _rulesRepo;
   final TimeSlotsRepo _timeSlotsRepo;

@@ -31,4 +31,17 @@ class UserRepo {
     await rewriteCachedUsers(fetched);
     return fetched;
   }
+
+  User getActiveOrFirstCachedUser() {
+    var cached = getCachedUsers();
+    var activeId = getActiveUserId();
+    var active = cached.firstWhere((element) => element.id == activeId, orElse: () => null);
+    if (active != null) {
+      return active;
+    }
+    if (cached.isNotEmpty) {
+      return cached.first;
+    }
+    return null;
+  }
 }
