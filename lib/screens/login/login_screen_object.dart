@@ -1,4 +1,4 @@
 class LoginScreenObject {
-  String name = "";
-  String pwd = "";
+  String name = "test_user";
+  String pwd = "test";
 }

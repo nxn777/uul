@@ -11,10 +11,10 @@ class UserApiClient {
   static Future<List<User>> getAppartmentUsers(String user, String pwd) {
     var pwdHash = sha256.convert(utf8.encode(pwd)).toString();
     print(pwdHash);
-    return Future.delayed(Duration(seconds: 1), () => _generateTestData(user));
+    return Future.delayed(Duration(seconds: 1), () => _generateTestData(user, pwd));
   }
 
-  static List<User> _generateTestData(String user) => List(3)
-        .mapIndexed((value, index) => User(id: index, name: user, avatarImageSrc: "assets/avatars/user (1).png", isActivated: false, appartment: Appartment(id: 0, code: "C1207")));
+  static List<User> _generateTestData(String user, pwd) => List(3)
+        .mapIndexed((value, index) => User(id: index, name: user + index.toString(), pwdHash: pwd, avatarImageSrc: "assets/avatars/user (1).png", isActivated: false, appartment: Appartment(id: 0, code: "C1207")));
 
 }

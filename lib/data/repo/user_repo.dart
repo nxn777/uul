@@ -22,7 +22,7 @@ class UserRepo {
   }
 
   Future<bool> rewriteCachedUsers(List<User> users) {
-    List<String> raw = users.map((e) => jsonEncode(e.toJson()));
+    List<String> raw = users.map((e) => jsonEncode(e.toJson())).toList();
     return _store.setStringList(_CACHED_USERS, raw);
   }
 

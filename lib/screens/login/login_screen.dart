@@ -9,7 +9,7 @@ import 'package:flutter/material.dart';
 
 class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
   @override
-  LoginViewModel Function(BuildContext p1) vmCreator() => (context) => LoginScreenBuilder.buildAndRunVM();
+  LoginViewModel Function(BuildContext p1) vmCreator() => (context) => LoginScreenBuilder.buildAndRunVM(context);
 
   @override
   Widget buildIdleState(LoginViewModel viewModel, BuildContext context) {
@@ -58,7 +58,7 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
             UULButton(
               title: "Log in",
               width: kSpacingHuge * 2,
-              onPressed: () { Navigator.of(context).pop(true); },
+              onPressed: () { viewModel.login(context); },
             ),
             SizedBox(width: kSpacingMedium,),
             UULButton(
