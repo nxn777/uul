@@ -18,7 +18,7 @@ class UserRepo {
     if (raw.isEmpty) {
       return List.empty();
     }
-    return raw.map((e) => User.fromJson(e));
+    return raw.map((e) => User.fromJson(e)).toList();
   }
 
   Future<bool> rewriteCachedUsers(List<User> users) {
@@ -43,5 +43,9 @@ class UserRepo {
       return cached.first;
     }
     return null;
+  }
+
+  Future<List<bool>> deleteAll() {
+    return Future.wait([setActiveUserId(-1), rewriteCachedUsers(List.empty())]);
   }
 }

@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:io';
+
 import 'package:UUL_Gym/models/appartment.dart';
 
 class User {
@@ -25,7 +28,8 @@ class User {
     _pwdHash = pwdHash;
   }
 
-  User.fromJson(dynamic json) {
+  User.fromJson(dynamic jsonRaw) {
+    final json = jsonDecode(jsonRaw.toString());
     _id = json["id"];
     _name = json["name"];
     _pwdHash = json["pwdHash"];

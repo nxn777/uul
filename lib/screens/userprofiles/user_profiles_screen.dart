@@ -52,7 +52,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
   Widget buildIdleState(UserProfilesViewModel viewModel, BuildContext context) {
     var screenObject = viewModel.viewState.value;
     if (screenObject == null) {
-      return buildNoProfilesState();
+      return buildNoProfilesState(viewModel);
     }
     return Column(
       children: [
@@ -64,7 +64,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
     );
   }
 
-  Widget buildNoProfilesState() {
+  Widget buildNoProfilesState(UserProfilesViewModel viewModel) {
     return ListView(
       children: [
         ScreenTitle("User profile"),
@@ -87,8 +87,8 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
               title: "Log in",
               width: kSpacingHuge * 2,
               onPressed: () async {
-                var result = await this.onLoginTap();
-                print(result);
+                bool result = await this.onLoginTap();
+                viewModel.onLoginResult(result);
               },
             ),
           ],

@@ -33,4 +33,10 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
   void changeActiveUser(User user) {
     // star button was pressed
   }
+
+  void onLoginResult(bool result) {
+    if (result == true) {
+      fetchData();
+    }
+  }
 }
