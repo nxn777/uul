@@ -8,15 +8,18 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class UserCard extends StatelessWidget {
   final User user;
   final int activeUserId;
+  final void Function(User) onTap;
 
-  UserCard(this.user, this.activeUserId);
+  UserCard(this.user, this.activeUserId, { this.onTap});
 
   @override
   Widget build(BuildContext context) {
     return Container(
       margin: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingXSmallPlus, kSpacingMedium, kSpacingXSmallPlus),
       child: InkWell(
-        onTap: () {},
+        onTap: () {
+          this.onTap?.call(user);
+        },
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         child: Row(
           mainAxisAlignment: MainAxisAlignment.start,

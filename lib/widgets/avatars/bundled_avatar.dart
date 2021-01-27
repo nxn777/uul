@@ -5,13 +5,15 @@ class BundledAvatar extends StatelessWidget {
   final void Function(String) onTap;
   final String imageSrc;
   final double height;
-  BundledAvatar({this.onTap, this.imageSrc, this.height});
+  final Color borderColor;
+  BundledAvatar({this.onTap, this.imageSrc, this.height, this.borderColor});
 
   @override
   Widget build(BuildContext context) {
     return ClipRRect(
       borderRadius: BorderRadius.circular(height),
       child: Material(
+        color: this.borderColor,
         child: InkWell(
           onTap: () {
             this.onTap?.call(imageSrc);
@@ -19,8 +21,8 @@ class BundledAvatar extends StatelessWidget {
           child: Padding(
             padding: const EdgeInsets.all(kSpacingXSmall),
             child: CircleAvatar(
-              radius: (height - 2*kSpacingXSmall) /2 ,
-              backgroundImage:AssetImage(
+              radius: (height - 2 * kSpacingXSmall) / 2,
+              backgroundImage: AssetImage(
                 imageSrc != null ? imageSrc : "assets/defaults/default_user3.png",
               ),
             ),

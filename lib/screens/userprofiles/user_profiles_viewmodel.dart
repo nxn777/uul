@@ -28,10 +28,14 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
 
   void changeCurrentUser(User user) {
     // user in the list was selected
+    viewState.value.currentUserId = user.id;
+    notifyListeners();
   }
 
   void changeActiveUser(User user) {
     // star button was pressed
+    viewState.value.activeUserId = user.id;
+    notifyListeners();
   }
 
   void onLoginResult(bool result) {

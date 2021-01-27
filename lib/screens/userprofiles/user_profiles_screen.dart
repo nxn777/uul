@@ -8,6 +8,8 @@ import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:UUL_Gym/widgets/button/u_u_l_button.dart';
 import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:UUL_Gym/widgets/user/current_user_card.dart';
+import 'package:UUL_Gym/widgets/user/user_list.dart';
+import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
@@ -54,14 +56,43 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
     if (screenObject == null) {
       return buildNoProfilesState(viewModel);
     }
-    return Column(
-      children: [
-        CurrentUserCard(
-          user: screenObject.currentUser,
-          isActive: screenObject.currentUser.id == screenObject.activeUserId,
-        ),
-      ],
-    );
+    return OrientationBuilder(builder: (context, orientation) {
+      if (orientation == Orientation.portrait) {
+        return Column(
+          children: getScreenWidgets(viewModel, false),
+        );
+      } else {
+        return ListView(
+          children: getScreenWidgets(viewModel, true),
+        );
+      }
+    });
+  }
+
+  List<Widget> getScreenWidgets(UserProfilesViewModel viewModel, bool insideListView) {
+    var screenObject = viewModel.viewState.value;
+    return [
+      CurrentUserCard(
+        user: screenObject.currentUser,
+        isActive: screenObject.currentUser.id == screenObject.activeUserId,
+        onMakeActiveTap: (user) => viewModel.changeActiveUser(user),
+      ),
+      insideListView
+          ? UserList(
+              insideListView: true,
+              users: screenObject.notCurrentUsers,
+              activeUserId: screenObject.activeUserId,
+              onUserTap: (user) => viewModel.changeCurrentUser(user),
+            )
+          : Expanded(
+              child: UserList(
+                insideListView: false,
+                users: screenObject.notCurrentUsers,
+                activeUserId: screenObject.activeUserId,
+                onUserTap: (user) => viewModel.changeCurrentUser(user),
+              ),
+            )
+    ];
   }
 
   Widget buildNoProfilesState(UserProfilesViewModel viewModel) {

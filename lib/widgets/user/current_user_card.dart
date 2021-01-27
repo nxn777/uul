@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/constants/text_style_constants.dart';
 import 'package:UUL_Gym/models/user.dart';
@@ -10,8 +11,9 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 class CurrentUserCard extends StatelessWidget {
   final User user;
   final bool isActive;
+  final void Function(User) onMakeActiveTap;
 
-  CurrentUserCard({@required this.user, @required this.isActive});
+  CurrentUserCard({@required this.user, @required this.isActive, this.onMakeActiveTap});
 
   @override
   Widget build(BuildContext context) {
@@ -37,11 +39,12 @@ class CurrentUserCard extends StatelessWidget {
               children: [
                 UULIconButton(
                   icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
-                  onTap: () {},
+                  onTap: () { if (!isActive) { this.onMakeActiveTap?.call(user); } },
                 ),
                 BundledAvatar(
                   height: kSpacingHuge * 2,
                   imageSrc: user?.avatarImageSrc == null ? "assets/defaults/default_user3.png" : user.avatarImageSrc,
+                  borderColor: user.isActivated ? kAccentColor : kInactiveColor,
                 ),
                 UULIconButton(
                   icon: FontAwesomeIcons.pen,

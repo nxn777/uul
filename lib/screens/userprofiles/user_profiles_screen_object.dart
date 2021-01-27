@@ -9,5 +9,5 @@ class UserProfilesScreenObject {
   UserProfilesScreenObject({@required this.currentUserId, @required this.activeUserId, @required this.allUsers});
 
   User get currentUser => allUsers.firstWhere((element) => element.id == currentUserId, orElse: () => null);
-  List<User> get notCurrentUsers => allUsers.where((element) => element.id != currentUserId);
+  List<User> get notCurrentUsers => allUsers.where((element) => element.id != currentUserId).toList();
 }
