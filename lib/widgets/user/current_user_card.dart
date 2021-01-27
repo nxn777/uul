@@ -7,6 +7,7 @@ import 'package:UUL_Gym/widgets/button/u_u_l_icon_button.dart';
 import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:super_tooltip/super_tooltip.dart';
 
 class CurrentUserCard extends StatelessWidget {
   final User user;
@@ -45,6 +46,7 @@ class CurrentUserCard extends StatelessWidget {
                   height: kSpacingHuge * 2,
                   imageSrc: user?.avatarImageSrc == null ? "assets/defaults/default_user3.png" : user.avatarImageSrc,
                   borderColor: user.isActivated ? kAccentColor : kInactiveColor,
+                  onTap: (_) => showToolTip(context),
                 ),
                 UULIconButton(
                   icon: FontAwesomeIcons.pen,
@@ -93,5 +95,24 @@ class CurrentUserCard extends StatelessWidget {
         ),
       ),
     );
+  }
+
+  void showToolTip(BuildContext context) {
+    var tooltip = SuperTooltip(
+      hasShadow: false,
+      borderWidth: 1,
+      borderRadius: kDefaultBorderRadius,
+      popupDirection: TooltipDirection.down,
+      borderColor: user.isActivated ? kAccentColor : kInactiveColor,
+      content: new Material(
+          child: Text(
+           user.isActivated ? "This profile is activated.\nYou can use it to book gyms" : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
+            softWrap: true,
+            style: kRegularActiveTextStyle,
+            textAlign: TextAlign.center,
+          )),
+    );
+
+    tooltip.show(context);
   }
 }
