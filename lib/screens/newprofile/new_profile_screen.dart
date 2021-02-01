@@ -1,4 +1,5 @@
-import 'package:UUL_Gym/models/app_state.dart';
+import 'package:UUL_Gym/common/function_extenstions.dart';
+import 'package:UUL_Gym/screens/newprofile/new_profile_screen_builder.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:UUL_Gym/widgets/stepper/step_controls.dart';
 import 'package:UUL_Gym/widgets/title/screen_title.dart';
@@ -6,19 +7,14 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
 import 'stepper/steps_factory.dart';
-import 'package:UUL_Gym/common/function_extenstions.dart';
 
-class AddNewProfileScreen extends StatelessWidget {
+class NewProfileScreen extends StatelessWidget {
   final NewProfileStepsFactory _stepsFactory = NewProfileStepsFactory();
+
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<NewProfileViewModel>(
-      create: (context) => NewProfileViewModel(
-        onUserCreated: (user) {
-          Provider.of<AppState>(context, listen: false).addUser(user);
-          Navigator.pop(context);
-        },
-      ),
+      create: NewProfileScreenBuilder.buildAndRunVM,
       child: Consumer<NewProfileViewModel>(builder: (context, viewModel, child) {
         return Scaffold(
           body: SafeArea(

@@ -2,7 +2,6 @@ import 'package:UUL_Gym/common/kv_store.dart';
 import 'package:UUL_Gym/constants/color_constants.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/di/global_dependencies.dart';
-import 'package:UUL_Gym/models/app_state.dart';
 import 'package:UUL_Gym/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -14,9 +13,7 @@ Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
   var kvStore = KVStore(await SharedPreferences.getInstance());
-  var globalDependencies = GlobalDependencies(
-    kvStore: kvStore
-  );
+  var globalDependencies = GlobalDependencies(kvStore: kvStore);
   await UserRepo(kvStore).deleteAll();
   runApp(MyApp(globalDependencies));
 }

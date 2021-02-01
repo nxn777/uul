@@ -15,7 +15,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 
 class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfilesViewModel> {
-  final Function onNewProfileTap;
+  final Future Function() onNewProfileTap;
   final Future Function() onLoginTap;
 
   UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap});
@@ -30,20 +30,23 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
             body: SafeArea(
               child: buildBody(viewModel, context),
             ),
-            floatingActionButton: Padding(
-              padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingHuge),
-              child: FloatingActionButton(
-                elevation: kSpacingXXSmall,
-                onPressed: () {
-                  this.onNewProfileTap();
-                },
-                child: FaIcon(
-                  FontAwesomeIcons.userPlus,
-                  color: Colors.black,
-                ),
-                backgroundColor: kAccentColor,
-              ),
-            ),
+            floatingActionButton: shouldShowFAB(viewModel)
+                ? Padding(
+                    padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingHuge),
+                    child: FloatingActionButton(
+                      elevation: kSpacingXXSmall,
+                      onPressed: () async {
+                        var result = await this.onNewProfileTap();
+                        viewModel.onUserActionResult(result);
+                      },
+                      child: FaIcon(
+                        FontAwesomeIcons.userPlus,
+                        color: Colors.black,
+                      ),
+                      backgroundColor: kAccentColor,
+                    ),
+                  )
+                : null,
           );
         },
       ),
@@ -74,7 +77,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
     return [
       CurrentUserCard(
         user: screenObject.currentUser,
-        isActive: screenObject.currentUser.id == screenObject.activeUserId,
+        isActive: screenObject.currentUser?.id == screenObject.activeUserId,
         onMakeActiveTap: (user) => viewModel.changeActiveUser(user),
       ),
       insideListView
@@ -119,7 +122,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
               width: kSpacingHuge * 2,
               onPressed: () async {
                 bool result = await this.onLoginTap();
-                viewModel.onLoginResult(result);
+                viewModel.onUserActionResult(result);
               },
             ),
           ],
@@ -134,5 +137,10 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
         ),
       ],
     );
+  }
+
+  bool shouldShowFAB(UserProfilesViewModel viewModel) {
+    var so = viewModel.viewState.value;
+    return (so == null && viewModel.viewState.status == ViewStatus.IDLE) || (so != null && so.canAddMore);
   }
 }

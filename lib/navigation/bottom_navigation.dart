@@ -7,6 +7,7 @@ import 'tabs.dart';
 
 class BottomNavigation extends StatelessWidget {
   BottomNavigation({@required this.currentTab, @required this.onSelectTab});
+
   final _tabs = [TabItem.NEWS, TabItem.SCHEDULE, TabItem.USER_PROFILES];
   final TabItem currentTab;
   final ValueChanged<TabItem> onSelectTab;

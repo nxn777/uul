@@ -11,12 +11,12 @@ class GymList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-      return HorizontalSelector<Gym>(
-        items: gyms,
-        onItemTap: onGymTapped,
-        isItemSelected: gymSelectedChecker,
-        textScale: 2,
-        indicatorScale: 1.2,
-      );
+    return HorizontalSelector<Gym>(
+      items: gyms,
+      onItemTap: onGymTapped,
+      isItemSelected: gymSelectedChecker,
+      textScale: 2,
+      indicatorScale: 1.2,
+    );
   }
 }

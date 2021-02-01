@@ -40,7 +40,11 @@ class CurrentUserCard extends StatelessWidget {
               children: [
                 UULIconButton(
                   icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
-                  onTap: () { if (!isActive) { this.onMakeActiveTap?.call(user); } },
+                  onTap: () {
+                    if (!isActive) {
+                      this.onMakeActiveTap?.call(user);
+                    }
+                  },
                 ),
                 BundledAvatar(
                   height: kSpacingHuge * 2,
@@ -106,11 +110,13 @@ class CurrentUserCard extends StatelessWidget {
       borderColor: user.isActivated ? kAccentColor : kInactiveColor,
       content: new Material(
           child: Text(
-           user.isActivated ? "This profile is activated.\nYou can use it to book gyms" : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
-            softWrap: true,
-            style: kRegularActiveTextStyle,
-            textAlign: TextAlign.center,
-          )),
+        user.isActivated
+            ? "This profile is activated.\nYou can use it to book gyms"
+            : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
+        softWrap: true,
+        style: kRegularActiveTextStyle,
+        textAlign: TextAlign.center,
+      )),
     );
 
     tooltip.show(context);

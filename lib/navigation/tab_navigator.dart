@@ -5,6 +5,7 @@ import 'package:flutter/widgets.dart';
 
 class TabNavigator extends StatelessWidget {
   TabNavigator({@required this.navigatorKey, @required this.tabItem, @required this.tabRoutes});
+
   final GlobalKey<NavigatorState> navigatorKey;
   final TabItem tabItem;
   final TabRoutes tabRoutes;

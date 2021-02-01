@@ -10,7 +10,7 @@ class UserCard extends StatelessWidget {
   final int activeUserId;
   final void Function(User) onTap;
 
-  UserCard(this.user, this.activeUserId, { this.onTap});
+  UserCard(this.user, this.activeUserId, {this.onTap});
 
   @override
   Widget build(BuildContext context) {

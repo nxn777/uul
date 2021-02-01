@@ -1,5 +1,3 @@
-
-
 import 'package:UUL_Gym/common/base_view_state.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/screens/login/login_screen_object.dart';

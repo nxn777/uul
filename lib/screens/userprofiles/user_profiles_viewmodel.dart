@@ -1,4 +1,5 @@
 import 'package:UUL_Gym/common/base_view_state.dart';
+import 'package:UUL_Gym/data/repo/rules_repo.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_screen_object.dart';
@@ -6,10 +7,11 @@ import 'package:flutter/foundation.dart';
 
 class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfilesScreenObject> {
   final UserRepo _userRepo;
+  final RulesRepo _rulesRepo;
 
   ViewState<UserProfilesScreenObject> viewState;
 
-  UserProfilesViewModel(this._userRepo) {
+  UserProfilesViewModel(this._userRepo, this._rulesRepo) {
     viewState = ViewState(status: ViewStatus.LOADING);
   }
 
@@ -21,8 +23,16 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
       return;
     }
     var users = await _userRepo.fetchAndCacheUsers(activeUser.name, activeUser.pwdHash);
+    var rules = await _rulesRepo.loadRules();
     var activeUserId = _userRepo.getActiveUserId();
-    viewState = ViewState(value: UserProfilesScreenObject(currentUserId: activeUserId, activeUserId: activeUserId, allUsers: users), status: ViewStatus.IDLE);
+    viewState = ViewState(
+        value: UserProfilesScreenObject(
+          currentUserId: activeUserId,
+          activeUserId: activeUserId,
+          allUsers: users,
+          canAddMore: users.length < rules.usersPerAppartment,
+        ),
+        status: ViewStatus.IDLE);
     notifyListeners();
   }
 
@@ -38,7 +48,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     notifyListeners();
   }
 
-  void onLoginResult(bool result) {
+  void onUserActionResult(bool result) {
     if (result == true) {
       fetchData();
     }

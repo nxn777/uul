@@ -22,11 +22,10 @@ class _UULLoadingIndicatorState extends State<UULLoadingIndicator> with TickerPr
           padding: EdgeInsets.all(kDefaultBorderRadius),
           child: Image.asset("assets/common/uul_logo.png"),
           decoration: BoxDecoration(
-            shape: BoxShape.rectangle,
-            borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
-            border: Border.all(color: colorVariation(_resizableController.value)),
-            color: Colors.white
-          ),
+              shape: BoxShape.rectangle,
+              borderRadius: BorderRadius.all(Radius.circular(kDefaultBorderRadius)),
+              border: Border.all(color: colorVariation(_resizableController.value)),
+              color: Colors.white),
         );
       },
     );

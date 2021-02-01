@@ -28,14 +28,7 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
     Future.wait([gyms, rules, slots]);
     this.viewState = ViewState(
         value: TimeSlotsScreenObject(
-          gyms: await gyms,
-          activeGymId: selectedGymId,
-          currentWeek: currentWeek,
-          activeDate: activeDate,
-          currentDate: currentDate,
-          rules: await rules,
-          timeSlots: await slots
-        ),
+            gyms: await gyms, activeGymId: selectedGymId, currentWeek: currentWeek, activeDate: activeDate, currentDate: currentDate, rules: await rules, timeSlots: await slots),
         status: ViewStatus.IDLE);
     notifyListeners();
   }

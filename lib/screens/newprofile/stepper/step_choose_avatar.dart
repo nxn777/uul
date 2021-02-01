@@ -24,7 +24,10 @@ Step createChooseAvatarStep(BuildContext context, int index, NewProfileViewModel
     title: Text("Choose your avatar"),
     content: Column(
       children: [
-        BundledAvatar(height: kSpacingHuge * 2, imageSrc: viewModel.activeAvatarImage,),
+        BundledAvatar(
+          height: kSpacingHuge * 2,
+          imageSrc: viewModel.activeAvatarImage,
+        ),
         BundledAvatarsList(
           height: kSpacingHuge,
           onTap: (image) {

@@ -22,7 +22,10 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Image.asset("assets/common/uul_logo_transparent_wo_title.png", height: kSpacingHuge,),
+            Image.asset(
+              "assets/common/uul_logo_transparent_wo_title.png",
+              height: kSpacingHuge,
+            ),
           ],
         ),
         Form(
@@ -50,7 +53,9 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
             ),
           ),
         ),
-        SizedBox(height: kSpacingMedium,),
+        SizedBox(
+          height: kSpacingMedium,
+        ),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
@@ -58,9 +63,13 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
             UULButton(
               title: "Log in",
               width: kSpacingHuge * 2,
-              onPressed: () { viewModel.login(context); },
+              onPressed: () {
+                viewModel.login(context);
+              },
             ),
-            SizedBox(width: kSpacingMedium,),
+            SizedBox(
+              width: kSpacingMedium,
+            ),
             UULButton(
               title: "Cancel",
               width: kSpacingHuge * 2,

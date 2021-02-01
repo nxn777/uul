@@ -1,6 +1,6 @@
 import 'package:UUL_Gym/common/has_title.dart';
-import 'package:UUL_Gym/models/tower.dart';
 import 'package:UUL_Gym/common/list_extensions.dart';
+import 'package:UUL_Gym/models/tower.dart';
 
 class Floor with HasTitle {
   static List<Floor> getFloors(Tower tower) {

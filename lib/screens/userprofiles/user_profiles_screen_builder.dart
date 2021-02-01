@@ -1,3 +1,4 @@
+import 'package:UUL_Gym/data/repo/rules_repo.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/di/global_dependencies.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_viewmodel.dart';
@@ -10,7 +11,8 @@ class UserProfilesScreenBuilder {
   static UserProfilesViewModel buildAndStartVM(BuildContext context) {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var userRepo = UserRepo(globalDependencies.kvStore);
-    var vm = UserProfilesViewModel(userRepo);
+    var rulesRepo = RulesRepo();
+    var vm = UserProfilesViewModel(userRepo, rulesRepo);
     vm.fetchData();
     return vm;
   }

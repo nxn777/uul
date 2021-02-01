@@ -7,6 +7,7 @@ class DateHelpers {
   }
 
   static final DateFormat _timeSlotTimeFormatter = DateFormat.Hm();
+
   static String formatTimeSlotTitle(TimeSlot timeSlot) => "${_timeSlotTimeFormatter.format(timeSlot.start)} - ${_timeSlotTimeFormatter.format(timeSlot.end)}";
 }
 

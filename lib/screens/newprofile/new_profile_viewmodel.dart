@@ -1,18 +1,24 @@
+import 'dart:convert';
+
+import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/models/appartment.dart';
-import 'package:UUL_Gym/models/floor.dart';
 import 'package:UUL_Gym/models/door_number.dart';
+import 'package:UUL_Gym/models/floor.dart';
 import 'package:UUL_Gym/models/tower.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_operations.dart';
+import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 
 const int _FIRST_STEP = 0;
 
 class NewProfileViewModel extends ChangeNotifier {
+  final UserRepo _userRepo;
+
   final Function(User) onUserCreated;
 
-  NewProfileViewModel({@required this.onUserCreated});
+  NewProfileViewModel(this._userRepo, {@required this.onUserCreated});
 
   int _totalSteps = 0;
   int _currentStep = _FIRST_STEP;
@@ -32,9 +38,9 @@ class NewProfileViewModel extends ChangeNotifier {
   final Set<int> _visited = {_FIRST_STEP};
   final accountFormKey = GlobalKey<FormState>();
 
-
   final List<Tower> towers = Tower.getTowers();
   int activeTowerId = -1;
+
   Tower get activeTower => activeTowerId == -1 ? null : towers[activeTowerId];
 
   List<Floor> get floors => activeTower == null ? [] : Floor.getFloors(activeTower);
@@ -63,7 +69,7 @@ class NewProfileViewModel extends ChangeNotifier {
 
   int _getNextActiveStep(int start) {
     int i = start;
-    while (i < _totalSteps -1) {
+    while (i < _totalSteps - 1) {
       i++;
       if (isStepActive(i)) {
         return i;
@@ -86,7 +92,7 @@ class NewProfileViewModel extends ChangeNotifier {
     return "Clear";
   }
 
-  bool nextButtonIsEnabled() => (_currentStep != _totalSteps -1) || isComplete();
+  bool nextButtonIsEnabled() => (_currentStep != _totalSteps - 1) || isComplete();
 
   String getAppartmentName() {
     if (activeTower == null || activeFloorId == -1 || activeDoorId == -1) {
@@ -96,7 +102,9 @@ class NewProfileViewModel extends ChangeNotifier {
   }
 
   void gotoStep(int newStep) {
-    if (!isStepActive(newStep)) { return; }
+    if (!isStepActive(newStep)) {
+      return;
+    }
     if (newStep < _totalSteps && newStep >= 0) {
       _currentStep = newStep;
       _visited.add(_currentStep);
@@ -126,8 +134,10 @@ class NewProfileViewModel extends ChangeNotifier {
 
   bool isComplete() => (_currentStep == _totalSteps - 1) && _visited.length == _totalSteps && _allValid();
 
-  void _onComplete() {
-    User user = User(name: name, appartment: Appartment(code: getAppartmentName()), avatarImageSrc: activeAvatarImage);
+  void _onComplete() async {
+    var pwdHash = sha256.convert(utf8.encode(pwd)).toString();
+    User user = User(id: 777, isActivated: false, name: name, pwdHash: pwdHash, appartment: Appartment(code: getAppartmentName()), avatarImageSrc: activeAvatarImage);
+    await this._userRepo.addUser(user);
     this.onUserCreated(user);
   }
 

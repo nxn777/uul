@@ -1,5 +1,4 @@
 import 'dart:convert';
-import 'dart:io';
 
 import 'package:UUL_Gym/models/appartment.dart';
 
@@ -9,14 +8,18 @@ class User {
   String _pwdHash;
   Appartment _appartment;
   String _avatarImageSrc;
+
   int get id => _id;
   bool _isActivated;
+
   String get name => _name;
+
   String get pwdHash => _pwdHash;
 
   Appartment get apartment => _appartment;
 
   String get avatarImageSrc => _avatarImageSrc;
+
   bool get isActivated => _isActivated;
 
   User({int id, String name, String pwdHash, Appartment appartment, String avatarImageSrc, bool isActivated}) {

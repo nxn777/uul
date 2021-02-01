@@ -13,6 +13,7 @@ class HorizontalSelectorTile<T extends HasTitle> extends StatefulWidget {
   final T item;
   final Function onTap;
   final bool isSelected;
+
   HorizontalSelectorTile({@required this.item, @required this.onTap, @required this.isSelected, this.itemRightSpacing, this.indicatorScale, this.textScale});
 
   @override

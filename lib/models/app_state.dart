@@ -11,5 +11,4 @@ class AppState extends ChangeNotifier {
     activeUserId = availableUsers.length - 1;
     notifyListeners();
   }
-
 }

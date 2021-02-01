@@ -27,8 +27,10 @@ mixin ViewStateField<T> implements ChangeNotifier {
   ViewState<T> viewState;
 }
 
-mixin ViewStateScreen<VM extends  ViewStateField> {
-  VM Function(BuildContext) vmCreator() { return (ctx) => null; }
+mixin ViewStateScreen<VM extends ViewStateField> {
+  VM Function(BuildContext) vmCreator() {
+    return (ctx) => null;
+  }
 
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<VM>(

@@ -8,6 +8,7 @@ class UserList extends StatelessWidget {
   final List<User> users;
   final int activeUserId;
   final bool insideListView;
+
   UserList({this.onUserTap, this.users, this.activeUserId, this.insideListView = false});
 
   @override

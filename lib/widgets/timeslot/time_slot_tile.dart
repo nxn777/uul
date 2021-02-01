@@ -12,6 +12,7 @@ class TimeSlotTile extends StatelessWidget {
   final bool isCurrentDay;
   final Rules rules;
   final Function(TimeSlot) onTap;
+
   TimeSlotTile({@required this.timeSlot, @required this.isCurrentDay, @required this.rules, @required this.onTap});
 
   @override

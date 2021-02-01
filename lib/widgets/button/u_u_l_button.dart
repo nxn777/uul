@@ -39,8 +39,7 @@ class UULButton extends StatelessWidget {
     if (isSolid) {
       return RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: isActive ? kAccentColor : kInactiveColor));
     } else {
-     return RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor));
+      return RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: kInactiveColor));
     }
   }
 }
-

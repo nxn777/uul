@@ -6,6 +6,7 @@ class BundledAvatar extends StatelessWidget {
   final String imageSrc;
   final double height;
   final Color borderColor;
+
   BundledAvatar({this.onTap, this.imageSrc, this.height, this.borderColor});
 
   @override

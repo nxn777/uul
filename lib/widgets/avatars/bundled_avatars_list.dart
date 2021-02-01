@@ -1,11 +1,13 @@
+import 'dart:convert';
+
 import 'package:UUL_Gym/constants/dimens.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:flutter/material.dart';
-import 'dart:convert';
 
 class BundledAvatarsList extends StatefulWidget {
   final Function(String) onTap;
   final double height;
+
   BundledAvatarsList({@required this.onTap, @required this.height});
 
   @override
@@ -26,7 +28,9 @@ class _BundledAvatarsListState extends State<BundledAvatarsList> {
     return Container(
       height: widget.height,
       child: ListView.separated(
-          separatorBuilder: (BuildContext context, int index) => SizedBox(width: kSpacingXSmall,),
+          separatorBuilder: (BuildContext context, int index) => SizedBox(
+                width: kSpacingXSmall,
+              ),
           itemCount: imagePaths.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => BundledAvatar(
