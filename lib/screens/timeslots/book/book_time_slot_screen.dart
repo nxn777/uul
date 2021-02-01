@@ -60,7 +60,7 @@ class BookTimeSlotScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, kSpacingSmall, 0, 0),
                 child: Text(
-                  "Also booked by:\n\n" + _countOccupiedByAppartment(),
+                  "Also booked by:\n\n" + _countOccupiedByApartment(),
                   style: kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color: Colors.black),
                   textAlign: TextAlign.start,
                 ),
@@ -90,12 +90,12 @@ class BookTimeSlotScreen extends StatelessWidget {
     );
   }
 
-  String _countOccupiedByAppartment() {
+  String _countOccupiedByApartment() {
     var map = Map<String, int>();
     timeSlot.occupiedBy.forEach((element) {
-      var count = map.putIfAbsent(element.apartment.code, () => 0);
+      var count = map.putIfAbsent(element.apartmentCode, () => 0);
       count++;
-      map[element.apartment.code] = count;
+      map[element.apartmentCode] = count;
     });
     String result = "";
     map.entries.forEach((element) {

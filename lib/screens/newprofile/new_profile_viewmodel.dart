@@ -1,7 +1,6 @@
 import 'dart:convert';
 
 import 'package:UUL_Gym/data/repo/user_repo.dart';
-import 'package:UUL_Gym/models/appartment.dart';
 import 'package:UUL_Gym/models/door_number.dart';
 import 'package:UUL_Gym/models/floor.dart';
 import 'package:UUL_Gym/models/tower.dart';
@@ -94,7 +93,7 @@ class NewProfileViewModel extends ChangeNotifier {
 
   bool nextButtonIsEnabled() => (_currentStep != _totalSteps - 1) || isComplete();
 
-  String getAppartmentName() {
+  String getApartmentCode() {
     if (activeTower == null || activeFloorId == -1 || activeDoorId == -1) {
       return null;
     }
@@ -136,7 +135,7 @@ class NewProfileViewModel extends ChangeNotifier {
 
   void _onComplete() async {
     var pwdHash = sha256.convert(utf8.encode(pwd)).toString();
-    User user = User(id: 777, isActivated: false, name: name, pwdHash: pwdHash, appartment: Appartment(code: getAppartmentName()), avatarImageSrc: activeAvatarImage);
+    User user = User(id: 777, isActivated: false, name: name, pwdHash: pwdHash, apartmentCode: getApartmentCode(), avatarImageSrc: activeAvatarImage);
     await this._userRepo.addUser(user);
     this.onUserCreated(user);
   }

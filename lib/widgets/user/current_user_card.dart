@@ -85,7 +85,7 @@ class CurrentUserCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
                     child: Text(
-                      user.apartment.code,
+                      user.apartmentCode,
                       style: kRegularInactiveTextStyle,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,

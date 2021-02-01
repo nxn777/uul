@@ -38,7 +38,7 @@ Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewM
             ),
             ShortUserInfo(
               name: viewModel.name,
-              appartment: viewModel.getAppartmentName(),
+              apartmentCode: viewModel.getApartmentCode(),
             )
           ],
         ),

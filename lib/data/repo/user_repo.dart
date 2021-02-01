@@ -22,7 +22,7 @@ class UserRepo {
   }
 
   Future<List<User>> fetchAndCacheUsers(String user, String pwd) async {
-    var fetched = await UserApiClient.getAppartmentUsers(user, pwd);
+    var fetched = await UserApiClient.getApartmentUsers(user, pwd);
     await rewriteCachedUsers(fetched);
     return fetched;
   }
@@ -46,7 +46,7 @@ class UserRepo {
 
   Future<List<User>> addUser(User user) async {
     var existent = _getCachedUsers();
-    var fetched = await UserApiClient.addAppartmentUser(user, existent);
+    var fetched = await UserApiClient.addApartmentUser(user, existent);
     await rewriteCachedUsers(fetched);
     await setActiveUserId(fetched.first.id);
     return fetched;

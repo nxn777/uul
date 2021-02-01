@@ -47,7 +47,7 @@ class UserCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    user.apartment.code,
+                    user.apartmentCode,
                     style: kCaptionInactiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                   )
                 ],

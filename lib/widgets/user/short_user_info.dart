@@ -4,9 +4,9 @@ import 'package:flutter/material.dart';
 
 class ShortUserInfo extends StatelessWidget {
   final String name;
-  final String appartment;
+  final String apartmentCode;
 
-  ShortUserInfo({this.name, this.appartment});
+  ShortUserInfo({this.name, this.apartmentCode});
 
   @override
   Widget build(BuildContext context) {
@@ -38,16 +38,16 @@ class ShortUserInfo extends StatelessWidget {
             ),
           ),
           Visibility(
-            visible: appartment != null,
+            visible: apartmentCode != null,
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Appartment:",
+                  "Apartment:",
                   style: kRegularActiveTextStyle,
                 ),
                 Text(
-                  appartment != null ? appartment : "",
+                  apartmentCode != null ? apartmentCode : "",
                   style: kRegularActiveTextStyle,
                 ),
               ],

@@ -14,4 +14,3 @@ class NewsScreen extends StatelessWidget {
   }
 }
 
-//UserCard(User(id: 0, name: "Username", pwdHash: "pwd", appartment: Appartment(id: 0, code: "C1207"), isActivated: true), 0)//

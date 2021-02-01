@@ -30,7 +30,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
           currentUserId: activeUserId,
           activeUserId: activeUserId,
           allUsers: users,
-          canAddMore: users.length < rules.usersPerAppartment,
+          canAddMore: users.length < rules.usersPerApartment,
         ),
         status: ViewStatus.IDLE);
     notifyListeners();
