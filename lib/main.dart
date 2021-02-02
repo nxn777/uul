@@ -48,10 +48,3 @@ class MyApp extends StatelessWidget {
     );
   }
 }
-
-/*
-
-            primaryColor: kAccentColor,
-            accentColor: kAccentColor,
-            brightness: Brightness.dark,
- */

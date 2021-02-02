@@ -32,3 +32,16 @@ class HorizontalSelector<T extends HasTitle> extends StatelessWidget {
           ))
       .toList();
 }
+
+class StringSelectorItem implements HasTitle {
+  String value;
+
+  StringSelectorItem(this.value);
+
+  @override
+  String getTitle({bool raw = false}) => value;
+}
+
+extension SelectorHelpers on List<String> {
+  List<StringSelectorItem> toSelectorItems() => this.map((e) => StringSelectorItem(e)).toList();
+}

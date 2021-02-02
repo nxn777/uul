@@ -1,10 +1,11 @@
 import 'dart:convert';
 
+import 'package:UUL_Gym/common/base_view_state.dart';
+import 'package:UUL_Gym/data/repo/rules_repo.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
-import 'package:UUL_Gym/models/door_number.dart';
-import 'package:UUL_Gym/models/floor.dart';
-import 'package:UUL_Gym/models/tower.dart';
+import 'package:UUL_Gym/models/buildings/Condo.dart';
 import 'package:UUL_Gym/models/user.dart';
+import 'package:UUL_Gym/screens/newprofile/new_profile_screen_object.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_operations.dart';
 import 'package:crypto/crypto.dart';
 import 'package:flutter/foundation.dart';
@@ -12,12 +13,16 @@ import 'package:flutter/material.dart';
 
 const int _FIRST_STEP = 0;
 
-class NewProfileViewModel extends ChangeNotifier {
+// TODO use erasers on dependent fields when changing address parts
+class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileScreenObject> {
   final UserRepo _userRepo;
-
+  final RulesRepo _rulesRepo;
   final Function(User) onUserCreated;
+  Condo _condo;
 
-  NewProfileViewModel(this._userRepo, {@required this.onUserCreated});
+  NewProfileViewModel(this._userRepo, this._rulesRepo, {@required this.onUserCreated}) {
+    viewState = ViewState(status: ViewStatus.LOADING);
+  }
 
   int _totalSteps = 0;
   int _currentStep = _FIRST_STEP;
@@ -37,18 +42,23 @@ class NewProfileViewModel extends ChangeNotifier {
   final Set<int> _visited = {_FIRST_STEP};
   final accountFormKey = GlobalKey<FormState>();
 
-  final List<Tower> towers = Tower.getTowers();
-  int activeTowerId = -1;
+  List<String> get towers => _condo.towers;
+  String activeTower = "";
 
-  Tower get activeTower => activeTowerId == -1 ? null : towers[activeTowerId];
+  List<String> get floors => _condo.getFloors(activeTower);
+  String activeFloor = "";
 
-  List<Floor> get floors => activeTower == null ? [] : Floor.getFloors(activeTower);
-  int activeFloorId = -1;
-
-  final List<Door> doors = Door.getDoor();
-  int activeDoorId = -1;
+  List<String> get doors => _condo.getDoors(activeTower, activeFloor);
+  String activeDoor = "";
 
   String activeAvatarImage;
+
+  void fetchData() async {
+    var rules = await _rulesRepo.loadRules();
+    _condo = Condo(rules.buildings, rules.specialFloorTitles, rules.doorsPerFloor, rules.excludedDoors);
+    viewState = ViewState(value: NewProfileScreenObject(), status: ViewStatus.IDLE);
+    notifyListeners();
+  }
 
   StepState getStepState(int index) {
     if (index == _currentStep) {
@@ -91,14 +101,9 @@ class NewProfileViewModel extends ChangeNotifier {
     return "Clear";
   }
 
-  bool nextButtonIsEnabled() => (_currentStep != _totalSteps - 1) || isComplete();
+  String getApartmentCode() => _condo.getApartmentCode(activeTower, activeFloor, activeDoor);
 
-  String getApartmentCode() {
-    if (activeTower == null || activeFloorId == -1 || activeDoorId == -1) {
-      return null;
-    }
-    return "${activeTower.getTitle()}${floors[activeFloorId].getTitle(raw: true)}${doors[activeDoorId].getTitle()}";
-  }
+  bool nextButtonIsEnabled() => (_currentStep != _totalSteps - 1) || isComplete();
 
   void gotoStep(int newStep) {
     if (!isStepActive(newStep)) {
@@ -135,38 +140,28 @@ class NewProfileViewModel extends ChangeNotifier {
 
   void _onComplete() async {
     var pwdHash = sha256.convert(utf8.encode(pwd)).toString();
-    User user = User(id: 777, isActivated: false, name: name, pwdHash: pwdHash, apartmentCode: getApartmentCode(), avatarImageSrc: activeAvatarImage);
+    User user = User(
+        id: 777, isActivated: false, name: name, pwdHash: pwdHash, apartmentCode: getApartmentCode(), avatarImageSrc: activeAvatarImage);
     await this._userRepo.addUser(user);
     this.onUserCreated(user);
   }
 
   bool _allValid() => !_validators.values.any((validator) => !validator.call(this));
 
-  void changeActiveTower(Tower tower) {
-    if (tower == null) {
-      this.activeTowerId = -1;
-    } else {
-      this.activeTowerId = tower.id;
-    }
-    this.activeFloorId = -1;
+  void changeActiveTower(String tower) {
+    this.activeTower = tower;
+    this.activeFloor = "";
     notifyListeners();
   }
 
-  void changeActiveFloor(Floor floor) {
-    if (floor == null) {
-      this.activeFloorId = -1;
-    } else {
-      this.activeFloorId = floor.id;
-    }
+  void changeActiveFloor(String floor) {
+    this.activeFloor = floor;
+    this.activeDoor = "";
     notifyListeners();
   }
 
-  void changeActiveDoor(Door door) {
-    if (door == null) {
-      this.activeDoorId = -1;
-    } else {
-      this.activeDoorId = door.id;
-    }
+  void changeActiveDoor(String door) {
+    this.activeDoor = door;
     notifyListeners();
   }
 
