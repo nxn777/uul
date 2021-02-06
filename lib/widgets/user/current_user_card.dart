@@ -1,6 +1,4 @@
-import 'package:UUL_Gym/constants/color_constants.dart';
-import 'package:UUL_Gym/constants/dimens.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:UUL_Gym/widgets/button/u_u_l_icon_button.dart';

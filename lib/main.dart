@@ -1,5 +1,5 @@
 import 'package:UUL_Gym/common/kv_store.dart';
-import 'package:UUL_Gym/constants/color_constants.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/di/global_dependencies.dart';
 import 'package:UUL_Gym/screens/home_screen.dart';
@@ -7,7 +7,6 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-import 'constants/dimens.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();

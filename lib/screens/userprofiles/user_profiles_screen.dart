@@ -1,7 +1,5 @@
 import 'package:UUL_Gym/common/base_view_state.dart';
-import 'package:UUL_Gym/constants/color_constants.dart';
-import 'package:UUL_Gym/constants/dimens.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_screen_builder.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_viewmodel.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';

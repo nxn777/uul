@@ -1,6 +1,6 @@
 import 'dart:convert';
 
-import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:flutter/material.dart';
 

@@ -1,5 +1,4 @@
-import 'package:UUL_Gym/constants/dimens.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class ScreenTitle extends StatelessWidget {

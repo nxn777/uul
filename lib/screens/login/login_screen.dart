@@ -1,6 +1,6 @@
 import 'package:UUL_Gym/common/base_view_state.dart';
 import 'package:UUL_Gym/common/validator/account_form_validator.dart';
-import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/screens/login/login_screen_builder.dart';
 import 'package:UUL_Gym/screens/login/login_viewmodel.dart';
 import 'package:UUL_Gym/widgets/button/u_u_l_button.dart';

@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class BundledAvatar extends StatelessWidget {

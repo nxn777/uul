@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/constants/color_constants.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/navigation/bottom_navigation.dart';
 import 'package:UUL_Gym/navigation/tab_navigator_factory.dart';
 import 'package:UUL_Gym/navigation/tabs.dart';

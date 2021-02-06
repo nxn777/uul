@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/constants/dimens.dart';
+import 'package:common/common.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:UUL_Gym/widgets/user/user_card.dart';
 import 'package:flutter/material.dart';

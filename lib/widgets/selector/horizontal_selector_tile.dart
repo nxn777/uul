@@ -1,8 +1,5 @@
 import 'package:UUL_Gym/common/has_title.dart';
-import 'package:UUL_Gym/constants/animation_constants.dart';
-import 'package:UUL_Gym/constants/color_constants.dart';
-import 'package:UUL_Gym/constants/dimens.dart';
-import 'package:UUL_Gym/constants/text_style_constants.dart';
+import 'package:common/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 
