@@ -2,7 +2,7 @@ import 'package:UUL_Gym/common/base_view_state.dart';
 import 'package:common/common.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_screen_builder.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_viewmodel.dart';
-import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
+import 'package:widgets/widgets.dart';
 import 'package:UUL_Gym/widgets/button/u_u_l_button.dart';
 import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:UUL_Gym/widgets/user/current_user_card.dart';

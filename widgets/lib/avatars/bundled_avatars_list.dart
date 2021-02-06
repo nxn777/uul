@@ -1,8 +1,9 @@
 import 'dart:convert';
 
 import 'package:common/common.dart';
-import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:flutter/material.dart';
+
+import 'bundled_avatar.dart';
 
 class BundledAvatarsList extends StatefulWidget {
   final Function(String) onTap;

@@ -1,7 +1,6 @@
 import 'package:common/common.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
-import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
-import 'package:UUL_Gym/widgets/avatars/bundled_avatars_list.dart';
+import 'package:widgets/widgets.dart';
 import 'package:flutter/material.dart';
 
 Step createChooseAvatarStep(BuildContext context, int index, NewProfileViewModel viewModel) {
