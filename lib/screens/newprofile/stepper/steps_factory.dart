@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/list_extensions.dart';
+import 'package:extensions/extensions.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_avatar.dart';
 import 'package:UUL_Gym/screens/newprofile/stepper/step_choose_door.dart';

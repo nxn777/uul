@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/date_helpers.dart';
+import 'package:extensions/extensions.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
@@ -42,9 +42,9 @@ class _DayTileAnimatedState extends State<DayTileAnimated> {
 
   // bool _isSelected() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).activeDate, widget.day);
   // bool _isCurrent() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).currentDate, widget.day);
-  bool _isSelected() => DateHelpers.isTheSameDay(widget.activeDate, widget.day);
+  bool _isSelected() => widget.activeDate.isTheSameDay(widget.day);
 
-  bool _isCurrent() => DateHelpers.isTheSameDay(widget.currentDate, widget.day);
+  bool _isCurrent() => widget.currentDate.isTheSameDay(widget.day);
 
   TextStyle _getTextStyle() {
     var _style = _isSelected() ? kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.w900) : kRegularInactiveTextStyle.copyWith(fontWeight: FontWeight.w900);

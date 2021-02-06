@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/date_helpers.dart';
+import 'package:extensions/extensions.dart';
 import 'package:common/common.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:flutter/material.dart';
@@ -42,7 +42,7 @@ class BookTimeSlotScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 children: [
                   Text(
-                    DateHelpers.formatTimeSlotTitle(timeSlot),
+                    DateFormatter.formatTimeSlotTitle(timeSlot.start , timeSlot.end),
                     style: kPageTitleTextStyle,
                     textAlign: TextAlign.start,
                   ),

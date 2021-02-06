@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/list_extensions.dart';
+import 'file:///C:/local/flutter/UUL_Gym/extensions/lib/src/list_extensions.dart';
 
 class Condo {
   final Map<String, int> _buildings;

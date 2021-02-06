@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/date_helpers.dart';
+import 'package:extensions/extensions.dart';
 import 'package:UUL_Gym/models/gym.dart';
 import 'package:UUL_Gym/models/rules.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
@@ -17,5 +17,5 @@ class TimeSlotsScreenObject {
 
   TimeSlotsScreenObject({this.gyms, this.activeGymId, this.currentWeek, this.activeDate, this.currentDate, this.timeSlots, this.rules});
 
-  bool get isCurrentDateActive => DateHelpers.isTheSameDay(activeDate, currentDate);
+  bool get isCurrentDateActive => activeDate.isTheSameDay(currentDate);
 }

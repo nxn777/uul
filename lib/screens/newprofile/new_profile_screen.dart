@@ -1,5 +1,5 @@
 import 'package:UUL_Gym/common/base_view_state.dart';
-import 'package:UUL_Gym/common/function_extenstions.dart';
+import 'file:///C:/local/flutter/UUL_Gym/extensions/lib/src/function_extenstions.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_screen_builder.dart';
 import 'package:UUL_Gym/screens/newprofile/new_profile_viewmodel.dart';
 import 'package:UUL_Gym/widgets/stepper/step_controls.dart';

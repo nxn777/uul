@@ -1,6 +1,6 @@
 import 'dart:math';
 
-import 'package:UUL_Gym/common/list_extensions.dart';
+import 'file:///C:/local/flutter/UUL_Gym/extensions/lib/src/list_extensions.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
 import 'package:UUL_Gym/models/user.dart';
 

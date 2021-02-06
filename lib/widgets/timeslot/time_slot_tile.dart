@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/date_helpers.dart';
+import 'package:extensions/extensions.dart';
 import 'package:common/common.dart';
 import 'package:UUL_Gym/models/rules.dart';
 import 'package:UUL_Gym/models/time_slot.dart';
@@ -45,7 +45,7 @@ class TimeSlotTile extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingSmall),
                     child: Text(
-                      DateHelpers.formatTimeSlotTitle(timeSlot),
+                      DateFormatter.formatTimeSlotTitle(timeSlot.start, timeSlot.end),
                       style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),

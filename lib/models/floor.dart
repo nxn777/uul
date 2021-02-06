@@ -1,5 +1,5 @@
 import 'package:UUL_Gym/common/has_title.dart';
-import 'package:UUL_Gym/common/list_extensions.dart';
+import 'file:///C:/local/flutter/UUL_Gym/extensions/lib/src/list_extensions.dart';
 import 'package:UUL_Gym/models/tower.dart';
 
 class Floor with HasTitle {
