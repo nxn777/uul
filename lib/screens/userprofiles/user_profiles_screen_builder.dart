@@ -11,7 +11,7 @@ class UserProfilesScreenBuilder {
   static UserProfilesViewModel buildAndStartVM(BuildContext context) {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var userRepo = UserRepo(globalDependencies.kvStore);
-    var rulesRepo = RulesRepo();
+    var rulesRepo = RulesRepo(globalDependencies.kvStore);
     var vm = UserProfilesViewModel(userRepo, rulesRepo);
     vm.fetchData();
     return vm;

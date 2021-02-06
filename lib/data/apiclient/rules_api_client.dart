@@ -4,7 +4,7 @@ import 'package:UUL_Gym/data/rest/uul_response.dart';
 class RulesApiClient {
   static Future<UULResponse<RulesDTO>> fetchRules() async {
     var response = await getDio().get("/api/Rules");
-    return UULResponse(response, RulesDTO());
+    return UULResponse.fromResponse(response, RulesDTO());
   }
 }
 

@@ -13,7 +13,7 @@ class TimeSlotsScreenBuilder {
   static TimeSlotsViewModel buildAndStartVM(BuildContext context) {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var gymRepo = GymRepo(globalDependencies.kvStore);
-    var rulesRepo = RulesRepo();
+    var rulesRepo = RulesRepo(globalDependencies.kvStore);
     var timeSlotsRepo = TimeSlotsRepo();
     var vm = TimeSlotsViewModel(gymRepo, rulesRepo, timeSlotsRepo);
     vm.fetchData();
