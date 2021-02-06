@@ -1,4 +1,7 @@
+import 'package:UUL_Gym/data/rest/uul_response.dart';
+
 class Rules {
+  final version = 0;
   final int personsPerTimeSlot = 4;
   final int usersPerApartment = 4;
   final Map<String, int> buildings = {"A": 10, "B": 10, "C": 12, "D": 12};

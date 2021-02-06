@@ -2,7 +2,7 @@ import 'dart:convert';
 import 'dart:math';
 
 import 'package:UUL_Gym/common/list_extensions.dart';
-import 'package:UUL_Gym/constants/rest_api.dart';
+import 'file:///C:/local/flutter/UUL_Gym/lib/data/rest/rest_api.dart';
 import 'package:UUL_Gym/models/user.dart';
 import 'package:dio/dio.dart';
 
