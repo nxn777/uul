@@ -28,18 +28,20 @@ class User {
     final json = jsonDecode(jsonRaw.toString());
     _id = json["id"];
     _name = json["name"];
-    _pwdHash = json["pwdHash"];
+    _pwdHash = json["pwd"];
     _apartmentCode = json["apartmentCode"];
     _isActivated = json["isActivated"];
+    _avatarImageSrc = json["avatarSrc"];
   }
 
   Map<String, dynamic> toJson() {
     var map = <String, dynamic>{};
     map["id"] = _id;
     map["name"] = _name;
-    map["pwdHash"] = _pwdHash;
+    map["pwd"] = _pwdHash;
     map["isActivated"] = _isActivated;
     map["apartmentCode"] = _apartmentCode;
+    map["avatarSrc"] = _avatarImageSrc;
     return map;
   }
 }

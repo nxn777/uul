@@ -139,9 +139,7 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
   bool isComplete() => (_currentStep == _totalSteps - 1) && _visited.length == _totalSteps && _allValid();
 
   void _onComplete() async {
-    var pwdHash = sha256.convert(utf8.encode(pwd)).toString();
-    User user = User(
-        id: 777, isActivated: false, name: name, pwdHash: pwdHash, apartmentCode: getApartmentCode(), avatarImageSrc: activeAvatarImage);
+    User user = User(name: name, pwdHash: pwd, apartmentCode: getApartmentCode(), avatarImageSrc: activeAvatarImage);
     await this._userRepo.addUser(user);
     this.onUserCreated(user);
   }
