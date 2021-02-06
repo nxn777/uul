@@ -46,6 +46,7 @@ class _DioHolder {
     dio.options.baseUrl = _kBaseUrl;
     dio.options.connectTimeout = 5000; //5s
     dio.options.receiveTimeout = 3000;
+    dio.options.responseType = ResponseType.plain;
     return dio;
   }
 }

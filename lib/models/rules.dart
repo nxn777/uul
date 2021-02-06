@@ -1,11 +1,24 @@
 import 'package:UUL_Gym/data/rest/uul_response.dart';
 
+const defaultBuilding = {"A": 10, "B": 10, "C": 12, "D": 12};
+const defaultSpecialFloors = {"A10": "PH", "B10": "PH", "C12": "PH", "D12": "PH"};
+const Set<String> defaultBannedApartments = {};
+
 class Rules {
-  final version = 0;
-  final int personsPerTimeSlot = 4;
-  final int usersPerApartment = 4;
-  final Map<String, int> buildings = {"A": 10, "B": 10, "C": 12, "D": 12};
-  final Map<String, String> specialFloorTitles = {"A10": "PH", "B10": "PH", "C12": "PH", "D12": "PH"};
-  final int doorsPerFloor = 8;
-  final Set<String> excludedDoors = {}; // could be { "C1207", "A0101" }
+  final version;
+  final int personsPerTimeSlot;
+  final int habitantsPerApartment;
+  final Map<String, int> buildings;
+  final Map<String, String> specialFloorTitles;
+  final int doorsPerFloor;
+  final Set<String> bannedApartments; // could be { "C1207", "A0101" }
+
+  Rules(
+      {this.version = 0,
+      this.personsPerTimeSlot = 4,
+      this.habitantsPerApartment = 4,
+      this.buildings = defaultBuilding,
+      this.specialFloorTitles = defaultSpecialFloors,
+      this.doorsPerFloor = 8,
+      this.bannedApartments = defaultBannedApartments});
 }

@@ -22,15 +22,19 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
     var activeDate = DateTime.now();
     var currentDate = DateTime.now();
     var gyms = _gymRepo.loadGyms();
-    var rules = _rulesRepo.loadRules();
     var selectedGymId = _gymRepo.getSelectedGymId();
     var slots = _timeSlotsRepo.fetchTimeSlotsByDateTime(selectedGymId, activeDate);
-    Future.wait([gyms, rules, slots]);
-    this.viewState = ViewState(
-        value: TimeSlotsScreenObject(
-            gyms: await gyms, activeGymId: selectedGymId, currentWeek: currentWeek, activeDate: activeDate, currentDate: currentDate, rules: await rules, timeSlots: await slots),
-        status: ViewStatus.IDLE);
-    notifyListeners();
+    Future.wait([gyms, slots]);
+    (await _rulesRepo.loadRules()).fold(
+      onSuccess: (rules) async {
+        this.viewState = ViewState(
+            value: TimeSlotsScreenObject(
+                gyms: await gyms, activeGymId: selectedGymId, currentWeek: currentWeek, activeDate: activeDate, currentDate: currentDate, rules: rules, timeSlots: await slots),
+            status: ViewStatus.IDLE);
+        notifyListeners();
+      },
+      onFailure: (response) => print(this.toString() + ":" + response.message),
+    );
   }
 
   void changeActiveGym(Gym gym) {

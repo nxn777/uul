@@ -54,10 +54,13 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
   String activeAvatarImage;
 
   void fetchData() async {
-    var rules = await _rulesRepo.loadRules();
-    _condo = Condo(rules.buildings, rules.specialFloorTitles, rules.doorsPerFloor, rules.excludedDoors);
-    viewState = ViewState(value: NewProfileScreenObject(), status: ViewStatus.IDLE);
-    notifyListeners();
+    (await _rulesRepo.loadRules()).fold(onSuccess: (rules) {
+      _condo = Condo(rules.buildings, rules.specialFloorTitles, rules.doorsPerFloor, rules.bannedApartments);
+      viewState = ViewState(value: NewProfileScreenObject(), status: ViewStatus.IDLE);
+      notifyListeners();
+    }, onFailure: (response) {
+      print(this.toString() + ":" + response.message);
+    });
   }
 
   StepState getStepState(int index) {

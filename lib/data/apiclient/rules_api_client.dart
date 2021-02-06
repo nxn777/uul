@@ -1,7 +1,5 @@
-import 'dart:convert';
-
+import 'package:UUL_Gym/data/rest/rest_api.dart';
 import 'package:UUL_Gym/data/rest/uul_response.dart';
-import 'file:///C:/local/flutter/UUL_Gym/lib/data/rest/rest_api.dart';
 
 class RulesApiClient {
   static Future<UULResponse<RulesDTO>> fetchRules() async {
@@ -10,7 +8,7 @@ class RulesApiClient {
   }
 }
 
-class RulesDTO with HasFromJson{
+class RulesDTO with HasFromJson {
   int _version;
   int _personsPerTimeSlot;
   int _habitantsPerApartment;
@@ -22,20 +20,15 @@ class RulesDTO with HasFromJson{
   int get version => _version;
   int get personsPerTimeSlot => _personsPerTimeSlot;
   int get habitantsPerApartment => _habitantsPerApartment;
-  int get doorsPerFloor =>_doorsPerFloor;
-  List<TowerDTO> get towers =>_towers;
+  int get doorsPerFloor => _doorsPerFloor;
+  List<TowerDTO> get towers => _towers;
   List<SpecialFloorDTO> get specialFloors => _specialFloors;
   List<BannedApartmentDTO> get bannedApartments => _bannedApartments;
 
   RulesDTO();
 
-  RulesDTO.fromJson(jsonRaw) {
-    populateFromJson(jsonRaw);
-  }
-
   @override
-  populateFromJson(jsonRaw) {
-    final json = jsonDecode(jsonRaw.toString());
+  populateFromJson(json) {
     _version = json["version"];
     _personsPerTimeSlot = json["personsPerTimeSlot"];
     _habitantsPerApartment = json["usersPerApartment"];
@@ -68,12 +61,10 @@ class TowerDTO {
   String get name => _name;
   int get floorCount => _floorCount;
 
-  TowerDTO.fromJson(dynamic jsonRaw) {
-    final json = jsonDecode(jsonRaw.toString());
+  TowerDTO.fromJson(dynamic json) {
     _name = json["name"];
     _floorCount = json["floorCount"];
   }
-
 }
 
 class SpecialFloorDTO {
@@ -83,22 +74,18 @@ class SpecialFloorDTO {
   String get name => _name;
   String get alias => _alias;
 
-  SpecialFloorDTO.fromJson(dynamic jsonRaw) {
-    final json = jsonDecode(jsonRaw.toString());
+  SpecialFloorDTO.fromJson(dynamic json) {
     _name = json["name"];
     _alias = json["alias"];
   }
-
 }
 
-class BannedApartmentDTO  {
+class BannedApartmentDTO {
   String _name;
 
   String get name => _name;
 
-  BannedApartmentDTO.fromJson(dynamic jsonRaw) {
-    final json = jsonDecode(jsonRaw.toString());
+  BannedApartmentDTO.fromJson(dynamic json) {
     _name = json["name"];
   }
-
 }

@@ -23,17 +23,23 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
       return;
     }
     var users = await _userRepo.fetchAndCacheUsers(activeUser.name, activeUser.pwdHash);
-    var rules = await _rulesRepo.loadRules();
     var activeUserId = _userRepo.getActiveUserId();
-    viewState = ViewState(
-        value: UserProfilesScreenObject(
-          currentUserId: activeUserId,
-          activeUserId: activeUserId,
-          allUsers: users,
-          canAddMore: users.length < rules.usersPerApartment,
-        ),
-        status: ViewStatus.IDLE);
-    notifyListeners();
+    (await _rulesRepo.loadRules()).fold(
+      onSuccess: (rules) {
+        viewState = ViewState(
+            value: UserProfilesScreenObject(
+              currentUserId: activeUserId,
+              activeUserId: activeUserId,
+              allUsers: users,
+              canAddMore: users.length < rules.habitantsPerApartment,
+            ),
+            status: ViewStatus.IDLE);
+        notifyListeners();
+      },
+      onFailure: (response) {
+        print(this.toString() + ":" + response.message);
+      },
+    );
   }
 
   void changeCurrentUser(User user) {
