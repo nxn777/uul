@@ -1,4 +1,4 @@
-import 'package:UUL_Gym/common/base_view_state.dart';
+import 'file:///C:/local/flutter/UUL_Gym/arch_components/lib/src/base_view_state.dart';
 import 'package:common/common.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_screen_builder.dart';
 import 'package:UUL_Gym/screens/userprofiles/user_profiles_viewmodel.dart';

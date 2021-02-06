@@ -345,6 +345,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.4"
+  news_presentation:
+    dependency: "direct main"
+    description:
+      path: "userstories/news/news_presentation"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   node_interop:
     dependency: transitive
     description:
