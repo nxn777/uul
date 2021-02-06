@@ -1,6 +1,5 @@
 import 'package:common/common.dart';
 import 'package:UUL_Gym/models/user.dart';
-import 'package:UUL_Gym/widgets/avatars/bundled_avatar.dart';
 import 'package:UUL_Gym/widgets/button/u_u_l_icon_button.dart';
 import 'package:UUL_Gym/widgets/title/screen_title.dart';
 import 'package:flutter/material.dart';
