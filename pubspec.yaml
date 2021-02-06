@@ -35,7 +35,11 @@ dependencies:
   dio: 3.0.10
   crypto: ^2.1.5
   super_tooltip: ^0.9.6
+  json_annotation: ^3.1.1
+
 dev_dependencies:
+  build_runner: ^1.11.1
+  json_serializable: ^3.5.1
   flutter_test:
     sdk: flutter
 
