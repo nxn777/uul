@@ -44,16 +44,9 @@ packages:
     source: hosted
     version: "1.15.0-nullsafety.3"
   common:
-    dependency: "direct main"
+    dependency: transitive
     description:
       path: "../common"
-      relative: true
-    source: path
-    version: "1.0.0+1"
-  core:
-    dependency: "direct main"
-    description:
-      path: "../core"
       relative: true
     source: path
     version: "1.0.0+1"
@@ -72,7 +65,7 @@ packages:
     source: hosted
     version: "3.0.10"
   extensions:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../extensions"
       relative: true
@@ -95,13 +88,6 @@ packages:
     description: flutter
     source: sdk
     version: "0.0.0"
-  font_awesome_flutter:
-    dependency: "direct main"
-    description:
-      name: font_awesome_flutter
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "8.11.0"
   http_parser:
     dependency: transitive
     description:
@@ -138,7 +124,7 @@ packages:
     source: hosted
     version: "1.8.0-nullsafety.1"
   rest:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../rest"
       relative: true
@@ -177,13 +163,6 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "1.1.0-nullsafety.1"
-  super_tooltip:
-    dependency: "direct main"
-    description:
-      name: super_tooltip
-      url: "https://pub.dartlang.org"
-    source: hosted
-    version: "0.9.6"
   term_glyph:
     dependency: transitive
     description:

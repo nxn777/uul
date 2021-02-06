@@ -1,6 +1,6 @@
 import 'package:UUL_Gym/common/kv_store.dart';
 import 'package:UUL_Gym/data/apiclient/rules_api_client.dart';
-import 'package:UUL_Gym/data/rest/uul_response.dart';
+import 'file:///C:/local/flutter/UUL_Gym/rest/lib/src/uul_response.dart';
 import 'package:UUL_Gym/models/result.dart';
 import 'package:UUL_Gym/models/rules.dart';
 

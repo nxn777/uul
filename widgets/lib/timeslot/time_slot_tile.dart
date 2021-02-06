@@ -1,14 +1,16 @@
+import 'package:extensions/extensions.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class UserCard extends StatelessWidget {
-  final User user;
-  final int activeUserId;
-  final void Function(User) onTap;
+class TimeSlotTile extends StatelessWidget {
+  final TimeSlot timeSlot;
+  final bool isCurrentDay;
+  final Rules rules;
+  final Function(TimeSlot) onTap;
 
-  UserCard(this.user, this.activeUserId, {this.onTap});
+  TimeSlotTile({@required this.timeSlot, @required this.isCurrentDay, @required this.rules, @required this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +18,9 @@ class UserCard extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingXSmallPlus, kSpacingMedium, kSpacingXSmallPlus),
       child: InkWell(
         onTap: () {
-          this.onTap?.call(user);
+          if (isCurrentDay) {
+            this.onTap(this.timeSlot);
+          }
         },
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         child: Row(
@@ -26,8 +30,8 @@ class UserCard extends StatelessWidget {
             Padding(
               padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
               child: FaIcon(
-                _getActiveStatusIcon(),
-                color: kAccentColor,
+                _getIcon(),
+                color: _getIconColor(),
                 size: kSpacingXLarge,
               ),
             ),
@@ -40,12 +44,12 @@ class UserCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingSmall),
                     child: Text(
-                      user.name,
+                      DateFormatter.formatTimeSlotTitle(timeSlot.start, timeSlot.end),
                       style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(
-                    user.apartmentCode,
+                    _getTimeSlotOccupiedByDescription(),
                     style: kCaptionInactiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                   )
                 ],
@@ -53,7 +57,10 @@ class UserCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(kSpacingMedium),
-              child: _getActivatedStatusIcon(),
+              child: FaIcon(
+                FontAwesomeIcons.angleRight,
+                color: kSecondaryColor,
+              ),
             ),
           ],
         ),
@@ -62,19 +69,42 @@ class UserCard extends StatelessWidget {
     );
   }
 
-  IconData _getActiveStatusIcon() {
-    if (user.id == activeUserId) {
-      return FontAwesomeIcons.solidStar;
+  String _getTimeSlotOccupiedByDescription() {
+    if (timeSlot.occupiedBy.isEmpty) {
+      String result = "All ${rules.personsPerTimeSlot} places are available";
+      if (rules.personsPerTimeSlot == 1) {
+        result = "The only place is available";
+      }
+      return result;
     } else {
-      return FontAwesomeIcons.star;
+      String result;
+      var left = rules.personsPerTimeSlot - timeSlot.occupiedBy.length;
+      if (left > 1) {
+        result = "$left places left";
+      } else if (left == 1) {
+        result = "1 place left";
+      } else {
+        result = "No places left";
+      }
+      return result;
     }
   }
 
-  Widget _getActivatedStatusIcon() {
-    if (user.isActivated) {
-      return FaIcon(FontAwesomeIcons.checkCircle, color: kAccentColor);
+  IconData _getIcon() {
+    IconData icon;
+    if (timeSlot.occupiedBy.isEmpty || timeSlot.occupiedBy.length == rules.personsPerTimeSlot) {
+      icon = FontAwesomeIcons.solidStar;
     } else {
-      return FaIcon(FontAwesomeIcons.clock, color: kInactiveColor);
+      icon = FontAwesomeIcons.starHalfAlt;
     }
+    return icon;
+  }
+
+  Color _getIconColor() {
+    var color = isCurrentDay ? kAccentColor : kInactiveColor;
+    if (timeSlot.occupiedBy.length == rules.personsPerTimeSlot) {
+      color = kInactiveColor;
+    }
+    return color;
   }
 }

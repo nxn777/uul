@@ -32,6 +32,8 @@ dependencies:
 
   common:
     path: ../common
+  core:
+    path: ../core
 
 dev_dependencies:
   flutter_test:
