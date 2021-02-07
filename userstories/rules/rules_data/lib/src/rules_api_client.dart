@@ -2,8 +2,13 @@ import 'package:rest/rest.dart';
 
 class RulesApiClient {
   static Future<UULResponse<RulesDTO>> fetchRules() async {
-    var response = await getDio().get("/api/Rules");
-    return UULResponse.fromResponse(response, RulesDTO());
+    var response;
+    try {
+      response = await getDio().get("/api/Rules");
+      return UULResponse.fromResponse(response, RulesDTO());
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
   }
 }
 
