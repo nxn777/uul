@@ -1,5 +1,5 @@
-name: timeslots_presentation
-description: TimeSlots presentation
+name: di
+description: DI
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -28,21 +28,20 @@ dependencies:
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
   core:
-    path: ../../../core
-  arch_components:
-    path: ../../../arch_components
-  common:
-    path: ../../../common
-  widgets:
-    path: ../../../widgets
-  extensions:
-    path: ../../../extensions
+    path: ../core
+  persistence_api:
+    path: ../persistence/persistence_api
+  persistence_data:
+    path: ../persistence/persistence_data
   rules_api:
-    path: ../../rules/rules_api
+    path: ../userstories/rules/rules_api
+  rules_data:
+    path: ../userstories/rules/rules_data
   timeslots_api:
-    path: ../timeslots_api
-  di:
-    path: ../../../di
+    path: ../userstories/timeslots/timeslots_api
+  timeslots_data:
+    path: ../userstories/timeslots/timeslots_data
+    
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -97,5 +96,5 @@ flutter:
   # identifiers, which may be completely independent or the same as these.
   module:
     androidX: true
-    androidPackage: dev.nxngrp.uul_gym.timeslots.timeslots_presentation
-    iosBundleIdentifier: dev.nxngrp.uulgym.timeslots.timeslotsPresentation
+    androidPackage: dev.nxngrp.uul_gym.di
+    iosBundleIdentifier: dev.nxngrp.uulgym.di

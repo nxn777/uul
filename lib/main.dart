@@ -1,7 +1,7 @@
 import 'package:UUL_Gym/common/kv_store.dart';
 import 'package:common/common.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
-import 'package:UUL_Gym/di/global_dependencies.dart';
+import 'file:///C:/local/flutter/UUL_Gym/di/lib/src/global_dependencies.dart';
 import 'package:UUL_Gym/screens/home_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';

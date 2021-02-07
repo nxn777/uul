@@ -12,3 +12,4 @@ export 'models/time_slot.dart';
 export 'models/tower.dart';
 export 'models/user.dart';
 export 'models/week.dart';
+export 'foundation/lazy.dart';
