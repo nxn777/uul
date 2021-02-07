@@ -1,5 +1,5 @@
-name: timeslots_presentation
-description: TimeSlots presentation
+name: rules_api
+description: Rules Api module
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -29,19 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   core:
     path: ../../../core
-  arch_components:
-    path: ../../../arch_components
-  common:
-    path: ../../../common
-  widgets:
-    path: ../../../widgets
-  extensions:
-    path: ../../../extensions
-  rules_api:
-    path: ../../rules/rules_api
-  timeslots_api:
-    path: ../timeslots_api
-    
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -96,5 +84,5 @@ flutter:
   # identifiers, which may be completely independent or the same as these.
   module:
     androidX: true
-    androidPackage: dev.nxngrp.uul_gym.timeslots.timeslots_presentation
-    iosBundleIdentifier: dev.nxngrp.uulgym.timeslots.timeslotsPresentation
+    androidPackage: dev.nxngrp.uul_gym.rules.rules_api
+    iosBundleIdentifier: dev.nxngrp.uulgym.rules.rulesApi

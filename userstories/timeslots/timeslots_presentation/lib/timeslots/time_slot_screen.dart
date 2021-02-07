@@ -1,14 +1,11 @@
 import 'dart:ui';
 
-import 'file:///C:/local/flutter/UUL_Gym/arch_components/lib/src/base_view_state.dart';
+import 'package:arch_components/arch_components.dart';
 import 'package:common/common.dart';
-import 'package:UUL_Gym/screens/timeslots/time_slot_screen_builder.dart';
-import 'package:UUL_Gym/screens/timeslots/time_slots_screen_object.dart';
-import 'package:UUL_Gym/screens/timeslots/time_slots_viewmodel.dart';
-import 'package:UUL_Gym/widgets/gym/gym_list.dart';
-import 'package:UUL_Gym/widgets/timeslot/time_slot_list.dart';
-import 'package:UUL_Gym/widgets/title/screen_title.dart';
-import 'package:UUL_Gym/widgets/week/day_list_animated.dart';
+import 'time_slot_screen_builder.dart';
+import 'time_slots_screen_object.dart';
+import 'time_slots_viewmodel.dart';
+import 'package:widgets/widgets.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

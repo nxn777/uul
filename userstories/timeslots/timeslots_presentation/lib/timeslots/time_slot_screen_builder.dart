@@ -1,7 +1,4 @@
-import 'package:UUL_Gym/data/repo/gym_repo.dart';
-import 'package:UUL_Gym/data/repo/rules_repo.dart';
-import 'package:UUL_Gym/data/repo/timeslots_repo.dart';
-import 'package:UUL_Gym/di/global_dependencies.dart';
+import 'package:timeslots_api/timeslots_api.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
 

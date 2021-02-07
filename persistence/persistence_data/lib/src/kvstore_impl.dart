@@ -1,9 +1,9 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class KVStore {
+class DefaultKVStore {
   final SharedPreferences _prefs;
 
-  KVStore(this._prefs);
+  DefaultKVStore(this._prefs);
 
   Future<bool> setString(String key, String value) => _prefs.setString(key, value);
 

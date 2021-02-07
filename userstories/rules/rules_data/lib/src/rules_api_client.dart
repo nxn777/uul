@@ -1,5 +1,4 @@
-import 'file:///C:/local/flutter/UUL_Gym/rest/lib/src/rest_api.dart';
-import 'file:///C:/local/flutter/UUL_Gym/rest/lib/src/uul_response.dart';
+import 'package:rest/rest.dart';
 
 class RulesApiClient {
   static Future<UULResponse<RulesDTO>> fetchRules() async {

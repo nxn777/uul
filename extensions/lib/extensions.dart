@@ -1,4 +1,4 @@
-library extenstions;
+library extensions;
 
 export 'src/date_extensions.dart';
 export 'src/function_extenstions.dart';

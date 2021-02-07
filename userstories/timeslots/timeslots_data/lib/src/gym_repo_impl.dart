@@ -1,12 +1,13 @@
-import 'package:UUL_Gym/common/kv_store.dart';
-import 'package:UUL_Gym/models/gym.dart';
+import 'package:timeslots_api/timeslots_api.dart';
+import 'package:core/core.dart';
+import 'package:persistence_api/persistence_api.dart';
 
 const String _GYM_KEY = "selected_gym";
 
-class GymRepo {
+class DefaultGymRepo implements GymRepo {
   final KVStore _store;
 
-  GymRepo(this._store);
+  DefaultGymRepo(this._store);
 
   Future<List<Gym>> loadGyms() {
     return Future.value(Gym.getGyms());

@@ -1,6 +1,6 @@
 import 'package:extensions/extensions.dart';
 import 'package:common/common.dart';
-import 'package:UUL_Gym/models/time_slot.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 
 class BookTimeSlotScreen extends StatelessWidget {

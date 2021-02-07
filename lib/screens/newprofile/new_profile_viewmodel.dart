@@ -1,6 +1,6 @@
 
 import 'file:///C:/local/flutter/UUL_Gym/arch_components/lib/src/base_view_state.dart';
-import 'package:UUL_Gym/data/repo/rules_repo.dart';
+import 'file:///C:/local/flutter/UUL_Gym/userstories/rules/rules_data/lib/src/rules_repo.dart';
 import 'package:UUL_Gym/data/repo/user_repo.dart';
 import 'package:UUL_Gym/models/buildings/Condo.dart';
 import 'package:UUL_Gym/models/user.dart';
