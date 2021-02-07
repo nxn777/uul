@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
-import 'time_slot_tile.dart';
 import 'package:flutter/material.dart';
+
+import 'time_slot_tile.dart';
 
 class TimeSlotList extends StatelessWidget {
   final Function(TimeSlot) onTap;

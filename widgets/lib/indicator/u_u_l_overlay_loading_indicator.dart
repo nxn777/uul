@@ -1,7 +1,8 @@
 import 'dart:ui';
 
-import 'u_u_l_loading_indicator.dart';
 import 'package:flutter/material.dart';
+
+import 'u_u_l_loading_indicator.dart';
 
 class UULOverlayLoadingIndicator extends StatelessWidget {
   final Widget child;

@@ -2,14 +2,14 @@ import 'dart:ui';
 
 import 'package:arch_components/arch_components.dart';
 import 'package:common/common.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
+import 'package:widgets/widgets.dart';
+
+import 'book/book_time_slot_screen.dart';
 import 'time_slot_screen_builder.dart';
 import 'time_slots_screen_object.dart';
 import 'time_slots_viewmodel.dart';
-import 'package:widgets/widgets.dart';
-import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
-
-import 'book/book_time_slot_screen.dart';
 
 class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewModel> {
   @override

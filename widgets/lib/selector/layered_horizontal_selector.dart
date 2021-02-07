@@ -1,6 +1,7 @@
 import 'package:core/core.dart';
-import 'horizontal_selector.dart';
 import 'package:flutter/material.dart';
+
+import 'horizontal_selector.dart';
 
 class LayeredHorizontalSelector<T extends HasTitle> extends StatelessWidget {
   final double itemRightSpacing;

@@ -1,9 +1,9 @@
 import 'dart:io';
 
+import 'package:common/common.dart';
 import 'package:dio/adapter.dart';
 import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
-import 'package:common/common.dart';
 
 const String _deVBaseUrl = "https://192.168.100.8:5001";
 const String _prodUrl = _deVBaseUrl;

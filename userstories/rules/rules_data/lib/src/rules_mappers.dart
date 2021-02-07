@@ -1,8 +1,8 @@
-import 'rules_api_client.dart';
 import 'package:core/core.dart';
 
-extension Mapper on RulesDTO {
+import 'rules_api_client.dart';
 
+extension Mapper on RulesDTO {
   Rules mapToDomain() {
     Map<String, int> buildings = new Map();
     this.towers.forEach((tower) {
@@ -19,7 +19,6 @@ extension Mapper on RulesDTO {
         doorsPerFloor: this.doorsPerFloor,
         buildings: buildings,
         specialFloorTitles: floorTitles,
-        bannedApartments: this.bannedApartments.map((e) => e.name).toSet()
-    );
+        bannedApartments: this.bannedApartments.map((e) => e.name).toSet());
   }
 }

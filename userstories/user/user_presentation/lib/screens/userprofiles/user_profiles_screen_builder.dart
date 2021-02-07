@@ -1,7 +1,8 @@
+import 'package:di/di.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:provider/provider.dart';
+
 import 'user_profiles_viewmodel.dart';
-import 'package:di/di.dart';
 
 class UserProfilesScreenBuilder {
   UserProfilesScreenBuilder._();

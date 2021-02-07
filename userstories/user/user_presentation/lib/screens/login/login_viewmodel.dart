@@ -1,7 +1,8 @@
-import 'package:flutter/widgets.dart';
 import 'package:arch_components/arch_components.dart';
-import 'login_screen_object.dart';
+import 'package:flutter/widgets.dart';
 import 'package:user_api/user_api.dart';
+
+import 'login_screen_object.dart';
 
 class LoginViewModel extends ChangeNotifier with ViewStateField<LoginScreenObject> {
   final accountFormKey = GlobalKey<FormState>();

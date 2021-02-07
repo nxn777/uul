@@ -1,11 +1,11 @@
-import 'package:flutter/foundation.dart';
-import 'package:flutter/material.dart';
 import 'package:arch_components/arch_components.dart';
 import 'package:core/core.dart';
-import 'new_profile_screen_object.dart';
-import 'package:user_api/user_api.dart';
+import 'package:flutter/foundation.dart';
+import 'package:flutter/material.dart';
 import 'package:rules_api/rules_api.dart';
+import 'package:user_api/user_api.dart';
 
+import 'new_profile_screen_object.dart';
 import 'stepper/step_operations.dart';
 
 const int _FIRST_STEP = 0;

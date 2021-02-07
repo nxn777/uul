@@ -1,7 +1,7 @@
-import 'package:common/common.dart';
 import 'package:UUL_Gym/navigation/bottom_navigation.dart';
 import 'package:UUL_Gym/navigation/tab_navigator_factory.dart';
 import 'package:UUL_Gym/navigation/tabs.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class HomeScreen extends StatefulWidget {

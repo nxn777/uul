@@ -1,5 +1,5 @@
-import 'package:extensions/extensions.dart';
 import 'package:core/core.dart';
+import 'package:extensions/extensions.dart';
 
 class TimeSlotsScreenObject {
   final List<Gym> gyms;

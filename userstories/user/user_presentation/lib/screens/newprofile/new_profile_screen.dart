@@ -1,10 +1,11 @@
 import 'package:arch_components/arch_components.dart';
+import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:widgets/widgets.dart';
+
+import 'new_profile_screen_builder.dart';
 import 'new_profile_viewmodel.dart';
 import 'stepper/steps_factory.dart';
-import 'new_profile_screen_builder.dart';
-import 'package:widgets/widgets.dart';
-import 'package:extensions/extensions.dart';
 
 class NewProfileScreen extends StatelessWidget with ViewStateScreen<NewProfileViewModel> {
   final NewProfileStepsFactory _stepsFactory = NewProfileStepsFactory();
@@ -26,17 +27,17 @@ class NewProfileScreen extends StatelessWidget with ViewStateScreen<NewProfileVi
                 onStepCancel: viewModel.clearStep,
                 onStepTapped: viewModel.gotoStep,
                 controlsBuilder: (_, {VoidCallback onStepContinue, VoidCallback onStepCancel}) => StepControls(
-                  onStepContinue: viewModel.nextButtonIsEnabled()
-                      ? onStepContinue.also(() {
-                    FocusScope.of(context).unfocus();
-                  })
-                      : null,
-                  onStepCancel: onStepCancel.also(() {
-                    FocusScope.of(context).unfocus();
-                  }),
-                  nextTitle: viewModel.getNextButtonTitle(),
-                  clearTitle: viewModel.getClearButtonTitle(),
-                ),
+                      onStepContinue: viewModel.nextButtonIsEnabled()
+                          ? onStepContinue.also(() {
+                              FocusScope.of(context).unfocus();
+                            })
+                          : null,
+                      onStepCancel: onStepCancel.also(() {
+                        FocusScope.of(context).unfocus();
+                      }),
+                      nextTitle: viewModel.getNextButtonTitle(),
+                      clearTitle: viewModel.getClearButtonTitle(),
+                    ),
                 currentStep: viewModel.currentStep,
                 steps: _stepsFactory.getNewProfileSteps(context, viewModel)),
           ]),

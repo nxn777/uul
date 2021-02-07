@@ -1,7 +1,7 @@
-import 'package:timeslots_api/timeslots_api.dart';
+import 'package:di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
-import 'package:di/di.dart';
+
 import 'time_slots_viewmodel.dart';
 
 class TimeSlotsScreenBuilder {

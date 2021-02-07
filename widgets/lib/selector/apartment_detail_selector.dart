@@ -1,8 +1,8 @@
 import 'package:common/common.dart';
-import 'layered_horizontal_selector.dart';
 import 'package:flutter/material.dart';
 
 import 'horizontal_selector.dart';
+import 'layered_horizontal_selector.dart';
 
 class ApartmentDetailSelector extends StatelessWidget {
   final List<String> items;

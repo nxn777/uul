@@ -1,7 +1,8 @@
+import 'package:di/di.dart';
 import 'package:flutter/widgets.dart';
 import 'package:provider/provider.dart';
+
 import 'login_viewmodel.dart';
-import 'package:di/di.dart';
 
 class LoginScreenBuilder {
   LoginScreenBuilder._();

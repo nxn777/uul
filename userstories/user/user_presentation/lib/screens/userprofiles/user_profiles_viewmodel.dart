@@ -1,9 +1,10 @@
-import 'package:flutter/foundation.dart';
 import 'package:arch_components/arch_components.dart';
-import 'user_profiles_screen_object.dart';
-import 'package:user_api/user_api.dart';
-import 'package:rules_api/rules_api.dart';
 import 'package:core/core.dart';
+import 'package:flutter/foundation.dart';
+import 'package:rules_api/rules_api.dart';
+import 'package:user_api/user_api.dart';
+
+import 'user_profiles_screen_object.dart';
 
 class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfilesScreenObject> {
   final UserRepo _userRepo;

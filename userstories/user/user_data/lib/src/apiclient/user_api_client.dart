@@ -1,23 +1,20 @@
 import 'dart:math';
 
-import 'package:rest/rest.dart';
 import 'package:core/core.dart';
 import 'package:extensions/extensions.dart';
+import 'package:rest/rest.dart';
 
 const String _kUsersApiPath = "/api/users/";
 
 class UserApiClient {
-
-
   UserApiClient._();
 
   static Future<List<User>> getApartmentUsers(String user, String pwd) {
     return Future.delayed(Duration(seconds: 1), () => _generateTestData(user, pwd));
   }
 
-  static Future<List<User>> addApartmentUser(User user, List<User> mockedExistent) async{
-
-    final response = await getDio().post(_kUsersApiPath + "new",  data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
+  static Future<List<User>> addApartmentUser(User user, List<User> mockedExistent) async {
+    final response = await getDio().post(_kUsersApiPath + "new", data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
 
     return Future.value(mockedExistent);
   }

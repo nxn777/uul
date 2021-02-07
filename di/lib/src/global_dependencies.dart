@@ -13,5 +13,4 @@ class GlobalDependencies {
   }
 
   GlobalDependencies({this.kvStore});
-
 }

@@ -1,9 +1,10 @@
-import 'package:rules_api/rules_api.dart';
 import 'package:core/core.dart';
+import 'package:persistence_api/persistence_api.dart';
 import 'package:rest/rest.dart';
+import 'package:rules_api/rules_api.dart';
+
 import 'rules_api_client.dart';
 import 'rules_mappers.dart';
-import 'package:persistence_api/persistence_api.dart';
 
 const String _CACHED_RULES = "cached_rules";
 

@@ -15,6 +15,5 @@ class DefaultTimeSlotsRepo implements TimeSlotsRepo {
   List<TimeSlot> _generateTestData(DateTime activeDate) =>
       List(20).mapIndexed((value, index) => TimeSlot(id: index, start: activeDate, end: activeDate.add(Duration(hours: 1)), occupiedBy: _generateUsers(Random().nextInt(5))));
 
-  List<User> _generateUsers(int number) =>
-      List(number).mapIndexed((value, index) => User(id: index, name: "username #$index", apartmentCode:  "C120${Random().nextInt(2)}"));
+  List<User> _generateUsers(int number) => List(number).mapIndexed((value, index) => User(id: index, name: "username #$index", apartmentCode: "C120${Random().nextInt(2)}"));
 }

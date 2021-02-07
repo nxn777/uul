@@ -1,5 +1,5 @@
-import 'package:widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:widgets/widgets.dart';
 
 class NewsScreen extends StatelessWidget {
   @override
@@ -13,4 +13,3 @@ class NewsScreen extends StatelessWidget {
     );
   }
 }
-

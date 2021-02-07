@@ -1,5 +1,6 @@
-import 'user.dart';
 import 'package:flutter/widgets.dart';
+
+import 'user.dart';
 
 class AppState extends ChangeNotifier {
   final List<User> availableUsers = [];

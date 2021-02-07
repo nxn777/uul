@@ -1,6 +1,7 @@
 import 'package:common/common.dart';
-import 'package:widgets/widgets.dart';
 import 'package:flutter/material.dart';
+import 'package:widgets/widgets.dart';
+
 import '../new_profile_viewmodel.dart';
 
 Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewModel) {

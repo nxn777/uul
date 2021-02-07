@@ -17,8 +17,7 @@ class UULResponse<T extends HasFromJson> {
   T get data => _data;
   String get rawData => _rawData;
 
-
-  UULResponse.fromCachedData(String raw, T dummy){
+  UULResponse.fromCachedData(String raw, T dummy) {
     _rawData = raw;
     final json = jsonDecode(_rawData);
     _isSuccess = json["success"];

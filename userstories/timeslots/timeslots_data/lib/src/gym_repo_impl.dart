@@ -1,6 +1,6 @@
-import 'package:timeslots_api/timeslots_api.dart';
 import 'package:core/core.dart';
 import 'package:persistence_api/persistence_api.dart';
+import 'package:timeslots_api/timeslots_api.dart';
 
 const String _GYM_KEY = "selected_gym";
 

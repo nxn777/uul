@@ -1,9 +1,10 @@
 import 'package:arch_components/arch_components.dart';
-import 'package:timeslots_api/timeslots_api.dart';
-import 'package:rules_api/rules_api.dart';
 import 'package:core/core.dart';
-import 'time_slots_screen_object.dart';
 import 'package:flutter/widgets.dart';
+import 'package:rules_api/rules_api.dart';
+import 'package:timeslots_api/timeslots_api.dart';
+
+import 'time_slots_screen_object.dart';
 
 class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject> {
   final GymRepo _gymRepo;

@@ -1,9 +1,9 @@
 import 'package:rest/rest.dart';
 
-class UULResult<Success>extends Result<Success, UULResponse> {
+class UULResult<Success> extends Result<Success, UULResponse> {
   UULResult.success(Success s) : super.success(s);
 
-  UULResult.failure(UULResponse response): super.failure(response);
+  UULResult.failure(UULResponse response) : super.failure(response);
 
   void fold({void Function(Success) onSuccess, void Function(UULResponse) onFailure}) {
     if (_success != null && _failure != null) {
@@ -62,8 +62,7 @@ class Result<Success, Failure> {
     }
   }
 
-  flatMapError<NewFailure>(
-      Result<Success, NewFailure> Function(Failure) transform) {
+  flatMapError<NewFailure>(Result<Success, NewFailure> Function(Failure) transform) {
     if (_failure != null) {
       return Result.failure(transform(_failure));
     } else {

@@ -1,6 +1,6 @@
-import 'package:extensions/extensions.dart';
 import 'package:common/common.dart';
 import 'package:core/core.dart';
+import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
 class BookTimeSlotScreen extends StatelessWidget {
@@ -42,7 +42,7 @@ class BookTimeSlotScreen extends StatelessWidget {
                 crossAxisAlignment: CrossAxisAlignment.baseline,
                 children: [
                   Text(
-                    DateFormatter.formatTimeSlotTitle(timeSlot.start , timeSlot.end),
+                    DateFormatter.formatTimeSlotTitle(timeSlot.start, timeSlot.end),
                     style: kPageTitleTextStyle,
                     textAlign: TextAlign.start,
                   ),

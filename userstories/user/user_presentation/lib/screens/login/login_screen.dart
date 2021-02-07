@@ -1,10 +1,11 @@
+import 'package:arch_components/arch_components.dart';
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:user_presentation/validators/account_form_validator.dart';
-import 'login_viewmodel.dart';
-import 'package:arch_components/arch_components.dart';
-import 'login_screen_builder.dart';
 import 'package:widgets/widgets.dart';
-import 'package:common/common.dart';
+
+import 'login_screen_builder.dart';
+import 'login_viewmodel.dart';
 
 class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
   @override

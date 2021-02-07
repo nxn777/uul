@@ -1,4 +1,3 @@
-
 const defaultBuilding = {"A": 10, "B": 10, "C": 12, "D": 12};
 const defaultSpecialFloors = {"A10": "PH", "B10": "PH", "C12": "PH", "D12": "PH"};
 const Set<String> defaultBannedApartments = {};

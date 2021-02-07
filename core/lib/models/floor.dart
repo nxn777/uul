@@ -1,5 +1,6 @@
-import 'has_title.dart';
 import 'package:extensions/extensions.dart';
+
+import 'has_title.dart';
 import 'tower.dart';
 
 class Floor with HasTitle {

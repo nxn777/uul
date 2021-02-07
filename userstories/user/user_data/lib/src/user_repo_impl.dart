@@ -1,8 +1,9 @@
 import 'dart:convert';
 
-import 'package:persistence_api/persistence_api.dart';
 import 'package:core/core.dart';
+import 'package:persistence_api/persistence_api.dart';
 import 'package:user_api/user_api.dart';
+
 import 'apiclient/user_api_client.dart';
 
 const String _ACTIVE_USER_ID = "active_usr_id";

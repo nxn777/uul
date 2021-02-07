@@ -1,12 +1,13 @@
+import 'package:arch_components/arch_components.dart';
 import 'package:common/common.dart';
-import 'package:widgets/widgets.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:arch_components/arch_components.dart';
-import 'user_profiles_viewmodel.dart';
+import 'package:widgets/widgets.dart';
+
 import 'user_profiles_screen_builder.dart';
+import 'user_profiles_viewmodel.dart';
 
 class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfilesViewModel> {
   final Future Function() onNewProfileTap;

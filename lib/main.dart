@@ -1,9 +1,9 @@
-import 'package:common/common.dart';
 import 'package:UUL_Gym/screens/home_screen.dart';
+import 'package:common/common.dart';
+import 'package:di/di.dart';
 import 'package:flutter/material.dart';
 import 'package:persistence_data/persistence_data.dart';
 import 'package:provider/provider.dart';
-import 'package:di/di.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
 Future<void> main() async {
