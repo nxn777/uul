@@ -1,10 +1,9 @@
-import 'file:///C:/local/flutter/UUL_Gym/arch_components/lib/src/base_view_state.dart';
+import 'package:arch_components/arch_components.dart';
 import 'package:UUL_Gym/data/repo/gym_repo.dart';
 import 'package:UUL_Gym/data/repo/rules_repo.dart';
 import 'package:UUL_Gym/data/repo/timeslots_repo.dart';
-import 'package:UUL_Gym/models/gym.dart';
-import 'package:UUL_Gym/models/week.dart';
-import 'package:UUL_Gym/screens/timeslots/time_slots_screen_object.dart';
+import 'package:core/core.dart';
+import 'time_slots_screen_object.dart';
 import 'package:flutter/widgets.dart';
 
 class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject> {

@@ -1,8 +1,5 @@
 import 'package:extensions/extensions.dart';
-import 'package:UUL_Gym/models/gym.dart';
-import 'package:UUL_Gym/models/rules.dart';
-import 'package:UUL_Gym/models/time_slot.dart';
-import 'package:UUL_Gym/models/week.dart';
+import 'package:core/core.dart';
 
 class TimeSlotsScreenObject {
   final List<Gym> gyms;
