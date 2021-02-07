@@ -41,7 +41,11 @@ dependencies:
     path: ../userstories/timeslots/timeslots_api
   timeslots_data:
     path: ../userstories/timeslots/timeslots_data
-    
+  user_api:
+    path: ../userstories/user/user_api
+  user_data:
+    path: ../userstories/user/user_data
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
