@@ -9,7 +9,7 @@ class GlobalDependencies {
     if (_dependenciesProvider == null) {
       _dependenciesProvider = DependenciesProvider(this);
     }
-    return dependenciesProvider;
+    return _dependenciesProvider;
   }
 
   GlobalDependencies({this.kvStore});

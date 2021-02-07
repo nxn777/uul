@@ -2,9 +2,9 @@ import 'dart:math';
 
 import 'package:core/core.dart';
 import 'package:extensions/extensions.dart';
-import 'package:rest/rest.dart';
+//import 'package:rest/rest.dart';
 
-const String _kUsersApiPath = "/api/users/";
+//const String _kUsersApiPath = "/api/users/";
 
 class UserApiClient {
   UserApiClient._();
@@ -14,7 +14,7 @@ class UserApiClient {
   }
 
   static Future<List<User>> addApartmentUser(User user, List<User> mockedExistent) async {
-    final response = await getDio().post(_kUsersApiPath + "new", data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
+    //final response = await getDio().post(_kUsersApiPath + "new", data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
 
     return Future.value(mockedExistent);
   }
