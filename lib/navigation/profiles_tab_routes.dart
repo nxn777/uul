@@ -1,9 +1,7 @@
 import 'package:UUL_Gym/navigation/tab_routes.dart';
-import 'package:UUL_Gym/screens/login/login_screen.dart';
-import 'package:UUL_Gym/screens/newprofile/new_profile_screen.dart';
-import 'package:UUL_Gym/screens/userprofiles/user_profiles_screen.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:user_presentation/user_presentation.dart';
 
 class ProfilesTabRoutes extends TabRoutes {
   static const String root = '/';

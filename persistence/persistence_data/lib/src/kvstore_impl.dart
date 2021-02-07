@@ -1,6 +1,7 @@
+import 'package:persistence_api/persistence_api.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
-class DefaultKVStore {
+class DefaultKVStore implements KVStore {
   final SharedPreferences _prefs;
 
   DefaultKVStore(this._prefs);

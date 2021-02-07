@@ -1,19 +1,17 @@
-import 'package:UUL_Gym/common/kv_store.dart';
 import 'package:common/common.dart';
-import 'package:UUL_Gym/data/repo/user_repo.dart';
-import 'file:///C:/local/flutter/UUL_Gym/di/lib/src/global_dependencies.dart';
 import 'package:UUL_Gym/screens/home_screen.dart';
 import 'package:flutter/material.dart';
+import 'package:persistence_data/persistence_data.dart';
 import 'package:provider/provider.dart';
+import 'package:di/di.dart';
 import 'package:shared_preferences/shared_preferences.dart';
-
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
 
-  var kvStore = KVStore(await SharedPreferences.getInstance());
+  var kvStore = DefaultKVStore(await SharedPreferences.getInstance());
   var globalDependencies = GlobalDependencies(kvStore: kvStore);
-  await UserRepo(kvStore).deleteAll();
+  await globalDependencies.dependenciesProvider.userModule.createUserRepo().deleteAll();
   runApp(MyApp(globalDependencies));
 }
 
