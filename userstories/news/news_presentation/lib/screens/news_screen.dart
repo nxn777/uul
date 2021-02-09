@@ -7,7 +7,7 @@ class NewsScreen extends StatelessWidget {
     return Scaffold(
       body: SafeArea(
         child: Container(
-          child: Center(child: UULLoadingIndicator()),
+          child: Center(child: UULErrorMessage(canCancel: false,)),
         ),
       ),
     );

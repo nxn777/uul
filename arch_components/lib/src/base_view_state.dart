@@ -2,12 +2,16 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:widgets/widgets.dart';
+import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:common/common.dart';
 
 enum ViewStatus { IDLE, ERROR, LOADING }
 
 class ViewError {
   String message;
   Function retry;
+
+  ViewError({this.message, this.retry});
 }
 
 class ViewState<T> {
@@ -54,7 +58,21 @@ mixin ViewStateScreen<VM extends ViewStateField> {
         ),
       );
 
-  Widget buildErrorState(VM viewModel, BuildContext context) => null;
+  Widget buildErrorState(VM viewModel, BuildContext context) {
+   // _showSnackbar(viewModel, context);
+    return Container(
+      child: FaIcon(
+        FontAwesomeIcons.sadCry,
+        size: kSpacingHuge,
+        color: kAccentColor,
+      ),
+    );
+  }
+
+  Widget buildErrorStateWithContent(VM viewModel, BuildContext context) {
+    //_showSnackbar(viewModel, context);
+    return buildIdleState(viewModel, context);
+  }
 
   Widget buildBody(VM viewModel, BuildContext context) {
     print("Building: $viewModel - ${viewModel.viewState.status}");
@@ -64,7 +82,7 @@ mixin ViewStateScreen<VM extends ViewStateField> {
         body = buildIdleState(viewModel, context);
         break;
       case ViewStatus.ERROR:
-        body = buildErrorState(viewModel, context);
+        body = viewModel.viewState.value == null ? buildErrorState(viewModel, context) : buildErrorStateWithContent(viewModel, context);
         break;
       case ViewStatus.LOADING:
         body = viewModel.viewState.value == null ? buildLoadingState(viewModel, context) : UULOverlayLoadingIndicator(child: buildIdleState(viewModel, context));

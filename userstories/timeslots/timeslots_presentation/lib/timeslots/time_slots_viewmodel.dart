@@ -32,7 +32,11 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
             status: ViewStatus.IDLE);
         notifyListeners();
       },
-      onFailure: (response) => print(this.toString() + ":" + response.message),
+      onFailure: (response) {
+        debugPrint(this.toString() + ":" + response.message);
+        this.viewState = this.viewState.copyWith(status: ViewStatus.ERROR, error: ViewError(message: response.message, retry: () => fetchData()));
+        notifyListeners();
+      },
     );
   }
 

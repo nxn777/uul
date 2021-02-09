@@ -8,12 +8,14 @@ class UULIconButton extends StatelessWidget {
 
   final Color color;
   final Color backgroundColor;
+  final Color innerBackgroundColor;
   final double side;
   final double innerPadding;
 
-  UULIconButton({this.icon, this.onTap, Color color, Color backgroundColor, double side, double innerPadding})
+  UULIconButton({this.icon, this.onTap, Color color, Color backgroundColor, innerBackgroundColor, double side, double innerPadding})
       : color = color == null ? kAccentColor : color,
         backgroundColor = backgroundColor == null ? Colors.black12.withOpacity(0.05) : backgroundColor,
+        innerBackgroundColor = innerBackgroundColor == null ? Colors.white : innerBackgroundColor,
         side = side == null ? kSpacingXXLarge : side,
         innerPadding = innerPadding == null ? kSpacingSmall : innerPadding;
 
@@ -31,7 +33,7 @@ class UULIconButton extends StatelessWidget {
               height: side,
               width: side,
               //color: Colors.white,
-              decoration: BoxDecoration(borderRadius: BorderRadius.circular(kDefaultBorderRadius - kSpacingXXSmall), color: Colors.white),
+              decoration: BoxDecoration(borderRadius: BorderRadius.circular(kDefaultBorderRadius - kSpacingXXSmall), color: innerBackgroundColor),
               child: Center(
                 child: FaIcon(
                   this.icon,
