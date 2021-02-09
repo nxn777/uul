@@ -5,8 +5,11 @@ import 'package:widgets/error/u_u_l_error_message.dart';
 
 class UULOverlayErrorMessage extends StatelessWidget {
   final Widget child;
+  final void Function() onCancelTap;
+  final void Function() onRetryTap;
+  final bool canCancel;
 
-  UULOverlayErrorMessage({this.child});
+  UULOverlayErrorMessage(this.child,{this.onRetryTap, this.canCancel, this.onCancelTap});
 
   @override
   Widget build(BuildContext context) {
@@ -19,7 +22,7 @@ class UULOverlayErrorMessage extends StatelessWidget {
         Center(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: .7, sigmaY: .7),
-            child: UULErrorMessage(),
+            child: UULErrorMessage(onRetryTap: this.onRetryTap, onCancelTap: this.onCancelTap, canCancel: this.canCancel,),
           ),
         ),
       ],

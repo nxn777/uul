@@ -2,16 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:widgets/widgets.dart';
-import 'package:font_awesome_flutter/font_awesome_flutter.dart';
-import 'package:common/common.dart';
 
 enum ViewStatus { IDLE, ERROR, LOADING }
 
 class ViewError {
-  String message;
-  Function retry;
-
-  ViewError({this.message, this.retry});
+  final String message;
+  final Function retry;
+  final Function cancel;
+  final bool canCancel;
+  ViewError({this.message, @required this.retry, @required this.canCancel, this.cancel});
 }
 
 class ViewState<T> {
@@ -28,6 +27,7 @@ class ViewState<T> {
 
 mixin ViewStateField<T> implements ChangeNotifier {
   ViewState<T> viewState;
+  void notifyAll() => notifyListeners();
 }
 
 mixin ViewStateScreen<VM extends ViewStateField> {
@@ -59,10 +59,14 @@ mixin ViewStateScreen<VM extends ViewStateField> {
       );
 
   Widget buildErrorState(VM viewModel, BuildContext context) => Container(
-    child: Center(
-      child: UULErrorMessage(),
-    ),
-  );
+        child: Center(
+          child: UULErrorMessage(
+            onRetryTap: viewModel.viewState.error.retry,
+            onCancelTap: viewModel.viewState.error.cancel ?? _getDefaultCancelAction(viewModel),
+            canCancel: viewModel.viewState.error.canCancel,
+          ),
+        ),
+      );
 
   Widget buildErrorStateWithContent(VM viewModel, BuildContext context) {
     return buildIdleState(viewModel, context);
@@ -76,12 +80,26 @@ mixin ViewStateScreen<VM extends ViewStateField> {
         body = buildIdleState(viewModel, context);
         break;
       case ViewStatus.ERROR:
-        body = viewModel.viewState.value == null ? buildErrorState(viewModel, context) : UULOverlayErrorMessage(child: buildIdleState(viewModel, context));
+        body = viewModel.viewState.value == null
+            ? buildErrorState(viewModel, context)
+            : UULOverlayErrorMessage(
+                buildIdleState(viewModel, context),
+                onRetryTap: viewModel.viewState.error.retry,
+                onCancelTap: viewModel.viewState.error.cancel ?? _getDefaultCancelAction(viewModel),
+                canCancel: viewModel.viewState.error.canCancel,
+              );
         break;
       case ViewStatus.LOADING:
         body = viewModel.viewState.value == null ? buildLoadingState(viewModel, context) : UULOverlayLoadingIndicator(child: buildIdleState(viewModel, context));
         break;
     }
     return body;
+  }
+
+  Function _getDefaultCancelAction(VM viewModel) {
+    return () {
+      viewModel.viewState = viewModel.viewState.copyWith(status: ViewStatus.IDLE, error: null);
+      viewModel.notifyAll();
+    };
   }
 }
