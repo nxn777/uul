@@ -16,9 +16,12 @@ class LoginViewModel extends ChangeNotifier with ViewStateField<LoginScreenObjec
   }
 
   void login(BuildContext context) async {
+    if (!accountFormKey.currentState.validate()) {
+      return;
+    }
     viewState = viewState.copyWith(status: ViewStatus.LOADING);
     notifyListeners();
-    var result = await _userRepo.fetchAndCacheUsers(viewState.value.name, viewState.value.pwd);
+    var result = await _userRepo.fetchAndCacheUsers(viewState.value.login, viewState.value.pwd);
     if (result.isNotEmpty) {
       await _userRepo.setActiveUserId(result.first.id);
       Navigator.of(context).pop(true);

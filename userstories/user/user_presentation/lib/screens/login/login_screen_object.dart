@@ -1,4 +1,5 @@
 class LoginScreenObject {
-  String name = "test_user";
-  String pwd = "test";
+  String login = "testLogin";
+  String pwd = "pwdTest";
+  String apartmentCode = "A1003";
 }

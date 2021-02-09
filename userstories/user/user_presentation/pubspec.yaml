@@ -29,6 +29,7 @@ dependencies:
   cupertino_icons: ^1.0.0
   font_awesome_flutter: ^8.11.0
   provider: ^4.3.2+3
+  mask_text_input_formatter: ^1.2.1
   common:
     path: ../../../common
   core:

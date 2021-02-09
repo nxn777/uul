@@ -10,7 +10,7 @@ class ViewError {
   final Function retry;
   final Function cancel;
   final bool canCancel;
-  ViewError({this.message, @required this.retry, @required this.canCancel, this.cancel});
+  ViewError({this.message, @required this.retry, this.canCancel = false, this.cancel});
 }
 
 class ViewState<T> {

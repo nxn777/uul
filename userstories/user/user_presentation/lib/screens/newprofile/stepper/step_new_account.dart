@@ -35,7 +35,7 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
             controller: nameController,
             decoration: InputDecoration(labelText: 'Name (will be visible for everyone)'),
             textCapitalization: TextCapitalization.words,
-            validator: AccountFormValidator.getNameValidator(),
+            validator: AccountFormValidator.getLoginValidator(),
             onChanged: (value) => viewModel.name = value,
           ),
           TextFormField(
