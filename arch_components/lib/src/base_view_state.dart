@@ -58,19 +58,13 @@ mixin ViewStateScreen<VM extends ViewStateField> {
         ),
       );
 
-  Widget buildErrorState(VM viewModel, BuildContext context) {
-   // _showSnackbar(viewModel, context);
-    return Container(
-      child: FaIcon(
-        FontAwesomeIcons.sadCry,
-        size: kSpacingHuge,
-        color: kAccentColor,
-      ),
-    );
-  }
+  Widget buildErrorState(VM viewModel, BuildContext context) => Container(
+    child: Center(
+      child: UULErrorMessage(),
+    ),
+  );
 
   Widget buildErrorStateWithContent(VM viewModel, BuildContext context) {
-    //_showSnackbar(viewModel, context);
     return buildIdleState(viewModel, context);
   }
 
@@ -82,7 +76,7 @@ mixin ViewStateScreen<VM extends ViewStateField> {
         body = buildIdleState(viewModel, context);
         break;
       case ViewStatus.ERROR:
-        body = viewModel.viewState.value == null ? buildErrorState(viewModel, context) : buildErrorStateWithContent(viewModel, context);
+        body = viewModel.viewState.value == null ? buildErrorState(viewModel, context) : UULOverlayErrorMessage(child: buildIdleState(viewModel, context));
         break;
       case ViewStatus.LOADING:
         body = viewModel.viewState.value == null ? buildLoadingState(viewModel, context) : UULOverlayLoadingIndicator(child: buildIdleState(viewModel, context));
