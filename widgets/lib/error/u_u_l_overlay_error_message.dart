@@ -8,8 +8,9 @@ class UULOverlayErrorMessage extends StatelessWidget {
   final void Function() onCancelTap;
   final void Function() onRetryTap;
   final bool canCancel;
+  final String message;
 
-  UULOverlayErrorMessage(this.child,{this.onRetryTap, this.canCancel, this.onCancelTap});
+  UULOverlayErrorMessage(this.child, {this.onRetryTap, this.canCancel, this.onCancelTap, this.message});
 
   @override
   Widget build(BuildContext context) {
@@ -22,7 +23,12 @@ class UULOverlayErrorMessage extends StatelessWidget {
         Center(
           child: BackdropFilter(
             filter: ImageFilter.blur(sigmaX: .7, sigmaY: .7),
-            child: UULErrorMessage(onRetryTap: this.onRetryTap, onCancelTap: this.onCancelTap, canCancel: this.canCancel,),
+            child: UULErrorMessage(
+              onRetryTap: this.onRetryTap,
+              onCancelTap: this.onCancelTap,
+              canCancel: this.canCancel,
+              message: this.message,
+            ),
           ),
         ),
       ],

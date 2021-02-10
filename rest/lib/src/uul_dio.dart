@@ -1,5 +1,6 @@
 
 import 'package:dio/dio.dart';
+import 'package:flutter/foundation.dart';
 import 'package:persistence_api/persistence_api.dart';
 
 import 'dio_factory.dart';
@@ -22,6 +23,9 @@ class UULDio {
     return _instance;
   }
   
-  Future<bool> updateToken(String token) => _kvStore.setString(_TOKEN_KEY, token);
+  Future<bool> updateToken(String token) {
+    debugPrint("Token was updated: $token");
+    return _kvStore.setString(_TOKEN_KEY, token);
+  }
   
 }

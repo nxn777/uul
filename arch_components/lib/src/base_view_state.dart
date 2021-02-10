@@ -61,6 +61,7 @@ mixin ViewStateScreen<VM extends ViewStateField> {
   Widget buildErrorState(VM viewModel, BuildContext context) => Container(
         child: Center(
           child: UULErrorMessage(
+            message: viewModel.viewState.error.message,
             onRetryTap: viewModel.viewState.error.retry,
             onCancelTap: viewModel.viewState.error.cancel ?? _getDefaultCancelAction(viewModel),
             canCancel: viewModel.viewState.error.canCancel,
@@ -84,6 +85,7 @@ mixin ViewStateScreen<VM extends ViewStateField> {
             ? buildErrorState(viewModel, context)
             : UULOverlayErrorMessage(
                 buildIdleState(viewModel, context),
+                message: viewModel.viewState.error.message,
                 onRetryTap: viewModel.viewState.error.retry,
                 onCancelTap: viewModel.viewState.error.cancel ?? _getDefaultCancelAction(viewModel),
                 canCancel: viewModel.viewState.error.canCancel,

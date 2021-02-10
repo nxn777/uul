@@ -6,6 +6,7 @@ import 'package:rest/rest.dart';
 
 abstract class UserApiClient {
   Future<UULResponse<TokenDTO>> login(String apartment, login, pwd);
+  Future logout();
 }
 
 class DefaultUserApiClient implements UserApiClient {
@@ -17,10 +18,20 @@ class DefaultUserApiClient implements UserApiClient {
     var response;
     try {
       response = await getDio().post("/api/users/login", data: {"login": login, "pwd": pwd, "apartmentCode": apartment});
-      return UULResponse.fromResponse(response, TokenDTO());
+      var result = UULResponse.fromResponse(response, TokenDTO());
+      if (result.isSuccess) {
+        uulDio.updateToken(result.data.value);
+      }
+      return result;
     } catch (e) {
       return UULResponse.fromException(e);
     }
+  }
+
+  @override
+  Future logout() {
+    uulDio.updateToken(null);
+    return Future.value("");
   }
 
   static Future<List<User>> getApartmentUsers(String user, String pwd) {
@@ -40,6 +51,7 @@ class DefaultUserApiClient implements UserApiClient {
       avatarImageSrc: "assets/avatars/user (${Random().nextInt(35) + 1}).png",
       isActivated: index % 2 == 0,
       apartmentCode: "C1207"));
+
 }
 
 class TokenDTO implements HasFromJson {

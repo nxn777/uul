@@ -27,6 +27,15 @@ class LoginViewModel extends ChangeNotifier with ViewStateField<LoginScreenObjec
       Navigator.of(context).pop(true);
     } else {
       debugPrint("Login failed");
+      viewState = viewState.copyWith(
+        status: ViewStatus.ERROR,
+        error: ViewError(
+          message: "Login failed",
+          retry: () => login(context),
+          canCancel: true,
+        ),
+      );
+      notifyListeners();
     }
   }
 }

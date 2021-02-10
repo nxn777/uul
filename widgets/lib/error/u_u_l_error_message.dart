@@ -7,8 +7,9 @@ class UULErrorMessage extends StatefulWidget {
   final void Function() onCancelTap;
   final void Function() onRetryTap;
   final bool canCancel;
+  final String message;
 
-  UULErrorMessage({this.onCancelTap, this.onRetryTap, this.canCancel = false});
+  UULErrorMessage({this.onCancelTap, this.onRetryTap, this.canCancel = false, this.message});
 
   @override
   _UULErrorMessageState createState() => _UULErrorMessageState();
@@ -39,7 +40,9 @@ class _UULErrorMessageState extends State<UULErrorMessage> with TickerProviderSt
                     padding: const EdgeInsets.symmetric(horizontal: kSpacingSmall),
                     child: Text(
                       _getMessage(),
-                      style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold,),
+                      style: kCaptionActiveTextStyle.copyWith(
+                        fontWeight: FontWeight.bold,
+                      ),
                     ),
                   ),
                   SizedBox(
@@ -102,6 +105,9 @@ class _UULErrorMessageState extends State<UULErrorMessage> with TickerProviderSt
   }
 
   String _getMessage() {
+    if (widget.message != null) {
+      return widget.message;
+    }
     if (widget.canCancel) {
       return "Something went wrong";
     } else {
@@ -119,7 +125,7 @@ class _UULErrorMessageState extends State<UULErrorMessage> with TickerProviderSt
           backgroundColor: kAccentColor,
           side: kSpacingHuge,
           innerPadding: kSpacingMedium,
-          onTap: () {},
+          onTap: () { widget.onCancelTap(); },
         ),
         SizedBox(
           width: kSpacingLarge,
@@ -131,7 +137,7 @@ class _UULErrorMessageState extends State<UULErrorMessage> with TickerProviderSt
           backgroundColor: kAccentColor,
           side: kSpacingHuge,
           innerPadding: kSpacingMedium * (1 + _resizableController.value / 80),
-          onTap: () {},
+          onTap: () { widget.onRetryTap(); },
         )
       ];
     } else {
