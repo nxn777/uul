@@ -57,6 +57,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
 
   void onUserActionResult(bool result) {
     if (result == true) {
+      debugPrint("Should update user profiles screen");
       fetchData();
     }
   }

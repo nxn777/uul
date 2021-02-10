@@ -1,4 +1,4 @@
-import 'user.dart';
+import 'usermodels/user.dart';
 
 class TimeSlot {
   int _id;
@@ -28,7 +28,7 @@ class TimeSlot {
     if (json["occupiedBy"] != null) {
       _occupiedBy = [];
       json["occupiedBy"].forEach((v) {
-        _occupiedBy.add(User.fromJson(v));
+        //_occupiedBy.add(User.fromJson(v));
       });
     }
   }
@@ -39,7 +39,7 @@ class TimeSlot {
     map["start"] = _start.toIso8601String();
     map["end"] = _end.toIso8601String();
     if (_occupiedBy != null) {
-      map["occupiedBy"] = _occupiedBy.map((v) => v.toJson()).toList();
+      //map["occupiedBy"] = _occupiedBy.map((v) => v.toJson()).toList();
     }
     return map;
   }
