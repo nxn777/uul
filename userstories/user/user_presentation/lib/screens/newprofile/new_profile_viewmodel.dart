@@ -30,6 +30,7 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
     _totalSteps = value;
   }
 
+  String login = "";
   String name = "";
   String pwd = "";
   final Map<int, NewProfileStepValidator> _validators = {};
@@ -139,8 +140,7 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
   bool isComplete() => (_currentStep == _totalSteps - 1) && _visited.length == _totalSteps && _allValid();
 
   void _onComplete() async {
-    User user = User(name: name, pwdHash: pwd, apartmentCode: getApartmentCode(), avatarImageSrc: activeAvatarImage);
-    await this._userRepo.addUser(user);
+    var user = await this._userRepo.addNewProfile(login: login, name: name, password: pwd, apartment: getApartmentCode(), avatarSrc: activeAvatarImage);
     this.onUserCreated(user);
   }
 

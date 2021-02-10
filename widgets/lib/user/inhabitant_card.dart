@@ -3,12 +3,12 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
-class UserCard extends StatelessWidget {
-  final User user;
-  final int activeUserId;
-  final void Function(User) onTap;
+class InhabitantCard extends StatelessWidget {
+  final Inhabitant inhabitant;
+  final int activeInhabitantId;
+  final void Function(Inhabitant) onTap;
 
-  UserCard(this.user, this.activeUserId, {this.onTap});
+  InhabitantCard(this.inhabitant, this.activeInhabitantId, {this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -16,7 +16,7 @@ class UserCard extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingXSmallPlus, kSpacingMedium, kSpacingXSmallPlus),
       child: InkWell(
         onTap: () {
-          this.onTap?.call(user);
+          this.onTap?.call(inhabitant);
         },
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         child: Row(
@@ -40,12 +40,12 @@ class UserCard extends StatelessWidget {
                   Padding(
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingSmall),
                     child: Text(
-                      user.name,
+                      inhabitant.name,
                       style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                     ),
                   ),
                   Text(
-                    user.apartmentCode,
+                    "inhabitant.apartmentCode",
                     style: kCaptionInactiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                   )
                 ],
@@ -53,7 +53,7 @@ class UserCard extends StatelessWidget {
             ),
             Padding(
               padding: const EdgeInsets.all(kSpacingMedium),
-              child: _getActivatedStatusIcon(),
+              child:FaIcon(FontAwesomeIcons.checkCircle, color: kAccentColor),// _getActivatedStatusIcon(),
             ),
           ],
         ),
@@ -63,18 +63,18 @@ class UserCard extends StatelessWidget {
   }
 
   IconData _getActiveStatusIcon() {
-    if (user.id == activeUserId) {
+    if (inhabitant.id == activeInhabitantId) {
       return FontAwesomeIcons.solidStar;
     } else {
       return FontAwesomeIcons.star;
     }
   }
 
-  Widget _getActivatedStatusIcon() {
-    if (user.isActivated) {
-      return FaIcon(FontAwesomeIcons.checkCircle, color: kAccentColor);
-    } else {
-      return FaIcon(FontAwesomeIcons.clock, color: kInactiveColor);
-    }
-  }
+  // Widget _getActivatedStatusIcon() {
+  //   if (user.isActivated) {
+  //     return FaIcon(FontAwesomeIcons.checkCircle, color: kAccentColor);
+  //   } else {
+  //     return FaIcon(FontAwesomeIcons.clock, color: kInactiveColor);
+  //   }
+  // }
 }

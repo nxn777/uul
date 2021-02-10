@@ -2,14 +2,14 @@ import 'package:core/core.dart';
 import 'package:flutter/cupertino.dart';
 
 class UserProfilesScreenObject {
-  int currentUserId;
-  int activeUserId;
-  final List<User> allUsers;
+  int currentInhabitantId;
+  int activeInhabitantId;
+  final User user;
   bool canAddMore;
 
-  UserProfilesScreenObject({@required this.currentUserId, @required this.activeUserId, @required this.allUsers, @required this.canAddMore});
+  UserProfilesScreenObject({@required this.currentInhabitantId, @required this.activeInhabitantId, @required this.user, @required this.canAddMore});
 
-  User get currentUser => allUsers.firstWhere((element) => element.id == currentUserId);
+  Inhabitant get currentInhabitant => user.inhabitants.firstWhere((element) => element.id == currentInhabitantId);
 
-  List<User> get notCurrentUsers => allUsers.where((element) => element.id != currentUserId).toList();
+  List<Inhabitant> get notCurrentInhabitants => user.inhabitants.where((element) => element.id != currentInhabitantId).toList();
 }

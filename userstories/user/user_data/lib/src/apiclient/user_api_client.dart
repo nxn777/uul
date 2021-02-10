@@ -34,21 +34,21 @@ class DefaultUserApiClient implements UserApiClient {
     return Future.value("");
   }
 
-  static Future<List<User>> getApartmentUsers(String user, String pwd) {
-    return Future.delayed(Duration(seconds: 1), () => _generateTestData(user, pwd));
-  }
-
-  static Future<List<User>> addApartmentUser(User user, List<User> mockedExistent) async {
-    //final response = await getDio().post(_kUsersApiPath + "new", data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
-
-    return Future.value(mockedExistent);
-  }
-
-  static List<User> _generateTestData(String user, pwd) => List(5).mapIndexed((value, index) => User(
-      login: user + index.toString(),
-      //avatarImageSrc: "assets/avatars/user (${Random().nextInt(35) + 1}).png",
-      isActivated: index % 2 == 0,
-      apartmentCode: "C1207"));
+  // static Future<List<User>> getApartmentUsers(String user, String pwd) {
+  //   return Future.delayed(Duration(seconds: 1), () => _generateTestData(user, pwd));
+  // }
+  //
+  // static Future<List<User>> addApartmentUser(User user, List<User> mockedExistent) async {
+  //   //final response = await getDio().post(_kUsersApiPath + "new", data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
+  //
+  //   return Future.value(mockedExistent);
+  // }
+  //
+  // static List<User> _generateTestData(String user, pwd) => List(5).mapIndexed((value, index) => User(
+  //     login: user + index.toString(),
+  //     //avatarImageSrc: "assets/avatars/user (${Random().nextInt(35) + 1}).png",
+  //     isActivated: index % 2 == 0,
+  //     apartmentCode: "C1207"));
 
 }
 

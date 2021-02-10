@@ -17,41 +17,41 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
   }
 
   void fetchData() async {
-    var activeUser = _userRepo.getActiveOrFirstCachedUser();
-    if (activeUser == null) {
-      viewState = viewState.copyWith(status: ViewStatus.IDLE); // no user profiles stored
-      notifyListeners();
-      return;
-    }
-    var users = await _userRepo.fetchAndCacheUsers(activeUser.name, activeUser.pwdHash);
-    var activeUserId = _userRepo.getActiveUserId();
-    (await _rulesRepo.loadRules()).fold(
-      onSuccess: (rules) {
-        viewState = ViewState(
-            value: UserProfilesScreenObject(
-              currentUserId: activeUserId,
-              activeUserId: activeUserId,
-              allUsers: users,
-              canAddMore: users.length < rules.habitantsPerApartment,
-            ),
-            status: ViewStatus.IDLE);
-        notifyListeners();
-      },
-      onFailure: (response) {
-        print(this.toString() + ":" + response.message);
-      },
-    );
+    // var activeUser = _userRepo.getActiveOrFirstCachedUser();
+    // if (activeUser == null) {
+    //   viewState = viewState.copyWith(status: ViewStatus.IDLE); // no user profiles stored
+    //   notifyListeners();
+    //   return;
+    // }
+    // var users = await _userRepo.fetchAndCacheUsers(activeUser.name, activeUser.pwdHash);
+    // var activeUserId = _userRepo.getActiveUserId();
+    // (await _rulesRepo.loadRules()).fold(
+    //   onSuccess: (rules) {
+    //     viewState = ViewState(
+    //         value: UserProfilesScreenObject(
+    //           currentInhabitantId: activeUserId,
+    //           activeInhabitantId: activeUserId,
+    //           allUsers: users,
+    //           canAddMore: users.length < rules.habitantsPerApartment,
+    //         ),
+    //         status: ViewStatus.IDLE);
+    //     notifyListeners();
+    //   },
+    //   onFailure: (response) {
+    //     print(this.toString() + ":" + response.message);
+    //   },
+    // );
   }
 
-  void changeCurrentUser(User user) {
+  void changeCurrentInhabitant(Inhabitant inhabitant) {
     // user in the list was selected
-    viewState.value.currentUserId = user.id;
+    viewState.value.currentInhabitantId = inhabitant.id;
     notifyListeners();
   }
 
-  void changeActiveUser(User user) {
+  void changeActiveInhabitant(Inhabitant inhabitant) {
     // star button was pressed
-    viewState.value.activeUserId = user.id;
+    viewState.value.activeInhabitantId = inhabitant.id;
     notifyListeners();
   }
 

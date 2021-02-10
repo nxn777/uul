@@ -15,7 +15,7 @@ class DefaultUserRepo implements UserRepo {
   DefaultUserRepo(this._store, this.apiClient);
 
   @override
-  Future<bool> login(String apartment, login, pwd) async {
+  Future<bool> login({String apartment, String login, String pwd}) async {
     var response = await apiClient.login(apartment, login, pwd);
     if (response.isSuccess) {
 
@@ -25,51 +25,61 @@ class DefaultUserRepo implements UserRepo {
     }
   }
 
-  int getActiveUserId() => _store.getInteger(_ACTIVE_USER_ID, -1);
+  @override
+  Future logout() => apiClient.logout();
 
-  Future<bool> setActiveUserId(int id) => _store.setInt(_ACTIVE_USER_ID, id);
+  @override
+  Future<User> addNewProfile({String login, String name, String password, String apartment, String avatarSrc}) {
+    // TODO: implement addNewProfile
 
-  Future<bool> rewriteCachedUsers(List<User> users) {
-    List<String> raw = users.map((e) => jsonEncode(e.toJson())).toList();
-    return _store.setStringList(_CACHED_USERS, raw);
+    throw UnimplementedError();
   }
-
-  Future<List<User>> fetchAndCacheUsers(String user, String pwd) async {
-    var fetched = await DefaultUserApiClient.getApartmentUsers(user, pwd);
-    await rewriteCachedUsers(fetched);
-    return fetched;
-  }
-
-  User getActiveOrFirstCachedUser() {
-    var cached = _getCachedUsers();
-    var activeId = getActiveUserId();
-    var active = cached.firstWhere((element) => element.id == activeId, orElse: () => null);
-    if (active != null) {
-      return active;
-    }
-    if (cached.isNotEmpty) {
-      return cached.first;
-    }
-    return null;
-  }
-
-  Future<List<bool>> deleteAll() {
-    return Future.wait([setActiveUserId(-1), rewriteCachedUsers(List.empty())]);
-  }
-
-  Future<List<User>> addUser(User user) async {
-    var existent = _getCachedUsers();
-    var fetched = await DefaultUserApiClient.addApartmentUser(user, existent);
-    await rewriteCachedUsers(fetched);
-    await setActiveUserId(fetched.first.id);
-    return fetched;
-  }
-
-  List<User> _getCachedUsers() {
-    List<String> raw = _store.getStringList(_CACHED_USERS);
-    if (raw.isEmpty) {
-      return List.empty();
-    }
-    return raw.map((e) => User.fromJson(e)).toList();
-  }
+  //
+  // int getActiveUserId() => _store.getInteger(_ACTIVE_USER_ID, -1);
+  //
+  // Future<bool> setActiveUserId(int id) => _store.setInt(_ACTIVE_USER_ID, id);
+  //
+  // Future<bool> rewriteCachedUsers(List<User> users) {
+  //   List<String> raw = users.map((e) => jsonEncode(e.toJson())).toList();
+  //   return _store.setStringList(_CACHED_USERS, raw);
+  // }
+  //
+  // Future<List<User>> fetchAndCacheUsers(String user, String pwd) async {
+  //   var fetched = await DefaultUserApiClient.getApartmentUsers(user, pwd);
+  //   await rewriteCachedUsers(fetched);
+  //   return fetched;
+  // }
+  //
+  // User getActiveOrFirstCachedUser() {
+  //   var cached = _getCachedUsers();
+  //   var activeId = getActiveUserId();
+  //   var active = cached.firstWhere((element) => element.id == activeId, orElse: () => null);
+  //   if (active != null) {
+  //     return active;
+  //   }
+  //   if (cached.isNotEmpty) {
+  //     return cached.first;
+  //   }
+  //   return null;
+  // }
+  //
+  // Future<List<bool>> deleteAll() {
+  //   return Future.wait([setActiveUserId(-1), rewriteCachedUsers(List.empty())]);
+  // }
+  //
+  // Future<List<User>> addUser(User user) async {
+  //   var existent = _getCachedUsers();
+  //   var fetched = await DefaultUserApiClient.addApartmentUser(user, existent);
+  //   await rewriteCachedUsers(fetched);
+  //   await setActiveUserId(fetched.first.id);
+  //   return fetched;
+  // }
+  //
+  // List<User> _getCachedUsers() {
+  //   List<String> raw = _store.getStringList(_CACHED_USERS);
+  //   if (raw.isEmpty) {
+  //     return List.empty();
+  //   }
+  //   return raw.map((e) => User.fromJson(e)).toList();
+  // }
 }

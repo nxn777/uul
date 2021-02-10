@@ -11,7 +11,7 @@ Future<void> main() async {
 
   var kvStore = DefaultKVStore(await SharedPreferences.getInstance());
   var globalDependencies = GlobalDependencies(kvStore: kvStore);
-  await globalDependencies.dependenciesProvider.userModule.createUserRepo().deleteAll();
+  await globalDependencies.dependenciesProvider.userModule.createUserRepo().logout();
   runApp(MyApp(globalDependencies));
 }
 

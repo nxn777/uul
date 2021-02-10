@@ -7,12 +7,12 @@ import 'package:widgets/avatars/bundled_avatar.dart';
 import 'package:widgets/button/u_u_l_icon_button.dart';
 import 'package:widgets/title/screen_title.dart';
 
-class CurrentUserCard extends StatelessWidget {
-  final User user;
+class CurrentInhabitantCard extends StatelessWidget {
+  final Inhabitant inhabitant;
   final bool isActive;
-  final void Function(User) onMakeActiveTap;
+  final void Function(Inhabitant) onMakeActiveTap;
 
-  CurrentUserCard({@required this.user, @required this.isActive, this.onMakeActiveTap});
+  CurrentInhabitantCard({@required this.inhabitant, @required this.isActive, this.onMakeActiveTap});
 
   @override
   Widget build(BuildContext context) {
@@ -40,14 +40,14 @@ class CurrentUserCard extends StatelessWidget {
                   icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
                   onTap: () {
                     if (!isActive) {
-                      this.onMakeActiveTap?.call(user);
+                      this.onMakeActiveTap?.call(inhabitant);
                     }
                   },
                 ),
                 BundledAvatar(
                   height: kSpacingHuge * 2,
-                  imageSrc: user?.avatarImageSrc == null ? "assets/defaults/default_user3.png" : user.avatarImageSrc,
-                  borderColor: user.isActivated ? kAccentColor : kInactiveColor,
+                  imageSrc: inhabitant?.avatarSrc == null ? "assets/defaults/default_user3.png" : inhabitant.avatarSrc,
+                  borderColor: kAccentColor,//inhabitant.isActivated ? kAccentColor : kInactiveColor,
                   onTap: (_) => showToolTip(context),
                 ),
                 UULIconButton(
@@ -65,7 +65,7 @@ class CurrentUserCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.all(kSpacingMedium),
                     child: Text(
-                      user.name,
+                      inhabitant.name,
                       style: kCaptionActiveTextStyle,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -83,7 +83,7 @@ class CurrentUserCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
                     child: Text(
-                      user.apartmentCode,
+                      "inhabitant.apartmentCode",
                       style: kRegularInactiveTextStyle,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -105,10 +105,10 @@ class CurrentUserCard extends StatelessWidget {
       borderWidth: 1,
       borderRadius: kDefaultBorderRadius,
       popupDirection: TooltipDirection.down,
-      borderColor: user.isActivated ? kAccentColor : kInactiveColor,
+      borderColor: kAccentColor ,//inhabitant.isActivated ? kAccentColor : kInactiveColor,
       content: new Material(
           child: Text(
-        user.isActivated
+        false//inhabitant.isActivated
             ? "This profile is activated.\nYou can use it to book gyms"
             : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
         softWrap: true,
