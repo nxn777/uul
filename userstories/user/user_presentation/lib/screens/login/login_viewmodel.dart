@@ -21,12 +21,12 @@ class LoginViewModel extends ChangeNotifier with ViewStateField<LoginScreenObjec
     }
     viewState = viewState.copyWith(status: ViewStatus.LOADING);
     notifyListeners();
-    var result = await _userRepo.fetchAndCacheUsers(viewState.value.login, viewState.value.pwd);
-    if (result.isNotEmpty) {
-      await _userRepo.setActiveUserId(result.first.id);
+    var isLoginSuccessful = await _userRepo.login(viewState.value.apartmentCode, viewState.value.login, viewState.value.pwd);
+    if (isLoginSuccessful) {
+      debugPrint("Login success");
       Navigator.of(context).pop(true);
     } else {
-      Navigator.of(context).pop(false);
+      debugPrint("Login failed");
     }
   }
 }

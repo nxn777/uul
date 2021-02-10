@@ -1,6 +1,8 @@
 import 'package:core/core.dart';
 
 abstract class UserRepo {
+  Future<bool> login(String apartment, login, pwd);
+
   int getActiveUserId();
 
   Future<bool> setActiveUserId(int id);

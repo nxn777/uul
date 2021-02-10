@@ -33,6 +33,8 @@ dependencies:
     path: ../persistence/persistence_api
   persistence_data:
     path: ../persistence/persistence_data
+  rest:
+    path: ../rest
   rules_api:
     path: ../userstories/rules/rules_api
   rules_data:

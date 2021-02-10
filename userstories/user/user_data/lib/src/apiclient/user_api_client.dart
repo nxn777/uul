@@ -2,12 +2,26 @@ import 'dart:math';
 
 import 'package:core/core.dart';
 import 'package:extensions/extensions.dart';
-//import 'package:rest/rest.dart';
+import 'package:rest/rest.dart';
 
-//const String _kUsersApiPath = "/api/users/";
+abstract class UserApiClient {
+  Future<UULResponse<TokenDTO>> login(String apartment, login, pwd);
+}
 
-class UserApiClient {
-  UserApiClient._();
+class DefaultUserApiClient implements UserApiClient {
+  final UULDio uulDio;
+  DefaultUserApiClient(this.uulDio);
+
+  @override
+  Future<UULResponse<TokenDTO>> login(String apartment, login, pwd) async {
+    var response;
+    try {
+      response = await getDio().post("/api/users/login", data: {"login": login, "pwd": pwd, "apartmentCode": apartment});
+      return UULResponse.fromResponse(response, TokenDTO());
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
+  }
 
   static Future<List<User>> getApartmentUsers(String user, String pwd) {
     return Future.delayed(Duration(seconds: 1), () => _generateTestData(user, pwd));
@@ -26,4 +40,13 @@ class UserApiClient {
       avatarImageSrc: "assets/avatars/user (${Random().nextInt(35) + 1}).png",
       isActivated: index % 2 == 0,
       apartmentCode: "C1207"));
+}
+
+class TokenDTO implements HasFromJson {
+  String value;
+
+  @override
+  populateFromJson(jsonRaw) {
+    value = jsonRaw.toString();
+  }
 }

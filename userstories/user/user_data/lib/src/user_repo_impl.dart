@@ -3,7 +3,6 @@ import 'dart:convert';
 import 'package:core/core.dart';
 import 'package:persistence_api/persistence_api.dart';
 import 'package:user_api/user_api.dart';
-
 import 'apiclient/user_api_client.dart';
 
 const String _ACTIVE_USER_ID = "active_usr_id";
@@ -11,8 +10,19 @@ const String _CACHED_USERS = "cached_users";
 
 class DefaultUserRepo implements UserRepo {
   final KVStore _store;
+  final UserApiClient apiClient;
 
-  DefaultUserRepo(this._store);
+  DefaultUserRepo(this._store, this.apiClient);
+
+  @override
+  Future<bool> login(String apartment, login, pwd) async {
+    var response = await apiClient.login(apartment, login, pwd);
+    if (response.isSuccess) {
+      return true;
+    } else {
+      return false;
+    }
+  }
 
   int getActiveUserId() => _store.getInteger(_ACTIVE_USER_ID, -1);
 
@@ -24,7 +34,7 @@ class DefaultUserRepo implements UserRepo {
   }
 
   Future<List<User>> fetchAndCacheUsers(String user, String pwd) async {
-    var fetched = await UserApiClient.getApartmentUsers(user, pwd);
+    var fetched = await DefaultUserApiClient.getApartmentUsers(user, pwd);
     await rewriteCachedUsers(fetched);
     return fetched;
   }
@@ -48,7 +58,7 @@ class DefaultUserRepo implements UserRepo {
 
   Future<List<User>> addUser(User user) async {
     var existent = _getCachedUsers();
-    var fetched = await UserApiClient.addApartmentUser(user, existent);
+    var fetched = await DefaultUserApiClient.addApartmentUser(user, existent);
     await rewriteCachedUsers(fetched);
     await setActiveUserId(fetched.first.id);
     return fetched;

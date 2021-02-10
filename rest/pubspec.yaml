@@ -31,6 +31,8 @@ dependencies:
 
   common:
     path: ../common
+  persistence_api:
+    path: ../persistence/persistence_api
 
 dev_dependencies:
   flutter_test:
