@@ -3,10 +3,6 @@ import 'package:rest/rest.dart';
 import 'package:persistence_api/persistence_api.dart';
 import 'package:core/core.dart';
 
-abstract class HasMapToDomain<D> implements HasFromJson {
-  D mapToDomain();
-}
-
 class CachingRequest<D, T extends HasMapToDomain<D>> {
   final KVStore _store;
   final Future<UULResponse<T>> Function() _networkCall;
@@ -22,8 +18,8 @@ class CachingRequest<D, T extends HasMapToDomain<D>> {
       }
     }
     var response = await _networkCall();
-    await _store.setString(storeKey, response.rawData);
     if (response.isSuccess) {
+      await _store.setString(storeKey, response.rawData);
       return UULResult.success(response.data.mapToDomain());
     } else {
       return UULResult.failure(response);

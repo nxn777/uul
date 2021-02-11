@@ -2,8 +2,12 @@ import 'dart:convert';
 
 import 'package:dio/dio.dart';
 
-mixin HasFromJson {
+abstract class HasFromJson {
   populateFromJson(dynamic jsonRaw);
+}
+
+abstract class HasMapToDomain<D> extends HasFromJson {
+  D mapToDomain();
 }
 
 class UULResponse<T extends HasFromJson> {
@@ -11,11 +15,13 @@ class UULResponse<T extends HasFromJson> {
   String _message;
   T _data;
   String _rawData;
+  int _code;
 
   bool get isSuccess => _isSuccess;
   String get message => _message;
   T get data => _data;
   String get rawData => _rawData;
+  int get code => _code;
 
   UULResponse.fromCachedData(String raw, T dummy) {
     _rawData = raw;
@@ -24,9 +30,11 @@ class UULResponse<T extends HasFromJson> {
     _message = json["message"];
     dummy.populateFromJson(json["data"]);
     _data = dummy;
+    _code = 0;
   }
 
   UULResponse.fromResponse(Response response, T dummy) {
+    _code = response.statusCode;
     if (response.statusCode == 401) {
       _isSuccess = false;
       _message = "Unauthorized";
@@ -51,6 +59,14 @@ class UULResponse<T extends HasFromJson> {
   }
 
   UULResponse.fromException(Exception e) {
+    if (e is DioError) {
+      _code = e.response?.statusCode ?? -1;
+      _message = e.response?.statusMessage ?? "Network error";
+      _data = null;
+      _isSuccess = false;
+      return;
+    }
+    _code = -1;
     _isSuccess = false;
     _message = e.toString();
     _data = null;

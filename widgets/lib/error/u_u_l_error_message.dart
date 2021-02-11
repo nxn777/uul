@@ -149,7 +149,7 @@ class _UULErrorMessageState extends State<UULErrorMessage> with TickerProviderSt
           backgroundColor: kAccentColor,
           side: kSpacingHuge,
           innerPadding: kSpacingMedium * (1 + _resizableController.value / 80),
-          onTap: () {},
+          onTap: () { widget.onRetryTap(); },
         )
       ];
     }

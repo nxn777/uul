@@ -16,7 +16,58 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     viewState = ViewState(status: ViewStatus.LOADING);
   }
 
+  void _showNeedLogin() {
+    viewState = ViewState(status: ViewStatus.IDLE); // no user profiles stored
+    notifyListeners();
+  }
+
+  void _showNetworkError() {
+    if (viewState.value != null) {
+      viewState = viewState.copyWith(
+        status: ViewStatus.ERROR,
+        error: ViewError(
+          retry: () => fetchData(),
+          canCancel: true,
+          cancel: () {
+            viewState = viewState.copyWith(status: ViewStatus.IDLE, error: null);
+            notifyListeners();
+          },
+        ),
+      );
+    } else {
+      viewState = viewState.copyWith(
+        status: ViewStatus.ERROR,
+        error: ViewError(
+          retry: () => fetchData(),
+        ),
+      );
+    }
+    notifyListeners();
+  }
+
+  void _showIdle(User user) {
+    viewState = viewState.copyWith(value: UserProfilesScreenObject(currentInhabitantId: null, activeInhabitantId: null, user: user, canAddMore: null))
+  }
+
   void fetchData() async {
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    (await _userRepo.getUser()).fold(onSuccess: (user) {
+      _showIdle(user);
+      debugPrint("$this fetched ${user.login}");
+    }, onFailure: (response) {
+      switch (response.code) {
+        case -1:
+          _showNetworkError();
+          break;
+        case 401:
+          _showNeedLogin();
+          break;
+        default:
+      }
+      debugPrint("$this fetched ${response.message} ${response.code}");
+    });
+
     // var activeUser = _userRepo.getActiveOrFirstCachedUser();
     // if (activeUser == null) {
     //   viewState = viewState.copyWith(status: ViewStatus.IDLE); // no user profiles stored
