@@ -141,7 +141,7 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
 
   void _onComplete() async {
     var user = await this._userRepo.addNewProfile(login: login, name: name, password: pwd, apartment: getApartmentCode(), avatarSrc: activeAvatarImage);
-    this.onUserCreated(user);
+    //this.onUserCreated(user);
   }
 
   bool _allValid() => !_validators.values.any((validator) => !validator.call(this));

@@ -1,12 +1,10 @@
-import 'dart:math';
-
-import 'package:core/core.dart';
-import 'package:extensions/extensions.dart';
 import 'package:rest/rest.dart';
+import '../user_dtos.dart';
 
 abstract class UserApiClient {
   Future<UULResponse<TokenDTO>> login(String apartment, login, pwd);
   Future logout();
+  Future<UULResponse<UserDTO>> fetchUser();
 }
 
 class DefaultUserApiClient implements UserApiClient {
@@ -34,29 +32,14 @@ class DefaultUserApiClient implements UserApiClient {
     return Future.value("");
   }
 
-  // static Future<List<User>> getApartmentUsers(String user, String pwd) {
-  //   return Future.delayed(Duration(seconds: 1), () => _generateTestData(user, pwd));
-  // }
-  //
-  // static Future<List<User>> addApartmentUser(User user, List<User> mockedExistent) async {
-  //   //final response = await getDio().post(_kUsersApiPath + "new", data: user.toJson()); //http.post(_ad_dUserUrl, headers: kBaseHeaders, body: jsonEncode(user.toJson()));
-  //
-  //   return Future.value(mockedExistent);
-  // }
-  //
-  // static List<User> _generateTestData(String user, pwd) => List(5).mapIndexed((value, index) => User(
-  //     login: user + index.toString(),
-  //     //avatarImageSrc: "assets/avatars/user (${Random().nextInt(35) + 1}).png",
-  //     isActivated: index % 2 == 0,
-  //     apartmentCode: "C1207"));
-
-}
-
-class TokenDTO implements HasFromJson {
-  String value;
-
   @override
-  populateFromJson(jsonRaw) {
-    value = jsonRaw.toString();
+  Future<UULResponse<UserDTO>> fetchUser() async {
+    var response;
+    try {
+      response = await uulDio.getInstance().get("/api/users/info");
+      return UULResponse.fromResponse(response, UserDTO());
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
   }
 }

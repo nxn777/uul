@@ -1,14 +1,14 @@
-import 'dart:convert';
-
 import 'package:core/core.dart';
 import 'package:persistence_api/persistence_api.dart';
 import 'package:user_api/user_api.dart';
+import 'package:user_data/user_data.dart';
 import 'apiclient/user_api_client.dart';
-
+import 'package:caching/caching.dart';
+import 'user_dtos.dart';
 const String _ACTIVE_USER_ID = "active_usr_id";
-const String _CACHED_USERS = "cached_users";
+const String _CACHED_USER = "cached_user";
 
-class DefaultUserRepo implements UserRepo {
+class DefaultUserRepo  implements UserRepo {
   final KVStore _store;
   final UserApiClient apiClient;
 
@@ -29,57 +29,30 @@ class DefaultUserRepo implements UserRepo {
   Future logout() => apiClient.logout();
 
   @override
-  Future<User> addNewProfile({String login, String name, String password, String apartment, String avatarSrc}) {
+  Future<UULResult<User>> addNewProfile({String login, String name, String password, String apartment, String avatarSrc}) {
     // TODO: implement addNewProfile
 
     throw UnimplementedError();
   }
-  //
-  // int getActiveUserId() => _store.getInteger(_ACTIVE_USER_ID, -1);
-  //
-  // Future<bool> setActiveUserId(int id) => _store.setInt(_ACTIVE_USER_ID, id);
-  //
-  // Future<bool> rewriteCachedUsers(List<User> users) {
-  //   List<String> raw = users.map((e) => jsonEncode(e.toJson())).toList();
-  //   return _store.setStringList(_CACHED_USERS, raw);
-  // }
-  //
-  // Future<List<User>> fetchAndCacheUsers(String user, String pwd) async {
-  //   var fetched = await DefaultUserApiClient.getApartmentUsers(user, pwd);
-  //   await rewriteCachedUsers(fetched);
-  //   return fetched;
-  // }
-  //
-  // User getActiveOrFirstCachedUser() {
-  //   var cached = _getCachedUsers();
-  //   var activeId = getActiveUserId();
-  //   var active = cached.firstWhere((element) => element.id == activeId, orElse: () => null);
-  //   if (active != null) {
-  //     return active;
-  //   }
-  //   if (cached.isNotEmpty) {
-  //     return cached.first;
-  //   }
-  //   return null;
-  // }
-  //
-  // Future<List<bool>> deleteAll() {
-  //   return Future.wait([setActiveUserId(-1), rewriteCachedUsers(List.empty())]);
-  // }
-  //
-  // Future<List<User>> addUser(User user) async {
-  //   var existent = _getCachedUsers();
-  //   var fetched = await DefaultUserApiClient.addApartmentUser(user, existent);
-  //   await rewriteCachedUsers(fetched);
-  //   await setActiveUserId(fetched.first.id);
-  //   return fetched;
-  // }
-  //
-  // List<User> _getCachedUsers() {
-  //   List<String> raw = _store.getStringList(_CACHED_USERS);
-  //   if (raw.isEmpty) {
-  //     return List.empty();
-  //   }
-  //   return raw.map((e) => User.fromJson(e)).toList();
-  // }
+
+  @override
+  Future<UULResult<User>> getUser({bool forced = false}) async {
+    var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.fetchUser());
+    return cachingRequest.call(forced, UserDTO());
+    // if (!forced) {
+    //   var _cachedRawData = _store.getString(_CACHED_USER, "");
+    //   if (_cachedRawData.isNotEmpty) {
+    //     var dto = new UserDTO();
+    //     return UULResult.success(UULResponse.fromCachedData(_cachedRawData, dto).data.mapToDomain());
+    //   }
+    // }
+    // var response = await apiClient.fetchUser();
+    // await _store.setString(_CACHED_USER, response.rawData);
+    // if (response.isSuccess) {
+    //   return UULResult.success(response.data.mapToDomain());
+    // } else {
+    //   return UULResult.failure(response);
+    // }
+  }
+
 }

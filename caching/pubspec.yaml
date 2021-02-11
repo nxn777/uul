@@ -1,5 +1,5 @@
-name: user_data
-description: User data module
+name: caching
+description: Caching for rest calls
 
 # The following defines the version and build number for your application.
 # A version number is three numbers separated by dots, like 1.2.43
@@ -18,7 +18,7 @@ description: User data module
 version: 1.0.0+1
 
 environment:
-  sdk: ">=2.10.4 <3.0.0"
+  sdk: ">=2.1.0 <3.0.0"
 
 dependencies:
   flutter:
@@ -27,18 +27,13 @@ dependencies:
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
   cupertino_icons: ^1.0.0
-  core:
-    path: ../../../core
-  persistence_api:
-    path: ../../../persistence/persistence_api
   rest:
-    path: ../../../rest
-  extensions:
-    path: ../../../extensions
-  user_api:
-    path: ../user_api
-  caching:
-    path: ../../../caching
+    path: ../rest
+  core:
+    path: ../core
+  persistence_api:
+    path: ../persistence/persistence_api
+
 dev_dependencies:
   flutter_test:
     sdk: flutter
@@ -93,5 +88,5 @@ flutter:
   # identifiers, which may be completely independent or the same as these.
   module:
     androidX: true
-    androidPackage: dev.nxngrp.uul_gym.user.user_data
-    iosBundleIdentifier: dev.nxngrp.uulgym.user.userData
+    androidPackage: dev.nxngrp.uul_gym.caching
+    iosBundleIdentifier: dev.nxngrp.uulgym.caching
