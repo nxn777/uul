@@ -6,11 +6,11 @@ import 'inhabitant_card.dart';
 
 class InhabitantList extends StatelessWidget {
   final void Function(Inhabitant) onInhabitantTap;
-  final User user;
+  final List<Inhabitant> inhabitants;
   final int activeInhabitantId;
   final bool insideListView;
 
-  InhabitantList({this.onInhabitantTap, this.user, this.activeInhabitantId, this.insideListView = false});
+  InhabitantList({this.onInhabitantTap, @required this.inhabitants, this.activeInhabitantId, this.insideListView = false});
 
   @override
   Widget build(BuildContext context) {
@@ -19,11 +19,11 @@ class InhabitantList extends StatelessWidget {
       shrinkWrap: insideListView ? true : false,
       physics: insideListView ? ClampingScrollPhysics() : null,
       itemBuilder: (context, index) => InhabitantCard(
-        user.inhabitants[index],
+        inhabitants[index],
         activeInhabitantId,
         onTap: onInhabitantTap,
       ),
-      itemCount: user.inhabitants.length,
+      itemCount: inhabitants.length,
     );
   }
 }

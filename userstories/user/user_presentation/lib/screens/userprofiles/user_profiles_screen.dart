@@ -72,20 +72,22 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
     return [
       CurrentInhabitantCard(
         inhabitant: screenObject.currentInhabitant,
-        isActive: false,//screenObject.currentUser?.id == screenObject.activeUserId,
+        isActive: screenObject.currentInhabitant.id == screenObject.activeInhabitantId,
+        isProfileActivated: screenObject.user.isActivated,
+        apartment: screenObject.user.apartmentCode,
         onMakeActiveTap: (item) => viewModel.changeActiveInhabitant(item),
       ),
       insideListView
           ? InhabitantList(
               insideListView: true,
-              user: screenObject.user,
+              inhabitants: screenObject.notCurrentInhabitants,
               activeInhabitantId: screenObject.activeInhabitantId,
               onInhabitantTap: (item) => viewModel.changeCurrentInhabitant(item),
             )
           : Expanded(
               child: InhabitantList(
                 insideListView: false,
-                user: screenObject.user,
+                inhabitants: screenObject.notCurrentInhabitants,
                 activeInhabitantId: screenObject.activeInhabitantId,
                 onInhabitantTap: (item) => viewModel.changeCurrentInhabitant(item),
               ),

@@ -10,9 +10,11 @@ import 'package:widgets/title/screen_title.dart';
 class CurrentInhabitantCard extends StatelessWidget {
   final Inhabitant inhabitant;
   final bool isActive;
+  final bool isProfileActivated;
+  final String apartment;
   final void Function(Inhabitant) onMakeActiveTap;
 
-  CurrentInhabitantCard({@required this.inhabitant, @required this.isActive, this.onMakeActiveTap});
+  CurrentInhabitantCard({@required this.inhabitant, @required this.isActive, this.isProfileActivated, this.apartment, this.onMakeActiveTap});
 
   @override
   Widget build(BuildContext context) {
@@ -47,7 +49,7 @@ class CurrentInhabitantCard extends StatelessWidget {
                 BundledAvatar(
                   height: kSpacingHuge * 2,
                   imageSrc: inhabitant?.avatarSrc == null ? "assets/defaults/default_user3.png" : inhabitant.avatarSrc,
-                  borderColor: kAccentColor,//inhabitant.isActivated ? kAccentColor : kInactiveColor,
+                  borderColor: isProfileActivated ? kAccentColor : kInactiveColor,
                   onTap: (_) => showToolTip(context),
                 ),
                 UULIconButton(
@@ -83,7 +85,7 @@ class CurrentInhabitantCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
                     child: Text(
-                      "inhabitant.apartmentCode",
+                      apartment,
                       style: kRegularInactiveTextStyle,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
@@ -105,16 +107,17 @@ class CurrentInhabitantCard extends StatelessWidget {
       borderWidth: 1,
       borderRadius: kDefaultBorderRadius,
       popupDirection: TooltipDirection.down,
-      borderColor: kAccentColor ,//inhabitant.isActivated ? kAccentColor : kInactiveColor,
+      borderColor: isProfileActivated ? kAccentColor : kInactiveColor,
       content: new Material(
-          child: Text(
-        false//inhabitant.isActivated
-            ? "This profile is activated.\nYou can use it to book gyms"
-            : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
-        softWrap: true,
-        style: kRegularActiveTextStyle,
-        textAlign: TextAlign.center,
-      )),
+        child: Text(
+          isProfileActivated
+              ? "This profile is activated.\nYou can use it to book gyms"
+              : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
+          softWrap: true,
+          style: kRegularActiveTextStyle,
+          textAlign: TextAlign.center,
+        ),
+      ),
     );
 
     tooltip.show(context);
