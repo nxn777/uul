@@ -4,8 +4,8 @@ import 'package:rules_data/rules_data.dart';
 
 class RulesModule {
   KVStore _kvStore;
+  RulesRepo _rulesRepo;
+  RulesModule(this._kvStore): _rulesRepo = DefaultRulesRepo(_kvStore);
 
-  RulesModule(this._kvStore);
-
-  RulesRepo createRulesRepo() => DefaultRulesRepo(_kvStore);
+  RulesRepo getRulesRepoSingleton() => _rulesRepo;
 }

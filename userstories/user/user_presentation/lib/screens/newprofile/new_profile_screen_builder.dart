@@ -10,7 +10,7 @@ class NewProfileScreenBuilder {
   static NewProfileViewModel buildAndRunVM(BuildContext context) {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var userRepo = globalDependencies.dependenciesProvider.userModule.createUserRepo();
-    var rulesRepo = globalDependencies.dependenciesProvider.rulesModule.createRulesRepo();
+    var rulesRepo = globalDependencies.dependenciesProvider.rulesModule.getRulesRepoSingleton();
     var vm = NewProfileViewModel(userRepo, rulesRepo, onUserCreated: (user) => Navigator.of(context).pop(true));
     vm.fetchData();
     return vm;
