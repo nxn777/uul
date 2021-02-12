@@ -21,11 +21,12 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     notifyListeners();
   }
 
-  void _showNetworkError() {
+  void _showNetworkError({String message}) {
     if (viewState.value != null) {
       viewState = viewState.copyWith(
         status: ViewStatus.ERROR,
         error: ViewError(
+          message: message,
           retry: () => fetchData(),
           canCancel: true,
           cancel: () {
@@ -38,6 +39,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
       viewState = viewState.copyWith(
         status: ViewStatus.ERROR,
         error: ViewError(
+          message: message,
           retry: () => fetchData(),
         ),
       );
@@ -45,28 +47,48 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     notifyListeners();
   }
 
-  void _showIdle(User user) {
-    viewState = viewState.copyWith(value: UserProfilesScreenObject(currentInhabitantId: null, activeInhabitantId: null, user: user, canAddMore: null))
+  void _showIdle(User user, Rules rules) async {
+    int storedActiveInhabitantId = _userRepo.getActiveInhabitantId();
+    int activeInhabitantId = storedActiveInhabitantId >=0 ? storedActiveInhabitantId : user.inhabitants.first.id;
+    var so = UserProfilesScreenObject(
+      currentInhabitantId: activeInhabitantId,
+      activeInhabitantId: activeInhabitantId,
+      user: user,
+      canAddMore: user.inhabitants.length < rules.habitantsPerApartment,
+    );
+    viewState = viewState.copyWith(value: so, status: ViewStatus.IDLE, error: null);
+    notifyListeners();
   }
 
   void fetchData() async {
     viewState = viewState.copyWith(status: ViewStatus.LOADING);
     notifyListeners();
-    (await _userRepo.getUser()).fold(onSuccess: (user) {
-      _showIdle(user);
-      debugPrint("$this fetched ${user.login}");
-    }, onFailure: (response) {
-      switch (response.code) {
-        case -1:
+    var rulesTask = _rulesRepo.loadRules();
+    (await _userRepo.getUser()).fold(
+      onSuccess: (user) async {
+        var rules = (await rulesTask).getOrNull();
+        if (rules == null) {
           _showNetworkError();
-          break;
-        case 401:
-          _showNeedLogin();
-          break;
-        default:
-      }
-      debugPrint("$this fetched ${response.message} ${response.code}");
-    });
+          debugPrint("$this rules were not fetched");
+          return;
+        }
+        _showIdle(user, rules);
+        debugPrint("$this fetched ${user.login}");
+      },
+      onFailure: (response) {
+        switch (response.code) {
+          case -1:
+            _showNetworkError();
+            break;
+          case 401:
+            _showNeedLogin();
+            break;
+          default:
+            _showNetworkError(message: response.message);
+        }
+        debugPrint("$this fetched ${response.message} ${response.code}");
+      },
+    );
 
     // var activeUser = _userRepo.getActiveOrFirstCachedUser();
     // if (activeUser == null) {

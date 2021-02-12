@@ -1,4 +1,6 @@
 abstract class KVStore {
+  Future<bool> clearAll();
+
   Future<bool> setString(String key, String value);
 
   Future<bool> setStringList(String key, List<String> value);

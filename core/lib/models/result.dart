@@ -46,19 +46,19 @@ class Result<Success, Failure> {
     }
   }
 
+  flatMap<NewSuccess>(Result<NewSuccess, Failure> Function(Success) transform) {
+    if (_success != null) {
+      return Result.success(transform(_success));
+    } else {
+      return Result.failure(_failure);
+    }
+  }
+
   mapError<NewFailure>(NewFailure Function(Failure) transform) {
     if (_failure != null) {
       return new Result.failure(transform(_failure));
     } else {
       return new Result.success(_success);
-    }
-  }
-
-  flatmap<NewSuccess>(Result<NewSuccess, Failure> Function(Success) transform) {
-    if (_success != null) {
-      return Result.success(transform(_success));
-    } else {
-      return Result.failure(_failure);
     }
   }
 
@@ -75,6 +75,14 @@ class Result<Success, Failure> {
       return _success;
     } else {
       throw _failure;
+    }
+  }
+
+  Success getOrNull() {
+    if (_success != null) {
+      return _success;
+    } else {
+      return null;
     }
   }
 }

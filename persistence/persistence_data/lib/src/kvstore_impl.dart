@@ -6,6 +6,8 @@ class DefaultKVStore implements KVStore {
 
   DefaultKVStore(this._prefs);
 
+  Future<bool> clearAll() => _prefs.clear();
+
   Future<bool> setString(String key, String value) => _prefs.setString(key, value);
 
   Future<bool> setStringList(String key, List<String> value) => _prefs.setStringList(key, value);

@@ -35,6 +35,8 @@ dependencies:
     path: ../../../rest
   persistence_api:
     path: ../../../persistence/persistence_api
+  caching:
+    path: ../../../caching
 
 dev_dependencies:
   flutter_test:
