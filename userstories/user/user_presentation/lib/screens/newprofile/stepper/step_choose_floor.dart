@@ -4,15 +4,11 @@ import 'package:widgets/widgets.dart';
 import '../new_profile_viewmodel.dart';
 
 Step createChooseFloorStep(BuildContext context, int index, NewProfileViewModel viewModel) {
-  bool _chooseFloorStepValidator(NewProfileViewModel viewModel) {
-    return viewModel.activeFloor.isNotEmpty;
-  }
+  bool _chooseFloorStepValidator(viewModel) => (viewModel as NewProfileViewModel).activeFloor.isNotEmpty;
 
-  void _chooseFloorStepEraser(NewProfileViewModel viewModel) {
-    viewModel.changeActiveFloor("");
-  }
+  void _chooseFloorStepEraser(viewModel) => (viewModel as NewProfileViewModel).changeActiveFloor("");
 
-  bool _stepEnabler(NewProfileViewModel viewModel) => viewModel.activeTower.isNotEmpty;
+  bool _stepEnabler(viewModel) => (viewModel as NewProfileViewModel).activeTower.isNotEmpty;
 
   viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseFloorStepValidator);

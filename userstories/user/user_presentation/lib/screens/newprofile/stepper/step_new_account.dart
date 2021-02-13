@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 import 'package:user_presentation/validators/account_form_validator.dart';
-
 import '../new_profile_viewmodel.dart';
 
 Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel viewModel) {
@@ -8,19 +7,19 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
   var pwdController = TextEditingController(text: viewModel.pwd);
   var loginController = TextEditingController(text: viewModel.login);
 
-  bool _newAccountStepValidator(NewProfileViewModel viewModel) {
-    return viewModel.accountFormKey.currentState.validate();
+  bool _newAccountStepValidator(viewModel) => (viewModel as NewProfileViewModel).formKey.currentState.validate();
+
+  void _newAccountStepEraser(viewModel)  {
+      var typedVm = viewModel as NewProfileViewModel;
+      nameController.clear();
+      pwdController.clear();
+      typedVm.name = "";
+      typedVm.pwd = "";
+      typedVm.login = "";
   }
 
-  void _newAccountStepEraser(NewProfileViewModel viewModel) {
-    nameController.clear();
-    pwdController.clear();
-    viewModel.name = "";
-    viewModel.pwd = "";
-    viewModel.login = "";
-  }
+  bool _stepEnabler(viewModel) => true;
 
-  bool _stepEnabler(NewProfileViewModel viewModel) => true;
   viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _newAccountStepValidator);
   viewModel.registerEraser(index, _newAccountStepEraser);
@@ -30,7 +29,7 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
     state: viewModel.getStepState(index),
     title: Text("Account"),
     content: Form(
-      key: viewModel.accountFormKey,
+      key: viewModel.formKey,
       child: Column(
         children: [
           TextFormField(

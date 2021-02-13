@@ -4,15 +4,12 @@ import 'package:widgets/widgets.dart';
 import '../new_profile_viewmodel.dart';
 
 Step createChooseDoorStep(BuildContext context, int index, NewProfileViewModel viewModel) {
-  bool _chooseDoorStepValidator(NewProfileViewModel viewModel) {
-    return viewModel.activeDoor.isNotEmpty;
-  }
+  bool _chooseDoorStepValidator(viewModel) => (viewModel as NewProfileViewModel).activeDoor.isNotEmpty;
 
-  void _chooseDoorStepEraser(NewProfileViewModel viewModel) {
-    viewModel.changeActiveDoor("");
-  }
+  void _chooseDoorStepEraser(viewModel) => (viewModel as NewProfileViewModel).changeActiveDoor("");
 
-  bool _stepEnabler(NewProfileViewModel viewModel) => true;
+  bool _stepEnabler( viewModel) => true;
+
   viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseDoorStepValidator);
   viewModel.registerEraser(index, _chooseDoorStepEraser);

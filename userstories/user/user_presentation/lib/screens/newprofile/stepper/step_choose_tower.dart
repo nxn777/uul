@@ -4,15 +4,12 @@ import 'package:widgets/widgets.dart';
 import '../new_profile_viewmodel.dart';
 
 Step createChooseTowerStep(BuildContext context, int index, NewProfileViewModel viewModel) {
-  bool _chooseTowerStepValidator(NewProfileViewModel viewModel) {
-    return viewModel.activeTower.isNotEmpty;
-  }
+  bool _chooseTowerStepValidator(viewModel) => (viewModel as NewProfileViewModel).activeTower.isNotEmpty;
 
-  void _chooseTowerStepEraser(NewProfileViewModel viewModel) {
-    viewModel.changeActiveTower("");
-  }
+  void _chooseTowerStepEraser(viewModel) => (viewModel as NewProfileViewModel).changeActiveTower("");
 
-  bool _stepEnabler(NewProfileViewModel viewModel) => true;
+  bool _stepEnabler(viewModel) => true;
+
   viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseTowerStepValidator);
   viewModel.registerEraser(index, _chooseTowerStepEraser);

@@ -1,21 +1,20 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:user_presentation/common/steps_viewmodel.dart';
 import 'package:widgets/widgets.dart';
 
-import '../new_profile_viewmodel.dart';
+import '../profile_mixins.dart';
 
-Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewModel) {
-  bool _chooseReviewStepValidator(NewProfileViewModel viewModel) {
-    return viewModel.activeAvatarImage != null;
-  }
+Step createReviewStep(BuildContext context, int index, StepsViewModel viewModel) {
+  bool _chooseReviewStepValidator(viewModel) => (viewModel as AvatarSelection).activeAvatarImage != null;
 
-  void _chooseReviewStepEraser(NewProfileViewModel viewModel) {
+  void _chooseReviewStepEraser(viewModel) {
     // clear all and goto 1
-    viewModel.changeActiveAvatarImage(null);
-    viewModel.eraseAll(exceptSet: {index});
+    (viewModel as AvatarSelection).changeActiveAvatarImage(null);
+    (viewModel as StepsViewModel).eraseAll(exceptSet: {index});
   }
 
-  bool _stepEnabler(NewProfileViewModel viewModel) => true;
+  bool _stepEnabler(viewModel) => true;
   viewModel.registerEnabler(index, _stepEnabler);
   viewModel.registerValidator(index, _chooseReviewStepValidator);
   viewModel.registerEraser(index, _chooseReviewStepEraser);
@@ -30,15 +29,15 @@ Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewM
           children: [
             BundledAvatar(
               height: kSpacingHuge * 1.5,
-              imageSrc: viewModel.activeAvatarImage,
+              imageSrc: (viewModel as AvatarSelection).activeAvatarImage,
             ),
             SizedBox(
               width: kSpacingMedium,
             ),
             ShortUserInfo(
-              name: viewModel.name,
-              apartmentCode: viewModel.getApartmentCode(),
-              login: viewModel.login,
+              name: (viewModel as HasReviewInfo).reviewInfo.name,
+              apartmentCode: (viewModel as HasReviewInfo).reviewInfo.apartmentCode,
+              login: (viewModel as HasReviewInfo).reviewInfo.login,
             )
           ],
         ),
