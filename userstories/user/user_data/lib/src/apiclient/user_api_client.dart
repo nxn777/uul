@@ -6,6 +6,7 @@ abstract class UserApiClient {
   Future logout();
   Future<UULResponse<UserDTO>> fetchUser();
   Future<UULResponse<UserDTO>> addUser(NewUserDTO dto);
+  Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc);
 }
 
 class DefaultUserApiClient implements UserApiClient {
@@ -54,6 +55,17 @@ class DefaultUserApiClient implements UserApiClient {
         uulDio.updateToken(result.message);
       }
       return result;
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
+  }
+
+  @override
+  Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc) async {
+    var response;
+    try {
+      response = await uulDio.getInstance().post("/api/users/habitants/add", data: {"name": name, "avatarSrc": avatarSrc});
+      return UULResponse.fromResponse(response, UserDTO());
     } catch (e) {
       return UULResponse.fromException(e);
     }

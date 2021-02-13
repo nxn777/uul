@@ -10,7 +10,7 @@ class NewInhabitantScreenBuilder {
   static NewInhabitantScreenViewModel buildAndRunVM(BuildContext context) {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var userRepo = globalDependencies.dependenciesProvider.userModule.createUserRepo();
-    var vm = NewInhabitantScreenViewModel(userRepo);
+    var vm = NewInhabitantScreenViewModel(context, userRepo);
     vm.fetchData();
     return vm;
   }
