@@ -81,6 +81,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
               inhabitants: screenObject.notCurrentInhabitants,
               activeInhabitantId: screenObject.activeInhabitantId,
               onInhabitantTap: (item) => viewModel.changeCurrentInhabitant(item),
+              onMakeInhabitantActiveTap: (item) => viewModel.changeActiveInhabitant(item),
             )
           : Expanded(
               child: InhabitantList(
@@ -88,6 +89,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
                 inhabitants: screenObject.notCurrentInhabitants,
                 activeInhabitantId: screenObject.activeInhabitantId,
                 onInhabitantTap: (item) => viewModel.changeCurrentInhabitant(item),
+                onMakeInhabitantActiveTap: (item) => viewModel.changeActiveInhabitant(item),
               ),
             )
     ];
