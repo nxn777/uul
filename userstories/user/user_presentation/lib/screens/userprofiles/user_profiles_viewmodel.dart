@@ -21,32 +21,6 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     viewState = ViewState(status: ViewStatus.IDLE); // no user profiles stored
     notifyListeners();
   }
-  //
-  // void _showNetworkError(Function retry, {String message}) {
-  //   if (viewState.value != null) {
-  //     viewState = viewState.copyWith(
-  //       status: ViewStatus.ERROR,
-  //       error: ViewError(
-  //         message: message,
-  //         retry: retry,
-  //         canCancel: true,
-  //         cancel: () {
-  //           viewState = viewState.copyWith(status: ViewStatus.IDLE, error: null);
-  //           notifyListeners();
-  //         },
-  //       ),
-  //     );
-  //   } else {
-  //     viewState = viewState.copyWith(
-  //       status: ViewStatus.ERROR,
-  //       error: ViewError(
-  //         message: message,
-  //         retry: retry,
-  //       ),
-  //     );
-  //   }
-  //   notifyListeners();
-  // }
 
   void _showIdle(User user, Rules rules) async {
     int storedActiveInhabitantId = _userRepo.getActiveInhabitantId();
@@ -79,20 +53,6 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
       onFailure: (response) => handleFailure(() => fetchData(), response),
     );
   }
-
-  // void _handleFailure(Function retry, response) {
-  //     switch (response.code) {
-  //       case -1:
-  //         _showNetworkError(retry);
-  //         break;
-  //       case 401:
-  //         _showNeedLogin();
-  //         break;
-  //       default:
-  //         _showNetworkError(retry, message: response.message);
-  //     }
-  //     debugPrint("$this fetched ${response.message} ${response.code}");
-  //   }
 
   void changeCurrentInhabitant(Inhabitant inhabitant) {
     // user in the list was selected
