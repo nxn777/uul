@@ -42,6 +42,12 @@ class DefaultUserRepo  implements UserRepo {
   }
 
   @override
+  Future<UULResult<User>> addNewInhabitant({String name, String avatarSrc}) {
+    // TODO: implement addNewInhabitant
+    throw UnimplementedError();
+  }
+  
+  @override
   Future<UULResult<User>> getUser({bool forced = false}) async {
     var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.fetchUser());
     return cachingRequest.call(forced, UserDTO());
@@ -49,5 +55,7 @@ class DefaultUserRepo  implements UserRepo {
 
   @override
   int getActiveInhabitantId() => _store.getInteger(_ACTIVE_INHABITANT_ID, -1);
+
+
 
 }

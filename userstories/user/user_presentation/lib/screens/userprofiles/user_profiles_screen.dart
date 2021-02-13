@@ -11,9 +11,10 @@ import 'user_profiles_viewmodel.dart';
 
 class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfilesViewModel> {
   final Future Function() onNewProfileTap;
+  final Future Function() onNewInhabitantTap;
   final Future Function() onLoginTap;
 
-  UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap});
+  UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap, @required this.onNewInhabitantTap});
 
   @override
   Widget build(BuildContext context) {
@@ -30,10 +31,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
                     padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingHuge),
                     child: FloatingActionButton(
                       elevation: kSpacingXXSmall,
-                      onPressed: () async {
-                        var result = await this.onNewProfileTap();
-                        viewModel.onUserActionResult(result);
-                      },
+                      onPressed: () => _handleFABClick(viewModel),
                       child: FaIcon(
                         FontAwesomeIcons.userPlus,
                         color: Colors.black,
@@ -139,5 +137,19 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
   bool shouldShowFAB(UserProfilesViewModel viewModel) {
     var so = viewModel.viewState.value;
     return (so == null && viewModel.viewState.status == ViewStatus.IDLE) || (so != null && so.canAddMore);
+  }
+
+  void _handleFABClick(UserProfilesViewModel viewModel) async {
+    var so = viewModel.viewState.value;
+    if (so == null && viewModel.viewState.status == ViewStatus.IDLE) {
+      var result = await this.onNewProfileTap();
+      viewModel.onUserActionResult(result);
+      return;
+    }
+    if ((so != null && so.canAddMore)) {
+      var result = await this.onNewInhabitantTap();
+      viewModel.onUserActionResult(result);
+      return;
+    }
   }
 }

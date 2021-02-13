@@ -6,7 +6,9 @@ import 'package:user_presentation/user_presentation.dart';
 class ProfilesTabRoutes extends TabRoutes {
   static const String root = '/';
   static const String newProfile = "/new_profile";
+  static const String newInhabitant = "/new_inhabitant";
   static const String login = "/login";
+
   @override
   String defaultRoute = root;
 
@@ -17,12 +19,16 @@ class ProfilesTabRoutes extends TabRoutes {
             onNewProfileTap: () {
               return push(newProfile, context, true);
             },
+            onNewInhabitantTap: () {
+              return push(newInhabitant, context, true);
+            },
             onLoginTap: () {
               return push(login, context, true);
             },
           ),
       ProfilesTabRoutes.newProfile: (context) => NewProfileScreen(),
-      ProfilesTabRoutes.login: (context) => LoginScreen()
+      ProfilesTabRoutes.login: (context) => LoginScreen(),
+      ProfilesTabRoutes.newInhabitant: (context) => NewInhabitantScreen()
     };
   }
 }
