@@ -11,13 +11,14 @@ import 'stepper/step_operations.dart';
 const int _FIRST_STEP = 0;
 
 // TODO use erasers on dependent fields when changing address parts
-class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileScreenObject> {
+class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileScreenObject>, DefaultErrorResponseHandlers {
   final UserRepo _userRepo;
   final RulesRepo _rulesRepo;
   final Function(User) onUserCreated;
   Condo _condo;
+  BuildContext _context;
 
-  NewProfileViewModel(this._userRepo, this._rulesRepo, {@required this.onUserCreated}) {
+  NewProfileViewModel(this._userRepo, this._rulesRepo, this._context, {@required this.onUserCreated}) {
     viewState = ViewState(status: ViewStatus.LOADING);
   }
 
@@ -30,9 +31,10 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
     _totalSteps = value;
   }
 
-  String login = "";
-  String name = "";
-  String pwd = "";
+  String login = "testLogin";
+  String name = "Test";
+  String pwd = "pwdTest";
+
   final Map<int, NewProfileStepValidator> _validators = {};
   final Map<int, NewProfileStepEraser> _erasers = {};
   final Map<int, NewProfileStepEnabler> _enablers = {};
@@ -50,6 +52,8 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
   String activeDoor = "";
 
   String activeAvatarImage;
+
+  User user;
 
   void fetchData() async {
     (await _rulesRepo.loadRules()).fold(onSuccess: (rules) {
@@ -140,8 +144,14 @@ class NewProfileViewModel extends ChangeNotifier with ViewStateField<NewProfileS
   bool isComplete() => (_currentStep == _totalSteps - 1) && _visited.length == _totalSteps && _allValid();
 
   void _onComplete() async {
-    var user = await this._userRepo.addNewProfile(login: login, name: name, password: pwd, apartment: getApartmentCode(), avatarSrc: activeAvatarImage);
-    //this.onUserCreated(user);
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    (await this._userRepo.addNewProfile(login: login, name: name, password: pwd, apartment: getApartmentCode(), avatarSrc: activeAvatarImage)).fold(
+      onSuccess: (user) {
+        Navigator.of(_context).pop(user);
+      },
+      onFailure: (response) => handleFailure(() => _onComplete(), response),
+    );
   }
 
   bool _allValid() => !_validators.values.any((validator) => !validator.call(this));

@@ -6,6 +6,7 @@ import '../new_profile_viewmodel.dart';
 Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel viewModel) {
   var nameController = TextEditingController(text: viewModel.name);
   var pwdController = TextEditingController(text: viewModel.pwd);
+  var loginController = TextEditingController(text: viewModel.login);
 
   bool _newAccountStepValidator(NewProfileViewModel viewModel) {
     return viewModel.accountFormKey.currentState.validate();
@@ -16,6 +17,7 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
     pwdController.clear();
     viewModel.name = "";
     viewModel.pwd = "";
+    viewModel.login = "";
   }
 
   bool _stepEnabler(NewProfileViewModel viewModel) => true;
@@ -32,10 +34,17 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
       child: Column(
         children: [
           TextFormField(
+            controller: loginController,
+            decoration: InputDecoration(labelText: 'Login'),
+            textCapitalization: TextCapitalization.words,
+            validator: AccountFormValidator.getLoginValidator(),
+            onChanged: (value) => viewModel.login = value,
+          ),
+          TextFormField(
             controller: nameController,
             decoration: InputDecoration(labelText: 'Name (will be visible for everyone)'),
             textCapitalization: TextCapitalization.words,
-            validator: AccountFormValidator.getLoginValidator(),
+            validator: AccountFormValidator.getNameValidator(),
             onChanged: (value) => viewModel.name = value,
           ),
           TextFormField(

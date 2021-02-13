@@ -4,8 +4,9 @@ import 'package:flutter/material.dart';
 class ShortUserInfo extends StatelessWidget {
   final String name;
   final String apartmentCode;
+  final String login;
 
-  ShortUserInfo({this.name, this.apartmentCode});
+  ShortUserInfo({this.name, this.apartmentCode, this.login});
 
   @override
   Widget build(BuildContext context) {
@@ -21,17 +22,39 @@ class ShortUserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Username:",
+                  "Login:",
                   style: kRegularActiveTextStyle,
                 ),
                 Text(
-                  name != null ? name : "",
-                  style: kRegularActiveTextStyle,
+                  login != null ? login : "",
+                  style: kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                   overflow: TextOverflow.ellipsis,
                   maxLines: 1,
                 ),
                 SizedBox(
-                  height: kSpacingMedium,
+                  height: kSpacingSmall,
+                ),
+              ],
+            ),
+          ),
+          Visibility(
+            visible: name != null && name.isNotEmpty,
+            child: Column(
+              mainAxisSize: MainAxisSize.min,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+                Text(
+                  "Name:",
+                  style: kRegularActiveTextStyle,
+                ),
+                Text(
+                  name != null ? name : "",
+                  style: kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
+                  overflow: TextOverflow.ellipsis,
+                  maxLines: 1,
+                ),
+                SizedBox(
+                  height: kSpacingSmall,
                 ),
               ],
             ),
@@ -47,7 +70,7 @@ class ShortUserInfo extends StatelessWidget {
                 ),
                 Text(
                   apartmentCode != null ? apartmentCode : "",
-                  style: kRegularActiveTextStyle,
+                  style: kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                 ),
               ],
             ),

@@ -38,13 +38,14 @@ Step createReviewStep(BuildContext context, int index, NewProfileViewModel viewM
             ShortUserInfo(
               name: viewModel.name,
               apartmentCode: viewModel.getApartmentCode(),
+              login: viewModel.login,
             )
           ],
         ),
         Padding(
           padding: const EdgeInsets.fromLTRB(0, kSpacingMedium, 0, 0),
           child: Text(
-            "Your profile will be saved on a server, you will need to visit Uno Urban Life administration in person to activate it.\nPlease remember your user name.",
+            "Your profile will be saved on a server, you will need to visit Uno Urban Life administration in person to activate it.\nPlease remember your login and name.",
             style: kRegularActiveTextStyle,
           ),
         )

@@ -6,7 +6,7 @@ import 'package:user_api/user_api.dart';
 
 import 'user_profiles_screen_object.dart';
 
-class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfilesScreenObject> {
+class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfilesScreenObject>, DefaultErrorResponseHandlers {
   final UserRepo _userRepo;
   final RulesRepo _rulesRepo;
 
@@ -16,36 +16,37 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     viewState = ViewState(status: ViewStatus.LOADING);
   }
 
-  void _showNeedLogin() {
+  @override
+  void showNeedLogin() {
     viewState = ViewState(status: ViewStatus.IDLE); // no user profiles stored
     notifyListeners();
   }
-
-  void _showNetworkError({String message}) {
-    if (viewState.value != null) {
-      viewState = viewState.copyWith(
-        status: ViewStatus.ERROR,
-        error: ViewError(
-          message: message,
-          retry: () => fetchData(),
-          canCancel: true,
-          cancel: () {
-            viewState = viewState.copyWith(status: ViewStatus.IDLE, error: null);
-            notifyListeners();
-          },
-        ),
-      );
-    } else {
-      viewState = viewState.copyWith(
-        status: ViewStatus.ERROR,
-        error: ViewError(
-          message: message,
-          retry: () => fetchData(),
-        ),
-      );
-    }
-    notifyListeners();
-  }
+  //
+  // void _showNetworkError(Function retry, {String message}) {
+  //   if (viewState.value != null) {
+  //     viewState = viewState.copyWith(
+  //       status: ViewStatus.ERROR,
+  //       error: ViewError(
+  //         message: message,
+  //         retry: retry,
+  //         canCancel: true,
+  //         cancel: () {
+  //           viewState = viewState.copyWith(status: ViewStatus.IDLE, error: null);
+  //           notifyListeners();
+  //         },
+  //       ),
+  //     );
+  //   } else {
+  //     viewState = viewState.copyWith(
+  //       status: ViewStatus.ERROR,
+  //       error: ViewError(
+  //         message: message,
+  //         retry: retry,
+  //       ),
+  //     );
+  //   }
+  //   notifyListeners();
+  // }
 
   void _showIdle(User user, Rules rules) async {
     int storedActiveInhabitantId = _userRepo.getActiveInhabitantId();
@@ -68,53 +69,30 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
       onSuccess: (user) async {
         var rules = (await rulesTask).getOrNull();
         if (rules == null) {
-          _showNetworkError();
+          showNetworkError(() => fetchData());
           debugPrint("$this rules were not fetched");
           return;
         }
         _showIdle(user, rules);
         debugPrint("$this fetched ${user.login}");
       },
-      onFailure: (response) {
-        switch (response.code) {
-          case -1:
-            _showNetworkError();
-            break;
-          case 401:
-            _showNeedLogin();
-            break;
-          default:
-            _showNetworkError(message: response.message);
-        }
-        debugPrint("$this fetched ${response.message} ${response.code}");
-      },
+      onFailure: (response) => handleFailure(() => fetchData(), response),
     );
-
-    // var activeUser = _userRepo.getActiveOrFirstCachedUser();
-    // if (activeUser == null) {
-    //   viewState = viewState.copyWith(status: ViewStatus.IDLE); // no user profiles stored
-    //   notifyListeners();
-    //   return;
-    // }
-    // var users = await _userRepo.fetchAndCacheUsers(activeUser.name, activeUser.pwdHash);
-    // var activeUserId = _userRepo.getActiveUserId();
-    // (await _rulesRepo.loadRules()).fold(
-    //   onSuccess: (rules) {
-    //     viewState = ViewState(
-    //         value: UserProfilesScreenObject(
-    //           currentInhabitantId: activeUserId,
-    //           activeInhabitantId: activeUserId,
-    //           allUsers: users,
-    //           canAddMore: users.length < rules.habitantsPerApartment,
-    //         ),
-    //         status: ViewStatus.IDLE);
-    //     notifyListeners();
-    //   },
-    //   onFailure: (response) {
-    //     print(this.toString() + ":" + response.message);
-    //   },
-    // );
   }
+
+  // void _handleFailure(Function retry, response) {
+  //     switch (response.code) {
+  //       case -1:
+  //         _showNetworkError(retry);
+  //         break;
+  //       case 401:
+  //         _showNeedLogin();
+  //         break;
+  //       default:
+  //         _showNetworkError(retry, message: response.message);
+  //     }
+  //     debugPrint("$this fetched ${response.message} ${response.code}");
+  //   }
 
   void changeCurrentInhabitant(Inhabitant inhabitant) {
     // user in the list was selected
@@ -128,8 +106,18 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     notifyListeners();
   }
 
-  void onUserActionResult(bool result) {
-    if (result == true) {
+  void onUserActionResult(result) async {
+    if (result is User) {
+      (await _rulesRepo.loadRules()).fold(
+        onSuccess: (rules) {
+          _showIdle(result, rules);
+        },
+        onFailure: (response) => handleFailure(() => onUserActionResult(result), response),
+      );
+      debugPrint("Should update user profiles screen with newly added User");
+      return;
+    }
+    if (result is bool && result == true) {
       debugPrint("Should update user profiles screen");
       fetchData();
     }

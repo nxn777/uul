@@ -76,7 +76,7 @@ class TowerDTO {
 
   TowerDTO.fromJson(dynamic json) {
     _name = json["name"];
-    _floorCount = json["floorCount"];
+    _floorCount = json["floorsCount"];
   }
 }
 

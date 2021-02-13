@@ -5,6 +5,7 @@ abstract class UserApiClient {
   Future<UULResponse<TokenDTO>> login(String apartment, login, pwd);
   Future logout();
   Future<UULResponse<UserDTO>> fetchUser();
+  Future<UULResponse<UserDTO>> addUser(NewUserDTO dto);
 }
 
 class DefaultUserApiClient implements UserApiClient {
@@ -38,6 +39,21 @@ class DefaultUserApiClient implements UserApiClient {
     try {
       response = await uulDio.getInstance().get("/api/users/info");
       return UULResponse.fromResponse(response, UserDTO());
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
+  }
+
+  @override
+  Future<UULResponse<UserDTO>> addUser(NewUserDTO dto) async {
+    var response;
+    try {
+      response = await getDio().post("/api/users/new", data: dto.toJson());
+      var result = UULResponse.fromResponse(response, UserDTO());
+      if (result.isSuccess) {
+        uulDio.updateToken(result.message);
+      }
+      return result;
     } catch (e) {
       return UULResponse.fromException(e);
     }

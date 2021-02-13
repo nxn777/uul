@@ -36,9 +36,9 @@ class DefaultUserRepo  implements UserRepo {
 
   @override
   Future<UULResult<User>> addNewProfile({String login, String name, String password, String apartment, String avatarSrc}) {
-    // TODO: implement addNewProfile
-
-    throw UnimplementedError();
+    NewUserDTO dto = NewUserDTO(login: login, name: name, pwd: password, apartmentCode: apartment, avatarSrc: avatarSrc);
+    var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.addUser(dto));
+    return cachingRequest.call(true, UserDTO());
   }
 
   @override

@@ -59,3 +59,33 @@ class UserDTO implements HasFromJson, HasMapToDomain<User> {
     );
   }
 }
+
+class NewUserDTO {
+    String apartmentCode;
+    String avatarSrc;
+    String login;
+    String name;
+    String pwd;
+
+    NewUserDTO({this.apartmentCode, this.avatarSrc, this.login, this.name, this.pwd});
+
+    factory NewUserDTO.fromJson(Map<String, dynamic> json) {
+        return NewUserDTO(
+            apartmentCode: json['apartmentCode'],
+            avatarSrc: json['avatarSrc'],
+            login: json['login'],
+            name: json['name'],
+            pwd: json['pwd'],
+        );
+    }
+
+    Map<String, dynamic> toJson() {
+        final Map<String, dynamic> data = new Map<String, dynamic>();
+        data['apartmentCode'] = this.apartmentCode;
+        data['avatarSrc'] = this.avatarSrc;
+        data['login'] = this.login;
+        data['name'] = this.name;
+        data['pwd'] = this.pwd;
+        return data;
+    }
+}

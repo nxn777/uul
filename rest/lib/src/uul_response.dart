@@ -47,8 +47,12 @@ class UULResponse<T extends HasFromJson> {
       final json = jsonDecode(_rawData);
       _isSuccess = json["success"];
       _message = json["message"];
-      dummy.populateFromJson(json["data"]);
-      _data = dummy;
+      if (json["data"] != null) {
+        dummy.populateFromJson(json["data"]);
+        _data = dummy;
+      } else {
+        _data = null;
+      }
     } else {
       _isSuccess = false;
       _message = response.statusMessage;

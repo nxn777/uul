@@ -30,6 +30,52 @@ mixin ViewStateField<T> implements ChangeNotifier {
   void notifyAll() => notifyListeners();
 }
 
+mixin DefaultErrorResponseHandlers<T> on ViewStateField<T> {
+  void showNeedLogin() {
+    throw UnimplementedError("Show need login for $this is not implemented");
+  }
+
+  void showNetworkError(Function retry, {String message}) {
+    if (viewState.value != null) {
+      viewState = viewState.copyWith(
+        status: ViewStatus.ERROR,
+        error: ViewError(
+          message: message,
+          retry: retry,
+          canCancel: true,
+          cancel: () {
+            viewState = viewState.copyWith(status: ViewStatus.IDLE, error: null);
+            notifyListeners();
+          },
+        ),
+      );
+    } else {
+      viewState = viewState.copyWith(
+        status: ViewStatus.ERROR,
+        error: ViewError(
+          message: message,
+          retry: retry,
+        ),
+      );
+    }
+    notifyListeners();
+  }
+
+  void handleFailure(Function retry, response) {
+    switch (response.code) {
+      case -1:
+        showNetworkError(retry);
+        break;
+      case 401:
+        showNeedLogin();
+        break;
+      default:
+        showNetworkError(retry, message: response.message);
+    }
+    debugPrint("$this fetched ${response.message} ${response.code}");
+  }
+}
+
 mixin ViewStateScreen<VM extends ViewStateField> {
   VM Function(BuildContext) vmCreator() {
     return (ctx) => null;
