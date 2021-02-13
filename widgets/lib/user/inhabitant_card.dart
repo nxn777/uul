@@ -2,13 +2,16 @@ import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:widgets/avatars/bundled_avatar.dart';
+import 'package:widgets/button/u_u_l_icon_button.dart';
 
 class InhabitantCard extends StatelessWidget {
   final Inhabitant inhabitant;
   final int activeInhabitantId;
   final void Function(Inhabitant) onTap;
+  final void Function(Inhabitant) onMakeActiveTap;
 
-  InhabitantCard(this.inhabitant, this.activeInhabitantId, {this.onTap});
+  InhabitantCard(this.inhabitant, this.activeInhabitantId, {this.onTap, this.onMakeActiveTap});
 
   @override
   Widget build(BuildContext context) {
@@ -24,12 +27,8 @@ class InhabitantCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.center,
           children: [
             Padding(
-              padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
-              child: FaIcon(
-                _getActiveStatusIcon(),
-                color: kAccentColor,
-                size: kSpacingXLarge,
-              ),
+              padding:  const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
+              child: BundledAvatar(imageSrc: inhabitant.avatarSrc, height: kSpacingHuge,),
             ),
             Expanded(
               child: Column(
@@ -45,15 +44,24 @@ class InhabitantCard extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "inhabitant.apartmentCode",
+                    inhabitant.getLastVisitFormatted(),
                     style: kCaptionInactiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                   )
                 ],
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(kSpacingMedium),
-              child:FaIcon(FontAwesomeIcons.checkCircle, color: kAccentColor),// _getActivatedStatusIcon(),
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
+              child: UULIconButton(
+                backgroundColor: Colors.transparent,
+                innerBackgroundColor: Colors.transparent,
+                icon: _getActiveStatusIcon(),
+                onTap: () {
+                  if (inhabitant.id != activeInhabitantId) {
+                    this.onMakeActiveTap?.call(inhabitant);
+                  }
+                },
+              ),
             ),
           ],
         ),
@@ -69,12 +77,4 @@ class InhabitantCard extends StatelessWidget {
       return FontAwesomeIcons.star;
     }
   }
-
-  // Widget _getActivatedStatusIcon() {
-  //   if (user.isActivated) {
-  //     return FaIcon(FontAwesomeIcons.checkCircle, color: kAccentColor);
-  //   } else {
-  //     return FaIcon(FontAwesomeIcons.clock, color: kInactiveColor);
-  //   }
-  // }
 }

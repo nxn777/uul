@@ -68,7 +68,7 @@ class CurrentInhabitantCard extends StatelessWidget {
                     padding: const EdgeInsets.all(kSpacingMedium),
                     child: Text(
                       inhabitant.name,
-                      style: kCaptionActiveTextStyle,
+                      style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
                       overflow: TextOverflow.ellipsis,
                       maxLines: 1,
                       textAlign: TextAlign.center,
@@ -85,10 +85,10 @@ class CurrentInhabitantCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
                     child: Text(
-                      apartment,
+                      "Apartment: $apartment\n${inhabitant.getLastVisitFormatted()}",
                       style: kRegularInactiveTextStyle,
                       overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
+                      maxLines: 2,
                       textAlign: TextAlign.center,
                     ),
                   ),
