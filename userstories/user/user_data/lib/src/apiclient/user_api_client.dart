@@ -65,7 +65,7 @@ class DefaultUserApiClient implements UserApiClient {
   Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc) async {
     var response;
     try {
-      response = await uulDio.getInstance().post("/api/users/habitants/add", data: {"name": name, "avatarSrc": avatarSrc});
+      response = await uulDio.getInstance().post("/api/habitants/add", data: {"name": name, "avatarSrc": avatarSrc});
       return UULResponse.fromResponse(response, UserDTO());
     } catch (e) {
       return UULResponse.fromException(e);
@@ -76,7 +76,7 @@ class DefaultUserApiClient implements UserApiClient {
   Future<UULResponse<UserDTO>> editInhabitant(int id, String name, String avatarSrc) async {
     var response;
     try {
-      response = await uulDio.getInstance().post("/api/users/habitants/edit", data: {"id": id, "name": name, "avatarSrc": avatarSrc});
+      response = await uulDio.getInstance().post("/api/habitants/edit", data: {"id": id, "name": name, "avatarSrc": avatarSrc});
       return UULResponse.fromResponse(response, UserDTO());
     } catch (e) {
       return UULResponse.fromException(e);
