@@ -25,6 +25,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
   void _showIdle(User user, Rules rules) async {
     int storedActiveInhabitantId = _userRepo.getActiveInhabitantId();
     int activeInhabitantId = storedActiveInhabitantId >=0 ? storedActiveInhabitantId : user.inhabitants.first.id;
+    await _userRepo.setCurrentInhabitantId(activeInhabitantId);
     var so = UserProfilesScreenObject(
       currentInhabitantId: activeInhabitantId,
       activeInhabitantId: activeInhabitantId,
@@ -66,6 +67,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     viewState.value.activeInhabitantId = inhabitant.id;
     notifyListeners();
   }
+
 
   void onUserActionResult(result) async {
     if (result is User) {

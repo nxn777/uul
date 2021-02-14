@@ -55,4 +55,7 @@ class DefaultUserRepo  implements UserRepo {
   @override
   Future<bool> setCurrentInhabitantId(int id) => this._store.setInt(_CURRENT_INHABITANT_ID, id);
 
+  @override
+  int getCurrentInhabitantId() => this._store.getInteger(_CURRENT_INHABITANT_ID, -1);
+
 }
