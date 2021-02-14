@@ -7,13 +7,14 @@ class ProfilesTabRoutes extends TabRoutes {
   static const String root = '/';
   static const String newProfile = "/new_profile";
   static const String newInhabitant = "/new_inhabitant";
+  static const String editInhabitant = "/edit_inhabitant";
   static const String login = "/login";
 
   @override
   String defaultRoute = root;
 
   @override
-  Map<String, WidgetBuilder> routeBuilders(BuildContext context) {
+  Map<String, WidgetBuilder> routeBuilders(BuildContext context, {data}) {
     return {
       ProfilesTabRoutes.root: (context) => UserProfilesScreen(
             onNewProfileTap: () {
@@ -25,10 +26,14 @@ class ProfilesTabRoutes extends TabRoutes {
             onLoginTap: () {
               return push(login, context, true);
             },
+            onEditInhabitantTap: () {
+              return push(editInhabitant, context, true);
+            },
           ),
       ProfilesTabRoutes.newProfile: (context) => NewProfileScreen(),
       ProfilesTabRoutes.login: (context) => LoginScreen(),
-      ProfilesTabRoutes.newInhabitant: (context) => NewInhabitantScreen()
+      ProfilesTabRoutes.newInhabitant: (context) => NewInhabitantScreen(),
+      ProfilesTabRoutes.editInhabitant: (context) => EditInhabitantScreen(),
     };
   }
 }

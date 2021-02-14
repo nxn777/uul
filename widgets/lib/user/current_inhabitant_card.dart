@@ -13,8 +13,9 @@ class CurrentInhabitantCard extends StatelessWidget {
   final bool isProfileActivated;
   final String apartment;
   final void Function(Inhabitant) onMakeActiveTap;
+  final void Function() onEditTap;
 
-  CurrentInhabitantCard({@required this.inhabitant, @required this.isActive, this.isProfileActivated, this.apartment, this.onMakeActiveTap});
+  CurrentInhabitantCard({@required this.inhabitant, @required this.isActive, this.isProfileActivated, this.apartment, this.onMakeActiveTap, this.onEditTap});
 
   @override
   Widget build(BuildContext context) {
@@ -55,7 +56,7 @@ class CurrentInhabitantCard extends StatelessWidget {
                 UULIconButton(
                   icon: FontAwesomeIcons.pen,
                   innerPadding: 12,
-                  onTap: () {},
+                  onTap: () { this.onEditTap?.call(); },
                 ),
               ],
             ),

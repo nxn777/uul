@@ -54,8 +54,9 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     );
   }
 
-  void changeCurrentInhabitant(Inhabitant inhabitant) {
+  void changeCurrentInhabitant(Inhabitant inhabitant) async {
     // user in the list was selected
+    await _userRepo.setCurrentInhabitantId(inhabitant.id);
     viewState.value.currentInhabitantId = inhabitant.id;
     notifyListeners();
   }

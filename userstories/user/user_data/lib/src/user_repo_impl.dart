@@ -9,6 +9,7 @@ import 'user_dtos.dart';
 
 const String _ACTIVE_INHABITANT_ID = "active_inh_id";
 const String _CACHED_USER = "cached_user";
+const String _CURRENT_INHABITANT_ID = "current_inh_id";
 
 class DefaultUserRepo  implements UserRepo {
   final KVStore _store;
@@ -19,12 +20,7 @@ class DefaultUserRepo  implements UserRepo {
   @override
   Future<bool> login({String apartment, String login, String pwd}) async {
     var response = await apiClient.login(apartment, login, pwd);
-    if (response.isSuccess) {
-
-      return true;
-    } else {
-      return false;
-    }
+    return response.isSuccess;
   }
 
   @override
@@ -56,6 +52,7 @@ class DefaultUserRepo  implements UserRepo {
   @override
   int getActiveInhabitantId() => _store.getInteger(_ACTIVE_INHABITANT_ID, -1);
 
-
+  @override
+  Future<bool> setCurrentInhabitantId(int id) => this._store.setInt(_CURRENT_INHABITANT_ID, id);
 
 }

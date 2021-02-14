@@ -1,5 +1,6 @@
 import 'package:arch_components/arch_components.dart';
 import 'package:common/common.dart';
+import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
@@ -12,9 +13,10 @@ import 'user_profiles_viewmodel.dart';
 class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfilesViewModel> {
   final Future Function() onNewProfileTap;
   final Future Function() onNewInhabitantTap;
+  final Future Function() onEditInhabitantTap;
   final Future Function() onLoginTap;
 
-  UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap, @required this.onNewInhabitantTap});
+  UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap, @required this.onNewInhabitantTap, @required this.onEditInhabitantTap});
 
   @override
   Widget build(BuildContext context) {
@@ -74,6 +76,10 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
         isProfileActivated: screenObject.user.isActivated,
         apartment: screenObject.user.apartmentCode,
         onMakeActiveTap: (item) => viewModel.changeActiveInhabitant(item),
+        onEditTap: () async {
+          var result = await this.onEditInhabitantTap.call();
+          viewModel.onUserActionResult(result);
+        },
       ),
       insideListView
           ? InhabitantList(

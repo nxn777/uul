@@ -7,4 +7,5 @@ abstract class UserRepo {
   Future<UULResult<User>> addNewProfile({String login, String name, String password, String apartment, String avatarSrc});
   Future<UULResult<User>> addNewInhabitant({String name, String avatarSrc});
   int getActiveInhabitantId();
+  Future<bool> setCurrentInhabitantId(int id);
 }

@@ -4,19 +4,20 @@ import 'package:user_api/user_api.dart';
 import 'package:user_presentation/common/inhabitant_viewmodel.dart';
 import 'package:user_presentation/common/profile_mixins.dart';
 import 'package:user_presentation/common/steps_viewmodel.dart';
-import 'package:user_presentation/screens/newinhabitant/new_inhabitant_screen_object.dart';
+
+import 'edit_inhabitant_screen_object.dart';
 
 const int _FIRST_STEP = 0;
 
-class NewInhabitantScreenViewModel extends StepsViewModel
-    with ViewStateField<NewInhabitantScreenObject>, AvatarSelection, DefaultErrorResponseHandlers, InhabitantViewModel
+class EditInhabitantScreenViewModel extends StepsViewModel
+    with ViewStateField<EditInhabitantScreenObject>, AvatarSelection, DefaultErrorResponseHandlers, InhabitantViewModel
     implements HasReviewInfo {
   final UserRepo _userRepo;
   final BuildContext _context;
 
   ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment);
 
-  NewInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
+  EditInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
     viewState = ViewState(status: ViewStatus.LOADING);
   }
 
@@ -25,7 +26,7 @@ class NewInhabitantScreenViewModel extends StepsViewModel
         onSuccess: (user) {
           login = user.login;
           apartment = user.apartmentCode;
-          viewState = ViewState(value: NewInhabitantScreenObject(), status: ViewStatus.IDLE);
+          viewState = ViewState(value: EditInhabitantScreenObject(), status: ViewStatus.IDLE);
           notifyListeners();
         },
         onFailure: (response) => handleFailure(() => fetchData(), response));

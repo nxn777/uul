@@ -1,15 +1,14 @@
 import 'package:flutter/material.dart';
-import 'package:user_presentation/screens/newinhabitant/new_inhabitant_viewmodel.dart';
 import 'package:user_presentation/validators/account_form_validator.dart';
+import '../../../common/inhabitant_viewmodel.dart';
 
-
-Step createNewInhabitantStep(BuildContext context, int index, NewInhabitantScreenViewModel viewModel) {
+Step createNewInhabitantStep(BuildContext context, int index, InhabitantViewModel viewModel) {
   var nameController = TextEditingController(text: viewModel.name);
 
-  bool _newAccountStepValidator(viewModel) => (viewModel as NewInhabitantScreenViewModel).formKey.currentState.validate();
+  bool _newAccountStepValidator(viewModel) => (viewModel as InhabitantViewModel).formKey.currentState.validate();
 
   void _newAccountStepEraser(viewModel)  {
-    var typedVm = viewModel as NewInhabitantScreenViewModel;
+    var typedVm = viewModel as InhabitantViewModel;
     nameController.clear();
     typedVm.name = "";
   }
