@@ -14,7 +14,7 @@ class NewInhabitantScreenViewModel extends StepsViewModel
   final UserRepo _userRepo;
   final BuildContext _context;
 
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment);
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and create");
 
   NewInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
     viewState = ViewState(status: ViewStatus.LOADING);

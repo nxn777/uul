@@ -34,7 +34,7 @@ class NewProfileViewModel extends StepsViewModel with ViewStateField<NewProfileS
   List<String> get doors => _condo.getDoors(activeTower, activeFloor);
   String activeDoor = "";
   String get apartmentCode => _condo.getApartmentCode(activeTower, activeFloor, activeDoor);
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartmentCode);
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartmentCode, "Review and create");
   User user;
 
   void fetchData() async {

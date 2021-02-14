@@ -44,6 +44,12 @@ class DefaultUserRepo  implements UserRepo {
   }
 
   @override
+  Future<UULResult<User>> editInhabitant({int id, String name, String avatarSrc}) {
+    var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.editInhabitant(id, name, avatarSrc));
+    return cachingRequest.call(true, UserDTO());
+  }
+
+  @override
   Future<UULResult<User>> getUser({bool forced = false}) async {
     var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.fetchUser());
     return cachingRequest.call(forced, UserDTO());

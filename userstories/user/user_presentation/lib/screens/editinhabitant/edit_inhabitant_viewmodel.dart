@@ -16,7 +16,9 @@ class EditInhabitantScreenViewModel extends StepsViewModel
   final UserRepo _userRepo;
   final BuildContext _context;
   Inhabitant _inhabitant;
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment);
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and update");
+  @override
+  String get applyButtonTitle => "Update";
 
   EditInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
     viewState = ViewState(status: ViewStatus.LOADING);
@@ -37,6 +39,7 @@ class EditInhabitantScreenViewModel extends StepsViewModel
         activeAvatarImage = _inhabitant.avatarSrc;
         viewState = ViewState(value: EditInhabitantScreenObject(), status: ViewStatus.IDLE);
         notifyListeners();
+        markAllStepsVisited();
       },
       onFailure: (response) => handleFailure(() => fetchData(), response),
     );
@@ -46,12 +49,17 @@ class EditInhabitantScreenViewModel extends StepsViewModel
   void onComplete() async {
     viewState = viewState.copyWith(status: ViewStatus.LOADING);
     notifyListeners();
-    (await this._userRepo.addNewInhabitant(name: name, avatarSrc: activeAvatarImage)).fold(
+    (await this._userRepo.editInhabitant(id: _inhabitant.id, name: name, avatarSrc: activeAvatarImage)).fold(
       onSuccess: (user) {
         Navigator.of(_context).pop(user);
       },
       onFailure: (response) => handleFailure(() => onComplete(), response),
     );
+  }
+
+  @override
+  void onTotalStepsChange(int newValue) {
+    markAllStepsVisited();
   }
 
   Inhabitant _getInhabitantToEdit(User user) {
@@ -68,4 +76,5 @@ class EditInhabitantScreenViewModel extends StepsViewModel
       return null;
     }
   }
+
 }

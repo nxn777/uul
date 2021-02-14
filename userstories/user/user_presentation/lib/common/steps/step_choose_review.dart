@@ -22,7 +22,7 @@ Step createReviewStep(BuildContext context, int index, StepsViewModel viewModel)
   return Step(
     isActive: viewModel.isStepActive(index),
     state: viewModel.getStepState(index),
-    title: Text("Review and create"),
+    title: Text((viewModel as HasReviewInfo).reviewInfo.reviewStepTitle),
     content: Column(
       children: [
         Row(

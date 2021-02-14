@@ -17,8 +17,11 @@ abstract class StepsViewModel extends ChangeNotifier {
   int _totalSteps = 0;
   int _currentStep;
   int get currentStep => _currentStep;
+
+  void onTotalStepsChange(int newTotal) {}
   set totalSteps(int value) {
     _totalSteps = value;
+    onTotalStepsChange(_totalSteps);
   }
 
   void registerValidator(int step, StepValidator validator) => validators[step] = validator;
@@ -55,9 +58,10 @@ abstract class StepsViewModel extends ChangeNotifier {
     return start;
   }
 
+  String get applyButtonTitle => "Create";
   String getNextButtonTitle() {
     if (_currentStep == _totalSteps - 1) {
-      return "Create";
+      return applyButtonTitle;
     }
     return "Next";
   }
@@ -110,5 +114,11 @@ abstract class StepsViewModel extends ChangeNotifier {
       visited.remove(index);
     });
     gotoStep(kFirstStep);
+  }
+
+  void markAllStepsVisited() {
+    for(int i = 0; i< _totalSteps; i++) {
+      visited.add(i);
+    }
   }
 }
