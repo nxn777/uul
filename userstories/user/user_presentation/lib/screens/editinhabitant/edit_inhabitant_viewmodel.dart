@@ -16,9 +16,11 @@ class EditInhabitantScreenViewModel extends StepsViewModel
   final UserRepo _userRepo;
   final BuildContext _context;
   Inhabitant _inhabitant;
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and update");
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and update", reviewMessage: "");
   @override
   String get applyButtonTitle => "Update";
+  bool _shouldShowDeleteProfile = false;
+  bool get shouldShowDeleteProfile => _shouldShowDeleteProfile;
 
   EditInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
     viewState = ViewState(status: ViewStatus.LOADING);
@@ -37,6 +39,7 @@ class EditInhabitantScreenViewModel extends StepsViewModel
         apartment = user.apartmentCode;
         name = _inhabitant.name;
         activeAvatarImage = _inhabitant.avatarSrc;
+        _shouldShowDeleteProfile = true;//user.inhabitants.length == 1;
         viewState = ViewState(value: EditInhabitantScreenObject(), status: ViewStatus.IDLE);
         notifyListeners();
         markAllStepsVisited();
@@ -60,6 +63,14 @@ class EditInhabitantScreenViewModel extends StepsViewModel
   @override
   void onTotalStepsChange(int newValue) {
     markAllStepsVisited();
+  }
+
+  void deleteInhabitant() {
+
+  }
+
+  void deleteProfile() {
+
   }
 
   Inhabitant _getInhabitantToEdit(User user) {

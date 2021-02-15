@@ -4,7 +4,8 @@ import 'package:user_presentation/common/steps_viewmodel.dart';
 import 'package:widgets/widgets.dart';
 import 'package:extensions/extensions.dart';
 
-Widget getStepsScreenContent(String title, BuildContext context, StepsViewModel viewModel, List<Step> steps) {
+const List<Widget> _empty = [];
+Widget getStepsScreenContent(String title, BuildContext context, StepsViewModel viewModel, List<Step> steps, {List<Widget> additional = _empty}) {
   return Column(
     crossAxisAlignment: CrossAxisAlignment.start,
     children: [
@@ -32,7 +33,7 @@ Widget getStepsScreenContent(String title, BuildContext context, StepsViewModel 
               currentStep: viewModel.currentStep,
               steps: steps,
             ),
-          ],
+          ].cast<Widget>()  + additional,
         ),
       )
     ],

@@ -14,8 +14,10 @@ class ReviewInfo {
   final String login;
   final String apartmentCode;
   final String reviewStepTitle;
-
-  ReviewInfo(this.name, this.login, this.apartmentCode, this.reviewStepTitle);
+  final String reviewMessage;
+  ReviewInfo(this.name, this.login, this.apartmentCode, this.reviewStepTitle,
+      {this.reviewMessage =
+          "Your profile will be saved on a server, you will need to visit Uno Urban Life administration in person to activate it.\nPlease remember your login and name."});
 }
 
 abstract class HasReviewInfo {

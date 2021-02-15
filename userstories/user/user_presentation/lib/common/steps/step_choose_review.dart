@@ -44,7 +44,7 @@ Step createReviewStep(BuildContext context, int index, StepsViewModel viewModel)
         Padding(
           padding: const EdgeInsets.fromLTRB(0, kSpacingMedium, 0, 0),
           child: Text(
-            "Your profile will be saved on a server, you will need to visit Uno Urban Life administration in person to activate it.\nPlease remember your login and name.",
+            (viewModel as HasReviewInfo).reviewInfo.reviewMessage,
             style: kRegularActiveTextStyle,
           ),
         )

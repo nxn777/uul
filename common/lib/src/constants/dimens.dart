@@ -3,6 +3,7 @@ const kCaptionTextSize = 16.0;
 const kPageTitleTextSize = 32.0;
 
 const kSpacingMedium = 16.0;
+const kSpacingXMedium = 12.0;
 const kSpacingSmall = 8.0;
 const kSpacingXSmall = 4.0;
 const kSpacingXXSmall = 2.0;
