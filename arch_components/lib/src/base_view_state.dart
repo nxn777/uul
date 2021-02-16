@@ -64,7 +64,7 @@ mixin DefaultErrorResponseHandlers<T> on ViewStateField<T> {
   void handleFailure(Function retry, response) {
     switch (response.code) {
       case -1:
-        showNetworkError(retry);
+        showNetworkError(retry, message: translateErrorMessageReason(response));
         break;
       case 401:
         showNeedLogin();
@@ -73,6 +73,11 @@ mixin DefaultErrorResponseHandlers<T> on ViewStateField<T> {
         showNetworkError(retry, message: response.message);
     }
     debugPrint("$this fetched ${response.message} ${response.code}");
+  }
+
+  // TODO
+  String translateErrorMessageReason(response) {
+    return response.message;
   }
 }
 

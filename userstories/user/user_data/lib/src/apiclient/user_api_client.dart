@@ -6,8 +6,10 @@ abstract class UserApiClient {
   Future logout();
   Future<UULResponse<UserDTO>> fetchUser();
   Future<UULResponse<UserDTO>> addUser(NewUserDTO dto);
+  Future<UULResponse<SingleValueDTO>> deleteUser(NewUserDTO dto);
   Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc);
   Future<UULResponse<UserDTO>> editInhabitant(int id, String name, String avatarSrc);
+  Future<UULResponse<UserDTO>> deleteInhabitant(int id);
 }
 
 class DefaultUserApiClient implements UserApiClient {
@@ -62,6 +64,21 @@ class DefaultUserApiClient implements UserApiClient {
   }
 
   @override
+  Future<UULResponse<SingleValueDTO>> deleteUser(NewUserDTO dto) async {
+    var response;
+    try {
+      response = await uulDio.getInstance().post("/api/users/delete", data: dto.toJson());
+      var result = UULResponse.fromResponse(response, SingleValueDTO());
+      if (result.isSuccess) {
+        uulDio.updateToken(result.message);
+      }
+      return result;
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
+  }
+
+  @override
   Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc) async {
     var response;
     try {
@@ -77,6 +94,17 @@ class DefaultUserApiClient implements UserApiClient {
     var response;
     try {
       response = await uulDio.getInstance().post("/api/habitants/edit", data: {"id": id, "name": name, "avatarSrc": avatarSrc});
+      return UULResponse.fromResponse(response, UserDTO());
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
+  }
+
+  @override
+  Future<UULResponse<UserDTO>> deleteInhabitant(int id) async {
+    var response;
+    try {
+      response = await uulDio.getInstance().post("/api/habitants/delete", data: {"id": id});
       return UULResponse.fromResponse(response, UserDTO());
     } catch (e) {
       return UULResponse.fromException(e);

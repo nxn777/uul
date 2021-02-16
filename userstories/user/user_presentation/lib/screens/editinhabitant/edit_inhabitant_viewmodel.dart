@@ -65,12 +65,27 @@ class EditInhabitantScreenViewModel extends StepsViewModel
     markAllStepsVisited();
   }
 
-  void deleteInhabitant() {
-
+  void deleteInhabitant() async {
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    (await this._userRepo.deleteInhabitant(_inhabitant.id)).fold(
+      onSuccess: (user) async {
+        await _userRepo.setCurrentInhabitantId(user.inhabitants.first.id);
+        Navigator.of(_context).pop(user);
+      },
+      onFailure: (response) => handleFailure(() => deleteInhabitant(), response),
+    );
   }
 
-  void deleteProfile() {
-
+  void deleteProfile(String pwd) async {
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    (await this._userRepo.deleteProfile(login: login, apartment: apartment, password: pwd)).fold(
+      onSuccess: (result) {
+        Navigator.of(_context).pop(true);
+      },
+      onFailure: (response) => handleFailure(() => deleteProfile(pwd), response),
+    );
   }
 
   Inhabitant _getInhabitantToEdit(User user) {

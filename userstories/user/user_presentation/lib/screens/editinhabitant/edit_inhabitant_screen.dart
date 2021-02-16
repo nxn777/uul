@@ -1,4 +1,3 @@
-
 import 'package:arch_components/arch_components.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
@@ -75,11 +74,13 @@ class EditInhabitantScreen extends StatelessWidget with ViewStateScreen<EditInha
               title: "Delete this profile",
               isSolid: false,
               onPressed: () {
+                String pwd = "";
                 AlertDialogBuilder(context)
                     .setTitle("Profile deletion")
                     .setMessage("Are you sure you want to delete this profile?\nThis can not be undone.")
                     .addCancel()
-                    .addAction("Delete", isDestructive: true, onPressed: viewModel.deleteProfile)
+                    .setTextField("Enter your password", valueChanged: (value) => pwd = value)
+                    .addAction("Delete", isDestructive: true, onPressed: () => viewModel.deleteProfile(pwd))
                     .buildAndShow();
               },
             ),

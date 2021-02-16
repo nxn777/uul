@@ -11,6 +11,15 @@ class TokenDTO implements HasFromJson {
   }
 }
 
+class SingleValueDTO implements HasFromJson {
+  String value;
+
+  @override
+  populateFromJson(jsonRaw) {
+    value = jsonRaw.toString();
+  }
+}
+
 class InhabitantDTO {
   int _id;
   String _name;

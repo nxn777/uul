@@ -38,6 +38,18 @@ class DefaultUserRepo  implements UserRepo {
   }
 
   @override
+  Future<UULResult<bool>> deleteProfile({String login, String password, String apartment}) async {
+    NewUserDTO dto = NewUserDTO(login: login, pwd: password, apartmentCode: apartment);
+    var response = await apiClient.deleteUser(dto);
+    if (response.isSuccess) {
+      await logout();
+      return UULResult.success(true);
+    } else {
+      return UULResult.failure(response);
+    }
+  }
+
+  @override
   Future<UULResult<User>> addNewInhabitant({String name, String avatarSrc}) {
     var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.addInhabitant(name, avatarSrc));
     return cachingRequest.call(true, UserDTO());
@@ -46,6 +58,12 @@ class DefaultUserRepo  implements UserRepo {
   @override
   Future<UULResult<User>> editInhabitant({int id, String name, String avatarSrc}) {
     var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.editInhabitant(id, name, avatarSrc));
+    return cachingRequest.call(true, UserDTO());
+  }
+
+  @override
+  Future<UULResult<User>> deleteInhabitant(int id) {
+    var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.deleteInhabitant(id));
     return cachingRequest.call(true, UserDTO());
   }
 
