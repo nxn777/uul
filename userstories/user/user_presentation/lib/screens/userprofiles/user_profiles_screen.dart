@@ -14,9 +14,11 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
   final Future Function() onNewProfileTap;
   final Future Function() onNewInhabitantTap;
   final Future Function() onEditInhabitantTap;
+  final Future Function() onEditProfileTap;
   final Future Function() onLoginTap;
 
-  UserProfilesScreen({@required this.onNewProfileTap, @required this.onLoginTap, @required this.onNewInhabitantTap, @required this.onEditInhabitantTap});
+  UserProfilesScreen(
+      {@required this.onNewProfileTap, @required this.onLoginTap, @required this.onNewInhabitantTap, @required this.onEditInhabitantTap, @required this.onEditProfileTap});
 
   @override
   Widget build(BuildContext context) {
@@ -74,12 +76,17 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
         inhabitant: screenObject.currentInhabitant,
         isActive: screenObject.currentInhabitant.id == screenObject.activeInhabitantId,
         isProfileActivated: screenObject.user.isActivated,
+        isSingle: screenObject.notCurrentInhabitants.isEmpty,
         apartment: screenObject.user.apartmentCode,
         onMakeActiveTap: (item) => viewModel.changeActiveInhabitant(item),
         onEditTap: () async {
           var result = await this.onEditInhabitantTap.call();
           viewModel.onUserActionResult(result);
         },
+        onEditProfileTap: () async {
+          var result = await this.onEditProfileTap.call();
+          viewModel.onUserActionResult(result);
+        }
       ),
       insideListView
           ? InhabitantList(

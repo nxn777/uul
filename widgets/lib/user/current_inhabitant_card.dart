@@ -12,10 +12,20 @@ class CurrentInhabitantCard extends StatelessWidget {
   final bool isActive;
   final bool isProfileActivated;
   final String apartment;
+  final bool isSingle;
   final void Function(Inhabitant) onMakeActiveTap;
   final void Function() onEditTap;
+  final void Function() onEditProfileTap;
 
-  CurrentInhabitantCard({@required this.inhabitant, @required this.isActive, this.isProfileActivated, this.apartment, this.onMakeActiveTap, this.onEditTap});
+  CurrentInhabitantCard(
+      {@required this.inhabitant,
+      @required this.isActive,
+      @required this.isSingle,
+      this.isProfileActivated,
+      this.apartment,
+      this.onMakeActiveTap,
+      this.onEditTap,
+      this.onEditProfileTap});
 
   @override
   Widget build(BuildContext context) {
@@ -35,18 +45,35 @@ class CurrentInhabitantCard extends StatelessWidget {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            ScreenTitle("User profile"),
+            Row(
+              children: [
+                Expanded(child: ScreenTitle("User profile")),
+                UULIconButton(
+                  icon: FontAwesomeIcons.cog,
+                  onTap: () {
+                    this.onEditProfileTap();
+                  },
+                ),
+                SizedBox(
+                  width: kSpacingXLarge,
+                )
+              ],
+            ),
             Row(
               mainAxisAlignment: MainAxisAlignment.spaceEvenly,
               children: [
-                UULIconButton(
-                  icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
-                  onTap: () {
-                    if (!isActive) {
-                      this.onMakeActiveTap?.call(inhabitant);
-                    }
-                  },
-                ),
+                isSingle
+                    ? SizedBox(
+                        width: 52,
+                      )
+                    : UULIconButton(
+                        icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
+                        onTap: () {
+                          if (!isActive) {
+                            this.onMakeActiveTap?.call(inhabitant);
+                          }
+                        },
+                      ),
                 BundledAvatar(
                   height: kSpacingHuge * 2,
                   imageSrc: inhabitant?.avatarSrc == null ? "assets/defaults/default_user3.png" : inhabitant.avatarSrc,
@@ -56,7 +83,9 @@ class CurrentInhabitantCard extends StatelessWidget {
                 UULIconButton(
                   icon: FontAwesomeIcons.pen,
                   innerPadding: 12,
-                  onTap: () { this.onEditTap?.call(); },
+                  onTap: () {
+                    this.onEditTap?.call();
+                  },
                 ),
               ],
             ),
