@@ -9,6 +9,8 @@ class EditProfileScreenBuilder {
   static EditProfileViewModel buildAndRunVM(BuildContext context) {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var userRepo = globalDependencies.dependenciesProvider.userModule.createUserRepo();
-    return EditProfileViewModel(userRepo);
+    var vm = EditProfileViewModel(context, userRepo);
+    vm.fetchData();
+    return vm;
   }
 }

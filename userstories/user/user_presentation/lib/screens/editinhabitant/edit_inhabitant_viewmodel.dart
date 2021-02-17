@@ -19,8 +19,8 @@ class EditInhabitantScreenViewModel extends StepsViewModel
   ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and update", reviewMessage: "");
   @override
   String get applyButtonTitle => "Update";
-  bool _shouldShowDeleteProfile = false;
-  bool get shouldShowDeleteProfile => _shouldShowDeleteProfile;
+  bool _shouldShowDeleteInhabitant = true;
+  bool get shouldShowDeleteInhabitant => _shouldShowDeleteInhabitant;
 
   EditInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
     viewState = ViewState(status: ViewStatus.LOADING);
@@ -39,7 +39,7 @@ class EditInhabitantScreenViewModel extends StepsViewModel
         apartment = user.apartmentCode;
         name = _inhabitant.name;
         activeAvatarImage = _inhabitant.avatarSrc;
-        _shouldShowDeleteProfile = true;//user.inhabitants.length == 1;
+        _shouldShowDeleteInhabitant = user.inhabitants.length > 1;
         viewState = ViewState(value: EditInhabitantScreenObject(), status: ViewStatus.IDLE);
         notifyListeners();
         markAllStepsVisited();
@@ -74,17 +74,6 @@ class EditInhabitantScreenViewModel extends StepsViewModel
         Navigator.of(_context).pop(user);
       },
       onFailure: (response) => handleFailure(() => deleteInhabitant(), response),
-    );
-  }
-
-  void deleteProfile(String pwd) async {
-    viewState = viewState.copyWith(status: ViewStatus.LOADING);
-    notifyListeners();
-    (await this._userRepo.deleteProfile(login: login, apartment: apartment, password: pwd)).fold(
-      onSuccess: (result) {
-        Navigator.of(_context).pop(true);
-      },
-      onFailure: (response) => handleFailure(() => deleteProfile(pwd), response),
     );
   }
 

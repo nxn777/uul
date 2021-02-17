@@ -12,6 +12,7 @@ export 'selector/horizontal_selector.dart';
 export 'stepper/step_controls.dart';
 export 'timeslot/time_slot_list.dart';
 export 'title/screen_title.dart';
+export 'title/section_title.dart';
 export 'user/current_inhabitant_card.dart';
 export 'user/short_user_info.dart';
 export 'user/inhabitant_card.dart';

@@ -22,42 +22,11 @@ class EditInhabitantScreen extends StatelessWidget with ViewStateScreen<EditInha
 
   List<Widget> getAdditionalWidgets(EditInhabitantScreenViewModel viewModel, BuildContext context) {
     List<Widget> result = List();
-    result.add(Row(
-      children: [
-        SizedBox(
-          width: kSpacingLarge,
-        ),
-        FaIcon(
-          FontAwesomeIcons.exclamationCircle,
-          color: Colors.redAccent,
-        ),
-        SizedBox(
-          width: kSpacingXMedium,
-        ),
-        Expanded(
-          child: UULButton(
-            title: "Delete this inhabitant",
-            isSolid: false,
-            onPressed: () {
-              AlertDialogBuilder(context)
-                  .setTitle("Inhabitant deletion")
-                  .setMessage("Are you sure you want to delete this inhabitant?\nThis can not be undone.")
-                  .addCancel()
-                  .addAction("Delete", isDestructive: true, onPressed: viewModel.deleteInhabitant)
-                  .buildAndShow();
-            },
-          ),
-        ),
-        SizedBox(
-          width: kSpacingLarge,
-        ),
-      ],
-    ));
-    result.add(SizedBox(
-      height: kSpacingXLarge,
-    ));
-    if (viewModel.shouldShowDeleteProfile) {
-      result.add(Row(
+    if (!viewModel.shouldShowDeleteInhabitant) {
+      return result;
+    }
+    result.add(
+      Row(
         children: [
           SizedBox(
             width: kSpacingLarge,
@@ -71,16 +40,14 @@ class EditInhabitantScreen extends StatelessWidget with ViewStateScreen<EditInha
           ),
           Expanded(
             child: UULButton(
-              title: "Delete this profile",
+              title: "Delete this inhabitant",
               isSolid: false,
               onPressed: () {
-                String pwd = "";
                 AlertDialogBuilder(context)
-                    .setTitle("Profile deletion")
-                    .setMessage("Are you sure you want to delete this profile?\nThis can not be undone.")
+                    .setTitle("Inhabitant deletion")
+                    .setMessage("Are you sure you want to delete this inhabitant?\nThis can not be undone.")
                     .addCancel()
-                    .setTextField("Enter your password", valueChanged: (value) => pwd = value)
-                    .addAction("Delete", isDestructive: true, onPressed: () => viewModel.deleteProfile(pwd))
+                    .addAction("Delete", isDestructive: true, onPressed: viewModel.deleteInhabitant)
                     .buildAndShow();
               },
             ),
@@ -89,11 +56,13 @@ class EditInhabitantScreen extends StatelessWidget with ViewStateScreen<EditInha
             width: kSpacingLarge,
           ),
         ],
-      ));
-      result.add(SizedBox(
+      ),
+    );
+    result.add(
+      SizedBox(
         height: kSpacingXLarge,
-      ));
-    }
+      ),
+    );
     return result;
   }
 }

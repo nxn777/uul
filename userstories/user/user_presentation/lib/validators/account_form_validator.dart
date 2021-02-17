@@ -19,6 +19,10 @@ class AccountFormValidator {
     return _pwdValidationErrorMessage;
   }
 
+  static String fieldEqualityValidator(String value1, String value2) {
+    return value1 == value2 ? null : "Values must be equal";
+  }
+
   static String _loginValidationErrorMessage(String login) {
     return login.length > 3 ? null : "Should be at least 4 characters long";
   }
