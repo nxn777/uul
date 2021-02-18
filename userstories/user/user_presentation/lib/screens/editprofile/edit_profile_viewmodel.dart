@@ -34,11 +34,26 @@ class EditProfileViewModel extends ChangeNotifier with ViewStateField<EditProfil
     );
   }
 
-  void logout() {
-
+  void logout() async {
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    await this._userRepo.logout();
+    Navigator.of(_context).pop(true);
   }
 
-  void changePassword() {
-
+  void changePassword() async {
+    if (!formKey.currentState.validate()) {
+      return;
+    }
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    (await this._userRepo.changeProfilePassword(
+            newPassword: viewState.value.newPwd, oldPassword: viewState.value.oldPwd, apartment: viewState.value.user.apartmentCode, login: viewState.value.user.login))
+        .fold(
+      onSuccess: (result) {
+        Navigator.of(_context).pop(result);
+      },
+      onFailure: (response) => handleFailure(() => changePassword(), response),
+    );
   }
 }

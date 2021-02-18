@@ -70,7 +70,10 @@ class EditProfileScreen extends StatelessWidget with ViewStateScreen<EditProfile
               child: UULButton(
                 title: "Submit",
                 isSolid: false,
-                onPressed: viewModel.changePassword,
+                onPressed: () {
+                  FocusScope.of(context).unfocus();
+                  viewModel.changePassword();
+                },
               ),
             ),
             SizedBox(
@@ -78,7 +81,6 @@ class EditProfileScreen extends StatelessWidget with ViewStateScreen<EditProfile
             ),
           ],
         ),
-
         SectionTitle("Other"),
         Row(
           children: [

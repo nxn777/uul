@@ -38,6 +38,12 @@ class DefaultUserRepo  implements UserRepo {
   }
 
   @override
+  Future<UULResult<User>> changeProfilePassword({String newPassword, String oldPassword, String apartment, String login,}) {
+    var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.changePassword(newPassword, oldPassword, apartment, login));
+    return cachingRequest.call(true, UserDTO());
+  }
+
+  @override
   Future<UULResult<bool>> deleteProfile({String login, String password, String apartment}) async {
     NewUserDTO dto = NewUserDTO(login: login, pwd: password, apartmentCode: apartment);
     var response = await apiClient.deleteUser(dto);

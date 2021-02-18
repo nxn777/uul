@@ -6,6 +6,7 @@ abstract class UserApiClient {
   Future logout();
   Future<UULResponse<UserDTO>> fetchUser();
   Future<UULResponse<UserDTO>> addUser(NewUserDTO dto);
+  Future<UULResponse<UserDTO>> changePassword(String newPwd, String oldPwd, String apartment, String login);
   Future<UULResponse<SingleValueDTO>> deleteUser(NewUserDTO dto);
   Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc);
   Future<UULResponse<UserDTO>> editInhabitant(int id, String name, String avatarSrc);
@@ -53,6 +54,21 @@ class DefaultUserApiClient implements UserApiClient {
     var response;
     try {
       response = await getDio().post("/api/users/new", data: dto.toJson());
+      var result = UULResponse.fromResponse(response, UserDTO());
+      if (result.isSuccess) {
+        uulDio.updateToken(result.message);
+      }
+      return result;
+    } catch (e) {
+      return UULResponse.fromException(e);
+    }
+  }
+
+  @override
+  Future<UULResponse<UserDTO>> changePassword(String newPwd, String oldPwd, String apartment, String login) async {
+    var response;
+    try {
+      response = await uulDio.getInstance().post("/api/users/changepwd", data: {"newPwd": newPwd, "oldPwd": oldPwd, "login": login, "apartmentCode": apartment});
       var result = UULResponse.fromResponse(response, UserDTO());
       if (result.isSuccess) {
         uulDio.updateToken(result.message);
