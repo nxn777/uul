@@ -1,3 +1,5 @@
+import 'package:core/core.dart';
+
 const defaultBuilding = {"A": 10, "B": 10, "C": 12, "D": 12};
 const defaultSpecialFloors = {"A10": "PH", "B10": "PH", "C12": "PH", "D12": "PH"};
 const Set<String> defaultBannedApartments = {};
@@ -10,6 +12,7 @@ class Rules {
   final Map<String, String> specialFloorTitles;
   final int doorsPerFloor;
   final Set<String> bannedApartments; // could be { "C1207", "A0101" }
+  final List<Gym> gyms = Gym.getGyms(); // TODO get from api response
 
   Rules(
       {this.version = 0,

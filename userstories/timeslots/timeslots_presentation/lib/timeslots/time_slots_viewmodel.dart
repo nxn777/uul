@@ -6,13 +6,13 @@ import 'package:timeslots_api/timeslots_api.dart';
 
 import 'time_slots_screen_object.dart';
 
-class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject> {
+class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject>, DefaultErrorResponseHandlers {
   final GymRepo _gymRepo;
   final RulesRepo _rulesRepo;
-  final TimeSlotsRepo _timeSlotsRepo;
+  final ScheduleRepo _scheduleRepo;
   ViewState<TimeSlotsScreenObject> viewState;
 
-  TimeSlotsViewModel(this._gymRepo, this._rulesRepo, this._timeSlotsRepo) {
+  TimeSlotsViewModel(this._gymRepo, this._rulesRepo, this._scheduleRepo) {
     viewState = ViewState<TimeSlotsScreenObject>(status: ViewStatus.LOADING);
   }
 
@@ -20,23 +20,35 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
     var currentWeek = Week.withDay(DateTime.now());
     var activeDate = DateTime.now();
     var currentDate = DateTime.now();
-    var gyms = _gymRepo.loadGyms();
     var selectedGymId = _gymRepo.getSelectedGymId();
-    var slots = _timeSlotsRepo.fetchTimeSlotsByDateTime(selectedGymId, activeDate);
-    Future.wait([gyms, slots]);
-    (await _rulesRepo.loadRules()).fold(
-      onSuccess: (rules) async {
+    var rulesResult = await _rulesRepo.loadRules();
+    var scheduleResult = await _scheduleRepo.fetchSchedule(selectedGymId, activeDate);
+    rulesResult.combineWith(scheduleResult).fold(
+      onSuccess: (rulesAndSchedule) async {
+        if (rulesAndSchedule.value1.gyms.isEmpty) {
+          this.viewState = this.viewState.copyWith(status: ViewStatus.ERROR, error: ViewError(message: "No gyms set", retry: () => fetchData()));
+          notifyListeners();
+          return;
+        }
+        if (selectedGymId == 0) {
+          selectedGymId = rulesAndSchedule.value1.gyms.first.id;
+          _gymRepo.setSelectedGymId(selectedGymId);
+          fetchData();
+          return;
+        }
         this.viewState = ViewState(
             value: TimeSlotsScreenObject(
-                gyms: await gyms, activeGymId: selectedGymId, currentWeek: currentWeek, activeDate: activeDate, currentDate: currentDate, rules: rules, timeSlots: await slots),
+                gyms: rulesAndSchedule.value1.gyms,
+                activeGymId: selectedGymId,
+                currentWeek: currentWeek,
+                activeDate: activeDate,
+                currentDate: currentDate,
+                rules: rulesAndSchedule.value1,
+                timeSlots: rulesAndSchedule.value2.timeSlots),
             status: ViewStatus.IDLE);
         notifyListeners();
       },
-      onFailure: (response) {
-        debugPrint(this.toString() + ":" + response.message);
-        this.viewState = this.viewState.copyWith(status: ViewStatus.ERROR, error: ViewError(message: response.message, retry: () => fetchData()));
-        notifyListeners();
-      },
+      onFailure: (response) => handleFailure(() => fetchData(), response),
     );
   }
 
@@ -54,10 +66,14 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
   void _updateTimeSlots() async {
     this.viewState = this.viewState.copyWith(status: ViewStatus.LOADING);
     notifyListeners();
-    var slots = await _timeSlotsRepo.fetchTimeSlotsByDateTime(this.viewState.value.activeGymId, this.viewState.value.activeDate);
-    this.viewState = this.viewState.copyWith(status: ViewStatus.IDLE);
-    this.viewState.value.timeSlots.clear();
-    this.viewState.value.timeSlots.addAll(slots);
-    notifyListeners();
+    (await _scheduleRepo.fetchSchedule(this.viewState.value.activeGymId, this.viewState.value.activeDate)).fold(
+      onSuccess: (schedule) {
+        this.viewState = this.viewState.copyWith(status: ViewStatus.IDLE);
+        this.viewState.value.timeSlots.clear();
+        this.viewState.value.timeSlots.addAll(schedule.timeSlots);
+        notifyListeners();
+      },
+      onFailure: (response) => handleFailure(() => _updateTimeSlots(), response),
+    );
   }
 }

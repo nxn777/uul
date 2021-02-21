@@ -1,5 +1,4 @@
 import 'package:arch_components/arch_components.dart';
-import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/widgets.dart';
 import 'package:user_api/user_api.dart';

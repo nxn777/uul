@@ -33,7 +33,8 @@ dependencies:
     path: ../common
   persistence_api:
     path: ../persistence/persistence_api
-
+  core:
+    path: ../core
 dev_dependencies:
   flutter_test:
     sdk: flutter

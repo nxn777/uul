@@ -1,4 +1,3 @@
-import 'package:core/core.dart';
 import 'package:persistence_api/persistence_api.dart';
 import 'package:timeslots_api/timeslots_api.dart';
 
@@ -8,10 +7,6 @@ class DefaultGymRepo implements GymRepo {
   final KVStore _store;
 
   DefaultGymRepo(this._store);
-
-  Future<List<Gym>> loadGyms() {
-    return Future.value(Gym.getGyms());
-  }
 
   int getSelectedGymId() => _store.getInteger(_GYM_KEY, 0);
 

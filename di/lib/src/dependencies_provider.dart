@@ -10,6 +10,6 @@ class DependenciesProvider {
 
   DependenciesProvider(GlobalDependencies globalDependencies)
       : rulesModule = RulesModule(globalDependencies.kvStore),
-        timeSlotsModule = TimeSlotsModule(globalDependencies.kvStore),
+        timeSlotsModule = TimeSlotsModule(globalDependencies.kvStore, globalDependencies.uulDio),
         userModule = UserModule(globalDependencies.kvStore, globalDependencies.uulDio);
 }

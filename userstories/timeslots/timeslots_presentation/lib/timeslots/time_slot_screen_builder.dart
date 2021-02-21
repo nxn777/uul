@@ -11,7 +11,7 @@ class TimeSlotsScreenBuilder {
     var globalDependencies = Provider.of<GlobalDependencies>(context, listen: false);
     var gymRepo = globalDependencies.dependenciesProvider.timeSlotsModule.createGymRepo();
     var rulesRepo = globalDependencies.dependenciesProvider.rulesModule.getRulesRepoSingleton();
-    var timeSlotsRepo = globalDependencies.dependenciesProvider.timeSlotsModule.createTimeSlotsRepo();
+    var timeSlotsRepo = globalDependencies.dependenciesProvider.timeSlotsModule.createScheduleRepo();
     var vm = TimeSlotsViewModel(gymRepo, rulesRepo, timeSlotsRepo);
     vm.fetchData();
     return vm;

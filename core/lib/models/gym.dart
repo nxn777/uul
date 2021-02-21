@@ -1,7 +1,7 @@
 import 'has_title.dart';
 // TODO REMOVE, use rules
 class Gym with HasTitle {
-  static List<Gym> getGyms() => [Gym._(0, "Gym A"), Gym._(1, "Gym B")];
+  static List<Gym> getGyms() => [Gym._(1, "Gym A"), Gym._(2, "Gym B")];
 
   final _title;
   final id;

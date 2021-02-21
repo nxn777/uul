@@ -15,6 +15,13 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "2.1.0-nullsafety.1"
+  caching:
+    dependency: "direct main"
+    description:
+      path: "../../../caching"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   characters:
     dependency: transitive
     description:
@@ -138,7 +145,7 @@ packages:
     source: path
     version: "1.0.0+1"
   rest:
-    dependency: transitive
+    dependency: "direct main"
     description:
       path: "../../../rest"
       relative: true

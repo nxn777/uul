@@ -10,7 +10,7 @@ class CachingRequest<D, T extends HasMapToDomain<D>> {
 
   CachingRequest(this.storeKey, this._store, {@required Future<UULResponse<T>> Function() networkCall}) : _networkCall = networkCall;
 
-  Future<UULResult<D>> call(bool forced, T dto) async {
+  Future<UULResult<D>> call(bool forced, T dto, {bool skipCaching = false}) async {
     if (!forced) {
       debugPrint("CachingRequest for $storeKey is not forced, looking for cache...");
       var _cachedRawData = _store.getString(storeKey, "");
@@ -19,11 +19,13 @@ class CachingRequest<D, T extends HasMapToDomain<D>> {
         return UULResult.success(UULResponse.fromCachedData(_cachedRawData, dto).data.mapToDomain());
       }
     }
-    debugPrint("CachingRequest for $storeKey firing");
+    debugPrint("CachingRequest for $storeKey firing, will cache: ${!skipCaching}");
     var response = await _networkCall();
     if (response.isSuccess) {
-      await _store.setString(storeKey, response.rawData);
-      debugPrint("CachingRequest for $storeKey stored");
+      if (!skipCaching) {
+        await _store.setString(storeKey, response.rawData);
+        debugPrint("CachingRequest for $storeKey stored");
+      }
       return UULResult.success(response.data.mapToDomain());
     } else {
       return UULResult.failure(response);

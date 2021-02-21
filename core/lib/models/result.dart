@@ -1,14 +1,18 @@
 import 'package:rest/rest.dart';
 
 class UULResult<Success> extends Result<Success, UULResponse> {
+  static void _checkValid(UULResult result) {
+    if (result._success != null && result._failure != null) {
+      throw Exception("Result is success and failure at the same time:\nSuccess:$result._success\nFailure:$result._failure");
+    }
+  }
+
   UULResult.success(Success s) : super.success(s);
 
   UULResult.failure(UULResponse response) : super.failure(response);
 
   void fold({void Function(Success) onSuccess, void Function(UULResponse) onFailure}) {
-    if (_success != null && _failure != null) {
-      throw Exception("Result is success and failure at the same time:\nSuccess:$_success\nFailure:$_failure");
-    }
+    _checkValid(this);
     if (_success != null) {
       onSuccess?.call(_success);
     }
@@ -16,6 +20,40 @@ class UULResult<Success> extends Result<Success, UULResponse> {
       onFailure?.call(_failure);
     }
   }
+  //
+  // UULResult<NewSuccess> then<NewSuccess>(UULResult<NewSuccess> Function(Success) nextAction) {
+  //   _checkValid(this);
+  //   if (_success != null) {
+  //     return nextAction.call(_success);
+  //   }
+  //   if (_failure != null) {
+  //     return UULResult.failure(_failure);
+  //   }
+  //   throw Exception("Result is null for success and failure at the same time:\nSuccess:$_success\nFailure:$_failure");
+  // }
+
+  UULResult<CombinedResult2<Success, NewSuccess>> combineWith<NewSuccess>(UULResult<NewSuccess> secondResult) {
+    _checkValid(this);
+    if (_success != null) {
+      _checkValid(secondResult);
+      if (secondResult._success != null) {
+        return UULResult.success(CombinedResult2(_success, secondResult._success));
+      }
+      if (secondResult._failure != null) {
+        return UULResult.failure(secondResult._failure);
+      }
+    }
+    if (_failure != null) {
+      return UULResult.failure(_failure);
+    }
+    throw Exception("Result is null for success and failure at the same time:\nSuccess:$_success\nFailure:$_failure");
+  }
+}
+
+class CombinedResult2<T1, T2> {
+  final T1 value1;
+  final T2 value2;
+  CombinedResult2(this.value1, this.value2);
 }
 
 class Result<Success, Failure> {

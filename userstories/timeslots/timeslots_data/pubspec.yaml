@@ -31,6 +31,10 @@ dependencies:
     path: ../timeslots_api
   core:
     path: ../../../core
+  rest:
+    path: ../../../rest
+  caching:
+    path: ../../../caching
   persistence_api:
     path: ../../../persistence/persistence_api
   extensions:
