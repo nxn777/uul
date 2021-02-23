@@ -3,8 +3,8 @@ import 'package:UUL_Gym/navigation/profiles_tab_routes.dart';
 import 'package:UUL_Gym/navigation/schedule_tab_routes.dart';
 import 'package:UUL_Gym/navigation/tab_navigator.dart';
 import 'package:UUL_Gym/navigation/tab_routes.dart';
-import 'package:UUL_Gym/navigation/tabs.dart';
 import 'package:flutter/widgets.dart';
+import 'package:navigation/navigation.dart';
 
 class TabNavigatorFactory {
   final Map<TabItem, GlobalKey<NavigatorState>> navigatorKeys;

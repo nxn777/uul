@@ -3,16 +3,17 @@ import 'package:core/core.dart';
 import 'package:flutter/widgets.dart';
 import 'package:rules_api/rules_api.dart';
 import 'package:timeslots_api/timeslots_api.dart';
-
+import 'package:navigation/navigation.dart';
 import 'time_slots_screen_object.dart';
 
 class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject>, DefaultErrorResponseHandlers {
   final GymRepo _gymRepo;
   final RulesRepo _rulesRepo;
   final ScheduleRepo _scheduleRepo;
+  final DeepLinkCommandExecutor  _deepLinkCommandExecutor;
   ViewState<TimeSlotsScreenObject> viewState;
 
-  TimeSlotsViewModel(this._gymRepo, this._rulesRepo, this._scheduleRepo) {
+  TimeSlotsViewModel(this._gymRepo, this._rulesRepo, this._scheduleRepo, this._deepLinkCommandExecutor) {
     viewState = ViewState<TimeSlotsScreenObject>(status: ViewStatus.LOADING);
   }
 
@@ -61,6 +62,14 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
   void changeActiveDate(DateTime newDate) {
     this.viewState.value.activeDate = newDate;
     _updateTimeSlots();
+  }
+
+  void bookTimeSlot(TimeSlot timeSlot) async {
+    viewState = viewState.copyWith(status: ViewStatus.LOADING);
+    notifyListeners();
+    fetchData();
+    _deepLinkCommandExecutor.openTab(TabItem.USER_PROFILES);
+    _deepLinkCommandExecutor.executeNavCommand(TabItem.USER_PROFILES, (nav) => nav.pushNamed("/new_inhabitant"));
   }
 
   void _updateTimeSlots() async {

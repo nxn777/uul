@@ -1,7 +1,7 @@
 import 'package:UUL_Gym/navigation/tab_routes.dart';
-import 'package:UUL_Gym/navigation/tabs.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
+import 'package:navigation/navigation.dart';
 
 class TabNavigator extends StatelessWidget {
   TabNavigator({@required this.navigatorKey, @required this.tabItem, @required this.tabRoutes});

@@ -8,8 +8,8 @@ class BookTimeSlotScreen extends StatelessWidget {
   final String gymTitle;
   final int placesLeft;
   final placesLeftDesc;
-
-  BookTimeSlotScreen({@required this.timeSlot, @required this.gymTitle, @required this.placesLeft}) : this.placesLeftDesc = "Places left: $placesLeft";
+  final void Function(TimeSlot) onBookTap;
+  BookTimeSlotScreen({@required this.timeSlot, @required this.gymTitle, @required this.placesLeft, @required this.onBookTap}) : this.placesLeftDesc = "Places left: $placesLeft";
 
   @override
   Widget build(BuildContext context) {
@@ -71,6 +71,7 @@ class BookTimeSlotScreen extends StatelessWidget {
                 onPressed: placesLeft == 0
                     ? null
                     : () {
+                        onBookTap.call(timeSlot);
                         Navigator.pop(context);
                       },
                 height: kSpacingXXLarge,

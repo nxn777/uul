@@ -51,12 +51,13 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
           onTap: viewModel.changeActiveDate,
         ),
       ),
-      _getScheduleContent(context, screenObject, viewModel.viewState.status == ViewStatus.LOADING, insideListView)
+      _getScheduleContent(context, insideListView, viewModel)
     ];
   }
 
-  Widget _getScheduleContent(BuildContext context, TimeSlotsScreenObject screenObject, bool isLoading, bool insideListView) {
-    if (screenObject.timeSlots.isNotEmpty || isLoading) {
+  Widget _getScheduleContent(BuildContext context, bool insideListView, TimeSlotsViewModel viewModel) {
+    TimeSlotsScreenObject screenObject = viewModel.viewState.value;
+    if (screenObject.timeSlots.isNotEmpty || viewModel.viewState.status == ViewStatus.LOADING) {
       return Expanded(
         child: TimeSlotList(
           insideListView: insideListView,
@@ -76,6 +77,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
                       timeSlot: timeSlot,
                       gymTitle: screenObject.activeGym.getTitle(),
                       placesLeft: screenObject.rules.personsPerTimeSlot - timeSlot.occupiedBy.length,
+                      onBookTap: viewModel.bookTimeSlot,
                     ),
                   ),
                 ),

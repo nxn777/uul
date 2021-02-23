@@ -44,6 +44,8 @@ dependencies:
     path: ../timeslots_api
   di:
     path: ../../../di
+  navigation:
+    path: ../../../navigation
 dev_dependencies:
   flutter_test:
     sdk: flutter

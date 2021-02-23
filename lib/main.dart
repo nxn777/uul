@@ -5,20 +5,22 @@ import 'package:flutter/material.dart';
 import 'package:persistence_data/persistence_data.dart';
 import 'package:provider/provider.dart';
 import 'package:shared_preferences/shared_preferences.dart';
+import 'package:navigation/navigation.dart';
 
 Future<void> main() async {
   WidgetsFlutterBinding.ensureInitialized();
-
+  var deepLinkProcessor = DeepLinkProcessor();
   var kvStore = DefaultKVStore(await SharedPreferences.getInstance());
-  var globalDependencies = GlobalDependencies(kvStore: kvStore);
+  var globalDependencies = GlobalDependencies(deepLinkProcessor, kvStore: kvStore);
   await globalDependencies.dependenciesProvider.userModule.createUserRepo().logout();
-  runApp(MyApp(globalDependencies));
+  runApp(MyApp(globalDependencies, deepLinkProcessor));
 }
 
 class MyApp extends StatelessWidget {
   final GlobalDependencies _globalDependencies;
+  final DeepLinkDepRegisterer _deepLinkDepRegisterer;
 
-  MyApp(this._globalDependencies);
+  MyApp(this._globalDependencies, this._deepLinkDepRegisterer);
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +42,7 @@ class MyApp extends StatelessWidget {
             ),
           ),
         ),
-        home: HomeScreen(),
+        home: HomeScreen(_deepLinkDepRegisterer),
       ),
     );
   }
