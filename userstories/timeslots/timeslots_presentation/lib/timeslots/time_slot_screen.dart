@@ -74,6 +74,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
                   child: Container(
                     padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + kBottomNavBarHeight),
                     child: BookTimeSlotScreen(
+                      isLoggedIn: viewModel.isLoggedIn(),
                       timeSlot: timeSlot,
                       gymTitle: screenObject.activeGym.getTitle(),
                       placesLeft: screenObject.rules.personsPerTimeSlot - timeSlot.occupiedBy.length,

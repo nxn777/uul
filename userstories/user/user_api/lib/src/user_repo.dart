@@ -11,6 +11,8 @@ abstract class UserRepo {
   Future<UULResult<User>> editInhabitant({int id, String name, String avatarSrc});
   Future<UULResult<User>> deleteInhabitant(int id);
   int getActiveInhabitantId();
+  Future<bool> setActiveInhabitantId(int id);
   Future<bool> setCurrentInhabitantId(int id);
   int getCurrentInhabitantId();
+  bool isLoggedIn();
 }

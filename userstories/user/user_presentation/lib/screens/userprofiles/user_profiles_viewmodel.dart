@@ -28,6 +28,7 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     int activeInhabitantId = storedActiveInhabitantId >=0 ? storedActiveInhabitantId : user.inhabitants.first.id;
     int currentInhabitantId = storedCurrentInhabitantId >=0 ? storedCurrentInhabitantId : user.inhabitants.first.id;
     await _userRepo.setCurrentInhabitantId(activeInhabitantId);
+    await _userRepo.setActiveInhabitantId(activeInhabitantId);
     var so = UserProfilesScreenObject(
       currentInhabitantId: currentInhabitantId,
       activeInhabitantId: activeInhabitantId,
@@ -64,8 +65,9 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     notifyListeners();
   }
 
-  void changeActiveInhabitant(Inhabitant inhabitant) {
+  void changeActiveInhabitant(Inhabitant inhabitant) async {
     // star button was pressed
+    await _userRepo.setActiveInhabitantId(inhabitant.id);
     viewState.value.activeInhabitantId = inhabitant.id;
     notifyListeners();
   }

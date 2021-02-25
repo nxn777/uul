@@ -7,6 +7,7 @@ import 'apiclient/schedule_api_client.dart';
 import 'apiclient/schedule_dtos.dart';
 
 const String _SCHEDULE_KEY_BASE = "schedule";
+const String _BOOK_KEY_BASE = "schedule";
 
 class DefaultScheduleRepo implements ScheduleRepo {
   final ScheduleApiClient _apiClient;
@@ -19,6 +20,13 @@ class DefaultScheduleRepo implements ScheduleRepo {
   Future<UULResult<Schedule>> _fetchSchedule(int gymId, int year, int month, int day) {
     var cachingRequest =
         CachingRequest<Schedule, ScheduleDTO>("$_SCHEDULE_KEY_BASE$gymId$year$month$day", _store, networkCall: () => _apiClient.getTimeSlotsForDayAndGym(gymId, year, month, day));
+    return cachingRequest.call(true, ScheduleDTO(), skipCaching: true);
+  }
+
+  @override
+  Future<UULResult<Schedule>> bookTimeSlot(int gymId, int timeSlotId, int inhabitantId) {
+    var cachingRequest =
+        CachingRequest<Schedule, ScheduleDTO>("$_BOOK_KEY_BASE$gymId$timeSlotId$inhabitantId", _store, networkCall: () => _apiClient.bookTimeSlot(gymId, timeSlotId, inhabitantId));
     return cachingRequest.call(true, ScheduleDTO(), skipCaching: true);
   }
 }

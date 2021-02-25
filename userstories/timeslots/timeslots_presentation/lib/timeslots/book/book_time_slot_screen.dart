@@ -4,12 +4,14 @@ import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
 
 class BookTimeSlotScreen extends StatelessWidget {
+  final bool isLoggedIn;
   final TimeSlot timeSlot;
   final String gymTitle;
   final int placesLeft;
   final placesLeftDesc;
   final void Function(TimeSlot) onBookTap;
-  BookTimeSlotScreen({@required this.timeSlot, @required this.gymTitle, @required this.placesLeft, @required this.onBookTap}) : this.placesLeftDesc = "Places left: $placesLeft";
+  BookTimeSlotScreen({@required this.timeSlot, @required this.gymTitle, @required this.placesLeft, @required this.onBookTap, @required this.isLoggedIn})
+      : this.placesLeftDesc = "Places left: $placesLeft";
 
   @override
   Widget build(BuildContext context) {
@@ -78,7 +80,7 @@ class BookTimeSlotScreen extends StatelessWidget {
                 color: kAccentColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: placesLeft == 0 ? kInactiveColor : kAccentColor)),
                 child: Text(
-                  "Book",
+                  isLoggedIn ? "Book" : "To book, please log in",
                   style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color: placesLeft == 0 ? kInactiveColor : Colors.black),
                 ),
               ),

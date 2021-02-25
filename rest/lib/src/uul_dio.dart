@@ -27,5 +27,6 @@ class UULDio {
     debugPrint("Token was updated: $token");
     return _kvStore.setString(_TOKEN_KEY, token);
   }
-  
+
+  String currentToken() => _kvStore.getString(_TOKEN_KEY, "");
 }

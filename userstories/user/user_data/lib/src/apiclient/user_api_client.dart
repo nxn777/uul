@@ -11,6 +11,7 @@ abstract class UserApiClient {
   Future<UULResponse<UserDTO>> addInhabitant(String name, String avatarSrc);
   Future<UULResponse<UserDTO>> editInhabitant(int id, String name, String avatarSrc);
   Future<UULResponse<UserDTO>> deleteInhabitant(int id);
+  bool hasToken();
 }
 
 class DefaultUserApiClient implements UserApiClient {
@@ -37,6 +38,9 @@ class DefaultUserApiClient implements UserApiClient {
     uulDio.updateToken(null);
     return Future.value("");
   }
+
+  @override
+  bool hasToken() => uulDio.currentToken().isNotEmpty;
 
   @override
   Future<UULResponse<UserDTO>> fetchUser() async {

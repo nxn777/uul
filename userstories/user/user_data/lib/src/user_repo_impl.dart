@@ -31,6 +31,9 @@ class DefaultUserRepo  implements UserRepo {
   }
 
   @override
+  bool isLoggedIn() => apiClient.hasToken();
+
+  @override
   Future<UULResult<User>> addNewProfile({String login, String name, String password, String apartment, String avatarSrc}) {
     NewUserDTO dto = NewUserDTO(login: login, name: name, pwd: password, apartmentCode: apartment, avatarSrc: avatarSrc);
     var cachingRequest = CachingRequest<User, UserDTO>(_CACHED_USER, _store, networkCall: () => apiClient.addUser(dto));
@@ -81,6 +84,9 @@ class DefaultUserRepo  implements UserRepo {
 
   @override
   int getActiveInhabitantId() => _store.getInteger(_ACTIVE_INHABITANT_ID, -1);
+
+  @override
+  Future<bool> setActiveInhabitantId(int id) => this._store.setInt(_ACTIVE_INHABITANT_ID, id);
 
   @override
   Future<bool> setCurrentInhabitantId(int id) => this._store.setInt(_CURRENT_INHABITANT_ID, id);

@@ -42,6 +42,8 @@ dependencies:
     path: ../../rules/rules_api
   timeslots_api:
     path: ../timeslots_api
+  user_api:
+    path: ../../user/user_api
   di:
     path: ../../../di
   navigation:
