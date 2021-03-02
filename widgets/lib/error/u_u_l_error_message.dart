@@ -40,6 +40,7 @@ class _UULErrorMessageState extends State<UULErrorMessage> with TickerProviderSt
                     padding: const EdgeInsets.symmetric(horizontal: kSpacingSmall),
                     child: Text(
                       _getMessage(),
+                      textAlign: TextAlign.center,
                       style: kCaptionActiveTextStyle.copyWith(
                         fontWeight: FontWeight.bold,
                       ),

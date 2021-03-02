@@ -5,9 +5,9 @@ class Inhabitant {
   final String name;
   final String avatarSrc;
   final String apartmentCode;
-  final String lastVisit = null;
+  final String lastVisit;
 
-  Inhabitant({@required this.id, @required this.name, @required this.apartmentCode, this.avatarSrc});
+  Inhabitant({@required this.id, @required this.name, @required this.apartmentCode, @required this.lastVisit, this.avatarSrc});
 
   String getLastVisitFormatted() {
     return "Last gym booking: ${lastVisit == null ? "Never" : lastVisit}";
