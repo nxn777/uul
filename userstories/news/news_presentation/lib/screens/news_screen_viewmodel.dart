@@ -15,6 +15,7 @@ class NewsScreenViewModel extends ChangeNotifier with ViewStateField<NewsScreenO
     (await _newsRepo.fetchNews()).fold(
       onSuccess: (newsPaper) {
         var so = NewsScreenObject(newsPaper);
+        viewState = viewState.copyWith(value: so, status: ViewStatus.IDLE);
       },
       onFailure: (response) => handleFailure(() => fetchData(), response),
     );
