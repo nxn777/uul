@@ -1,0 +1,1 @@
+library news_data;

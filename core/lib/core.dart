@@ -12,3 +12,4 @@ export 'models/usermodels/habitant.dart';
 export 'models/week.dart';
 export 'models/gym.dart';
 export 'models/schedule.dart';
+export 'models/news.dart';
