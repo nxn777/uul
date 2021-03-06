@@ -15,7 +15,7 @@ class DefaultNewsRepo implements NewsRepo {
 
   @override
   Future<UULResult<NewsPaper>> fetchNews() {
-    var cachingRequest = CachingRequest(_NEWS_KEY, _store, networkCall: () => _apiClient.fetchNewsPaper());
+    var cachingRequest = CachingRequest<NewsPaper, NewsPaperDTO>(_NEWS_KEY, _store, networkCall: () => _apiClient.fetchNewsPaper());
     return cachingRequest.call(true, NewsPaperDTO(), skipCaching: true);
   }
 

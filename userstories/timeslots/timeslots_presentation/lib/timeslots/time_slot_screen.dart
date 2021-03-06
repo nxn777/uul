@@ -13,7 +13,7 @@ import 'time_slots_viewmodel.dart';
 
 class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewModel> {
   @override
-  TimeSlotsViewModel Function(BuildContext p1) vmCreator()  => TimeSlotsScreenBuilder.buildAndStartVM;
+  TimeSlotsViewModel Function(BuildContext p1) vmCreator() => TimeSlotsScreenBuilder.buildAndStartVM;
 
   Widget buildIdleState(TimeSlotsViewModel viewModel, BuildContext context) {
     return OrientationBuilder(builder: (context, orientation) {
@@ -58,58 +58,82 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
   Widget _getScheduleContent(BuildContext context, bool insideListView, TimeSlotsViewModel viewModel) {
     TimeSlotsScreenObject screenObject = viewModel.viewState.value;
     if (screenObject.timeSlots.isNotEmpty || viewModel.viewState.status == ViewStatus.LOADING) {
-      return Expanded(
-        child: TimeSlotList(
-          insideListView: insideListView,
-          timeSlots: screenObject.timeSlots,
-          isCurrentDateActive: screenObject.isCurrentDateActive,
-          rules: screenObject.rules,
-          onTap: (timeSlot) {
-            showModalBottomSheet(
-              context: context,
-              isScrollControlled: true,
-              builder: (context) => BackdropFilter(
-                filter: ImageFilter.blur(sigmaX: .7, sigmaY: .7),
-                child: SingleChildScrollView(
-                  child: Container(
-                    padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + kBottomNavBarHeight),
-                    child: BookTimeSlotScreen(
-                      isLoggedIn: viewModel.isLoggedIn(),
-                      timeSlot: timeSlot,
-                      gymTitle: screenObject.activeGym.getTitle(),
-                      placesLeft: screenObject.rules.personsPerTimeSlot - timeSlot.occupiedBy.length,
-                      onBookTap: viewModel.bookTimeSlot,
-                    ),
-                  ),
-                ),
-              ),
+      return insideListView
+          ? getTimeSlotList(insideListView, screenObject, context, viewModel)
+          : Expanded(
+              child: getTimeSlotList(insideListView, screenObject, context, viewModel),
             );
-          },
-        ),
-      );
     }
-    if(screenObject.currentDate.isBefore(screenObject.activeDate)) {
+    if (screenObject.currentDate.isBefore(screenObject.activeDate)) {
       return Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.earlybirds, size: kSpacingXLarge, color: kAccentColor,),
-            SizedBox(height: kSpacingMedium,),
-            Text("Gym booking is not available for this day yet", style: kRegularActiveTextStyle,),
+            FaIcon(
+              FontAwesomeIcons.earlybirds,
+              size: kSpacingXLarge,
+              color: kAccentColor,
+            ),
+            SizedBox(
+              height: kSpacingMedium,
+            ),
+            Text(
+              "Gym booking is not available for this day yet",
+              style: kRegularActiveTextStyle,
+            ),
           ],
         ),
-      );//
+      ); //
     } else {
       return Expanded(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            FaIcon(FontAwesomeIcons.question, size: kSpacingXLarge, color: kAccentColor,),
-            SizedBox(height: kSpacingMedium,),
-            Text("No data for this day", style: kRegularActiveTextStyle,),
+            FaIcon(
+              FontAwesomeIcons.question,
+              size: kSpacingXLarge,
+              color: kAccentColor,
+            ),
+            SizedBox(
+              height: kSpacingMedium,
+            ),
+            Text(
+              "No data for this day",
+              style: kRegularActiveTextStyle,
+            ),
           ],
         ),
-      );//
+      ); //
     }
+  }
+
+  TimeSlotList getTimeSlotList(bool insideListView, TimeSlotsScreenObject screenObject, BuildContext context, TimeSlotsViewModel viewModel) {
+    return TimeSlotList(
+      insideListView: insideListView,
+      timeSlots: screenObject.timeSlots,
+      isCurrentDateActive: screenObject.isCurrentDateActive,
+      rules: screenObject.rules,
+      onTap: (timeSlot) {
+        showModalBottomSheet(
+          context: context,
+          isScrollControlled: true,
+          builder: (context) => BackdropFilter(
+            filter: ImageFilter.blur(sigmaX: .7, sigmaY: .7),
+            child: SingleChildScrollView(
+              child: Container(
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + kBottomNavBarHeight),
+                child: BookTimeSlotScreen(
+                  isLoggedIn: viewModel.isLoggedIn(),
+                  timeSlot: timeSlot,
+                  gymTitle: screenObject.activeGym.getTitle(),
+                  placesLeft: screenObject.rules.personsPerTimeSlot - timeSlot.occupiedBy.length,
+                  onBookTap: viewModel.bookTimeSlot,
+                ),
+              ),
+            ),
+          ),
+        );
+      },
+    );
   }
 }

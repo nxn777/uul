@@ -198,6 +198,20 @@ packages:
       url: "https://pub.dartlang.org"
     source: hosted
     version: "0.0.4"
+  news_api:
+    dependency: transitive
+    description:
+      path: "userstories/news/news_api"
+      relative: true
+    source: path
+    version: "1.0.0+1"
+  news_data:
+    dependency: transitive
+    description:
+      path: "userstories/news/news_data"
+      relative: true
+    source: path
+    version: "1.0.0+1"
   news_presentation:
     dependency: "direct main"
     description:

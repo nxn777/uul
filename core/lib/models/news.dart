@@ -13,12 +13,17 @@ class News {
   final DateTime updatedAt;
   final DateTime modifiedAt;
   final Auditory auditory;
+  final NewsType type = NewsType.INFO; // TODO implement on the backend
 
   News(this.id, this.title, this.content, this.author, this.createAt, this.updatedAt, this.modifiedAt, this.auditory);
 }
 
 enum Auditory {
   GUESTS, REGISTERED, ACTIVATED
+}
+
+enum NewsType {
+  INFO, ALERT, CALL_TO_ACTION, POLL, REMINDER
 }
 
 extension AuditoryFromInt on int {
