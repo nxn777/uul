@@ -21,7 +21,11 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
 
   bool isLoggedIn() => _userRepo.isLoggedIn();
 
-  void fetchData() async {
+  void fetchData({bool fromPullRefresh = false}) async {
+    if (!fromPullRefresh) {
+      viewState = viewState.copyWith(status: ViewStatus.LOADING);
+      notifyListeners();
+    }
     var currentWeek = Week.withDay(DateTime.now());
     var activeDate = DateTime.now();
     var currentDate = DateTime.now();

@@ -16,18 +16,21 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
   TimeSlotsViewModel Function(BuildContext p1) vmCreator() => TimeSlotsScreenBuilder.buildAndStartVM;
 
   Widget buildIdleState(TimeSlotsViewModel viewModel, BuildContext context) {
-    return OrientationBuilder(builder: (context, orientation) {
-      if (orientation == Orientation.portrait) {
-        return Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: _getScreenChildren(context, viewModel, false),
-        );
-      } else {
-        return ListView(
-          children: _getScreenChildren(context, viewModel, true),
-        );
-      }
-    });
+    return RefreshIndicator(
+      onRefresh: () async => viewModel.fetchData(fromPullRefresh: true),
+      child: OrientationBuilder(builder: (context, orientation) {
+        if (orientation == Orientation.portrait) {
+          return Column(
+            crossAxisAlignment: CrossAxisAlignment.stretch,
+            children: _getScreenChildren(context, viewModel, false),
+          );
+        } else {
+          return ListView(
+            children: _getScreenChildren(context, viewModel, true),
+          );
+        }
+      }),
+    );
   }
 
   List<Widget> _getScreenChildren(BuildContext context, TimeSlotsViewModel viewModel, bool insideListView) {
