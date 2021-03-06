@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:extensions/extensions.dart';
+
 class NewsDetailHeader extends StatelessWidget {
   final News news;
 

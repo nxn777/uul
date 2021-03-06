@@ -13,9 +13,9 @@ class News {
   final DateTime updatedAt;
   final DateTime modifiedAt;
   final Auditory auditory;
-  final NewsType type = NewsType.INFO; // TODO implement on the backend
+  final NewsType type;
 
-  News(this.id, this.title, this.content, this.author, this.createAt, this.updatedAt, this.modifiedAt, this.auditory);
+  News(this.id, this.title, this.content, this.author, this.createAt, this.updatedAt, this.modifiedAt, this.auditory, this.type);
 }
 
 enum Auditory {
@@ -34,5 +34,17 @@ extension AuditoryFromInt on int {
       case 2: return Auditory.ACTIVATED;
     }
     return defaultValue;
+  }
+}
+
+extension NewsTypeFromInt on int {
+  NewsType toNewsType(NewsType defaultValue) {
+    var result = NewsType.INFO;
+    try {
+      result = NewsType.values.elementAt(this);
+    } catch (e) {
+      result = defaultValue;
+    }
+    return result;
   }
 }

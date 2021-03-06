@@ -54,14 +54,14 @@ class NewsTile extends StatelessWidget {
                   ),
                   Text(
                     "By: ${news.author}",
-                    style: kCaptionInactiveTextStyle,
+                    style: kRegularInactiveSecondaryTextStyle.copyWith(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: kSpacingSmall,
                   ),
                   Text(
                     "Last modified at: ${DateFormatter.formatNewsDateTime(news.modifiedAt)}",
-                    style: kRegularActiveTextStyle,
+                    style: kRegularInactiveSecondaryTextStyle,
                   ),
                   SizedBox(
                     height: kSpacingMedium,

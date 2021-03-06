@@ -17,6 +17,8 @@ const kCaptionInactiveTextStyle = TextStyle(fontSize: kCaptionTextSize, color: k
 
 const kRegularInactiveTextStyle = TextStyle(fontSize: kRegularTextSize, color: kInactiveColor);
 
+const kRegularInactiveSecondaryTextStyle = TextStyle(fontSize: kRegularTextSize, color: kInactiveSecondaryColor);
+
 const kPageTitleTextStyle = TextStyle(fontSize: kPageTitleTextSize, color: Colors.black, fontWeight: FontWeight.w900);
 
 const kSubtitleActiveTextStyle = TextStyle(fontSize: kSubTitleTextSize, color: Colors.black, fontWeight: FontWeight.bold);
