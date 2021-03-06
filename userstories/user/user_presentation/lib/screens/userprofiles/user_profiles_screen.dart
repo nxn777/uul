@@ -55,38 +55,42 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
     if (screenObject == null) {
       return buildNoProfilesState(viewModel);
     }
-    return OrientationBuilder(builder: (context, orientation) {
-      if (orientation == Orientation.portrait) {
-        return Column(
-          children: getScreenWidgets(viewModel, false),
-        );
-      } else {
-        return ListView(
-          children: getScreenWidgets(viewModel, true),
-        );
-      }
-    });
+    return RefreshIndicator(
+      onRefresh: () async => viewModel.fetchData(fromPullRefresh: true),
+      child: OrientationBuilder(
+        builder: (context, orientation) {
+          if (orientation == Orientation.portrait) {
+            return Column(
+              children: getScreenWidgets(viewModel, false),
+            );
+          } else {
+            return ListView(
+              children: getScreenWidgets(viewModel, true),
+            );
+          }
+        },
+      ),
+    );
   }
 
   List<Widget> getScreenWidgets(UserProfilesViewModel viewModel, bool insideListView) {
     var screenObject = viewModel.viewState.value;
     return [
       CurrentInhabitantCard(
-        inhabitant: screenObject.currentInhabitant,
-        isActive: screenObject.currentInhabitant.id == screenObject.activeInhabitantId,
-        isProfileActivated: screenObject.user.isActivated,
-        isSingle: screenObject.notCurrentInhabitants.isEmpty,
-        apartment: screenObject.user.apartmentCode,
-        onMakeActiveTap: (item) => viewModel.changeActiveInhabitant(item),
-        onEditTap: () async {
-          var result = await this.onEditInhabitantTap.call();
-          viewModel.onUserActionResult(result);
-        },
-        onEditProfileTap: () async {
-          var result = await this.onEditProfileTap.call();
-          viewModel.onUserActionResult(result);
-        }
-      ),
+          inhabitant: screenObject.currentInhabitant,
+          isActive: screenObject.currentInhabitant.id == screenObject.activeInhabitantId,
+          isProfileActivated: screenObject.user.isActivated,
+          isSingle: screenObject.notCurrentInhabitants.isEmpty,
+          apartment: screenObject.user.apartmentCode,
+          onMakeActiveTap: (item) => viewModel.changeActiveInhabitant(item),
+          onEditTap: () async {
+            var result = await this.onEditInhabitantTap.call();
+            viewModel.onUserActionResult(result);
+          },
+          onEditProfileTap: () async {
+            var result = await this.onEditProfileTap.call();
+            viewModel.onUserActionResult(result);
+          }),
       insideListView
           ? InhabitantList(
               insideListView: true,

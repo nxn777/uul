@@ -39,11 +39,13 @@ class UserProfilesViewModel extends ChangeNotifier with ViewStateField<UserProfi
     notifyListeners();
   }
 
-  void fetchData() async {
-    viewState = viewState.copyWith(status: ViewStatus.LOADING);
-    notifyListeners();
+  void fetchData({bool fromPullRefresh = false}) async {
+    if (!fromPullRefresh) {
+      viewState = viewState.copyWith(status: ViewStatus.LOADING);
+      notifyListeners();
+    }
     var rulesTask = _rulesRepo.loadRules();
-    (await _userRepo.getUser()).fold(
+    (await _userRepo.getUser(forced: fromPullRefresh)).fold(
       onSuccess: (user) async {
         var rules = (await rulesTask).getOrNull();
         if (rules == null) {
