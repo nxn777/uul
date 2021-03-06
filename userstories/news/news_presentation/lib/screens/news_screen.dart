@@ -1,4 +1,5 @@
 import 'package:arch_components/arch_components.dart';
+import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:widgets/widgets.dart';
 
@@ -6,6 +7,10 @@ import 'news_screen_builder.dart';
 import 'news_screen_viewmodel.dart';
 
 class NewsScreen extends StatelessWidget with ViewStateScreen<NewsScreenViewModel> {
+  final Future Function(News) onNewsTap;
+
+  NewsScreen({this.onNewsTap});
+
   @override
   NewsScreenViewModel Function(BuildContext p1) vmCreator() => NewsScreenBuilder.buildAndStartVM;
 
@@ -36,11 +41,13 @@ class NewsScreen extends StatelessWidget with ViewStateScreen<NewsScreenViewMode
           ? NewsList(
               news: so.newsPaper.news,
               insideListView: insideListView,
+              onTap: onNewsTap,
             )
           : Expanded(
               child: NewsList(
                 news: so.newsPaper.news,
                 insideListView: insideListView,
+                onTap: onNewsTap,
               ),
             ),
     ];

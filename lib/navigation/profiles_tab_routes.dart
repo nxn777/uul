@@ -15,9 +15,9 @@ class ProfilesTabRoutes extends TabRoutes {
   String defaultRoute = root;
 
   @override
-  Map<String, WidgetBuilder> routeBuilders(BuildContext context, {data}) {
+  Map<String, WidgetBuilderWrapper> routeBuilders(BuildContext context, {data}) {
     return {
-      ProfilesTabRoutes.root: (context) => UserProfilesScreen(
+      ProfilesTabRoutes.root: (_) => (context) => UserProfilesScreen(
             onNewProfileTap: () {
               return push(newProfile, context, true);
             },
@@ -34,11 +34,11 @@ class ProfilesTabRoutes extends TabRoutes {
               return push(editProfile, context, true);
             },
           ),
-      ProfilesTabRoutes.newProfile: (context) => NewProfileScreen(),
-      ProfilesTabRoutes.login: (context) => LoginScreen(),
-      ProfilesTabRoutes.newInhabitant: (context) => NewInhabitantScreen(),
-      ProfilesTabRoutes.editInhabitant: (context) => EditInhabitantScreen(),
-      ProfilesTabRoutes.editProfile: (context) => EditProfileScreen(),
+      ProfilesTabRoutes.newProfile: (_) => (context) => NewProfileScreen(),
+      ProfilesTabRoutes.login: (_) => (context) => LoginScreen(),
+      ProfilesTabRoutes.newInhabitant: (_) => (context) => NewInhabitantScreen(),
+      ProfilesTabRoutes.editInhabitant: (_) => (context) => EditInhabitantScreen(),
+      ProfilesTabRoutes.editProfile: (_) => (context) => EditProfileScreen(),
     };
   }
 }

@@ -6,8 +6,8 @@ import 'package:extensions/extensions.dart';
 
 class NewsTile extends StatelessWidget {
   final News news;
-
-  NewsTile(this.news);
+  final void Function(News) onTap;
+  NewsTile(this.news, {this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -15,7 +15,7 @@ class NewsTile extends StatelessWidget {
       margin: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingXSmallPlus, kSpacingMedium, kSpacingXSmallPlus),
       child: InkWell(
         onTap: () {
-
+          this.onTap(news);
         },
         borderRadius: BorderRadius.circular(kDefaultBorderRadius),
         child: Row(
@@ -29,8 +29,8 @@ class NewsTile extends StatelessWidget {
                 height: kSpacingXLarge,
                 child: Center(
                   child: FaIcon(
-                    FontAwesomeIcons.exclamationTriangle,//_getIcon(),
-                    color: _getIconColor(),
+                    news.type.getIcon(),
+                    color: news.type.getIconColor(),
                     size: kSpacingXLarge,
                   ),
                 ),
@@ -81,35 +81,5 @@ class NewsTile extends StatelessWidget {
       ),
       decoration: BoxDecoration(color: kBackgroundColor, borderRadius: BorderRadius.circular(kDefaultBorderRadius)),
     );
-  }
-
-  IconData _getIcon() {
-    IconData result;
-    switch (news.type) {
-      case NewsType.INFO:
-        result = FontAwesomeIcons.info;
-        break;
-      case NewsType.ALERT:
-        result = FontAwesomeIcons.exclamationTriangle;
-        break;
-      case NewsType.CALL_TO_ACTION:
-        result = FontAwesomeIcons.solidBell;
-        break;
-      case NewsType.POLL:
-        result = FontAwesomeIcons.poll;
-        break;
-      case NewsType.REMINDER:
-        result = FontAwesomeIcons.angleDoubleUp;
-        break;
-    }
-    return result;
-  }
-
-  Color _getIconColor() {
-    if ([NewsType.ALERT].contains(news.type)) {
-      return Colors.redAccent;
-    } else {
-      return kAccentColor;
-    }
   }
 }

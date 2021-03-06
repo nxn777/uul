@@ -1,6 +1,7 @@
 const kRegularTextSize = 12.0;
 const kCaptionTextSize = 16.0;
 const kPageTitleTextSize = 32.0;
+const kSubTitleTextSize = 24.0;
 
 const kSpacingMedium = 16.0;
 const kSpacingXMedium = 12.0;

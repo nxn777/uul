@@ -16,7 +16,7 @@ class HomeScreen extends StatefulWidget {
 
 class _HomeScreenState extends State<HomeScreen> {
 
-  var _currentTab = TabItem.SCHEDULE;
+  var _currentTab = TabItem.NEWS;
   static final _navigatorKeys = {
     TabItem.NEWS: GlobalKey<NavigatorState>(),
     TabItem.SCHEDULE: GlobalKey<NavigatorState>(),

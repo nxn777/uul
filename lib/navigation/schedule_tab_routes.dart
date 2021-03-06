@@ -9,7 +9,7 @@ class ScheduleTabRoutes extends TabRoutes {
   String defaultRoute = root;
 
   @override
-  Map<String, WidgetBuilder> routeBuilders(BuildContext context) {
-    return {ScheduleTabRoutes.root: (context) => TimeSlotScreen()};
+  Map<String, WidgetBuilderWrapper> routeBuilders(BuildContext context) {
+    return {ScheduleTabRoutes.root: (_) => (context) => TimeSlotScreen()};
   }
 }
