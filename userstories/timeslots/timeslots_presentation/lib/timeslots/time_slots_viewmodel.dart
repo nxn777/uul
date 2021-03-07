@@ -6,6 +6,7 @@ import 'package:timeslots_api/timeslots_api.dart';
 import 'package:navigation/navigation.dart';
 import 'package:user_api/user_api.dart';
 import 'time_slots_screen_object.dart';
+import 'package:i18n/i18n.dart';
 
 class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScreenObject>, DefaultErrorResponseHandlers {
   final GymRepo _gymRepo;
@@ -35,7 +36,7 @@ class TimeSlotsViewModel extends ChangeNotifier with ViewStateField<TimeSlotsScr
     rulesResult.combineWith(scheduleResult).fold(
       onSuccess: (rulesAndSchedule) async {
         if (rulesAndSchedule.value1.gyms.isEmpty) {
-          this.viewState = this.viewState.copyWith(status: ViewStatus.ERROR, error: ViewError(message: "No gyms set", retry: () => fetchData()));
+          this.viewState = this.viewState.copyWith(status: ViewStatus.ERROR, error: ViewError(message: "No gyms set".i18n, retry: () => fetchData()));
           notifyListeners();
           return;
         }

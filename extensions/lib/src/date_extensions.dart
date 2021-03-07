@@ -9,6 +9,7 @@ class DateFormatter {
   static String formatNewsDateTime(DateTime dateTime) => "${_newsTimeFormatter.format(dateTime)}";
 
   static DateFormat createNewsDateFormat(BuildContext context) => DateFormat.MMMMd(Localizations.localeOf(context).languageCode).add_Hm();
+  static DateFormat createWeekDayFormat(BuildContext context) => DateFormat("E", Localizations.localeOf(context).languageCode);
 }
 
 extension MapHelpers on DateTime {

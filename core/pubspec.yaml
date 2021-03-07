@@ -32,6 +32,8 @@ dependencies:
 
   rest:
     path: ../rest
+  i18n:
+    path: ../i18n
 
 dev_dependencies:
   flutter_test:

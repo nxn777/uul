@@ -9,16 +9,25 @@ class HorizontalSelector<T extends HasTitle> extends StatelessWidget {
   final List<T> items;
   final Function(T) onItemTap;
   final bool Function(T) isItemSelected;
-
-  HorizontalSelector({this.items, this.onItemTap, this.isItemSelected, this.itemRightSpacing, this.indicatorScale, this.textScale});
+  final bool scrollable;
+  HorizontalSelector({this.items, this.onItemTap, this.isItemSelected, this.itemRightSpacing, this.indicatorScale, this.textScale, this.scrollable});
 
   @override
   Widget build(BuildContext context) {
-    return Row(
-      mainAxisAlignment: MainAxisAlignment.start,
-      crossAxisAlignment: CrossAxisAlignment.center,
-      children: _getTiles(),
-    );
+    return scrollable == true
+        ? SingleChildScrollView(
+            scrollDirection: Axis.horizontal,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.start,
+              crossAxisAlignment: CrossAxisAlignment.center,
+              children: _getTiles(),
+            ),
+          )
+        : Row(
+            mainAxisAlignment: MainAxisAlignment.start,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: _getTiles(),
+          );
   }
 
   List<Widget> _getTiles() => items

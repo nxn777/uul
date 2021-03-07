@@ -12,7 +12,7 @@ class Rules {
   final Map<String, String> specialFloorTitles;
   final int doorsPerFloor;
   final Set<String> bannedApartments; // could be { "C1207", "A0101" }
-  final List<Gym> gyms = Gym.getGyms(); // TODO get from api response
+  final List<Gym> gyms;
 
   Rules(
       {this.version = 0,
@@ -21,5 +21,6 @@ class Rules {
       this.buildings = defaultBuilding,
       this.specialFloorTitles = defaultSpecialFloors,
       this.doorsPerFloor = 8,
-      this.bannedApartments = defaultBannedApartments});
+      this.bannedApartments = defaultBannedApartments,
+      this.gyms});
 }

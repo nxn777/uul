@@ -10,7 +10,7 @@ class Week {
   }
 
   factory Week.withDay(DateTime baseDate) {
-    var list = List<DateTime>(7);
+    var list = List<DateTime>.filled(7, null);
     int currentWeekDay = baseDate.weekday - 1;
     list[currentWeekDay] = baseDate;
     for (int i = currentWeekDay - 1; i >= 0; i--) {

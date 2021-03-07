@@ -1,13 +1,14 @@
 import 'has_title.dart';
-// TODO REMOVE, use rules
-class Gym with HasTitle {
-  static List<Gym> getGyms() => [Gym._(1, "Gym A"), Gym._(2, "Gym B")];
+import 'package:i18n/i18n.dart';
 
-  final _title;
-  final id;
-
-  Gym._(this.id, this._title);
+class Gym implements HasTitle {
+  final bool isOpen;
+  final String name;
+  final int id;
+  Gym(this.id, this.name, this.isOpen);
 
   @override
-  String getTitle({bool raw = false}) => _title;
+  String getTitle({bool raw = false}) {
+    return "Gym %s".i18n.fill([name]);
+  }
 }

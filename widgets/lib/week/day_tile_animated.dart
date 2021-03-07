@@ -10,7 +10,7 @@ class DayTileAnimated extends StatefulWidget {
   final DateTime activeDate;
   final DateTime currentDate;
 
-  DayTileAnimated({@required this.day, @required this.activeDate, @required this.currentDate, @required this.onTap}) : _dayFormatter = DateFormat("E");
+  DayTileAnimated(this._dayFormatter, {@required this.day, @required this.activeDate, @required this.currentDate, @required this.onTap});
 
   @override
   _DayTileAnimatedState createState() => _DayTileAnimatedState();
@@ -30,7 +30,6 @@ class _DayTileAnimatedState extends State<DayTileAnimated> {
           textAlign: TextAlign.center,
         ),
         padding: EdgeInsets.fromLTRB(8, 12, 8, 12),
-        width: 44,
         duration: Duration(milliseconds: kStandardAnimationDurationMS),
         decoration: BoxDecoration(
           color: _isSelected() ? kAccentColor : Colors.transparent,
@@ -40,8 +39,6 @@ class _DayTileAnimatedState extends State<DayTileAnimated> {
     );
   }
 
-  // bool _isSelected() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).activeDate, widget.day);
-  // bool _isCurrent() => DateHelpers.isTheSameDay(Provider.of<AppState>(context, listen: false).currentDate, widget.day);
   bool _isSelected() => widget.activeDate.isTheSameDay(widget.day);
 
   bool _isCurrent() => widget.currentDate.isTheSameDay(widget.day);

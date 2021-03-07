@@ -5,6 +5,7 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:widgets/widgets.dart';
+import 'package:i18n/i18n.dart';
 
 import 'book/book_time_slot_screen.dart';
 import 'time_slot_screen_builder.dart';
@@ -36,7 +37,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
   List<Widget> _getScreenChildren(BuildContext context, TimeSlotsViewModel viewModel, bool insideListView) {
     TimeSlotsScreenObject screenObject = viewModel.viewState.value;
     return [
-      ScreenTitle("Schedule"),
+      ScreenTitle("Schedule".i18n),
       Padding(
         padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
         child: GymList(
@@ -81,7 +82,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
               height: kSpacingMedium,
             ),
             Text(
-              "Gym booking is not available for this day yet",
+              "Gym booking is not available for this day yet".i18n,
               style: kRegularActiveTextStyle,
             ),
           ],
@@ -101,7 +102,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
               height: kSpacingMedium,
             ),
             Text(
-              "No data for this day",
+              "No data for this day".i18n,
               style: kRegularActiveTextStyle,
             ),
           ],

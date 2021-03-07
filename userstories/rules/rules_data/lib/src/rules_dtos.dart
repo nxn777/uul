@@ -9,6 +9,7 @@ class RulesDTO implements HasFromJson, HasMapToDomain<Rules> {
   List<TowerDTO> _towers;
   List<SpecialFloorDTO> _specialFloors;
   List<BannedApartmentDTO> _bannedApartments;
+  List<GymDTO> _gyms;
 
   int get version => _version;
   int get personsPerTimeSlot => _personsPerTimeSlot;
@@ -17,6 +18,7 @@ class RulesDTO implements HasFromJson, HasMapToDomain<Rules> {
   List<TowerDTO> get towers => _towers;
   List<SpecialFloorDTO> get specialFloors => _specialFloors;
   List<BannedApartmentDTO> get bannedApartments => _bannedApartments;
+  List<GymDTO> get gyms => _gyms;
 
   RulesDTO();
 
@@ -44,6 +46,12 @@ class RulesDTO implements HasFromJson, HasMapToDomain<Rules> {
         _bannedApartments.add(BannedApartmentDTO.fromJson(t));
       });
     }
+    if (json["gyms"] != null) {
+      _gyms = [];
+      json["gyms"].forEach((t) {
+        _gyms.add(GymDTO.fromJson(t));
+      });
+    }
   }
 
   @override
@@ -57,13 +65,15 @@ class RulesDTO implements HasFromJson, HasMapToDomain<Rules> {
       floorTitles[specialFloor.name] = specialFloor.alias;
     });
     return Rules(
-        version: this.version,
-        personsPerTimeSlot: this.personsPerTimeSlot,
-        habitantsPerApartment: this.habitantsPerApartment,
-        doorsPerFloor: this.doorsPerFloor,
-        buildings: buildings,
-        specialFloorTitles: floorTitles,
-        bannedApartments: this.bannedApartments.map((e) => e.name).toSet());
+      version: this.version,
+      personsPerTimeSlot: this.personsPerTimeSlot,
+      habitantsPerApartment: this.habitantsPerApartment,
+      doorsPerFloor: this.doorsPerFloor,
+      buildings: buildings,
+      specialFloorTitles: floorTitles,
+      bannedApartments: this.bannedApartments.map((e) => e.name).toSet(),
+      gyms: this.gyms.map((e) => Gym(e.id, e.name, e.isOpen)).toList(),
+    );
   }
 }
 
@@ -100,5 +110,21 @@ class BannedApartmentDTO {
 
   BannedApartmentDTO.fromJson(dynamic json) {
     _name = json["name"];
+  }
+}
+
+class GymDTO {
+  int _id;
+  bool _isOpen;
+  String _name;
+
+  int get id => _id;
+  String get name => _name;
+  bool get isOpen => _isOpen;
+
+  GymDTO.fromJson(dynamic json) {
+    _name = json["name"];
+    _id = json["id"];
+    _isOpen = json["isOpen"];
   }
 }

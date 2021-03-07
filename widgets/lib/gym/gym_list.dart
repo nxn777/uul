@@ -17,6 +17,7 @@ class GymList extends StatelessWidget {
       isItemSelected: gymSelectedChecker,
       textScale: 2,
       indicatorScale: 1.2,
+      scrollable: true,
     );
   }
 }

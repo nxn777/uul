@@ -14,37 +14,38 @@ class NewsDetailScreen extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       body: SafeArea(
-          child: ListView(
-        children: [
-          NewsDetailHeader(_news),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-            child: Text(
-              _news.title,
-              style: kSubtitleActiveTextStyle,
+        child: ListView(
+          children: [
+            NewsDetailHeader(_news),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+              child: Text(
+                _news.title,
+                style: kSubtitleActiveTextStyle,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-            child: Linkable(
-              text: _news.content,
-              style: kRegularTextContentActiveTextStyle,
-              softWrap: true,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+              child: Linkable(
+                text: _news.content,
+                style: kRegularTextContentActiveTextStyle,
+                softWrap: true,
+              ),
             ),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-            child: Text(DateFormatter.createNewsDateFormat(context).format(_news.modifiedAt)),
-          ),
-          Padding(
-            padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-            child: Text(
-              _news.author,
-              style: kRegularInactiveTextStyle,
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+              child: Text(DateFormatter.createNewsDateFormat(context).format(_news.modifiedAt)),
             ),
-          )
-        ],
-      )),
+            Padding(
+              padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+              child: Text(
+                _news.author,
+                style: kRegularInactiveTextStyle,
+              ),
+            )
+          ],
+        ),
+      ),
     );
   }
 }

@@ -3,6 +3,7 @@ import 'package:core/core.dart';
 import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
+import 'package:i18n/i18n.dart';
 
 class TimeSlotTile extends StatelessWidget {
   final TimeSlot timeSlot;
@@ -71,22 +72,14 @@ class TimeSlotTile extends StatelessWidget {
 
   String _getTimeSlotOccupiedByDescription() {
     if (timeSlot.occupiedBy.isEmpty) {
-      String result = "All ${rules.personsPerTimeSlot} places are available";
+      String result = "All %s places are available".i18n.fill([rules.personsPerTimeSlot]);
       if (rules.personsPerTimeSlot == 1) {
-        result = "The only place is available";
+        result = "The only place is available".i18n;
       }
       return result;
     } else {
-      String result;
       var left = rules.personsPerTimeSlot - timeSlot.occupiedBy.length;
-      if (left > 1) {
-        result = "$left places left";
-      } else if (left == 1) {
-        result = "1 place left";
-      } else {
-        result = "No places left";
-      }
-      return result;
+      return "%d places left".i18n.plural(left);
     }
   }
 

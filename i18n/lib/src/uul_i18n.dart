@@ -12,6 +12,20 @@ extension Localization on String {
           "Poll": "Poll",
           "Reminder": "Reminder",
           "Unknown": "Unknown",
+          "Schedule": "Schedule",
+          "Gym booking is not available for this day yet": "Gym booking is not available for this day yet",
+          "No data for this day":  "No data for this day",
+          "No gyms set": "No gyms set",
+          "Gym %s" : "Gym %s",
+          "All %s places are available": "All %s places are available",
+          "The only place is available": "The only place is available",
+          "%d places left" : "%d places left"
+            .zero("No places left")
+            .one("One place left"),
+          "Places left: %s": "Places left: %s",
+          "Also booked by:\n\n%s": "Also booked by:\n\n%s",
+          "Book": "Book",
+          "To book, please log in": "To book, please log in",
         },
         "es": {
           "News": "Noticias",
@@ -23,6 +37,20 @@ extension Localization on String {
           "Poll": "Encuesta",
           "Reminder": "Recordatorio",
           "Unknown": "Desconocido",
+          "Schedule": "Horario",
+          "Gym booking is not available for this day yet": "La reserva del gimnasio aún no está disponible para este día",
+          "No data for this day": "No hay datos para este día",
+          "No gyms set": "No hay gimnasios establecidos",
+          "Gym %s": "Gymnasio %s",
+          "All %s places are available": "Los %s lugares están disponibles",
+          "The only place is available": "El único lugar está disponible",
+          "%d places left" : "Quedan %d lugares"
+              .zero("No quedan lugares")
+              .one("Queda un lugar"),
+          "Places left: %s": "Quedan %s lugares",
+          "Also booked by:\n\n%s": "También reservado por: \n\n%s",
+          "Book": "Reservar",
+          "To book, please log in": "Para reservar, inicie sesión"
         }
       };
   String get i18n => localize(this, _t);

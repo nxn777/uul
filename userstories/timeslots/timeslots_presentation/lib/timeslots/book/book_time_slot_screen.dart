@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:extensions/extensions.dart';
 import 'package:flutter/material.dart';
+import 'package:i18n/i18n.dart';
 
 class BookTimeSlotScreen extends StatelessWidget {
   final bool isLoggedIn;
@@ -11,7 +12,7 @@ class BookTimeSlotScreen extends StatelessWidget {
   final placesLeftDesc;
   final void Function(TimeSlot) onBookTap;
   BookTimeSlotScreen({@required this.timeSlot, @required this.gymTitle, @required this.placesLeft, @required this.onBookTap, @required this.isLoggedIn})
-      : this.placesLeftDesc = "Places left: $placesLeft";
+      : this.placesLeftDesc = "Places left: %s".i18n.fill([placesLeft]);
 
   @override
   Widget build(BuildContext context) {
@@ -42,6 +43,7 @@ class BookTimeSlotScreen extends StatelessWidget {
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.baseline,
+                textBaseline: TextBaseline.alphabetic,
                 children: [
                   Text(
                     DateFormatter.formatTimeSlotTitle(timeSlot.start, timeSlot.end),
@@ -60,7 +62,7 @@ class BookTimeSlotScreen extends StatelessWidget {
               child: Padding(
                 padding: const EdgeInsets.fromLTRB(0, kSpacingSmall, 0, 0),
                 child: Text(
-                  "Also booked by:\n\n" + _countOccupiedByApartment(),
+                  "Also booked by:\n\n%s".i18n.fill([_countOccupiedByApartment()]),
                   style: kRegularActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color: Colors.black),
                   textAlign: TextAlign.start,
                 ),
@@ -80,7 +82,7 @@ class BookTimeSlotScreen extends StatelessWidget {
                 color: kAccentColor,
                 shape: RoundedRectangleBorder(borderRadius: BorderRadius.circular(kMediumBorderRadius), side: BorderSide(color: placesLeft == 0 ? kInactiveColor : kAccentColor)),
                 child: Text(
-                  isLoggedIn ? "Book" : "To book, please log in",
+                  isLoggedIn ? "Book".i18n : "To book, please log in".i18n,
                   style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.w900, color: placesLeft == 0 ? kInactiveColor : Colors.black),
                 ),
               ),
