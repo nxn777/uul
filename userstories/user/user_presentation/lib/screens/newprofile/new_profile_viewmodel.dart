@@ -8,6 +8,7 @@ import 'package:user_presentation/common/profile_mixins.dart';
 import 'package:user_presentation/common/steps_viewmodel.dart';
 
 import 'new_profile_screen_object.dart';
+import 'package:i18n/i18n.dart';
 
 const int _FIRST_STEP = 0;
 
@@ -34,7 +35,7 @@ class NewProfileViewModel extends StepsViewModel with ViewStateField<NewProfileS
   List<String> get doors => _condo.getDoors(activeTower, activeFloor);
   String activeDoor = "";
   String get apartmentCode => _condo.getApartmentCode(activeTower, activeFloor, activeDoor);
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartmentCode, "Review and create");
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartmentCode, "Review and create".i18n);
   User user;
 
   void fetchData() async {

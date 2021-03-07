@@ -1,5 +1,6 @@
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
+import 'package:i18n/i18n.dart';
 
 import 'step_operations.dart';
 
@@ -58,19 +59,19 @@ abstract class StepsViewModel extends ChangeNotifier {
     return start;
   }
 
-  String get applyButtonTitle => "Create";
+  String get applyButtonTitle => "Create".i18n;
   String getNextButtonTitle() {
     if (_currentStep == _totalSteps - 1) {
       return applyButtonTitle;
     }
-    return "Next";
+    return "Next".i18n;
   }
 
   String getClearButtonTitle() {
     if (_currentStep == _totalSteps - 1) {
-      return "Reset all";
+      return "Reset all".i18n;
     }
-    return "Clear";
+    return "Clear".i18n;
   }
 
   bool nextButtonIsEnabled() => (_currentStep != _totalSteps - 1) || isComplete();

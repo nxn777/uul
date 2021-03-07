@@ -6,6 +6,7 @@ import 'package:user_presentation/validators/account_form_validator.dart';
 import 'package:widgets/widgets.dart';
 import 'login_screen_builder.dart';
 import 'login_viewmodel.dart';
+import 'package:i18n/i18n.dart';
 
 class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
   @override
@@ -20,7 +21,7 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
     var apartmentMaskFormatter = MaskTextInputFormatter(mask: 'A####', filter: { "#": RegExp(r'[0-9]'), "A": RegExp(r'[A-D]') });
     return ListView(
       children: [
-        ScreenTitle("Log in"),
+        ScreenTitle("Log in".i18n),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
@@ -39,7 +40,7 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
               children: [
                 TextFormField(
                   controller: apartmentController,
-                  decoration: InputDecoration(labelText: 'Apartment'),
+                  decoration: InputDecoration(labelText: 'Apartment'.i18n),
                   textCapitalization: TextCapitalization.characters,
                   validator: AccountFormValidator.getApartmentValidator(),
                   onChanged: (value) => so.apartmentCode = value,
@@ -47,14 +48,14 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
                 ),
                 TextFormField(
                   controller: loginController,
-                  decoration: InputDecoration(labelText: 'Name'),
+                  decoration: InputDecoration(labelText: 'Name'.i18n),
                   textCapitalization: TextCapitalization.words,
                   validator: AccountFormValidator.getLoginValidator(),
                   onChanged: (value) => so.login = value,
                 ),
                 TextFormField(
                   controller: pwdController,
-                  decoration: InputDecoration(labelText: 'Password'),
+                  decoration: InputDecoration(labelText: 'Password'.i18n),
                   obscureText: true,
                   validator: AccountFormValidator.getPwdValidator(),
                   onChanged: (value) => so.pwd = value,
@@ -71,8 +72,8 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
           mainAxisSize: MainAxisSize.min,
           children: [
             UULButton(
-              title: "Log in",
-              width: kSpacingHuge * 2,
+              title: "Log in".i18n,
+              width: kSpacingHuge * 2.05,
               onPressed: () {
                 viewModel.login(context);
               },
@@ -81,8 +82,8 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
               width: kSpacingMedium,
             ),
             UULButton(
-              title: "Cancel",
-              width: kSpacingHuge * 2,
+              title: "Cancel".i18n,
+              width: kSpacingHuge * 2.05,
               isSolid: false,
               onPressed: () {
                 Navigator.of(context).pop(false);

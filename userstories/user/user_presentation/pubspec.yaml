@@ -46,6 +46,8 @@ dependencies:
     path: ../../rules/rules_api
   extensions:
     path: ../../../extensions
+  i18n:
+    path: ../../../i18n
 
 dev_dependencies:
   flutter_test:

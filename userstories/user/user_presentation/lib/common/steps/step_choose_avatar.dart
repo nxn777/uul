@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:user_presentation/common/profile_mixins.dart';
 import 'package:user_presentation/common/steps_viewmodel.dart';
 import 'package:widgets/widgets.dart';
-
+import 'package:i18n/i18n.dart';
 
 Step createChooseAvatarStep(BuildContext context, int index, StepsViewModel viewModel) {
   bool _chooseAvatarStepValidator(viewModel) => (viewModel as AvatarSelection).activeAvatarImage != null;
@@ -18,7 +18,7 @@ Step createChooseAvatarStep(BuildContext context, int index, StepsViewModel view
   return Step(
     isActive: viewModel.isStepActive(index),
     state: viewModel.getStepState(index),
-    title: Text("Choose your avatar"),
+    title: Text("Choose your avatar".i18n),
     content: Column(
       children: [
         BundledAvatar(

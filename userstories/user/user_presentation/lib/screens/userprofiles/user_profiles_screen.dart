@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:provider/provider.dart';
 import 'package:widgets/widgets.dart';
-
+import 'package:i18n/i18n.dart';
 import 'user_profiles_screen_builder.dart';
 import 'user_profiles_viewmodel.dart';
 
@@ -114,14 +114,14 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
   Widget buildNoProfilesState(UserProfilesViewModel viewModel) {
     return ListView(
       children: [
-        ScreenTitle("User profile"),
+        ScreenTitle("User profile".i18n),
         Center(
           child: BundledAvatar(height: kSpacingHuge * 2, imageSrc: "assets/defaults/default_user3.png"),
         ),
         Padding(
           padding: const EdgeInsets.all(kSpacingMedium),
           child: Text(
-            "There are no stored user profiles",
+            "There are no stored user profiles".i18n,
             style: kRegularActiveTextStyle,
             textAlign: TextAlign.center,
           ),
@@ -131,8 +131,8 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
           mainAxisSize: MainAxisSize.min,
           children: [
             UULButton(
-              title: "Log in",
-              width: kSpacingHuge * 2,
+              title: "Log in".i18n,
+              width: kSpacingHuge * 2.05,
               onPressed: () async {
                 bool result = await this.onLoginTap();
                 viewModel.onUserActionResult(result);
@@ -143,7 +143,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
         Padding(
           padding: const EdgeInsets.all(kSpacingMedium),
           child: Text(
-            "Or create a new profile",
+            "Or create a new profile".i18n,
             style: kRegularActiveTextStyle,
             textAlign: TextAlign.center,
           ),

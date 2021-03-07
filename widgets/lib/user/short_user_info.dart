@@ -1,5 +1,6 @@
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
+import 'package:i18n/i18n.dart';
 
 class ShortUserInfo extends StatelessWidget {
   final String name;
@@ -22,7 +23,7 @@ class ShortUserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Login:",
+                  "Login:".i18n,
                   style: kRegularActiveTextStyle,
                 ),
                 Text(
@@ -44,7 +45,7 @@ class ShortUserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Name:",
+                  "Name:".i18n,
                   style: kRegularActiveTextStyle,
                 ),
                 Text(
@@ -65,7 +66,7 @@ class ShortUserInfo extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: [
                 Text(
-                  "Apartment:",
+                  "Apartment:".i18n,
                   style: kRegularActiveTextStyle,
                 ),
                 Text(

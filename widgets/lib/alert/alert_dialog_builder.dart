@@ -2,6 +2,7 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter/services.dart';
+import 'package:i18n/i18n.dart';
 
 class AlertDialogBuilder {
   final BuildContext _context;
@@ -54,7 +55,7 @@ class AlertDialogBuilder {
   }
 
   AlertDialogBuilder addCancel() {
-    return addAction("Cancel");
+    return addAction("Cancel".i18n);
   }
 
   AlertDialog build() {

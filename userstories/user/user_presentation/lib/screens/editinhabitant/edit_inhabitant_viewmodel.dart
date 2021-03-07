@@ -7,6 +7,7 @@ import 'package:user_presentation/common/profile_mixins.dart';
 import 'package:user_presentation/common/steps_viewmodel.dart';
 
 import 'edit_inhabitant_screen_object.dart';
+import 'package:i18n/i18n.dart';
 
 const int _FIRST_STEP = 0;
 
@@ -16,9 +17,9 @@ class EditInhabitantScreenViewModel extends StepsViewModel
   final UserRepo _userRepo;
   final BuildContext _context;
   Inhabitant _inhabitant;
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and update", reviewMessage: "");
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and update".i18n, reviewMsg: "");
   @override
-  String get applyButtonTitle => "Update";
+  String get applyButtonTitle => "Update".i18n;
   bool _shouldShowDeleteInhabitant = true;
   bool get shouldShowDeleteInhabitant => _shouldShowDeleteInhabitant;
 

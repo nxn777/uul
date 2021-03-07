@@ -5,6 +5,7 @@ import 'package:user_presentation/common/inhabitant_viewmodel.dart';
 import 'package:user_presentation/common/profile_mixins.dart';
 import 'package:user_presentation/common/steps_viewmodel.dart';
 import 'package:user_presentation/screens/newinhabitant/new_inhabitant_screen_object.dart';
+import 'package:i18n/i18n.dart';
 
 const int _FIRST_STEP = 0;
 
@@ -14,7 +15,7 @@ class NewInhabitantScreenViewModel extends StepsViewModel
   final UserRepo _userRepo;
   final BuildContext _context;
 
-  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and create");
+  ReviewInfo get reviewInfo => ReviewInfo(name, login, apartment, "Review and create".i18n, reviewMsg: "");
 
   NewInhabitantScreenViewModel(this._context, this._userRepo) : super(_FIRST_STEP) {
     viewState = ViewState(status: ViewStatus.LOADING);

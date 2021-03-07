@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:user_presentation/validators/account_form_validator.dart';
 import '../new_profile_viewmodel.dart';
+import 'package:i18n/i18n.dart';
 
 Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel viewModel) {
   var nameController = TextEditingController(text: viewModel.name);
@@ -27,28 +28,28 @@ Step createNewAccountStep(BuildContext context, int index, NewProfileViewModel v
   return Step(
     isActive: viewModel.isStepActive(index),
     state: viewModel.getStepState(index),
-    title: Text("Account"),
+    title: Text("Account".i18n),
     content: Form(
       key: viewModel.formKey,
       child: Column(
         children: [
           TextFormField(
             controller: loginController,
-            decoration: InputDecoration(labelText: 'Login'),
+            decoration: InputDecoration(labelText: 'Login'.i18n),
             textCapitalization: TextCapitalization.words,
             validator: AccountFormValidator.getLoginValidator(),
             onChanged: (value) => viewModel.login = value,
           ),
           TextFormField(
             controller: nameController,
-            decoration: InputDecoration(labelText: 'Name (will be visible for everyone)'),
+            decoration: InputDecoration(labelText: 'Name (will be visible for everyone)'.i18n),
             textCapitalization: TextCapitalization.words,
             validator: AccountFormValidator.getNameValidator(),
             onChanged: (value) => viewModel.name = value,
           ),
           TextFormField(
             controller: pwdController,
-            decoration: InputDecoration(labelText: 'Password'),
+            decoration: InputDecoration(labelText: 'Password'.i18n),
             obscureText: true,
             validator: AccountFormValidator.getPwdValidator(),
             onChanged: (value) => viewModel.pwd = value,

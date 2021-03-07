@@ -5,6 +5,7 @@ import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:user_presentation/common/steps_screen_content.dart';
 import 'package:widgets/button/u_u_l_button.dart';
 import 'package:widgets/widgets.dart';
+import 'package:i18n/i18n.dart';
 
 import 'edit_inhabitant_screen_builder.dart';
 import 'edit_inhabitant_viewmodel.dart';
@@ -18,7 +19,7 @@ class EditInhabitantScreen extends StatelessWidget with ViewStateScreen<EditInha
 
   @override
   Widget buildIdleState(EditInhabitantScreenViewModel viewModel, BuildContext context) =>
-      getStepsScreenContent("Edit inhabitant", context, viewModel, _stepsFactory.getEditInhabitantSteps(context, viewModel), additional: getAdditionalWidgets(viewModel, context));
+      getStepsScreenContent("Edit inhabitant".i18n, context, viewModel, _stepsFactory.getEditInhabitantSteps(context, viewModel), additional: getAdditionalWidgets(viewModel, context));
 
   List<Widget> getAdditionalWidgets(EditInhabitantScreenViewModel viewModel, BuildContext context) {
     List<Widget> result = List();
@@ -40,14 +41,14 @@ class EditInhabitantScreen extends StatelessWidget with ViewStateScreen<EditInha
           ),
           Expanded(
             child: UULButton(
-              title: "Delete this inhabitant",
+              title: "Delete this inhabitant".i18n,
               isSolid: false,
               onPressed: () {
                 AlertDialogBuilder(context)
-                    .setTitle("Inhabitant deletion")
-                    .setMessage("Are you sure you want to delete this inhabitant?\nThis can not be undone.")
+                    .setTitle("Inhabitant deletion".i18n)
+                    .setMessage("Are you sure you want to delete this inhabitant?\nThis can not be undone.".i18n)
                     .addCancel()
-                    .addAction("Delete", isDestructive: true, onPressed: viewModel.deleteInhabitant)
+                    .addAction("Delete".i18n, isDestructive: true, onPressed: viewModel.deleteInhabitant)
                     .buildAndShow();
               },
             ),

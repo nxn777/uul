@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:user_presentation/validators/account_form_validator.dart';
 import '../../../common/inhabitant_viewmodel.dart';
+import 'package:i18n/i18n.dart';
 
 Step createNewInhabitantStep(BuildContext context, int index, InhabitantViewModel viewModel) {
   var nameController = TextEditingController(text: viewModel.name);
@@ -22,14 +23,14 @@ Step createNewInhabitantStep(BuildContext context, int index, InhabitantViewMode
   return Step(
     isActive: viewModel.isStepActive(index),
     state: viewModel.getStepState(index),
-    title: Text("Inhabitant"),
+    title: Text("Inhabitant".i18n),
     content: Form(
       key: viewModel.formKey,
       child: Column(
         children: [
           TextFormField(
             controller: nameController,
-            decoration: InputDecoration(labelText: 'Name (will be visible for everyone)'),
+            decoration: InputDecoration(labelText: "Name (will be visible for everyone)".i18n),
             textCapitalization: TextCapitalization.words,
             validator: AccountFormValidator.getNameValidator(),
             onChanged: (value) => viewModel.name = value,

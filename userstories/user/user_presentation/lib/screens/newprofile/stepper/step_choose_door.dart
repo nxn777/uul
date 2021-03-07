@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:widgets/widgets.dart';
+import 'package:i18n/i18n.dart';
 
 import '../new_profile_viewmodel.dart';
 
@@ -17,7 +18,7 @@ Step createChooseDoorStep(BuildContext context, int index, NewProfileViewModel v
   return Step(
     isActive: viewModel.isStepActive(index),
     state: viewModel.getStepState(index),
-    title: Text("Choose your door"),
+    title: Text("Choose your door".i18n),
     content: Container(
       child: ApartmentDetailSelector(
         items: viewModel.doors,

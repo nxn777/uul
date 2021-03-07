@@ -1,4 +1,5 @@
 import 'package:flutter/foundation.dart';
+import 'package:i18n/i18n.dart';
 
 mixin AvatarSelection on ChangeNotifier {
   String activeAvatarImage;
@@ -15,9 +16,10 @@ class ReviewInfo {
   final String apartmentCode;
   final String reviewStepTitle;
   final String reviewMessage;
-  ReviewInfo(this.name, this.login, this.apartmentCode, this.reviewStepTitle,
-      {this.reviewMessage =
-          "Your profile will be saved on a server, you will need to visit Uno Urban Life administration in person to activate it.\nPlease remember your login and name."});
+  ReviewInfo(this.name, this.login, this.apartmentCode, this.reviewStepTitle, {String reviewMsg})
+      : reviewMessage = reviewMsg != null
+            ? reviewMsg
+            : "Your profile will be saved on a server, you will need to visit Uno Urban Life administration in person to activate it.\nPlease remember your login.".i18n;
 }
 
 abstract class HasReviewInfo {

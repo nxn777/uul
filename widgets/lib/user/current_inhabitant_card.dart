@@ -6,6 +6,7 @@ import 'package:super_tooltip/super_tooltip.dart';
 import 'package:widgets/avatars/bundled_avatar.dart';
 import 'package:widgets/button/u_u_l_icon_button.dart';
 import 'package:widgets/title/screen_title.dart';
+import 'package:i18n/i18n.dart';
 
 class CurrentInhabitantCard extends StatelessWidget {
   final Inhabitant inhabitant;
@@ -47,7 +48,7 @@ class CurrentInhabitantCard extends StatelessWidget {
           children: [
             Row(
               children: [
-                Expanded(child: ScreenTitle("User profile")),
+                Expanded(child: ScreenTitle("User profile".i18n)),
                 UULIconButton(
                   icon: FontAwesomeIcons.cog,
                   onTap: () {
@@ -115,7 +116,7 @@ class CurrentInhabitantCard extends StatelessWidget {
                   child: Padding(
                     padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
                     child: Text(
-                      "Apartment: $apartment\n${inhabitant.getLastVisitFormatted()}",
+                      "Apartment: %s\n%s".i18n.fill([apartment, inhabitant.getLastVisitFormatted()]),
                       style: kRegularInactiveTextStyle,
                       overflow: TextOverflow.ellipsis,
                       maxLines: 2,
@@ -141,8 +142,8 @@ class CurrentInhabitantCard extends StatelessWidget {
       content: new Material(
         child: Text(
           isProfileActivated
-              ? "This profile is activated.\nYou can use it to book gyms"
-              : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.",
+              ? "This profile is activated.\nYou can use it to book gyms".i18n
+              : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.".i18n,
           softWrap: true,
           style: kRegularActiveTextStyle,
           textAlign: TextAlign.center,

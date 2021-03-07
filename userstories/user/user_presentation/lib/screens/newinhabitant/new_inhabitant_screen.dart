@@ -4,6 +4,7 @@ import 'package:user_presentation/common/steps_screen_content.dart';
 import 'package:user_presentation/screens/newinhabitant/new_inhabitant_screen_builder.dart';
 import 'package:user_presentation/screens/newinhabitant/new_inhabitant_viewmodel.dart';
 import 'package:user_presentation/screens/newinhabitant/stepper/steps_factory.dart';
+import 'package:i18n/i18n.dart';
 
 class NewInhabitantScreen extends StatelessWidget with ViewStateScreen<NewInhabitantScreenViewModel> {
   final NewInhabitantStepsFactory _stepsFactory = NewInhabitantStepsFactory();
@@ -13,5 +14,5 @@ class NewInhabitantScreen extends StatelessWidget with ViewStateScreen<NewInhabi
 
   @override
   Widget buildIdleState(NewInhabitantScreenViewModel viewModel, BuildContext context)  =>
-      getStepsScreenContent("New inhabitant", context, viewModel, _stepsFactory.getNewInhabitantSteps(context, viewModel));
+      getStepsScreenContent("New inhabitant".i18n, context, viewModel, _stepsFactory.getNewInhabitantSteps(context, viewModel));
 }
