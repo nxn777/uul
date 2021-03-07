@@ -3,7 +3,6 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:extensions/extensions.dart';
 import 'package:linkable/linkable.dart';
-import 'package:url_launcher/url_launcher.dart';
 import 'package:widgets/widgets.dart';
 
 class NewsDetailScreen extends StatelessWidget {
@@ -35,7 +34,7 @@ class NewsDetailScreen extends StatelessWidget {
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-            child: Text(DateFormatter.formatNewsDateTime(_news.modifiedAt)),
+            child: Text(DateFormatter.createNewsDateFormat(context).format(_news.modifiedAt)),
           ),
           Padding(
             padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),

@@ -3,11 +3,14 @@ import 'package:core/core.dart';
 import 'package:flutter/material.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 import 'package:extensions/extensions.dart';
+import 'package:i18n/i18n.dart';
+import 'package:intl/intl.dart';
 
 class NewsTile extends StatelessWidget {
+  final DateFormat newsDateFormat;
   final News news;
   final void Function(News) onTap;
-  NewsTile(this.news, {this.onTap});
+  NewsTile(this.news, this.newsDateFormat, {this.onTap});
 
   @override
   Widget build(BuildContext context) {
@@ -53,14 +56,14 @@ class NewsTile extends StatelessWidget {
                     ),
                   ),
                   Text(
-                    "By: ${news.author}",
+                    "By: %s".i18n.fill([news.author]),
                     style: kRegularInactiveSecondaryTextStyle.copyWith(fontWeight: FontWeight.bold),
                   ),
                   SizedBox(
                     height: kSpacingSmall,
                   ),
                   Text(
-                    "Last modified at: ${DateFormatter.formatNewsDateTime(news.modifiedAt)}",
+                    "Last modified at: %s".i18n.fill([newsDateFormat.format(news.modifiedAt)]),
                     style: kRegularInactiveSecondaryTextStyle,
                   ),
                   SizedBox(

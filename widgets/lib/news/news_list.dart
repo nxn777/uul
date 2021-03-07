@@ -1,5 +1,6 @@
 import 'package:core/core.dart';
 import 'package:flutter/material.dart';
+import 'package:extensions/extensions.dart';
 
 import 'news_tile.dart';
 
@@ -14,7 +15,7 @@ class NewsList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListView.builder(
-      itemBuilder: (context, index) => NewsTile(news[index], onTap: onTap,),
+      itemBuilder: (context, index) => NewsTile(news[index], DateFormatter.createNewsDateFormat(context), onTap: onTap,),
       itemCount: news.length,
       shrinkWrap: insideListView ? true : false,
       physics: insideListView ? ClampingScrollPhysics() : null,

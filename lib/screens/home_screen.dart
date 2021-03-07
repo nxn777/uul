@@ -4,7 +4,6 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
 
-
 class HomeScreen extends StatefulWidget {
   final DeepLinkDepRegisterer deepLinkDepRegisterer;
 

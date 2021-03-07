@@ -43,6 +43,8 @@ dependencies:
     path: ../../../common
   di:
     path: ../../../di
+  i18n:
+    path: ../../../i18n
 dev_dependencies:
   flutter_test:
     sdk: flutter
