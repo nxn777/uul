@@ -1,6 +1,8 @@
 import 'dart:convert';
-
+import 'package:i18n/i18n.dart';
 import 'package:dio/dio.dart';
+
+import 'error.dart';
 
 abstract class HasFromJson {
   populateFromJson(dynamic jsonRaw);
@@ -34,10 +36,9 @@ class UULResponse<T extends HasFromJson> {
   }
 
   UULResponse.fromResponse(Response response, T dummy) {
-    _code = response.statusCode;
     if (response.statusCode == 401) {
       _isSuccess = false;
-      _message = "Unauthorized";
+      _message = "Unauthorized".i18n;
       _data = null;
       _rawData = null;
       return;
@@ -46,7 +47,8 @@ class UULResponse<T extends HasFromJson> {
       _rawData = response.data.toString();
       final json = jsonDecode(_rawData);
       _isSuccess = json["success"];
-      _message = json["message"];
+      _code =  json["code"];
+      _message = UULError.getMessage(_code);
       if (json["data"] != null) {
         dummy.populateFromJson(json["data"]);
         _data = dummy;
@@ -55,17 +57,15 @@ class UULResponse<T extends HasFromJson> {
       }
     } else {
       _isSuccess = false;
-      _message = response.statusMessage;
       _data = null;
       _rawData = null;
-      return;
     }
   }
 
   UULResponse.fromException(Exception e) {
     if (e is DioError) {
       _code = e.response?.statusCode ?? -1;
-      _message = e.response?.statusMessage ?? "Network error";
+      _message = e.response?.statusMessage ?? "Network error".i18n;
       _data = null;
       _isSuccess = false;
       return;

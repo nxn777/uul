@@ -3,6 +3,7 @@ import 'package:flutter/widgets.dart';
 import 'package:user_api/user_api.dart';
 
 import 'login_screen_object.dart';
+import 'package:i18n/i18n.dart';
 
 class LoginViewModel extends ChangeNotifier with ViewStateField<LoginScreenObject> {
   final accountFormKey = GlobalKey<FormState>();
@@ -30,7 +31,7 @@ class LoginViewModel extends ChangeNotifier with ViewStateField<LoginScreenObjec
       viewState = viewState.copyWith(
         status: ViewStatus.ERROR,
         error: ViewError(
-          message: "Login failed",
+          message: "Login failed".i18n,
           retry: () => login(context),
           canCancel: true,
         ),
