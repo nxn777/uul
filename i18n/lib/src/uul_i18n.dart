@@ -111,6 +111,7 @@ extension Localization on String {
           "No description": "No description",
           "Unauthorized": "Unauthorized",
           "Network error": "Network error",
+          "Back": "Back",
         },
         "es": {
           "News": "Noticias",
@@ -219,7 +220,8 @@ extension Localization on String {
           "News retrieval failed": "Error al recuperar noticias",
           "No description": "Sin descripción",
           "Unauthorized": "No autorizado",
-          "Network error": "Error de red"
+          "Network error": "Error de red",
+          "Back" : "Volver",
         }
       };
   String get i18n => localize(this, _t);

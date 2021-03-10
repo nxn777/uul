@@ -16,7 +16,10 @@ class NewsDetailScreen extends StatelessWidget {
       body: SafeArea(
         child: ListView(
           children: [
-            NewsDetailHeader(_news),
+            NewsDetailHeader(
+              _news,
+              hasBackButtonIn: {TargetPlatform.iOS},
+            ),
             Padding(
               padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
               child: Text(
