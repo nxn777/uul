@@ -125,7 +125,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
             filter: ImageFilter.blur(sigmaX: .7, sigmaY: .7),
             child: SingleChildScrollView(
               child: Container(
-                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + kBottomNavBarHeight),
+                padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + getBottomNavBarHeight(context)),
                 child: BookTimeSlotScreen(
                   isLoggedIn: viewModel.isLoggedIn(),
                   timeSlot: timeSlot,

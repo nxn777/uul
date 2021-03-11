@@ -31,7 +31,7 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
             ),
             floatingActionButton: shouldShowFAB(viewModel)
                 ? Padding(
-                    padding: const EdgeInsets.fromLTRB(0, 0, 0, kSpacingHuge),
+                    padding: EdgeInsets.fromLTRB(0, 0, 0, getBottomNavBarHeight(context)),
                     child: FloatingActionButton(
                       elevation: kSpacingXXSmall,
                       onPressed: () => _handleFABClick(viewModel),
