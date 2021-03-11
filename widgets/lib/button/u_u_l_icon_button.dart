@@ -15,7 +15,7 @@ class UULIconButton extends StatelessWidget {
   UULIconButton({this.icon, this.onTap, Color color, Color backgroundColor, innerBackgroundColor, double side, double innerPadding})
       : color = color == null ? kAccentColor : color,
         backgroundColor = backgroundColor == null ? Colors.black12.withOpacity(0.05) : backgroundColor,
-        innerBackgroundColor = innerBackgroundColor == null ? Colors.white : innerBackgroundColor,
+        innerBackgroundColor = innerBackgroundColor == null ? Colors.transparent : innerBackgroundColor,
         side = side == null ? kSpacingXXLarge : side,
         innerPadding = innerPadding == null ? kSpacingSmall : innerPadding;
 

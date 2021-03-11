@@ -36,45 +36,34 @@ class CurrentInhabitantCard extends StatelessWidget {
           bottomRight: Radius.circular(kLargeBorderRadius),
           bottomLeft: Radius.circular(kLargeBorderRadius),
         ),
-        color: Colors.white,
       ),
-      child: ClipRRect(
-        borderRadius: BorderRadius.only(
-          bottomLeft: Radius.circular(kLargeBorderRadius),
-          bottomRight: Radius.circular(kLargeBorderRadius),
-        ),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Row(
+      child: Column(
+        crossAxisAlignment: CrossAxisAlignment.start,
+        children: [
+          Row(
+            children: [
+              Expanded(child: ScreenTitle("User profile".i18n)),
+              UULIconButton(
+                backgroundColor: Colors.transparent,
+                innerBackgroundColor: Colors.transparent,
+                icon: FontAwesomeIcons.cog,
+                onTap: () {
+                  this.onEditProfileTap();
+                },
+              ),
+              SizedBox(
+                width: kSpacingXLarge,
+              )
+            ],
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kSpacingXLarge),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                Expanded(child: ScreenTitle("User profile".i18n)),
-                UULIconButton(
-                  icon: FontAwesomeIcons.cog,
-                  onTap: () {
-                    this.onEditProfileTap();
-                  },
-                ),
                 SizedBox(
-                  width: kSpacingXLarge,
-                )
-              ],
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                isSingle
-                    ? SizedBox(
-                        width: 52,
-                      )
-                    : UULIconButton(
-                        icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
-                        onTap: () {
-                          if (!isActive) {
-                            this.onMakeActiveTap?.call(inhabitant);
-                          }
-                        },
-                      ),
+                  width: 52,
+                ),
                 BundledAvatar(
                   height: kSpacingHuge * 2,
                   imageSrc: inhabitant?.avatarSrc == null ? "assets/defaults/default_user3.png" : inhabitant.avatarSrc,
@@ -83,6 +72,8 @@ class CurrentInhabitantCard extends StatelessWidget {
                 ),
                 UULIconButton(
                   icon: FontAwesomeIcons.pen,
+                  backgroundColor: Colors.transparent,
+                  innerBackgroundColor: Colors.transparent,
                   innerPadding: 12,
                   onTap: () {
                     this.onEditTap?.call();
@@ -90,44 +81,62 @@ class CurrentInhabitantCard extends StatelessWidget {
                 ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
+          ),
+          Padding(
+            padding: const EdgeInsets.symmetric(horizontal: kSpacingXLarge),
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+              crossAxisAlignment: CrossAxisAlignment.start,
+              mainAxisSize: MainAxisSize.max,
               children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.all(kSpacingMedium),
-                    child: Text(
-                      inhabitant.name,
-                      style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 1,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
+                SizedBox(
+                  width: 52,
                 ),
+                Column(
+                  children: [
+                    Padding(
+                      padding: const EdgeInsets.all(kSpacingMedium),
+                      child: Text(
+                        inhabitant.name,
+                        style: kCaptionActiveTextStyle.copyWith(fontWeight: FontWeight.bold),
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 1,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                    Padding(
+                      padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+                      child: Text(
+                        "Apartment: %s\n%s".i18n.fill([apartment, inhabitant.getLastVisitFormatted()]),
+                        style: kRegularInactiveTextStyle,
+                        overflow: TextOverflow.ellipsis,
+                        maxLines: 2,
+                        textAlign: TextAlign.center,
+                      ),
+                    ),
+                  ],
+                ),
+                isSingle
+                    ? SizedBox(
+                        width: 52,
+                      )
+                    : Padding(
+                        padding: EdgeInsets.fromLTRB(0, kSpacingMedium, 0, 0),
+                        child: UULIconButton(
+                          backgroundColor: Colors.transparent,
+                          innerBackgroundColor: Colors.transparent,
+                          icon: isActive ? FontAwesomeIcons.solidStar : FontAwesomeIcons.star,
+                          onTap: () {
+                            if (!isActive) {
+                              this.onMakeActiveTap?.call(inhabitant);
+                            }
+                          },
+                        ),
+                      ),
               ],
             ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              mainAxisSize: MainAxisSize.min,
-              children: [
-                Expanded(
-                  child: Padding(
-                    padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-                    child: Text(
-                      "Apartment: %s\n%s".i18n.fill([apartment, inhabitant.getLastVisitFormatted()]),
-                      style: kRegularInactiveTextStyle,
-                      overflow: TextOverflow.ellipsis,
-                      maxLines: 2,
-                      textAlign: TextAlign.center,
-                    ),
-                  ),
-                ),
-              ],
-            ),
-          ],
-        ),
+          ),
+        ],
       ),
     );
   }
@@ -143,7 +152,8 @@ class CurrentInhabitantCard extends StatelessWidget {
         child: Text(
           isProfileActivated
               ? "This profile is activated.\nYou can use it to book gyms".i18n
-              : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person.".i18n,
+              : "This profile is not activated.\nTo activate you should visit\nUNO URBAN Life\nadministration in person."
+                  .i18n,
           softWrap: true,
           style: kRegularActiveTextStyle,
           textAlign: TextAlign.center,

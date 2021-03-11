@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -64,20 +65,15 @@ mixin DefaultErrorResponseHandlers<T> on ViewStateField<T> {
   void handleFailure(Function retry, response) {
     switch (response.code) {
       case -1:
-        showNetworkError(retry, message: translateErrorMessageReason(response));
+        showNetworkError(retry, message: response.message);
         break;
       case 401:
         showNeedLogin();
         break;
       default:
-        showNetworkError(retry, message: response.message);
+        showNetworkError(retry, message: UULError.getMessage(response.code));
     }
     debugPrint("$this fetched ${response.message} ${response.code}");
-  }
-
-  // TODO
-  String translateErrorMessageReason(response) {
-    return response.message;
   }
 }
 

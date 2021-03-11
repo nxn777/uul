@@ -43,7 +43,6 @@ class MyApp extends StatelessWidget {
           const Locale('es'),
         ],
         theme: theme.copyWith(
-          canvasColor: Colors.white,
           primaryColor: kAccentColor,
           accentColor: kAccentColor,
           brightness: Brightness.dark,

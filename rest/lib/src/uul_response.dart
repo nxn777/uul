@@ -2,7 +2,6 @@ import 'dart:convert';
 import 'package:i18n/i18n.dart';
 import 'package:dio/dio.dart';
 
-import 'error.dart';
 
 abstract class HasFromJson {
   populateFromJson(dynamic jsonRaw);
@@ -48,7 +47,7 @@ class UULResponse<T extends HasFromJson> {
       final json = jsonDecode(_rawData);
       _isSuccess = json["success"];
       _code =  json["code"];
-      _message = UULError.getMessage(_code);
+      _message = json["message"];
       if (json["data"] != null) {
         dummy.populateFromJson(json["data"]);
         _data = dummy;
