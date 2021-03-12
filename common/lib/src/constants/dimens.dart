@@ -1,3 +1,4 @@
+import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 const kRegularTextSize = 12.0;
@@ -32,10 +33,11 @@ double getBottomNavBarHeight(BuildContext context) {
 }
 
 const _kStatusBarHeight = 48.0;
+const _kStatusBarHeightAndroid = 20.0;
 
 double getStatusBarHeight(BuildContext context) {
   if (MediaQuery.of(context).orientation == Orientation.portrait) {
-    return _kStatusBarHeight;
+    return isAndroid(context) ? _kStatusBarHeightAndroid : _kStatusBarHeight;
   } else {
     return 0;
   }

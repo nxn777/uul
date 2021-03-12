@@ -107,12 +107,15 @@ class CurrentInhabitantCard extends StatelessWidget {
                     ),
                     Padding(
                       padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-                      child: Text(
-                        "Apartment: %s\n%s".i18n.fill([apartment, inhabitant.getLastVisitFormatted()]),
-                        style: kRegularInactiveTextStyle,
-                        overflow: TextOverflow.ellipsis,
-                        maxLines: 2,
-                        textAlign: TextAlign.center,
+                      child: Container(
+                        width: kSpacingXLarge*5,
+                        child: Text(
+                          "Apartment: %s\n%s".i18n.fill([apartment, inhabitant.getLastVisitFormatted()]),
+                          style: kRegularInactiveTextStyle,
+                          overflow: TextOverflow.ellipsis,
+                          maxLines: 3,
+                          textAlign: TextAlign.center,
+                        ),
                       ),
                     ),
                   ],
