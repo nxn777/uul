@@ -26,6 +26,7 @@ class NewsScreen extends StatelessWidget with ViewStateScreen<NewsScreenViewMode
           );
         } else {
           return ListView(
+            physics: ClampingScrollPhysics(),
             children: _getScreenChildren(context, viewModel, true),
           );
         }
@@ -36,7 +37,7 @@ class NewsScreen extends StatelessWidget with ViewStateScreen<NewsScreenViewMode
   List<Widget> _getScreenChildren(BuildContext context, NewsScreenViewModel viewModel, bool insideListView) {
     var so = viewModel.viewState.value;
     return [
-      ScreenTitle("News".i18n),
+      ScreenTitle("News".i18n, backgroundColor: Colors.white, hasRoundedCorners: true,),
       insideListView
           ? NewsList(
               news: so.newsPaper.news,

@@ -113,8 +113,10 @@ class UserProfilesScreen extends StatelessWidget with ViewStateScreen<UserProfil
 
   Widget buildNoProfilesState(UserProfilesViewModel viewModel) {
     return ListView(
+      physics: ClampingScrollPhysics(),
       children: [
-        ScreenTitle("User profile".i18n),
+        ScreenTitle("User profile".i18n, backgroundColor: Colors.white, hasRoundedCorners: true,),
+        SizedBox(height: kSpacingMedium,),
         Center(
           child: BundledAvatar(height: kSpacingHuge * 2, imageSrc: "assets/defaults/default_user3.png"),
         ),

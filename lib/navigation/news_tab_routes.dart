@@ -15,7 +15,7 @@ class NewsTabRoutes extends TabRoutes {
     return {
       NewsTabRoutes.root: (_) => (context) => NewsScreen(
         onNewsTap: (news) {
-          return push(NewsTabRoutes.details, context, true, screenParam: news);
+          return push(NewsTabRoutes.details, context, true, false, screenParam: news);
         },
       ),
       NewsTabRoutes.details: (news) => (context) => NewsDetailScreen(news),

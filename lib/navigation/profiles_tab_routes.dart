@@ -19,19 +19,19 @@ class ProfilesTabRoutes extends TabRoutes {
     return {
       ProfilesTabRoutes.root: (_) => (context) => UserProfilesScreen(
             onNewProfileTap: () {
-              return push(newProfile, context, true);
+              return push(newProfile, context, true, true);
             },
             onNewInhabitantTap: () {
-              return push(newInhabitant, context, true);
+              return push(newInhabitant, context, true, true);
             },
             onLoginTap: () {
-              return push(login, context, true);
+              return push(login, context, true, true);
             },
             onEditInhabitantTap: () {
-              return push(editInhabitant, context, true);
+              return push(editInhabitant, context, true, true);
             },
             onEditProfileTap: () {
-              return push(editProfile, context, true);
+              return push(editProfile, context, true, true);
             },
           ),
       ProfilesTabRoutes.newProfile: (_) => (context) => NewProfileScreen(),

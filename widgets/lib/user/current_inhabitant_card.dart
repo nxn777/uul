@@ -36,6 +36,7 @@ class CurrentInhabitantCard extends StatelessWidget {
           bottomRight: Radius.circular(kLargeBorderRadius),
           bottomLeft: Radius.circular(kLargeBorderRadius),
         ),
+        color: Colors.white
       ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,

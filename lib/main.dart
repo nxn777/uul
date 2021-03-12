@@ -45,7 +45,7 @@ class MyApp extends StatelessWidget {
         theme: theme.copyWith(
           primaryColor: kAccentColor,
           accentColor: kAccentColor,
-          brightness: Brightness.dark,
+          scaffoldBackgroundColor: Colors.amber,
           bottomSheetTheme: BottomSheetThemeData(
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(

@@ -6,7 +6,7 @@ class TimeSlotsScreenObject {
   final List<Gym> gyms;
   int activeGymId;
 
-  Gym get activeGym => gyms[activeGymId];
+  Gym get activeGym => gyms.singleWhere((element) => element.id == activeGymId);
   final Week currentWeek;
   DateTime activeDate;
   final DateTime currentDate;

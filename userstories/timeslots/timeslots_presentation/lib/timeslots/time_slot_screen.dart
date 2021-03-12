@@ -27,6 +27,7 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
           );
         } else {
           return ListView(
+            physics: ClampingScrollPhysics(),
             children: _getScreenChildren(context, viewModel, true),
           );
         }
@@ -37,22 +38,34 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
   List<Widget> _getScreenChildren(BuildContext context, TimeSlotsViewModel viewModel, bool insideListView) {
     TimeSlotsScreenObject screenObject = viewModel.viewState.value;
     return [
-      ScreenTitle("Schedule".i18n),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
-        child: GymList(
-          gyms: screenObject.gyms,
-          onGymTapped: viewModel.changeActiveGym,
-          gymSelectedChecker: (gym) => gym.id == screenObject.activeGymId,
+      ScreenTitle("Schedule".i18n, backgroundColor: Colors.white,),
+      Container(
+        color: Colors.white,
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(kSpacingMedium, 0, kSpacingMedium, kSpacingMedium),
+          child: GymList(
+            gyms: screenObject.gyms,
+            onGymTapped: viewModel.changeActiveGym,
+            gymSelectedChecker: (gym) => gym.id == screenObject.activeGymId,
+          ),
         ),
       ),
-      Padding(
-        padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingMedium, kSpacingMedium, kSpacingMedium),
-        child: DayListAnimated(
-          currentWeek: screenObject.currentWeek,
-          activeDate: screenObject.activeDate,
-          currentDate: screenObject.currentDate,
-          onTap: viewModel.changeActiveDate,
+      Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.only(
+            bottomLeft: Radius.circular(kLargeBorderRadius),
+            bottomRight: Radius.circular(kLargeBorderRadius),
+          ),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingMedium, kSpacingMedium, kSpacingMedium),
+          child: DayListAnimated(
+            currentWeek: screenObject.currentWeek,
+            activeDate: screenObject.activeDate,
+            currentDate: screenObject.currentDate,
+            onTap: viewModel.changeActiveDate,
+          ),
         ),
       ),
       _getScheduleContent(context, insideListView, viewModel)
@@ -119,10 +132,12 @@ class TimeSlotScreen extends StatelessWidget with ViewStateScreen<TimeSlotsViewM
       rules: screenObject.rules,
       onTap: (timeSlot) {
         showModalBottomSheet(
+          elevation: 0,
+          barrierColor: Colors.transparent,
           context: context,
           isScrollControlled: true,
           builder: (context) => BackdropFilter(
-            filter: ImageFilter.blur(sigmaX: .7, sigmaY: .7),
+            filter: ImageFilter.blur(sigmaX: 2, sigmaY: 2),
             child: SingleChildScrollView(
               child: Container(
                 padding: EdgeInsets.only(bottom: MediaQuery.of(context).viewInsets.bottom + getBottomNavBarHeight(context)),

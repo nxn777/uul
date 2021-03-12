@@ -6,9 +6,10 @@ abstract class TabRoutes {
 
   Map<String, WidgetBuilderWrapper> routeBuilders(BuildContext context);
 
-  Future push(String screen, BuildContext context, bool hideNavBar, {dynamic screenParam}) {
+  Future push(String screen, BuildContext context, bool hideNavBar, bool isFullScreenDlg, {dynamic screenParam}) {
     return Navigator.of(context, rootNavigator: hideNavBar).push(
       MaterialPageRoute(
+        fullscreenDialog: isFullScreenDlg,
         builder: (context) => routeBuilders(context)[screen].call(screenParam).call(context),
       ),
     );

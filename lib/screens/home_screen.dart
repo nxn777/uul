@@ -14,7 +14,6 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   var _currentTab = TabItem.NEWS;
   static final _navigatorKeys = {
     TabItem.NEWS: GlobalKey<NavigatorState>(),
@@ -22,7 +21,6 @@ class _HomeScreenState extends State<HomeScreen> {
     TabItem.USER_PROFILES: GlobalKey<NavigatorState>(),
   };
   TabNavigatorFactory _tabNavigatorFactory = TabNavigatorFactory(navigatorKeys: _navigatorKeys);
-
 
   void _selectTab(TabItem tabItem) {
     setState(() => _currentTab = tabItem);
@@ -35,6 +33,12 @@ class _HomeScreenState extends State<HomeScreen> {
     return WillPopScope(
       onWillPop: () async => !await _navigatorKeys[_currentTab].currentState.maybePop(),
       child: Scaffold(
+        appBar: AppBar(
+          backgroundColor: Colors.white,
+          toolbarHeight: - getStatusBarHeight(context),
+          elevation: 0,
+          shadowColor: Colors.white,
+        ),
         extendBody: true,
         body: Stack(children: <Widget>[
           _buildOffstageNavigator(TabItem.NEWS),

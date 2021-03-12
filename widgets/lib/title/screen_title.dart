@@ -1,5 +1,3 @@
-import 'dart:ui';
-
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
@@ -9,12 +7,33 @@ class ScreenTitle extends StatelessWidget with BackButtonChooser {
   final String title;
   final Set<TargetPlatform> hasBackButtonIn;
   final bool hasBackText;
-  ScreenTitle(this.title, {this.hasBackButtonIn, this.hasBackText = false});
+  final Color backgroundColor;
+  final bool hasRoundedCorners;
+  ScreenTitle(this.title,
+      {this.hasBackButtonIn, this.hasBackText = false, this.backgroundColor, this.hasRoundedCorners = false});
 
   @override
   Widget build(BuildContext context) {
+    return backgroundColor == null
+        ? getContent(context)
+        : Container(
+            color: hasRoundedCorners ? null : Colors.white,
+            decoration: hasRoundedCorners
+                ? BoxDecoration(
+                    color: Colors.white,
+                    borderRadius: BorderRadius.only(
+                      bottomLeft: Radius.circular(kLargeBorderRadius),
+                      bottomRight: Radius.circular(kLargeBorderRadius),
+                    ),
+                  )
+                : null,
+            child: getContent(context),
+          );
+  }
+
+  Padding getContent(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
+      padding: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge + getStatusBarHeight(context), kSpacingMedium, kSpacingLarge),
       child: Row(
         children: getChildren(
           context,
@@ -42,8 +61,8 @@ mixin BackButtonChooser {
     );
   }
 
-  List<Widget> getChildren(
-      BuildContext context, Set<TargetPlatform> hasBackButtonIn, hasBackText, {List<Widget> additionalWidgets}) {
+  List<Widget> getChildren(BuildContext context, Set<TargetPlatform> hasBackButtonIn, hasBackText,
+      {List<Widget> additionalWidgets}) {
     List<Widget> result = [];
     if (hasBackButtonIn != null && hasBackButtonIn.contains(Theme.of(context).platform)) {
       result.add(TextButton.icon(
@@ -55,7 +74,9 @@ mixin BackButtonChooser {
         ),
       ));
     }
-    if (additionalWidgets != null) { result.addAll(additionalWidgets); }
+    if (additionalWidgets != null) {
+      result.addAll(additionalWidgets);
+    }
     return result;
   }
 }

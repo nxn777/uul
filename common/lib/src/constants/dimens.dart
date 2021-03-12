@@ -30,3 +30,13 @@ double getBottomNavBarHeight(BuildContext context) {
   }
   return _kBottomNavBarHeight;
 }
+
+const _kStatusBarHeight = 48.0;
+
+double getStatusBarHeight(BuildContext context) {
+  if (MediaQuery.of(context).orientation == Orientation.portrait) {
+    return _kStatusBarHeight;
+  } else {
+    return 0;
+  }
+}
