@@ -48,7 +48,7 @@ class LoginScreen extends StatelessWidget with ViewStateScreen<LoginViewModel> {
                 ),
                 TextFormField(
                   controller: loginController,
-                  decoration: InputDecoration(labelText: 'Name'.i18n),
+                  decoration: InputDecoration(labelText: 'Login'.i18n),
                   textCapitalization: TextCapitalization.words,
                   validator: AccountFormValidator.getLoginValidator(),
                   onChanged: (value) => so.login = value,

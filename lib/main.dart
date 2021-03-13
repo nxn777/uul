@@ -16,7 +16,9 @@ Future<void> main() async {
   var deepLinkProcessor = DeepLinkProcessor();
   var kvStore = DefaultKVStore(await SharedPreferences.getInstance());
   var globalDependencies = GlobalDependencies(deepLinkProcessor, kvStore: kvStore);
-  await globalDependencies.dependenciesProvider.userModule.createUserRepo().logout();
+  if (!isProduction) {
+    await globalDependencies.dependenciesProvider.userModule.createUserRepo().logout();
+  }
   Translations.recordMissingKeys = false;
   Translations.recordMissingTranslations = false;
   runApp(MyApp(globalDependencies, deepLinkProcessor));
