@@ -2,6 +2,7 @@ import 'package:UUL_Gym/screens/home_screen.dart';
 import 'package:common/common.dart';
 import 'package:di/di.dart';
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:i18n_extension/i18n_extension.dart';
 import 'package:persistence_data/persistence_data.dart';
 import 'package:provider/provider.dart';
@@ -45,7 +46,7 @@ class MyApp extends StatelessWidget {
         theme: theme.copyWith(
           primaryColor: kAccentColor,
           accentColor: kAccentColor,
-          scaffoldBackgroundColor: Colors.amber,
+          scaffoldBackgroundColor: Colors.grey[100],
           bottomSheetTheme: BottomSheetThemeData(
             backgroundColor: Colors.white,
             shape: RoundedRectangleBorder(

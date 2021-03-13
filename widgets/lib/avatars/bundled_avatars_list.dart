@@ -35,7 +35,7 @@ class _BundledAvatarsListState extends State<BundledAvatarsList> {
           itemCount: imagePaths.length,
           scrollDirection: Axis.horizontal,
           itemBuilder: (context, index) => BundledAvatar(
-                onTap: widget.onTap,
+                onTap: (item, ctx) => widget.onTap(item),
                 imageSrc: imagePaths[index],
                 height: widget.height,
               )),

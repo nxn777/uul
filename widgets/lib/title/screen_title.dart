@@ -3,14 +3,25 @@ import 'package:flutter/material.dart';
 import 'package:i18n/i18n.dart';
 import 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
+enum ScreenTitleArrow { BACK, DOWN }
+
 class ScreenTitle extends StatelessWidget with BackButtonChooser {
   final String title;
   final Set<TargetPlatform> hasBackButtonIn;
   final bool hasBackText;
   final Color backgroundColor;
   final bool hasRoundedCorners;
-  ScreenTitle(this.title,
-      {this.hasBackButtonIn, this.hasBackText = false, this.backgroundColor, this.hasRoundedCorners = false});
+  final ScreenTitleArrow arrow;
+  final bool adjustHeightForStatusBar;
+  ScreenTitle(
+    this.title, {
+    this.hasBackButtonIn,
+    this.hasBackText = false,
+    this.backgroundColor,
+    this.hasRoundedCorners = false,
+    this.arrow = ScreenTitleArrow.BACK,
+    this.adjustHeightForStatusBar = true,
+  });
 
   @override
   Widget build(BuildContext context) {
@@ -33,12 +44,13 @@ class ScreenTitle extends StatelessWidget with BackButtonChooser {
 
   Padding getContent(BuildContext context) {
     return Padding(
-      padding: EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge + getStatusBarHeight(context), kSpacingMedium, kSpacingLarge),
+      padding: const EdgeInsets.fromLTRB(kSpacingMedium, kSpacingLarge, kSpacingMedium, kSpacingLarge),
       child: Row(
         children: getChildren(
           context,
           hasBackButtonIn,
           hasBackText,
+          arrow,
           additionalWidgets: [
             Text(
               title,
@@ -52,8 +64,9 @@ class ScreenTitle extends StatelessWidget with BackButtonChooser {
 }
 
 mixin BackButtonChooser {
-  Widget getBackButton(BuildContext context) {
-    var icon = (Theme.of(context).platform == TargetPlatform.iOS) ? Icons.arrow_back_ios_rounded : Icons.arrow_back;
+  Widget getBackButton(BuildContext context, ScreenTitleArrow arrow) {
+    var icon = (isAndroid(context)) ? (Icons.arrow_back) : (Icons.arrow_back_ios_rounded);
+    icon = arrow == ScreenTitleArrow.BACK ? icon : Icons.keyboard_arrow_down_sharp;
     return FaIcon(
       icon,
       size: kSpacingLarge,
@@ -61,13 +74,14 @@ mixin BackButtonChooser {
     );
   }
 
-  List<Widget> getChildren(BuildContext context, Set<TargetPlatform> hasBackButtonIn, hasBackText,
+  List<Widget> getChildren(
+      BuildContext context, Set<TargetPlatform> hasBackButtonIn, hasBackText, ScreenTitleArrow arrow,
       {List<Widget> additionalWidgets}) {
     List<Widget> result = [];
     if (hasBackButtonIn != null && hasBackButtonIn.contains(Theme.of(context).platform)) {
       result.add(TextButton.icon(
         onPressed: () => Navigator.of(context).pop(),
-        icon: getBackButton(context),
+        icon: getBackButton(context, arrow),
         label: Text(
           hasBackText ? "Back".i18n : "",
           style: kRegularActiveLinkTextStyle,

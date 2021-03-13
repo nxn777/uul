@@ -31,6 +31,7 @@ class NewsDetailHeader extends StatelessWidget with BackButtonChooser {
           context,
           hasBackButtonIn,
           hasBackText,
+          ScreenTitleArrow.BACK,
           additionalWidgets: [
             Expanded(
               child: Text(

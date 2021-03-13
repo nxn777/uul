@@ -69,7 +69,7 @@ class CurrentInhabitantCard extends StatelessWidget {
                   height: kSpacingHuge * 2,
                   imageSrc: inhabitant?.avatarSrc == null ? "assets/defaults/default_user3.png" : inhabitant.avatarSrc,
                   borderColor: isProfileActivated ? kAccentColor : kInactiveColor,
-                  onTap: (_) => showToolTip(context),
+                  onTap: (_, ctx) => showToolTip(ctx),
                 ),
                 UULIconButton(
                   icon: FontAwesomeIcons.pen,
@@ -164,7 +164,6 @@ class CurrentInhabitantCard extends StatelessWidget {
         ),
       ),
     );
-
     tooltip.show(context);
   }
 }

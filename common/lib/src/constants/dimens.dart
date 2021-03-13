@@ -31,14 +31,3 @@ double getBottomNavBarHeight(BuildContext context) {
   }
   return _kBottomNavBarHeight;
 }
-
-const _kStatusBarHeight = 48.0;
-const _kStatusBarHeightAndroid = 20.0;
-
-double getStatusBarHeight(BuildContext context) {
-  if (MediaQuery.of(context).orientation == Orientation.portrait) {
-    return isAndroid(context) ? _kStatusBarHeightAndroid : _kStatusBarHeight;
-  } else {
-    return 0;
-  }
-}

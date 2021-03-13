@@ -2,7 +2,7 @@ import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 
 class BundledAvatar extends StatelessWidget {
-  final void Function(String) onTap;
+  final void Function(String, BuildContext) onTap;
   final String imageSrc;
   final double height;
   final Color borderColor;
@@ -17,7 +17,7 @@ class BundledAvatar extends StatelessWidget {
         color: this.borderColor,
         child: InkWell(
           onTap: () {
-            this.onTap?.call(imageSrc);
+            this.onTap?.call(imageSrc, context);
           },
           child: Padding(
             padding: const EdgeInsets.all(kSpacingXSmall),

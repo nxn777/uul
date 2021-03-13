@@ -19,7 +19,7 @@ class EditProfileScreen extends StatelessWidget with ViewStateScreen<EditProfile
     var oldPwdController = TextEditingController(text: viewModel.viewState.value.oldPwd);
     return ListView(
       children: [
-        ScreenTitle("Edit profile".i18n),
+        ScreenTitle("Edit profile".i18n, hasBackButtonIn: { TargetPlatform.iOS }, arrow: ScreenTitleArrow.DOWN,),
         SectionTitle("Change password".i18n),
         Padding(
           padding: const EdgeInsets.symmetric(horizontal: kSpacingMedium),

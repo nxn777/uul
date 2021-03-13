@@ -3,6 +3,7 @@ import 'package:UUL_Gym/navigation/tab_navigator_factory.dart';
 import 'package:common/common.dart';
 import 'package:flutter/material.dart';
 import 'package:navigation/navigation.dart';
+import 'package:widgets/widgets.dart';
 
 class HomeScreen extends StatefulWidget {
   final DeepLinkDepRegisterer deepLinkDepRegisterer;
@@ -30,25 +31,24 @@ class _HomeScreenState extends State<HomeScreen> {
   Widget build(BuildContext context) {
     widget.deepLinkDepRegisterer.registerTabSwitcher(_selectTab);
     widget.deepLinkDepRegisterer.registerNavKeys(_navigatorKeys);
-    return WillPopScope(
-      onWillPop: () async => !await _navigatorKeys[_currentTab].currentState.maybePop(),
-      child: Scaffold(
-        appBar: AppBar(
-          backgroundColor: Colors.white,
-          toolbarHeight: - getStatusBarHeight(context),
-          elevation: 0,
-          shadowColor: Colors.white,
-        ),
-        extendBody: true,
-        body: Stack(children: <Widget>[
-          _buildOffstageNavigator(TabItem.NEWS),
-          _buildOffstageNavigator(TabItem.SCHEDULE),
-          _buildOffstageNavigator(TabItem.USER_PROFILES),
-        ]),
-        backgroundColor: kWindowBackgroundColor,
-        bottomNavigationBar: BottomNavigation(
-          currentTab: _currentTab,
-          onSelectTab: _selectTab,
+    return ColoredStatusBar(
+      child: WillPopScope(
+        onWillPop: () async => !await _navigatorKeys[_currentTab].currentState.maybePop(),
+        child: SafeArea(
+          bottom: false,
+          child: Scaffold(
+            extendBody: true,
+            body: Stack(children: <Widget>[
+              _buildOffstageNavigator(TabItem.NEWS),
+              _buildOffstageNavigator(TabItem.SCHEDULE),
+              _buildOffstageNavigator(TabItem.USER_PROFILES),
+            ]),
+            backgroundColor: kWindowBackgroundColor,
+            bottomNavigationBar: BottomNavigation(
+              currentTab: _currentTab,
+              onSelectTab: _selectTab,
+            ),
+          ),
         ),
       ),
     );
