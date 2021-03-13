@@ -1,4 +1,5 @@
 import 'package:arch_components/arch_components.dart';
+import 'package:common/common.dart';
 import 'package:core/core.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
@@ -25,9 +26,9 @@ class NewProfileViewModel extends StepsViewModel with ViewStateField<NewProfileS
     viewState = ViewState(status: ViewStatus.LOADING);
   }
 
-  String login = "testLogin";
-  String name = "Test";
-  String pwd = "pwdTest";
+  String login = isProduction ? "" : "testLogin";
+  String name = isProduction ? "" : "Test";
+  String pwd = isProduction ? "" :"pwdTest";
   List<String> get towers => _condo.towers;
   String activeTower = "";
   List<String> get floors => _condo.getFloors(activeTower);

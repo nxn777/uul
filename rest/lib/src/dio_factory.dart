@@ -6,7 +6,7 @@ import 'package:dio/dio.dart';
 import 'package:flutter/foundation.dart';
 
 const String _deVBaseUrl = "https://192.168.100.8:5001";
-const String _prodUrl = _deVBaseUrl;
+const String _prodUrl = "https://uul-backend.azurewebsites.net";
 
 final String _kBaseUrl = isProduction ? _prodUrl : _deVBaseUrl;
 
