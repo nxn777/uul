@@ -24,7 +24,31 @@ class _HomeScreenState extends State<HomeScreen> {
   TabNavigatorFactory _tabNavigatorFactory = TabNavigatorFactory(navigatorKeys: _navigatorKeys);
 
   void _selectTab(TabItem tabItem) {
-    setState(() => _currentTab = tabItem);
+    setState(() {
+      _currentTab = tabItem;
+      _pageController.animateToPage(TabItem.values.indexOf(_currentTab),
+          duration: Duration(milliseconds: 500), curve: Curves.easeOut);
+    });
+  }
+
+  var screens = <Widget>[];
+  PageController _pageController;
+
+  @override
+  void initState() {
+    super.initState();
+    screens = <Widget>[
+      _buildNavigator(TabItem.NEWS),
+      _buildNavigator(TabItem.SCHEDULE),
+      _buildNavigator(TabItem.USER_PROFILES),
+    ];
+    _pageController = PageController();
+  }
+
+  @override
+  void dispose() {
+    _pageController.dispose();
+    super.dispose();
   }
 
   @override
@@ -38,11 +62,14 @@ class _HomeScreenState extends State<HomeScreen> {
           bottom: false,
           child: Scaffold(
             extendBody: true,
-            body: Stack(children: <Widget>[
-              _buildOffstageNavigator(TabItem.NEWS),
-              _buildOffstageNavigator(TabItem.SCHEDULE),
-              _buildOffstageNavigator(TabItem.USER_PROFILES),
-            ]),
+            body: PageView(
+              physics: AlwaysScrollableScrollPhysics(),
+              children: screens,
+              controller: _pageController,
+              onPageChanged: (index) {
+                setState(() => _currentTab = TabItem.values[index]);
+              },
+            ),
             backgroundColor: kWindowBackgroundColor,
             bottomNavigationBar: BottomNavigation(
               currentTab: _currentTab,
@@ -54,10 +81,5 @@ class _HomeScreenState extends State<HomeScreen> {
     );
   }
 
-  Widget _buildOffstageNavigator(TabItem tabItem) {
-    return Offstage(
-      offstage: _currentTab != tabItem,
-      child: _tabNavigatorFactory.getTabNavigator(tabItem),
-    );
-  }
+  Widget _buildNavigator(TabItem tabItem) => _tabNavigatorFactory.getTabNavigator(tabItem);
 }
